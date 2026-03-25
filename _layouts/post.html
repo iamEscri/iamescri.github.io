@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} — {{ site.title }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+
+<button class="hamburger" onclick="toggleSidebar()" aria-label="Menú">
+  <i class="fas fa-bars"></i>
+</button>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+{% include sidebar.html %}
+
+<div class="main">
+  {% include topbar.html %}
+  <div class="content">
+    <div class="post-body">
+
+      <a href="{{ '/' | relative_url }}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Volver al Blog
+      </a>
+
+      <div class="writeup-hero">
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;">
+          {{ page.category | default: "blog" }}
+        </div>
+        <h1 class="writeup-title">{{ page.title }}</h1>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:16px;">
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
+            <i class="fas fa-calendar"></i> {{ page.date | date: "%d %b %Y" }}
+          </span>
+          {% if page.read_time %}
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
+            <i class="fas fa-clock"></i> {{ page.read_time }} min
+          </span>
+          {% endif %}
+          {% if page.tags %}
+          <div class="card-tags" style="margin:0;">
+            {% for tag in page.tags %}
+            <span class="tag">#{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="writeup-body">
+        {{ content }}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

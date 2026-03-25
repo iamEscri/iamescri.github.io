@@ -1,0 +1,103 @@
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-brand">
+    <div class="avatar-wrap">
+      {% if site.avatar %}
+        <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}">
+      {% else %}
+        💀
+      {% endif %}
+    </div>
+    <div class="site-name">{{ site.title }}</div>
+    <div class="site-tag">{{ site.tagline }}</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">navegación</div>
+
+    <div class="nav-item {% if page.section == 'home' or page.url == '/' %}active{% endif %}"
+         data-section="home"
+         onclick="showSection('home', this)">
+      <i class="fas fa-terminal"></i>
+      Home
+    </div>
+
+    <div class="nav-item {% if page.section == 'writeups' %}active{% endif %}"
+         data-section="writeups"
+         onclick="showSection('writeups', this)">
+      <i class="fas fa-flag"></i>
+      Writeups
+      <span class="nav-badge" id="count-all">0</span>
+    </div>
+
+    <div class="nav-item {% if page.section == 'portfolio' %}active{% endif %}"
+         data-section="portfolio"
+         onclick="showSection('portfolio', this)">
+      <i class="fas fa-user-secret"></i>
+      Portfolio
+    </div>
+
+    <div class="nav-item {% if page.section == 'blog' %}active{% endif %}"
+         data-section="blog"
+         onclick="showSection('blog', this)">
+      <i class="fas fa-pencil-alt"></i>
+      Blog
+    </div>
+
+    <div class="nav-item {% if page.section == 'projects' %}active{% endif %}"
+         data-section="projects"
+         onclick="showSection('projects', this)">
+      <i class="fas fa-code-branch"></i>
+      Proyectos
+    </div>
+
+    <div class="nav-section" style="margin-top:24px;">plataformas</div>
+
+    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('dockerlabs', null)">
+      <i class="fas fa-box"></i>
+      DockerLabs
+      <span class="nav-badge" id="count-dockerlabs">0</span>
+    </div>
+
+    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('hackthebox', null)">
+      <i class="fas fa-cube"></i>
+      HackTheBox
+      <span class="nav-badge" id="count-hackthebox">0</span>
+    </div>
+
+    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('tryhackme', null)">
+      <i class="fas fa-shield-alt"></i>
+      TryHackMe
+      <span class="nav-badge" id="count-tryhackme">0</span>
+    </div>
+
+    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('vulnyx', null)">
+      <i class="fas fa-spider"></i>
+      Vulnyx
+      <span class="nav-badge" id="count-vulnyx">0</span>
+    </div>
+
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="social-links">
+      {% if site.social.github %}
+      <a href="{{ site.social.github }}" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      {% endif %}
+      {% if site.social.twitter %}
+      <a href="{{ site.social.twitter }}" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+      {% endif %}
+      {% if site.social.hackthebox %}
+      <a href="{{ site.social.hackthebox }}" target="_blank" title="HackTheBox"><i class="fas fa-cube"></i></a>
+      {% endif %}
+      {% if site.social.tryhackme %}
+      <a href="{{ site.social.tryhackme }}" target="_blank" title="TryHackMe"><i class="fas fa-shield-alt"></i></a>
+      {% endif %}
+    </div>
+    <div class="status-dot">
+      <div class="dot"></div>
+      aprendiendo cada día
+    </div>
+  </div>
+
+</aside>

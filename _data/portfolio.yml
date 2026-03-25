@@ -1,0 +1,57 @@
+# =============================================
+#  _data/portfolio.yml
+#  Edita esto para personalizar tu portfolio.
+# =============================================
+
+bio: >
+  Aprendiz del hacking ético con pasión por los CTFs y la seguridad ofensiva.
+  Escribo writeups para ayudar a la comunidad y para no olvidar lo que aprendo.
+  Siempre estudiando, siempre rompiendo cosas (con permiso).
+
+location: "España"
+available: true
+
+skills:
+  - name: "Reconocimiento & Enumeración"
+    pct: 85
+  - name: "Web Application Hacking"
+    pct: 80
+  - name: "Privilege Escalation (Linux)"
+    pct: 75
+  - name: "Active Directory"
+    pct: 55
+  - name: "Buffer Overflow / Pwn"
+    pct: 40
+  - name: "Scripting Python / Bash"
+    pct: 70
+
+tools:
+  - nmap
+  - feroxbuster
+  - burpsuite
+  - metasploit
+  - john
+  - hashcat
+  - hydra
+  - gobuster
+  - linpeas
+  - bloodhound
+  - impacket
+  - pwntools
+
+certifications:
+  - name: "eJPT"
+    org: "INE / eLearnSecurity"
+    date: "2025"
+    icon: "🎯"
+    status: "obtained"
+  - name: "OSCP"
+    org: "Offensive Security"
+    date: "En progreso"
+    icon: "🔐"
+    status: "in-progress"
+  - name: "HTB Pro Hacker"
+    org: "HackTheBox"
+    date: "2025"
+    icon: "🟩"
+    status: "obtained"

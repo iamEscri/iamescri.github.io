@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} — {{ site.title }}</title>
+<meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+
+<button class="hamburger" onclick="toggleSidebar()" aria-label="Menú">
+  <i class="fas fa-bars"></i>
+</button>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+{% include sidebar.html %}
+
+<div class="main">
+  {% include topbar.html %}
+  <div class="content">
+    <div class="writeup-single">
+
+      <a href="{{ '/' | relative_url }}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Volver a Writeups
+      </a>
+
+      <div class="writeup-hero">
+        <div class="writeup-meta-line">
+          {% assign plat = page.platform | downcase %}
+          <span class="platform-pill pill-{{ plat }}">{{ page.platform }}</span>
+          {% if page.difficulty %}
+          <span class="diff-badge diff-{{ page.difficulty | downcase }}">{{ page.difficulty }}</span>
+          {% endif %}
+          {% if page.os %}
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">
+            <i class="{% if page.os == 'windows' %}fab fa-windows{% else %}fab fa-linux{% endif %}"></i>
+            {{ page.os | capitalize }}
+          </span>
+          {% endif %}
+        </div>
+
+        <h1 class="writeup-title">{{ page.title }}</h1>
+
+        <p class="writeup-excerpt-hero">
+          {{ page.excerpt | strip_html | default: page.description }}
+        </p>
+
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;">
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
+            <i class="fas fa-calendar"></i> {{ page.date | date: "%d %b %Y" }}
+          </span>
+          {% if page.tags %}
+          <div class="card-tags" style="margin:0;">
+            {% for tag in page.tags %}
+            <span class="tag">#{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="writeup-body">
+        {{ content }}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
