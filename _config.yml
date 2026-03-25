@@ -58,8 +58,9 @@ defaults:
 
 # Exclude from build
 exclude:
-  - README.md
+  - vendor/
   - Gemfile
   - Gemfile.lock
-  - node_modules
+  - README.md
   - .github
+
