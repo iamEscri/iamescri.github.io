@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: blog
 title: "Cheatsheet: Escalada de Privilegios en Linux"
 category: cheatsheet
 read_time: 8
