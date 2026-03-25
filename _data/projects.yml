@@ -31,7 +31,7 @@
 - name: "Próximamente..."
   icon: "➕"
   desc: "Nuevo proyecto en desarrollo. ¡Vuelve pronto!"
-  stack: [???]
+  stack: ["Coming Soon"]
   github: ""
   demo: ""
   stars: 0
