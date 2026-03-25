@@ -4,11 +4,11 @@
 #  Se renderizan automáticamente en la sección Proyectos.
 # =============================================
 
-- name: AutoRecon-CTF
+- name: Guia Nuclei
   icon: "🔍"
   desc: "Script de reconocimiento automático para CTFs. Lanza nmap, feroxbuster y nikto en paralelo y genera un reporte en markdown."
   stack: [Python, Bash, nmap]
-  github: "https://github.com/iamEscri/autorecon-ctf"
+  github: "https://github.com/iamEscri/nuclei-guide.git"
   demo: ""
   stars: 0
   forks: 0
