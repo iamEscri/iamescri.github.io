@@ -55,6 +55,12 @@ defaults:
     values:
       layout: post
       category: blog
+  - scope:
+      path: "_posts/defensive"
+      type: posts
+    values:
+      layout: post
+      category: defensive
 
 # Exclude from build
 exclude:
