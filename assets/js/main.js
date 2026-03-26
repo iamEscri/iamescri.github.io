@@ -26,7 +26,8 @@ function showSection(id, navEl) {
     writeups:  '~/writeups',
     portfolio: '~/portfolio',
     blog:      '~/blog',
-    projects:  '~/proyectos'
+    projects:  '~/proyectos',
+    defensive: '~/seg-defensiva'
   };
   const bc = document.getElementById('breadcrumb-text');
   if (bc) bc.textContent = labels[id] || '~/' + id;
@@ -106,9 +107,6 @@ function updateCounts() {
     if (tabEl) tabEl.textContent = count;
     total += count;
   });
-  // Total en sidebar
-  const allEl = document.getElementById('count-all');
-  if (allEl) allEl.textContent = total;
   // Total en tab "Todas"
   const tabAllEl = document.getElementById('tab-count-all');
   if (tabAllEl) tabAllEl.textContent = total;
