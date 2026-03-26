@@ -603,9 +603,39 @@ body::before {
 
 .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
 .project-icon { font-size: 26px; }
-.project-links { display: flex; gap: 12px; }
-.project-links a { color: var(--text-muted); font-size: 15px; transition: color 0.2s; }
-.project-links a:hover { color: var(--green); }
+.project-links { display: flex; gap: 8px; align-items: center; }
+.project-github-btn,
+.project-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.project-github-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.project-github-btn i { font-size: 16px; }
+.project-github-btn:hover {
+  background: var(--green-glow);
+  border-color: var(--green);
+  color: var(--green);
+  box-shadow: 0 0 12px var(--green-glow);
+}
+.project-demo-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.project-demo-btn:hover { border-color: var(--blue); color: var(--blue); }
 
 .project-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
 .project-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
