@@ -311,12 +311,15 @@ section: home
       <div class="blog-card" onclick="window.location='{{ post.url | relative_url }}'">
         <div class="blog-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
         <div>
-          <div class="blog-card-cat">{{ post.category | default: "blog" }}</div>
           <div class="blog-card-title">{{ post.title }}</div>
           <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
           <div class="blog-card-meta">
             <span><i class="fas fa-calendar"></i> {{ post.date | date: "%d %b %Y" }}</span>
-            {% if post.read_time %}<span><i class="fas fa-clock"></i> {{ post.read_time }} min</span>{% endif %}
+            {% if post.tags and post.tags.size > 0 %}
+            <span class="blog-card-tags">
+              {% for tag in post.tags %}<span class="blog-tag">#{{ tag }}</span>{% endfor %}
+            </span>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -373,12 +376,15 @@ section: home
       <div class="blog-card" onclick="window.location='{{ post.url | relative_url }}'">
         <div class="blog-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
         <div>
-          <div class="blog-card-cat">{{ post.tags | join: ", " }}</div>
           <div class="blog-card-title">{{ post.title }}</div>
           <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
           <div class="blog-card-meta">
             <span><i class="fas fa-calendar"></i> {{ post.date | date: "%d %b %Y" }}</span>
-            {% if post.read_time %}<span><i class="fas fa-clock"></i> {{ post.read_time }} min</span>{% endif %}
+            {% if post.tags and post.tags.size > 0 %}
+            <span class="blog-card-tags">
+              {% for tag in post.tags %}<span class="blog-tag">#{{ tag }}</span>{% endfor %}
+            </span>
+            {% endif %}
           </div>
         </div>
       </div>
