@@ -5,7 +5,7 @@ platform: dockerlabs
 difficulty: easy
 os: linux
 date: 2026-03-24
-tags: [fuzzing, sqli, privesc, sudo]
+tags: [fuzzing, sqli, privesc, sudo, Alvaro Escri]
 description: "Máquina fácil de DockerLabs. Enumeración web, SQLi en login y escalada con sudo."
 ---
 
