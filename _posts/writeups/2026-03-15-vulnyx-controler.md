@@ -3,7 +3,7 @@ layout: writeup
 title: "Controler"
 platform: vulnyx
 difficulty: medium
-os: windows
+os: linux
 date: 2026-03-15
 tags: [active-directory, kerberoasting, bloodhound, impacket]
 description: "Máquina Windows con Active Directory. Enumeración AD, Kerberoasting y movimiento lateral."
