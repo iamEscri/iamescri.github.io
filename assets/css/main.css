@@ -483,7 +483,7 @@ body::before {
   border: 3px solid var(--green);
   box-shadow: 0 0 30px var(--green-glow);
   margin: 0 auto 20px;
-  background: var(--surface);
+  background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
