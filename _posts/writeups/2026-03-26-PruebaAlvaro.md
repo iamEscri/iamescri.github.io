@@ -9,6 +9,11 @@ tags: [Prueba, Escri]
 description: "Máquina fácil de DockerLabs. Enumeración web, SQLi en login y escalada con sudo."
 ---
 
+Esto es una maquina de prueba 
+
+---
+
+
 ## Reconocimiento
 
 Empezamos con un escaneo de puertos para ver qué tenemos:
