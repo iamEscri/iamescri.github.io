@@ -1,11 +1,11 @@
 ---
 layout: writeup
 title: "Controler"
-platform: vulnyx
+platform: tryhackme
 difficulty: medium
 os: linux
 date: 2026-03-15
-tags: [active-directory, kerberoasting, bloodhound, impacket]
+tags: [active-directory, kerberoasting, bloodhound, impacket, prueba]
 description: "Máquina Windows con Active Directory. Enumeración AD, Kerberoasting y movimiento lateral."
 ---
 
