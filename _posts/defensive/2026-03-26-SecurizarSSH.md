@@ -8,7 +8,7 @@ description: "Primeros pasos en seguridad defensiva: qué es el Blue Team, herra
 ---
 
 
-#Esto es una prueba
+# Esto es una prueba
 
 
 SSH mola
