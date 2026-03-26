@@ -80,14 +80,13 @@ function handleSearch(val) {
   val = val.toLowerCase().trim();
 
   if (!val) {
-    // Restaurar visibilidad de todas las cards
     document.querySelectorAll('.writeup-card').forEach(c => c.classList.remove('hidden'));
     document.querySelectorAll('.blog-card').forEach(c => c.style.display = '');
     document.querySelectorAll('.project-card').forEach(c => c.style.display = '');
     return;
   }
 
-  // Resultados por sección
+  // Writeups
   var writeupHits = 0;
   document.querySelectorAll('.writeup-card').forEach(card => {
     const match = card.textContent.toLowerCase().includes(val);
@@ -95,6 +94,7 @@ function handleSearch(val) {
     if (match) writeupHits++;
   });
 
+  // Blog
   var blogHits = 0;
   document.querySelectorAll('#section-blog .blog-card').forEach(card => {
     const match = card.textContent.toLowerCase().includes(val);
@@ -102,6 +102,7 @@ function handleSearch(val) {
     if (match) blogHits++;
   });
 
+  // Defensiva
   var defHits = 0;
   document.querySelectorAll('#section-defensive .blog-card').forEach(card => {
     const match = card.textContent.toLowerCase().includes(val);
@@ -109,22 +110,29 @@ function handleSearch(val) {
     if (match) defHits++;
   });
 
+  // Proyectos — excluir cards WIP
   var projectHits = 0;
   document.querySelectorAll('.project-card').forEach(card => {
+    if (card.dataset.wip === 'true') { card.style.display = 'none'; return; }
     const match = card.textContent.toLowerCase().includes(val);
     card.style.display = match ? '' : 'none';
     if (match) projectHits++;
   });
 
-  // Navegar a la sección con más resultados
-  var best = 'writeups';
-  var bestCount = writeupHits;
-  if (blogHits     > bestCount) { best = 'blog';      bestCount = blogHits;     }
-  if (defHits      > bestCount) { best = 'defensive'; bestCount = defHits;      }
-  if (projectHits  > bestCount) { best = 'projects';                             }
+  // Navegar a la sección con MÁS hits (ignorar secciones con 0)
+  var scores = [
+    { section: 'writeups',  count: writeupHits  },
+    { section: 'blog',      count: blogHits      },
+    { section: 'defensive', count: defHits       },
+    { section: 'projects',  count: projectHits   }
+  ];
+  scores.sort(function(a, b) { return b.count - a.count; });
 
-  var navEl = document.querySelector('[data-section="' + best + '"]');
-  showSection(best, navEl);
+  if (scores[0].count > 0) {
+    var best = scores[0].section;
+    var navEl = document.querySelector('[data-section="' + best + '"]');
+    showSection(best, navEl);
+  }
 }
 
 // ── Update counters ──────────────────────────
