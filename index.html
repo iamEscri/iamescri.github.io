@@ -76,6 +76,11 @@ section: home
       <div class="stat-label">posts de blog</div>
     </div>
     <div class="stat-card">
+      <div class="stat-icon">🔵</div>
+      <div class="stat-number">{{ all_defensive | size }}</div>
+      <div class="stat-label">seg. defensiva</div>
+    </div>
+    <div class="stat-card">
       <div class="stat-icon">⚙️</div>
       <!-- Bug #3 fix: excluir proyectos WIP del contador -->
       <div class="stat-number">{{ projects | where: "wip", false | size }}</div>
