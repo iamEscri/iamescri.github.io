@@ -2,8 +2,18 @@
 //  iamEscri — main.js
 // =============================================
 
+// Detecta si estamos en una subpágina (writeup / post individual)
+// o en el index (SPA con secciones).
+var IS_SUBPAGE = document.body.classList.contains('is-subpage');
+
 // ── Section navigation ──────────────────────
 function showSection(id, navEl) {
+  // Si estamos en una subpágina, redirigir al index con hash
+  if (IS_SUBPAGE) {
+    window.location.href = '/' + '#' + id;
+    return;
+  }
+
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
@@ -25,6 +35,16 @@ function showSection(id, navEl) {
   window.scrollTo(0, 0);
 }
 
+// ── Handle hash on page load (para volver desde subpágina) ──
+function handleHashNavigation() {
+  if (IS_SUBPAGE) return;
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById('section-' + hash)) {
+    const navEl = document.querySelector('[data-section="' + hash + '"]');
+    showSection(hash, navEl);
+  }
+}
+
 // ── Mobile sidebar ───────────────────────────
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
@@ -38,6 +58,12 @@ function closeSidebar() {
 
 // ── Platform filter (writeups) ───────────────
 function filterPlatform(platform, tabEl) {
+  // Si estamos en subpágina, redirigir al index y filtrar
+  if (IS_SUBPAGE) {
+    window.location.href = '/#writeups';
+    return;
+  }
+
   document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
   if (tabEl) tabEl.classList.add('active');
 
@@ -49,12 +75,12 @@ function filterPlatform(platform, tabEl) {
 
 // ── Live search ──────────────────────────────
 function handleSearch(val) {
+  if (IS_SUBPAGE) return;
   val = val.toLowerCase().trim();
   if (!val) {
     document.querySelectorAll('.writeup-card').forEach(c => c.classList.remove('hidden'));
     return;
   }
-  // Jump to writeups section
   const wu = document.getElementById('section-writeups');
   if (wu && !wu.classList.contains('active')) {
     showSection('writeups', document.querySelector('[data-section="writeups"]'));
@@ -65,17 +91,27 @@ function handleSearch(val) {
 }
 
 // ── Update counters ──────────────────────────
+// Actualiza tanto los badges del sidebar (id=count-*) 
+// como los tabs de la sección writeups (id=tab-count-*)
 function updateCounts() {
   const platforms = ['dockerlabs', 'hackthebox', 'tryhackme', 'vulnyx'];
   let total = 0;
   platforms.forEach(p => {
-    const count = document.querySelectorAll(`[data-platform="${p}"]`).length;
-    const el = document.getElementById('count-' + p);
-    if (el) el.textContent = count;
+    const count = document.querySelectorAll('.writeup-card[data-platform="' + p + '"]').length;
+    // Sidebar badge
+    const sideEl = document.getElementById('count-' + p);
+    if (sideEl) sideEl.textContent = count;
+    // Tab counter (renombrado a tab-count-* para evitar ID duplicado)
+    const tabEl = document.getElementById('tab-count-' + p);
+    if (tabEl) tabEl.textContent = count;
     total += count;
   });
+  // Total en sidebar
   const allEl = document.getElementById('count-all');
   if (allEl) allEl.textContent = total;
+  // Total en tab "Todas"
+  const tabAllEl = document.getElementById('tab-count-all');
+  if (tabAllEl) tabAllEl.textContent = total;
 }
 
 // ── Skill bar animation ──────────────────────
@@ -88,21 +124,26 @@ function animateSkills() {
 
 // ── Init ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  updateCounts();
+  // Manejar navegación con hash (volver desde subpágina)
+  handleHashNavigation();
 
-  // Animate skills when portfolio is shown
-  const portfolioNav = document.querySelector('[data-section="portfolio"]');
-  if (portfolioNav) {
-    portfolioNav.addEventListener('click', () => {
-      setTimeout(animateSkills, 100);
+  if (!IS_SUBPAGE) {
+    updateCounts();
+
+    // Animar skills al entrar al portfolio
+    const portfolioNav = document.querySelector('[data-section="portfolio"]');
+    if (portfolioNav) {
+      portfolioNav.addEventListener('click', () => {
+        setTimeout(animateSkills, 100);
+      });
+    }
+
+    // Atajo de teclado: / para buscar
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        document.getElementById('search-input')?.focus();
+      }
     });
   }
-
-  // Keyboard shortcut: / to focus search
-  document.addEventListener('keydown', e => {
-    if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
-      e.preventDefault();
-      document.getElementById('search-input')?.focus();
-    }
-  });
 });
