@@ -74,21 +74,49 @@ function filterPlatform(platform, tabEl) {
   });
 }
 
-// ── Live search ──────────────────────────────
+// ── Live search (global) ─────────────────────
 function handleSearch(val) {
   if (IS_SUBPAGE) return;
   val = val.toLowerCase().trim();
+
   if (!val) {
+    // Restaurar visibilidad de todas las cards
     document.querySelectorAll('.writeup-card').forEach(c => c.classList.remove('hidden'));
+    document.querySelectorAll('.blog-card').forEach(c => c.style.display = '');
+    // Volver al estado normal: no forzamos sección
     return;
   }
-  const wu = document.getElementById('section-writeups');
-  if (wu && !wu.classList.contains('active')) {
-    showSection('writeups', document.querySelector('[data-section="writeups"]'));
-  }
+
+  // Resultados por sección
+  var writeupHits = 0;
   document.querySelectorAll('.writeup-card').forEach(card => {
-    card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(val));
+    const match = card.textContent.toLowerCase().includes(val);
+    card.classList.toggle('hidden', !match);
+    if (match) writeupHits++;
   });
+
+  var blogHits = 0;
+  document.querySelectorAll('#section-blog .blog-card').forEach(card => {
+    const match = card.textContent.toLowerCase().includes(val);
+    card.style.display = match ? '' : 'none';
+    if (match) blogHits++;
+  });
+
+  var defHits = 0;
+  document.querySelectorAll('#section-defensive .blog-card').forEach(card => {
+    const match = card.textContent.toLowerCase().includes(val);
+    card.style.display = match ? '' : 'none';
+    if (match) defHits++;
+  });
+
+  // Navegar a la sección con más resultados
+  var best = 'writeups';
+  var bestCount = writeupHits;
+  if (blogHits > bestCount)      { best = 'blog';      bestCount = blogHits; }
+  if (defHits  > bestCount)      { best = 'defensive';                        }
+
+  var navEl = document.querySelector('[data-section="' + best + '"]');
+  showSection(best, navEl);
 }
 
 // ── Update counters ──────────────────────────
