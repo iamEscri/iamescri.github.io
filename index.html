@@ -437,7 +437,7 @@ section: home
 
   <div class="projects-grid">
     {% for project in projects %}
-    <div class="project-card" {% if project.wip %}style="border-style:dashed;opacity:.6;"{% endif %}>
+    <div class="project-card" data-wip="{{ project.wip }}" {% if project.wip %}style="border-style:dashed;opacity:.6;"{% endif %}>
       <div class="project-header">
         <div class="project-icon">{{ project.icon }}</div>
         <div class="project-links">
