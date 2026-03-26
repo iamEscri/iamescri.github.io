@@ -27,7 +27,6 @@
          onclick="showSection('writeups', this)">
       <i class="fas fa-flag"></i>
       Writeups
-      <span class="nav-badge" id="count-all">0</span>
     </div>
 
     <div class="nav-item {% if page.section == 'portfolio' %}active{% endif %}"
@@ -42,6 +41,13 @@
          onclick="showSection('blog', this)">
       <i class="fas fa-pencil-alt"></i>
       Blog
+    </div>
+
+    <div class="nav-item {% if page.section == 'defensive' %}active{% endif %}"
+         data-section="defensive"
+         onclick="showSection('defensive', this)">
+      <i class="fas fa-shield-alt"></i>
+      Seg. Defensiva
     </div>
 
     <div class="nav-item {% if page.section == 'projects' %}active{% endif %}"
