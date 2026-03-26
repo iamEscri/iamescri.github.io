@@ -6,6 +6,7 @@ section: home
 
 {% assign all_writeups = site.posts | where: "category", "writeup" %}
 {% assign all_blog     = site.posts | where: "category", "blog" %}
+{% assign all_defensive = site.posts | where: "category", "defensive" %}
 {% assign portfolio    = site.data.portfolio %}
 {% assign projects     = site.data.projects %}
 
@@ -352,6 +353,68 @@ section: home
         </div>
         {% endif %}
         {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     SECTION: SEGURIDAD DEFENSIVA
+     ==================================================== -->
+<section class="section" id="section-defensive">
+  <div class="section-header">
+    <div class="section-label">seguridad defensiva</div>
+    <h2 class="section-title">Seguridad <span class="accent">Defensiva</span></h2>
+    <p class="section-desc">Guías, técnicas y herramientas para defender sistemas. Blue team, detección, hardening y respuesta a incidentes.</p>
+  </div>
+
+  <div class="blog-layout">
+    <div class="blog-posts">
+      {% for post in all_defensive %}
+      <div class="blog-card" onclick="window.location='{{ post.url | relative_url }}'">
+        <div class="blog-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+        <div>
+          <div class="blog-card-cat">{{ post.tags | join: ", " }}</div>
+          <div class="blog-card-title">{{ post.title }}</div>
+          <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> {{ post.date | date: "%d %b %Y" }}</span>
+            {% if post.read_time %}<span><i class="fas fa-clock"></i> {{ post.read_time }} min</span>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% if all_defensive.size == 0 %}
+      <div style="text-align:center;padding:60px 0;color:var(--text-muted);font-family:var(--font-mono);font-size:13px;">
+        <div style="font-size:40px;margin-bottom:16px;">🛡️</div>
+        Todavía no hay artículos de seguridad defensiva.<br>
+        Crea un fichero <code>.md</code> en <code>_posts/defensive/</code>.
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Sidebar de seguridad defensiva -->
+    <div>
+      {% assign def_tags = all_defensive | map: "tags" | join: "," | split: "," | uniq | sort %}
+      {% if def_tags.size > 0 %}
+      <div class="blog-sidebar-widget">
+        <div class="widget-title"><i class="fas fa-tags"></i> Tags</div>
+        <div class="tag-cloud">
+          {% for tag in def_tags %}
+          {% if tag != "" %}
+          <span class="tag-cloud-item">#{{ tag }}</span>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="blog-sidebar-widget">
+        <div class="widget-title"><i class="fas fa-info-circle"></i> Sobre esta sección</div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.7;">
+          Artículos enfocados en el lado defensivo de la ciberseguridad: detección de amenazas, hardening, análisis de logs, SIEM, respuesta a incidentes y más.
+        </div>
       </div>
     </div>
   </div>
