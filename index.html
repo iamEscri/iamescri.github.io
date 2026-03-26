@@ -327,12 +327,12 @@ section: home
 
     <!-- Sidebar del blog -->
     <div>
-      {% assign all_tags = all_writeups | concat: all_blog | map: "tags" | join: "," | split: "," | uniq | sort %}
-      {% if all_tags.size > 0 %}
+      {% assign blog_tags = all_blog | map: "tags" | join: "," | split: "," | uniq | sort %}
+      {% if blog_tags.size > 0 %}
       <div class="blog-sidebar-widget">
         <div class="widget-title"><i class="fas fa-tags"></i> Tags</div>
         <div class="tag-cloud">
-          {% for tag in all_tags %}
+          {% for tag in blog_tags %}
           {% if tag != "" %}
           <span class="tag-cloud-item">#{{ tag }}</span>
           {% endif %}
@@ -342,17 +342,10 @@ section: home
       {% endif %}
 
       <div class="blog-sidebar-widget">
-        <div class="widget-title"><i class="fas fa-chart-pie"></i> Por plataforma</div>
-        {% assign platforms = "dockerlabs,hackthebox,tryhackme,vulnyx" | split: "," %}
-        {% for plat in platforms %}
-        {% assign plat_count = all_writeups | where: "platform", plat | size %}
-        {% if plat_count > 0 %}
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:12px;">
-          <span style="color:var(--text-dim);text-transform:capitalize;">{{ plat }}</span>
-          <span style="color:var(--green);">{{ plat_count }}</span>
+        <div class="widget-title"><i class="fas fa-info-circle"></i> Sobre esta sección</div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.7;">
+          Tutoriales, cheatsheets y reflexiones sobre hacking ético, CTFs y pentesting. Conocimiento práctico para llevar al campo.
         </div>
-        {% endif %}
-        {% endfor %}
       </div>
     </div>
   </div>
