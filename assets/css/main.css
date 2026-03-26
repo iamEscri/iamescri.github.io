@@ -81,7 +81,7 @@ body::before {
   box-shadow: 0 0 20px var(--green-glow);
   overflow: hidden;
   margin-bottom: 16px;
-  background: var(--surface);
+  background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
