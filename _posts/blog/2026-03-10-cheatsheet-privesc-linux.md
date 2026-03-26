@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Cheatsheet: Escalada de Privilegios en Linux"
-category: [cheatsheet]
 read_time: 8
 date: 2026-03-10
 tags: [linux, privesc, suid, sudo, capabilities]
