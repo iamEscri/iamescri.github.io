@@ -5,7 +5,7 @@
       {% if site.avatar %}
         <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}">
       {% else %}
-        💀
+        <img src="{{ '/assets/favicon.png' | relative_url }}" alt="{{ site.title }}">
       {% endif %}
     </div>
     <div class="site-name">{{ site.title }}</div>
