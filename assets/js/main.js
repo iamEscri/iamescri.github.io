@@ -83,7 +83,7 @@ function handleSearch(val) {
     // Restaurar visibilidad de todas las cards
     document.querySelectorAll('.writeup-card').forEach(c => c.classList.remove('hidden'));
     document.querySelectorAll('.blog-card').forEach(c => c.style.display = '');
-    // Volver al estado normal: no forzamos sección
+    document.querySelectorAll('.project-card').forEach(c => c.style.display = '');
     return;
   }
 
@@ -109,11 +109,19 @@ function handleSearch(val) {
     if (match) defHits++;
   });
 
+  var projectHits = 0;
+  document.querySelectorAll('.project-card').forEach(card => {
+    const match = card.textContent.toLowerCase().includes(val);
+    card.style.display = match ? '' : 'none';
+    if (match) projectHits++;
+  });
+
   // Navegar a la sección con más resultados
   var best = 'writeups';
   var bestCount = writeupHits;
-  if (blogHits > bestCount)      { best = 'blog';      bestCount = blogHits; }
-  if (defHits  > bestCount)      { best = 'defensive';                        }
+  if (blogHits     > bestCount) { best = 'blog';      bestCount = blogHits;     }
+  if (defHits      > bestCount) { best = 'defensive'; bestCount = defHits;      }
+  if (projectHits  > bestCount) { best = 'projects';                             }
 
   var navEl = document.querySelector('[data-section="' + best + '"]');
   showSection(best, navEl);
