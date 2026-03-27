@@ -10,5 +10,6 @@ description: "Primeros pasos en seguridad defensiva: qué es el Blue Team, herra
 
 # Esto es una prueba
 
+![Terminal](/assets/img/defensiva/securizar-ssh/terminal.png)
 
 SSH mola
