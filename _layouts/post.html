@@ -36,11 +36,7 @@
           <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
             <i class="fas fa-calendar"></i> {{ page.date | date: "%d %b %Y" }}
           </span>
-          {% if page.read_time %}
-          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
-            <i class="fas fa-clock"></i> {{ page.read_time }} min
-          </span>
-          {% endif %}
+
           {% if page.tags %}
           <div class="card-tags" style="margin:0;">
             {% for tag in page.tags %}
