@@ -295,6 +295,7 @@ body::before {
 .t-out.green { color: var(--green); }
 .t-out.muted { color: var(--text-muted); }
 .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink 1s infinite; vertical-align: middle; margin-left: 4px; }
+.t-file { color: var(--green); margin-right: 16px; display: inline-block; }
 @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
 
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 40px; }
