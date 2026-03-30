@@ -660,6 +660,87 @@ body::before {
 .project-stats { display: flex; gap: 14px; }
 .project-stat { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
 
+/* ===== PROJECT EXPANDABLE PANEL ===== */
+.project-card--expandable { cursor: pointer; }
+.project-card--expandable:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,255,136,0.06); }
+.project-card--expandable.project-card--open { border-color: var(--green); transform: none; box-shadow: 0 0 0 1px var(--green), 0 12px 40px rgba(0,255,136,0.10); }
+
+.project-expand-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 11px;
+  transition: all 0.2s;
+}
+.project-card--expandable:hover .project-expand-hint,
+.project-card--open .project-expand-hint {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-glow);
+}
+
+.project-chevron {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.project-card--open .project-chevron {
+  transform: rotate(180deg);
+}
+
+.project-details-panel {
+  display: none;
+  overflow: hidden;
+}
+.project-card--open .project-details-panel {
+  display: block;
+  animation: projectPanelIn 0.3s ease forwards;
+}
+@keyframes projectPanelIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.project-details-divider {
+  height: 1px;
+  background: linear-gradient(to right, var(--green), transparent);
+  margin: 18px 0 16px;
+  opacity: 0.4;
+}
+
+.project-details-content {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.project-details-content p { margin: 0 0 12px; }
+.project-details-content p:last-child { margin-bottom: 0; }
+.project-details-content strong { color: var(--green); font-weight: 600; }
+.project-details-content ul {
+  padding-left: 18px;
+  margin: 8px 0 12px;
+  list-style: none;
+}
+.project-details-content ul li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 6px;
+}
+.project-details-content ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-size: 10px;
+  top: 2px;
+}
+
 /* ===== WRITEUP SINGLE PAGE ===== */
 .writeup-single { max-width: 860px; }
 .writeup-hero {
