@@ -435,20 +435,21 @@ section: home
 
   <div class="projects-grid">
     {% for project in projects %}
-    {% assign pid = forloop.index %}
-    <div class="project-card{% unless project.wip %} project-card--expandable{% endunless %}"
+    <div class="project-card{% unless project.wip %} project-card--clickable{% endunless %}"
          data-wip="{{ project.wip }}"
          {% if project.wip %}style="border-style:dashed;opacity:.6;"{% endif %}
-         {% unless project.wip %}onclick="toggleProject(this, event)"{% endunless %}>
+         {% unless project.wip %}{% if project.post_url and project.post_url != "" %}onclick="window.location='{{ project.post_url | relative_url }}'"{% endif %}{% endunless %}>
 
       <!-- Cabecera: icono + botones -->
       <div class="project-header">
         <div class="project-icon">{{ project.icon }}</div>
         <div class="project-links">
           {% unless project.wip %}
-          <span class="project-expand-hint" aria-hidden="true">
-            <i class="fas fa-chevron-down project-chevron"></i>
+          {% if project.post_url and project.post_url != "" %}
+          <span class="project-read-more">
+            Ver más <i class="fas fa-arrow-right" style="font-size:10px;"></i>
           </span>
+          {% endif %}
           {% endunless %}
           {% if project.github and project.github != "" %}
           <a href="{{ project.github }}" target="_blank" title="Ver en GitHub" class="project-github-btn" onclick="event.stopPropagation()">
@@ -486,17 +487,6 @@ section: home
         </div>
         {% endif %}
       </div>
-
-      <!-- Panel expandible con detalles -->
-      {% if project.details and project.details != "" %}
-      <div class="project-details-panel">
-        <div class="project-details-divider"></div>
-        <div class="project-details-content">
-          {{ project.details | markdownify }}
-        </div>
-      </div>
-      {% endif %}
-
       {% else %}
       <div class="project-stats">
         <div class="project-stat" style="color:var(--text-muted)"><i class="fas fa-hammer"></i> WIP</div>
