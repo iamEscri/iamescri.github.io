@@ -435,31 +435,46 @@ section: home
 
   <div class="projects-grid">
     {% for project in projects %}
-    <div class="project-card" data-wip="{{ project.wip }}" {% if project.wip %}style="border-style:dashed;opacity:.6;"{% endif %}>
+    {% assign pid = forloop.index %}
+    <div class="project-card{% unless project.wip %} project-card--expandable{% endunless %}"
+         data-wip="{{ project.wip }}"
+         {% if project.wip %}style="border-style:dashed;opacity:.6;"{% endif %}
+         {% unless project.wip %}onclick="toggleProject(this, event)"{% endunless %}>
+
+      <!-- Cabecera: icono + botones -->
       <div class="project-header">
         <div class="project-icon">{{ project.icon }}</div>
         <div class="project-links">
+          {% unless project.wip %}
+          <span class="project-expand-hint" aria-hidden="true">
+            <i class="fas fa-chevron-down project-chevron"></i>
+          </span>
+          {% endunless %}
           {% if project.github and project.github != "" %}
-          <a href="{{ project.github }}" target="_blank" title="Ver en GitHub" class="project-github-btn">
+          <a href="{{ project.github }}" target="_blank" title="Ver en GitHub" class="project-github-btn" onclick="event.stopPropagation()">
             <i class="fab fa-github"></i>
             <span>GitHub</span>
           </a>
           {% endif %}
           {% if project.demo and project.demo != "" %}
-          <a href="{{ project.demo }}" target="_blank" title="Demo" class="project-demo-btn">
+          <a href="{{ project.demo }}" target="_blank" title="Demo" class="project-demo-btn" onclick="event.stopPropagation()">
             <i class="fas fa-external-link-alt"></i>
             <span>Demo</span>
           </a>
           {% endif %}
         </div>
       </div>
+
+      <!-- Nombre y descripción corta (siempre visible) -->
       <div class="project-name">{{ project.name }}</div>
       <p class="project-desc">{{ project.desc }}</p>
+
       <div class="project-stack">
         {% for tech in project.stack %}
         <span class="stack-badge">{{ tech }}</span>
         {% endfor %}
       </div>
+
       {% unless project.wip %}
       <div class="project-stats">
         <div class="project-stat"><i class="fas fa-star"></i> {{ project.stars | default: 0 }}</div>
@@ -471,6 +486,17 @@ section: home
         </div>
         {% endif %}
       </div>
+
+      <!-- Panel expandible con detalles -->
+      {% if project.details and project.details != "" %}
+      <div class="project-details-panel">
+        <div class="project-details-divider"></div>
+        <div class="project-details-content">
+          {{ project.details | markdownify }}
+        </div>
+      </div>
+      {% endif %}
+
       {% else %}
       <div class="project-stats">
         <div class="project-stat" style="color:var(--text-muted)"><i class="fas fa-hammer"></i> WIP</div>
