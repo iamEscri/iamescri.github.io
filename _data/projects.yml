@@ -7,17 +7,10 @@
 - name: Guia Nuclei
   icon: "🔍"
   desc: "Script de reconocimiento automático para CTFs. Lanza nmap, feroxbuster y nikto en paralelo y genera un reporte en markdown."
-  details: |
-    **Guia Nuclei** es una herramienta de automatización de reconocimiento diseñada específicamente para entornos CTF y pentesting. El script orquesta en paralelo tres de las herramientas más utilizadas en la fase de enumeración:
-
-    - **nmap** — Escaneo de puertos, detección de servicios y versiones.
-    - **feroxbuster** — Fuzzing de directorios y endpoints web de forma recursiva.
-    - **nikto** — Análisis de vulnerabilidades web conocidas y misconfigurations.
-
-    Una vez completada la ejecución, todos los resultados se consolidan automáticamente en un reporte en formato Markdown, listo para ser incluido en un writeup o compartido con el equipo. Ideal para ahorrar tiempo en la fase inicial de cada máquina y centrarte en lo que importa: explotar vulnerabilidades.
   stack: [Python, Bash, nmap]
   github: "https://github.com/iamEscri/nuclei-guide.git"
   demo: ""
+  post_url: "/project/guia-nuclei/"
   stars: 0
   forks: 0
   lang: Python
@@ -27,20 +20,10 @@
 - name: RevShell-Gen
   icon: "🐚"
   desc: "Generador de reverse shells one-liner para múltiples lenguajes. Con codificación URL/base64 automática."
-  details: |
-    **RevShell-Gen** es una aplicación web desarrollada con Flask que facilita la generación rápida de reverse shells listos para usar en entornos CTF y ejercicios de pentesting.
-
-    Caracteristicas principales:
-
-    - **Multiples lenguajes** — Genera payloads en Bash, Python, PHP, Perl, Ruby, PowerShell y mas.
-    - **Codificacion automatica** — Transforma los shells en URL encoding o Base64 con un solo clic, evitando problemas con caracteres especiales.
-    - **Interfaz web limpia** — Introduce IP, puerto y lenguaje objetivo; obtén tu one-liner instantaneamente.
-    - **Facil despliegue** — Funciona en local o en un servidor remoto. Sin dependencias pesadas.
-
-    Pensado para agilizar la fase de post-explotacion sin tener que recordar ni buscar sintaxis manualmente en cada ejercicio.
   stack: [Python, Flask]
   github: "https://github.com/iamEscri/revshell-gen"
   demo: ""
+  post_url: "/project/revshell-gen/"
   stars: 0
   forks: 0
   lang: Python
@@ -50,10 +33,10 @@
 - name: "Próximamente..."
   icon: "➕"
   desc: "Nuevo proyecto en desarrollo. ¡Vuelve pronto!"
-  details: ""
   stack: ["Coming Soon"]
   github: ""
   demo: ""
+  post_url: ""
   stars: 0
   forks: 0
   lang: ""
