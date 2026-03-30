@@ -4,40 +4,39 @@
 # =============================================
 
 bio: >
-  Aprendiz del hacking ético con pasión por los CTFs y la seguridad ofensiva.
-  Escribo writeups para ayudar a la comunidad y para no olvidar lo que aprendo.
-  Siempre estudiando, siempre rompiendo cosas (con permiso).
+  Técnico en Sistemas (ASIR) enfocado en ciberseguridad defensiva.
+  Actualmente en formación en entornos SOC, análisis de logs y detección de amenazas.
+  Trabajo con entornos Linux, redes y herramientas de seguridad, documentando todo el proceso mediante writeups y artículos técnicos.
+  Mi objetivo es especializarme en Blue Team y formar parte de un SOC.
+  
 
 location: "España"
 available: true
 
 skills:
-  - name: "Reconocimiento & Enumeración"
+  - name: "Linux (administración básica)"
     pct: 85
-  - name: "Web Application Hacking"
+  - name: "Redes (TCP/IP, servicios)"
     pct: 80
-  - name: "Privilege Escalation (Linux)"
-    pct: 75
-  - name: "Active Directory"
+  - name: "Análisis de logs"
+    pct: 50
+  - name: "Hardening básico"
     pct: 55
-  - name: "Buffer Overflow / Pwn"
-    pct: 40
-  - name: "Scripting Python / Bash"
+  - name: "Herramientas de seguridad"
+    pct: 60
+  - name: "CTFs / resolución de máquinas"
     pct: 70
 
 tools:
-  - nmap
-  - feroxbuster
-  - burpsuite
-  - metasploit
-  - john
-  - hashcat
-  - hydra
-  - gobuster
-  - linpeas
-  - bloodhound
-  - impacket
-  - pwntools
+- nmap
+- wireshark
+- tcpdump
+- burpsuite
+- metasploit
+- linux
+- bash
+- splunk
+- elastic
 
 certifications:
   - name: "eJPT"
