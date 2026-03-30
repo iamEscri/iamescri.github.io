@@ -62,6 +62,12 @@ defaults:
     values:
       layout: post
       category: defensive
+  - scope:
+      path: "_posts/projects"
+      type: posts
+    values:
+      layout: project
+      category: project
 
 # Exclude from build
 exclude:
