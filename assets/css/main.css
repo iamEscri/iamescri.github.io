@@ -583,7 +583,7 @@ body::before {
 .blog-card-cat {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--green);
+  color: var(--text-muted);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -598,9 +598,9 @@ body::before {
 .blog-tag {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--green);
-  background: rgba(0, 255, 136, 0.08);
-  border: 1px solid rgba(0, 255, 136, 0.2);
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 4px;
   padding: 2px 7px;
   letter-spacing: 0.05em;
