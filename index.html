@@ -42,31 +42,11 @@ section: home
   </div>
 
   <!-- Stats -->
-  <div class="stats-grid">
+  <div class="stats-grid stats-grid--four">
     <div class="stat-card">
       <div class="stat-icon">🚩</div>
       <div class="stat-number">{{ all_writeups | size }}</div>
       <div class="stat-label">writeups totales</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🐋</div>
-      <div class="stat-number">{{ all_writeups | where: "platform", "dockerlabs" | size }}</div>
-      <div class="stat-label">DockerLabs</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🟩</div>
-      <div class="stat-number">{{ all_writeups | where: "platform", "hackthebox" | size }}</div>
-      <div class="stat-label">HackTheBox</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🛡️</div>
-      <div class="stat-number">{{ all_writeups | where: "platform", "tryhackme" | size }}</div>
-      <div class="stat-label">TryHackMe</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🕷️</div>
-      <div class="stat-number">{{ all_writeups | where: "platform", "vulnyx" | size }}</div>
-      <div class="stat-label">Vulnyx</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon">✍️</div>
