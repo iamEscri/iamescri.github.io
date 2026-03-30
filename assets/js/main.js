@@ -164,13 +164,6 @@ function animateSkills() {
   });
 }
 
-// ── Project card expand/collapse ─────────────
-function toggleProject(cardEl, event) {
-  // Evitar que clics en enlaces internos disparen el toggle
-  if (event && event.target.closest('a')) return;
-  cardEl.classList.toggle('project-card--open');
-}
-
 // ── Init ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   // Manejar navegación con hash (volver desde subpágina)
