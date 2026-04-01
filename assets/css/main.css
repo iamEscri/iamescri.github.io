@@ -699,7 +699,7 @@ body::before {
 }
 
 /* ===== WRITEUP SINGLE PAGE ===== */
-.writeup-single { max-width: 860px; }
+.writeup-single { max-width: unset; }
 .writeup-hero {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -790,7 +790,7 @@ body::before {
   grid-template-columns: 1fr 280px;
   gap: 32px;
   align-items: start;
-  max-width: 1100px;
+  max-width: 100%;
 }
 
 .post-main {
