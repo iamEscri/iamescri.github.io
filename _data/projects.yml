@@ -4,7 +4,7 @@
 #  Se renderizan automáticamente en la sección Proyectos.
 # =============================================
 
-- - name: "iamEscri.es"
+- name: "iamEscri.es"
   icon: "🌐"
   desc: "Web personal de ciberseguridad: writeups, proyectos y artículos de Blue Team. Construida con Jekyll y desplegada en GitHub Pages con dominio propio."
   stack: [Jekyll, Liquid, HTML, CSS, JavaScript, GitHub Pages]
