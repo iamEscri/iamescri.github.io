@@ -787,10 +787,16 @@ body::before {
 /* ===== POST LAYOUT CON SIDEBAR DERECHA ===== */
 .post-layout {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 32px;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
   align-items: start;
   max-width: 100%;
+}
+
+/* Reducir padding lateral cuando hay post-layout para aprovechar todo el ancho */
+.content:has(.post-layout) {
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .post-main {
@@ -810,7 +816,9 @@ body::before {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .post-sidebar-title {
