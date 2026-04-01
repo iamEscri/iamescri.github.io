@@ -457,12 +457,18 @@ body::before {
 .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .tag {
   font-family: var(--font-mono);
-  font-size: 10px;
-  padding: 3px 8px;
+  font-size: 11px;
+  padding: 4px 10px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 4px;
   color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.tag:hover {
+  border-color: var(--green);
+  color: var(--green);
 }
 
 .tool-tag {
