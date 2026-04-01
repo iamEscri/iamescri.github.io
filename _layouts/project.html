@@ -22,62 +22,170 @@
 <div class="main">
   {% include topbar.html %}
   <div class="content">
-    <div class="post-body">
 
-      <a href="{{ '/#projects' | relative_url }}" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Volver a Proyectos
-      </a>
+    <a href="{{ '/#projects' | relative_url }}" class="back-btn">
+      <i class="fas fa-arrow-left"></i> Volver a Proyectos
+    </a>
 
-      <div class="writeup-hero">
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;">
-          proyecto
+    <div class="post-layout">
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="post-main">
+        <div class="writeup-hero">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;">
+            proyecto
+          </div>
+
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+            {% if page.icon %}
+            <span style="font-size:32px;">{{ page.icon }}</span>
+            {% endif %}
+            <h1 class="writeup-title" style="margin:0;">{{ page.title }}</h1>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;">
+            {% if page.stack %}
+            <div class="card-tags" style="margin:0;">
+              {% for tech in page.stack %}
+              <span class="tag">{{ tech }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if page.lang %}
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">
+              <i class="fas fa-circle" style="font-size:8px;color:{{ page.lang_color | default: '#3572A5' }}"></i>
+              {{ page.lang }}
+            </span>
+            {% endif %}
+
+            {% if page.github and page.github != "" %}
+            <a href="{{ page.github }}" target="_blank" class="project-github-btn" style="text-decoration:none;">
+              <i class="fab fa-github"></i> <span>GitHub</span>
+            </a>
+            {% endif %}
+
+            {% if page.demo and page.demo != "" %}
+            <a href="{{ page.demo }}" target="_blank" class="project-demo-btn" style="text-decoration:none;">
+              <i class="fas fa-external-link-alt"></i> <span>Demo</span>
+            </a>
+            {% endif %}
+          </div>
         </div>
 
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
-          {% if page.icon %}
-          <span style="font-size:32px;">{{ page.icon }}</span>
+        <div class="writeup-body" id="post-content">
+          {{ content }}
+        </div>
+      </div>
+
+      <!-- SIDEBAR DERECHA -->
+      <aside class="post-sidebar">
+
+        <!-- TOC -->
+        <div class="post-sidebar-card" id="toc-box">
+          <div class="post-sidebar-title">
+            <i class="fas fa-list-ul"></i> Contenido
+          </div>
+          <nav id="toc-nav">
+            <span class="toc-loading">Cargando...</span>
+          </nav>
+        </div>
+
+        <!-- PROYECTOS RELACIONADOS (misma stack) -->
+        {% assign current_stack = page.stack %}
+        {% assign related_projects = "" | split: "" %}
+        {% for proj in site.posts %}
+          {% if proj.url != page.url and proj.layout == "project" %}
+            {% for tech in current_stack %}
+              {% if proj.stack contains tech %}
+                {% unless related_projects contains proj %}
+                  {% assign related_projects = related_projects | push: proj %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
           {% endif %}
-          <h1 class="writeup-title" style="margin:0;">{{ page.title }}</h1>
-        </div>
+        {% endfor %}
 
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;">
-          {% if page.stack %}
-          <div class="card-tags" style="margin:0;">
+        {% if related_projects.size > 0 %}
+        <div class="post-sidebar-card">
+          <div class="post-sidebar-title">
+            <i class="fas fa-link"></i> Relacionados
+          </div>
+          <ul class="related-list">
+            {% for proj in related_projects limit:4 %}
+            <li>
+              <a href="{{ proj.url | relative_url }}" class="related-item">
+                <span class="related-item-cat">proyecto</span>
+                <span class="related-item-title">{{ proj.title }}</span>
+                <span class="related-item-date">{{ proj.date | date: "%d %b %Y" }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- STACK / TAGS -->
+        {% if page.stack %}
+        <div class="post-sidebar-card">
+          <div class="post-sidebar-title">
+            <i class="fas fa-tags"></i> Stack
+          </div>
+          <div class="sidebar-tags">
             {% for tech in page.stack %}
             <span class="tag">{{ tech }}</span>
             {% endfor %}
           </div>
-          {% endif %}
-
-          {% if page.lang %}
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">
-            <i class="fas fa-circle" style="font-size:8px;color:{{ page.lang_color | default: '#3572A5' }}"></i>
-            {{ page.lang }}
-          </span>
-          {% endif %}
-
-          {% if page.github and page.github != "" %}
-          <a href="{{ page.github }}" target="_blank" class="project-github-btn" style="text-decoration:none;">
-            <i class="fab fa-github"></i> <span>GitHub</span>
-          </a>
-          {% endif %}
-
-          {% if page.demo and page.demo != "" %}
-          <a href="{{ page.demo }}" target="_blank" class="project-demo-btn" style="text-decoration:none;">
-            <i class="fas fa-external-link-alt"></i> <span>Demo</span>
-          </a>
-          {% endif %}
         </div>
-      </div>
+        {% endif %}
 
-      <div class="writeup-body">
-        {{ content }}
-      </div>
+      </aside>
 
-    </div>
+    </div><!-- /.post-layout -->
   </div>
 </div>
 
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+<script>
+(function() {
+  const content = document.getElementById('post-content');
+  const nav = document.getElementById('toc-nav');
+  if (!content || !nav) return;
+
+  const headings = content.querySelectorAll('h2, h3');
+  if (headings.length === 0) {
+    document.getElementById('toc-box').style.display = 'none';
+    return;
+  }
+
+  nav.innerHTML = '';
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'heading-' + i;
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    a.className = 'toc-link toc-' + h.tagName.toLowerCase();
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    nav.appendChild(a);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = nav.querySelector('a[href="#' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        nav.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -70% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+})();
+</script>
 </body>
 </html>
