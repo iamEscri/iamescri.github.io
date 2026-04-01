@@ -246,6 +246,9 @@ body::before {
 /* ===== CONTENT ===== */
 .content { padding: 40px; max-width: 1200px; }
 
+/* Sin max-width en páginas de post/writeup/proyecto/defensiva para que el grid ocupe todo */
+.content:has(.post-layout) { max-width: none; }
+
 /* ===== SECTIONS ===== */
 .section { display: none; }
 .section.active { display: block; }
@@ -787,8 +790,8 @@ body::before {
 /* ===== POST LAYOUT CON SIDEBAR DERECHA ===== */
 .post-layout {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 40px;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
   align-items: start;
   max-width: 100%;
 }
