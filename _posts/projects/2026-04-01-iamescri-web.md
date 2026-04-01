@@ -13,9 +13,9 @@ tags: [jekyll, github-pages, ciberseguridad, web, sysadmin]
 
 ## ¿Qué es este proyecto?
 
-**iamEscri.es** es mi web personal de ciberseguridad: el sitio donde documento mi aprendizaje, publico writeups de máquinas, comparto artículos de Blue Team y presento mis proyectos.
+**iamEscri.es** es mi web personal de ciberseguridad: el sitio donde documento mi aprendizaje, publico writeups de máquinas, comparto artículos de Blue Team y presento mis proyectos técnicos.
 
-Más allá de ser una web de portfolio, es en sí misma un proyecto técnico. Diseñarla, configurarla, desplegarla con dominio propio y mantenerla activa implicó tomar decisiones reales de infraestructura, aunque soy técnico de sistemas y no desarrollador.
+Más allá del contenido, la web es en sí misma un proyecto de infraestructura. Elegir la tecnología, configurar el despliegue automático, gestionar el dominio propio con DNS y mantener todo funcionando son decisiones técnicas reales que tomé como técnico de sistemas, aunque el diseño visual lo desarrollé con ayuda de IA (Claude, de Anthropic).
 
 ---
 
@@ -28,73 +28,90 @@ Más allá de ser una web de portfolio, es en sí misma un proyecto técnico. Di
 | Frontend | HTML5, CSS3, JavaScript vanilla |
 | Alojamiento | GitHub Pages |
 | Dominio | Registro externo con DNS apuntado a GitHub |
-| CI/CD | GitHub Actions (build y deploy automático) |
+| CI/CD | GitHub Actions |
 | Escritura de contenido | Markdown |
 
 ---
 
-## Arquitectura y cómo funciona
+## ¿Qué es Jekyll y por qué lo elegí?
 
-La web es un **sitio estático generado con Jekyll**. No hay base de datos, no hay servidor de aplicaciones ni backend. El flujo completo es:
+Jekyll es un **generador de sitios estáticos**: una herramienta que convierte archivos de texto plano (escritos en Markdown, un formato muy sencillo) en páginas web completas listas para publicar. No hay base de datos, no hay servidor de aplicaciones, no hay panel de administración.
 
-```
-Escribo un .md  →  git push  →  GitHub Actions construye el sitio  →  GitHub Pages lo sirve
-```
+El resultado es un conjunto de archivos HTML, CSS y JavaScript estáticos que cualquier servidor web puede servir directamente, sin necesidad de ejecutar código en el servidor para cada visita.
 
-Esto tiene ventajas claras desde el punto de vista de un técnico de sistemas:
+Lo elegí por tres razones concretas:
 
-- **Sin superficie de ataque de servidor**: no hay PHP, no hay WordPress, no hay CMS con panel de administración expuesto.
-- **Alta disponibilidad gestionada**: GitHub Pages se encarga de la infraestructura. Sin que yo tenga que gestionar un VPS, parchear un servidor ni renovar certificados manualmente.
-- **HTTPS automático**: certificado TLS gestionado por GitHub, renovación transparente.
-- **Coste cero de hosting**: GitHub Pages es gratuito para proyectos públicos.
+- **Seguridad**: sin servidor de aplicaciones ni base de datos, la superficie de ataque es mínima. No hay WordPress que actualizar, no hay plugin vulnerable, no hay panel de login expuesto.
+- **Sencillez operacional**: no tengo que gestionar un VPS, parchear un sistema operativo ni preocuparme por la disponibilidad del servidor. GitHub Pages se encarga de todo eso.
+- **Flujo de trabajo basado en Git**: todo el contenido vive en un repositorio. Publicar un artículo es exactamente igual que hacer un commit, algo que cualquier técnico de sistemas ya sabe hacer.
 
 ---
 
-## Dominio propio
+## Arquitectura y flujo de despliegue
 
-El dominio `iamescri.es` está registrado en un proveedor externo. La configuración DNS apunta al alojamiento de GitHub Pages mediante registros `A` y `CNAME`:
+El ciclo completo desde que escribo contenido hasta que aparece en la web es este:
 
 ```
-# Registros A — IPs de GitHub Pages
+Creo o edito un archivo .md  →  git push  →  GitHub Actions construye el sitio  →  GitHub Pages lo publica
+```
+
+**GitHub Actions** es el sistema de integración continua integrado en GitHub. Cada vez que subo un cambio al repositorio, se dispara automáticamente un proceso que:
+
+1. Instala Jekyll y sus dependencias
+2. Lee todos los archivos Markdown del repositorio
+3. Genera el sitio web completo en HTML estático
+4. Lo despliega en GitHub Pages
+
+Todo esto ocurre en aproximadamente un minuto, sin intervención manual. El resultado es visible en `iamescri.es` de forma inmediata.
+
+---
+
+## Dominio propio y configuración DNS
+
+El dominio `iamescri.es` está registrado en un proveedor externo. Para que apunte a GitHub Pages en lugar del servidor del registrador, configuré los siguientes registros DNS:
+
+```
+# Registros A — apuntan a las IPs de GitHub Pages
 185.199.108.153
 185.199.109.153
 185.199.110.153
 185.199.111.153
 
-# Registro CNAME — subdominio www
+# Registro CNAME — para el subdominio www
 www  →  iamescri.github.io
 ```
 
-El archivo `CNAME` en la raíz del repositorio le indica a GitHub Pages qué dominio personalizado usar.
+Además, el repositorio contiene un archivo llamado `CNAME` en su raíz con el valor `iamescri.es`. Esto le indica a GitHub Pages qué dominio personalizado debe usar al servir el sitio.
+
+El certificado HTTPS es gestionado y renovado automáticamente por GitHub, sin ninguna intervención por mi parte.
 
 ---
 
-## Diseño y estructura
+## Diseño y estructura de la web
 
-El diseño tiene estética de **terminal / hacker**: fondo oscuro, tipografía monoespaciada, colores inspirados en una shell de Linux. Aunque el diseño lo construyó Claude (IA de Anthropic), yo definí los requisitos, validé cada iteración y tomé todas las decisiones de estructura y contenido.
+La web tiene estética de **terminal / hacker**: fondo oscuro, tipografía monoespaciada, colores verdes inspirados en una shell de Linux. Funciona como una **Single Page Application (SPA)**, lo que significa que el menú lateral carga cada sección sin recargar la página completa, dando una experiencia más fluida.
 
-La web funciona como una **Single Page Application (SPA)**: el menú lateral navega entre secciones sin recargar la página, usando JavaScript vanilla para mostrar y ocultar bloques de contenido.
+Las secciones principales son:
 
-### Secciones principales
-
-- **Home** — Terminal interactivo con estadísticas automáticas y actividad reciente
-- **Writeups** — Resoluciones de máquinas CTF filtradas por plataforma y dificultad
+- **Home** — Terminal interactivo con estadísticas calculadas automáticamente a partir del contenido publicado
+- **Writeups** — Resoluciones de máquinas CTF, filtrables por plataforma y dificultad
 - **Portfolio** — Bio, skills con barras de progreso, herramientas y certificaciones
 - **Blog** — Artículos técnicos, cheatsheets y tutoriales
 - **Seguridad Defensiva** — Guías de Blue Team, hardening y detección de amenazas
-- **Proyectos** — Esta misma sección, con tarjetas y páginas completas
+- **Proyectos** — Esta misma sección
 
 ---
 
 ## Gestión del contenido
 
-Todo el contenido se gestiona mediante **archivos Markdown** en carpetas específicas del repositorio. No hay panel de administración ni CMS. El flujo de publicación es:
+Todo el contenido se publica creando archivos Markdown en carpetas concretas del repositorio. No hay formularios, no hay editor visual, no hay CMS. El flujo es:
 
 ```bash
-# 1. Crear el writeup o artículo
+# Ejemplo: publicar un nuevo writeup
+# 1. Crear el archivo en la carpeta correspondiente
 vim _posts/writeups/2026-04-01-dockerlabs-trust.md
 
-# 2. Subir los cambios
+# 2. Subir los cambios al repositorio
 git add .
 git commit -m "nuevo writeup: DockerLabs - Trust"
 git push
@@ -102,38 +119,16 @@ git push
 # 3. GitHub Actions construye y despliega automáticamente (~1 min)
 ```
 
-Los contadores de estadísticas, la actividad reciente y la lista del terminal se actualizan solos con cada nuevo archivo publicado. No hay que tocar HTML ni JavaScript.
-
----
-
-## CI/CD con GitHub Actions
-
-El repositorio tiene un workflow de GitHub Actions que se dispara en cada `push` a la rama principal:
-
-1. Clona el repositorio
-2. Instala Ruby y las dependencias de Jekyll
-3. Construye el sitio estático (`jekyll build`)
-4. Despliega el resultado en GitHub Pages
-
-Esto garantiza que cualquier cambio que haga —desde añadir un writeup hasta modificar la configuración— se publique automáticamente sin intervención manual.
+Los contadores del home, la actividad reciente y la lista del terminal se actualizan solos con cada nuevo archivo publicado. Nunca hay que tocar HTML, CSS ni JavaScript para publicar contenido.
 
 ---
 
 ## Lo que aprendí con este proyecto
 
-Aunque mi especialidad es sistemas y ciberseguridad, este proyecto me dio perspectiva práctica sobre:
+Mi especialidad es sistemas y ciberseguridad, no desarrollo web. Aun así, este proyecto me obligó a entender y aplicar conceptos que normalmente quedan fuera de ese ámbito:
 
-- Cómo funciona el ciclo completo de una web estática: desde el código hasta el usuario final
-- Configuración de DNS y dominios personalizados en GitHub Pages
+- El ciclo completo de una web estática: desde el código fuente hasta el usuario final
+- Configuración de DNS y dominios personalizados en una plataforma de hosting externa
 - Git como herramienta de despliegue continuo, no solo de control de versiones
-- Organización de un repositorio Jekyll: layouts, includes, datos YAML, front matter
-- Las ventajas de seguridad de los sitios estáticos frente a plataformas dinámicas con CMS
-
----
-
-## Próximas mejoras
-
-- [ ] Añadir sección de CTF labs con progreso y estadísticas detalladas
-- [ ] Sistema de búsqueda de writeups por técnica o CVE
-- [ ] Página de recursos y herramientas recomendadas
-- [ ] Integración de badges dinámicos de HackTheBox y TryHackMe
+- Las ventajas reales de los sitios estáticos frente a plataformas dinámicas con CMS, especialmente desde el punto de vista de la seguridad
+- Cómo estructurar un repositorio Jekyll: layouts, includes, datos en YAML y front matter
