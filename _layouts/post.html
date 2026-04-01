@@ -21,40 +21,149 @@
 <div class="main">
   {% include topbar.html %}
   <div class="content">
-    <div class="post-body">
 
-      <a href="{{ '/' | relative_url }}" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Volver
-      </a>
+    <a href="{{ '/' | relative_url }}" class="back-btn">
+      <i class="fas fa-arrow-left"></i> Volver
+    </a>
 
-      <div class="writeup-hero">
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;">
-          {{ page.category | default: "blog" }}
+    <div class="post-layout">
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="post-main">
+        <div class="writeup-hero">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;">
+            {{ page.category | default: "blog" }}
+          </div>
+          <h1 class="writeup-title">{{ page.title }}</h1>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:16px;">
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
+              <i class="fas fa-calendar"></i> {{ page.date | date: "%d %b %Y" }}
+            </span>
+            {% if page.tags %}
+            <div class="card-tags" style="margin:0;">
+              {% for tag in page.tags %}
+              <span class="tag">#{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
         </div>
-        <h1 class="writeup-title">{{ page.title }}</h1>
-        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:16px;">
-          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
-            <i class="fas fa-calendar"></i> {{ page.date | date: "%d %b %Y" }}
-          </span>
 
-          {% if page.tags %}
-          <div class="card-tags" style="margin:0;">
+        <div class="writeup-body" id="post-content">
+          {{ content }}
+        </div>
+      </div>
+
+      <!-- SIDEBAR DERECHA -->
+      <aside class="post-sidebar">
+
+        <!-- TOC -->
+        <div class="post-sidebar-card" id="toc-box">
+          <div class="post-sidebar-title">
+            <i class="fas fa-list-ul"></i> Contenido
+          </div>
+          <nav id="toc-nav">
+            <span class="toc-loading">Cargando...</span>
+          </nav>
+        </div>
+
+        <!-- ARTÍCULOS RELACIONADOS -->
+        {% assign current_tags = page.tags %}
+        {% assign related = "" | split: "" %}
+        {% for post in site.posts %}
+          {% if post.url != page.url %}
+            {% for tag in current_tags %}
+              {% if post.tags contains tag %}
+                {% unless related contains post %}
+                  {% assign related = related | push: post %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        {% if related.size > 0 %}
+        <div class="post-sidebar-card">
+          <div class="post-sidebar-title">
+            <i class="fas fa-link"></i> Relacionados
+          </div>
+          <ul class="related-list">
+            {% for post in related limit:4 %}
+            <li>
+              <a href="{{ post.url | relative_url }}" class="related-item">
+                <span class="related-item-cat">{{ post.category | default: "blog" }}</span>
+                <span class="related-item-title">{{ post.title }}</span>
+                <span class="related-item-date">{{ post.date | date: "%d %b %Y" }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- TAGS DEL POST -->
+        {% if page.tags %}
+        <div class="post-sidebar-card">
+          <div class="post-sidebar-title">
+            <i class="fas fa-tags"></i> Tags
+          </div>
+          <div class="sidebar-tags">
             {% for tag in page.tags %}
             <span class="tag">#{{ tag }}</span>
             {% endfor %}
           </div>
-          {% endif %}
         </div>
-      </div>
+        {% endif %}
 
-      <div class="writeup-body">
-        {{ content }}
-      </div>
+      </aside>
 
-    </div>
+    </div><!-- /.post-layout -->
   </div>
 </div>
 
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+<script>
+// Generar TOC dinámicamente desde los h2 y h3 del artículo
+(function() {
+  const content = document.getElementById('post-content');
+  const nav = document.getElementById('toc-nav');
+  if (!content || !nav) return;
+
+  const headings = content.querySelectorAll('h2, h3');
+  if (headings.length === 0) {
+    document.getElementById('toc-box').style.display = 'none';
+    return;
+  }
+
+  nav.innerHTML = '';
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'heading-' + i;
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    a.className = 'toc-link toc-' + h.tagName.toLowerCase();
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    nav.appendChild(a);
+  });
+
+  // Highlight activo al hacer scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = nav.querySelector(`a[href="#${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        nav.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -70% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+})();
+</script>
 </body>
 </html>
