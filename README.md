@@ -1,101 +1,124 @@
 <div align="center">
 
-# iamEscri — Portfolio de Ciberseguridad
+<img src="https://iamescri.es/assets/favicon.png" width="80" alt="iamEscri logo" />
 
-**Técnico IT (ASIR) | Ciberseguridad | Blue Team & SOC (en formación)**
+# iamEscri · Portfolio de Ciberseguridad
 
-[![Sitio web](https://img.shields.io/badge/Web-iamescri.es-00ff41?style=flat-square&logo=googlechrome&logoColor=white)](https://iamescri.es)
-[![GitHub Pages](https://img.shields.io/badge/Hosting-GitHub%20Pages-181717?style=flat-square&logo=github&logoColor=white)](https://iamescri.github.io)
+**Técnico IT (ASIR) · Ciberseguridad · Blue Team & SOC en formación**
+
+[![Sitio web](https://img.shields.io/badge/🌐_Web-iamescri.es-00ff41?style=flat-square&logo=googlechrome&logoColor=white)](https://iamescri.es)
+[![GitHub Pages](https://img.shields.io/github/deployments/iamEscri/iamescri.github.io/github-pages?style=flat-square&label=GitHub%20Pages&logo=github&logoColor=white)](https://iamescri.github.io)
 [![Jekyll](https://img.shields.io/badge/Jekyll-4.3-CC0000?style=flat-square&logo=jekyll&logoColor=white)](https://jekyllrb.com)
-[![Deploy](https://img.shields.io/badge/CI/CD-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/iamEscri/iamescri.github.io/actions)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/iamEscri/iamescri.github.io/deploy.yml?branch=main&style=flat-square&label=CI%2FCD&logo=githubactions&logoColor=white)](https://github.com/iamEscri/iamescri.github.io/actions)
+[![License](https://img.shields.io/badge/Contenido-©_iamEscri-grey?style=flat-square)](./LICENSE)
 
 </div>
 
 ---
 
-## 📌 Descripción
+## ¿Qué es esto?
 
-Repositorio del portfolio personal de **iamEscri**, construido con Jekyll y desplegado en GitHub Pages. El sitio funciona como punto central de documentación técnica: writeups de CTFs, artículos de seguridad defensiva, proyectos personales y un portfolio con certificaciones, skills y herramientas.
+Repositorio del portfolio personal de **iamEscri** — un técnico de sistemas (ASIR) en formación continua en ciberseguridad, con foco en Blue Team, SOC y análisis defensivo.
 
-Accesible en el dominio personalizado **[iamescri.es](https://iamescri.es)**.
+El sitio está construido con **Jekyll** y desplegado en **GitHub Pages** bajo el dominio propio [`iamescri.es`](https://iamescri.es). Funciona como hub central para:
 
----
-
-## 🌐 Dominio personalizado
-
-El sitio está configurado con un **dominio personalizado `iamescri.es`** apuntando a GitHub Pages. La configuración se realiza a través de los DNS del proveedor del dominio, añadiendo los registros `A` oficiales de GitHub Pages y el registro `CNAME www`. GitHub gestiona automáticamente el certificado **SSL/TLS (HTTPS)** mediante Let's Encrypt.
-
-```
-A     @   →  185.199.108.153
-A     @   →  185.199.109.153
-A     @   →  185.199.110.153
-A     @   →  185.199.111.153
-CNAME www →  iamescri.github.io
-```
+- 🔍 **Writeups** de máquinas CTF (HackTheBox, DockerLabs, Vulnyx, TryHackMe)
+- 🛡️ **Seguridad defensiva** — hardening, Blue Team y detección de amenazas
+- 📝 **Blog técnico** — cheatsheets, tutoriales y reflexiones
+- 🚀 **Proyectos** — herramientas y scripts propios
+- 🧠 **Portfolio** — skills, certificaciones y herramientas
 
 ---
 
-## 🗂️ Estructura del proyecto
+## Estructura del proyecto
 
 ```
 iamescri.github.io/
-├── _config.yml             # Configuración global de Jekyll
-├── _data/
-│   ├── portfolio.yml       # Skills, herramientas y certificaciones
-│   └── projects.yml        # Proyectos personales
-├── _layouts/
-│   ├── default.html        # Layout base (sidebar + topbar)
-│   ├── post.html           # Layout para posts de blog y seg. defensiva
-│   ├── writeup.html        # Layout para writeups de CTF
-│   └── project.html        # Layout para proyectos
-├── _includes/
-│   ├── sidebar.html        # Barra lateral de navegación
-│   ├── topbar.html         # Barra superior con búsqueda
-│   └── writeup-card.html   # Componente de tarjeta de writeup
-├── _posts/
-│   ├── writeups/           # Writeups de máquinas (HackTheBox, Vulnyx, etc.)
-│   ├── blog/               # Artículos técnicos y cheatsheets
-│   ├── defensive/          # Contenido de seguridad defensiva / Blue Team
-│   └── projects/           # Descripciones de proyectos
-├── assets/
-│   ├── css/main.css        # Estilos globales (tema hacker oscuro custom)
-│   ├── js/main.js          # JavaScript del sitio
-│   └── img/                # Imágenes organizadas por sección
-├── index.html              # Página principal y secciones del portfolio
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # Pipeline de CI/CD con GitHub Actions
-└── Gemfile                 # Dependencias Ruby/Jekyll
+│
+├── 📄 _config.yml                          # Configuración global de Jekyll
+├── 📄 Gemfile                              # Dependencias Ruby/Jekyll
+├── 📄 index.html                           # Página principal (SPA con secciones dinámicas)
+├── 📄 robots.txt                           # Directivas para crawlers
+├── 📄 CNAME                                # Dominio personalizado → iamescri.es
+│
+├── 📁 _data/
+│   ├── portfolio.yml                       # Skills, herramientas y certificaciones
+│   └── projects.yml                        # Metadatos de proyectos propios
+│
+├── 📁 _layouts/
+│   ├── default.html                        # Layout base (sidebar + topbar)
+│   ├── post.html                           # Layout para blog y seguridad defensiva
+│   ├── writeup.html                        # Layout para writeups CTF
+│   └── project.html                        # Layout para proyectos
+│
+├── 📁 _includes/
+│   ├── sidebar.html                        # Navegación lateral
+│   ├── topbar.html                         # Barra superior con búsqueda
+│   └── writeup-card.html                   # Componente de tarjeta de writeup
+│
+├── 📁 _posts/
+│   ├── writeups/
+│   │   ├── 2026-03-15-vulnyx-controler.md
+│   │   ├── 2026-03-24-dockerlabs-pequenas-mentirosas.md
+│   │   └── 2026-03-26-PruebaAlvaro.md
+│   ├── blog/
+│   │   ├── 2026-03-10-PruebaBlog.md
+│   │   └── 2026-03-10-cheatsheet-privesc-linux.md
+│   ├── defensive/
+│   │   ├── 2026-03-26-SecurizarSSH.md
+│   │   └── 2026-03-26-mi-primer-articulo.md
+│   └── projects/
+│       ├── 2026-01-02-revshell-gen.md
+│       └── 2026-04-01-iamescri-web.md
+│
+├── 📁 assets/
+│   ├── css/main.css                        # Estilos globales (tema hacker oscuro)
+│   ├── js/main.js                          # JavaScript vanilla del sitio
+│   ├── favicon.ico / favicon.png
+│   └── img/
+│       ├── blog/                           # Imágenes para posts de blog
+│       ├── defensiva/
+│       │   └── securizar-ssh/
+│       │       └── terminal.png
+│       └── writeups/
+│           ├── dockerlabs/
+│           └── hackthebox/
+│
+└── 📁 .github/
+    └── workflows/
+        └── deploy.yml                      # Pipeline CI/CD con GitHub Actions
 ```
 
 ---
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 | Capa | Tecnología |
-|---|---|
-| **Generador estático** | [Jekyll 4.3](https://jekyllrb.com) |
-| **Lenguaje de plantillas** | Liquid + HTML5 |
-| **Estilos** | CSS3 personalizado (sin frameworks, tema hacker dark) |
-| **Scripting** | JavaScript vanilla |
-| **Sintaxis de contenido** | Markdown (kramdown) |
-| **Resaltado de código** | Rouge |
-| **Hosting** | GitHub Pages |
-| **CI/CD** | GitHub Actions |
-| **Dominio** | iamescri.es (dominio personalizado con HTTPS) |
-| **Ruby** | 3.3 (via `ruby/setup-ruby`) |
+|:--|:--|
+| Generador estático | [Jekyll 4.3](https://jekyllrb.com) |
+| Plantillas | Liquid + HTML5 |
+| Estilos | CSS3 custom (sin frameworks · tema hacker dark) |
+| Scripting | JavaScript vanilla |
+| Contenido | Markdown (kramdown) |
+| Resaltado de código | Rouge |
+| Hosting | GitHub Pages |
+| CI/CD | GitHub Actions |
+| Dominio | `iamescri.es` con HTTPS via Let's Encrypt |
+| Ruby | 3.3 (via `ruby/setup-ruby`) |
 
-### Plugins Jekyll
+**Plugins Jekyll activos:**
 
-- `jekyll-feed` — Genera feed RSS/Atom automáticamente
-- `jekyll-sitemap` — Genera `sitemap.xml` para SEO
-- `jekyll-seo-tag` — Meta tags SEO y Open Graph
+| Plugin | Función |
+|:--|:--|
+| `jekyll-feed` | Feed RSS/Atom automático |
+| `jekyll-sitemap` | `sitemap.xml` para SEO |
+| `jekyll-seo-tag` | Meta tags + Open Graph |
 
 ---
 
-## ⚙️ Instalación local
+## Instalación local
 
-### Requisitos previos
+### Requisitos
 
 - Ruby ≥ 3.0
 - Bundler (`gem install bundler`)
@@ -103,26 +126,28 @@ iamescri.github.io/
 ### Pasos
 
 ```bash
-# 1. Clonar el repositorio
+# Clonar el repositorio
 git clone https://github.com/iamEscri/iamescri.github.io.git
 cd iamescri.github.io
 
-# 2. Instalar dependencias
+# Instalar dependencias
 bundle install
 
-# 3. Arrancar el servidor local
+# Arrancar servidor local
 bundle exec jekyll serve
 
-# El sitio estará disponible en http://localhost:4000
+# Disponible en → http://localhost:4000
 ```
+
+> 💡 Para regenerar el sitio automáticamente al editar archivos usa `bundle exec jekyll serve --livereload`
 
 ---
 
-## ✍️ Crear contenido nuevo
+## Crear contenido nuevo
 
 ### Writeup de CTF
 
-Crea un archivo en `_posts/writeups/` con el formato `YYYY-MM-DD-nombre-maquina.md`:
+Archivo en `_posts/writeups/` con formato `YYYY-MM-DD-nombre-maquina.md`:
 
 ```yaml
 ---
@@ -132,13 +157,13 @@ platform: HackTheBox        # HackTheBox | TryHackMe | Vulnyx | DockerLabs
 difficulty: Medium           # Easy | Medium | Hard | Insane
 os: Linux                    # Linux | Windows
 tags: [nmap, sqli, privesc]
-date: 2025-01-01
+date: YYYY-MM-DD
 ---
 ```
 
-### Post de blog / seguridad defensiva
+### Post de blog o seguridad defensiva
 
-Crea un archivo en `_posts/blog/` o `_posts/defensive/`:
+Archivo en `_posts/blog/` o `_posts/defensive/`:
 
 ```yaml
 ---
@@ -147,56 +172,103 @@ title: "Título del artículo"
 category: tutorial           # tutorial | cheatsheet | reflexion | herramienta
 description: "Descripción breve"
 tags: [linux, hardening]
-date: 2025-01-01
+date: YYYY-MM-DD
 ---
 ```
 
 ### Proyecto
 
-Crea un archivo en `_posts/projects/` y actualiza `_data/projects.yml`.
+1. Crea un archivo en `_posts/projects/` con el front matter del layout `project`
+2. Añade la entrada correspondiente en `_data/projects.yml`
+
+### Imágenes por sección
+
+Guarda las imágenes en la ruta correspondiente dentro de `assets/img/`:
+
+| Sección | Ruta |
+|:--|:--|
+| Blog | `assets/img/blog/` |
+| Seguridad defensiva | `assets/img/defensiva/<nombre-post>/` |
+| Writeups DockerLabs | `assets/img/writeups/dockerlabs/` |
+| Writeups HackTheBox | `assets/img/writeups/hackthebox/` |
 
 ---
 
-## 🔄 Despliegue (CI/CD)
+## Pipeline de despliegue (CI/CD)
 
-El despliegue es completamente automático mediante **GitHub Actions**. Cada `push` a la rama `main` ejecuta el pipeline definido en `.github/workflows/deploy.yml`:
+Cada `push` a `main` dispara el workflow `.github/workflows/deploy.yml` automáticamente:
 
 ```
 push → main
-  └── build
-        ├── Checkout del repositorio
-        ├── Setup Ruby 3.3
-        ├── bundle install
-        ├── jekyll build (JEKYLL_ENV=production)
-        └── Upload artifact
-  └── deploy
-        └── Deploy a GitHub Pages → iamescri.es
+  └─ JOB: build
+       ├─ Checkout del repositorio
+       ├─ Setup Ruby 3.3
+       ├─ bundle install
+       ├─ jekyll build  (JEKYLL_ENV=production)
+       └─ Upload artifact
+  └─ JOB: deploy
+       └─ Deploy a GitHub Pages → iamescri.es
 ```
 
-No es necesario ningún paso manual para publicar.
+> No se requiere ningún paso manual. El tiempo medio de despliegue es de ~1 minuto.
 
 ---
 
-## 📊 Secciones del sitio
+## Dominio y DNS
+
+El dominio `iamescri.es` apunta a GitHub Pages mediante los siguientes registros DNS:
+
+```
+# Registros A (IPv4 de GitHub Pages)
+A   @   →   185.199.108.153
+A   @   →   185.199.109.153
+A   @   →   185.199.110.153
+A   @   →   185.199.111.153
+
+# Registro CNAME (subdominio www)
+CNAME   www   →   iamescri.github.io
+```
+
+El archivo `CNAME` en la raíz del repositorio contiene el valor `iamescri.es`. GitHub gestiona y renueva el certificado HTTPS automáticamente vía Let's Encrypt.
+
+---
+
+## Secciones del sitio
 
 | Sección | Descripción |
-|---|---|
-| **Portfolio** | Skills con porcentaje, certificaciones y herramientas |
-| **Writeups** | Resolución de máquinas CTF con metodología detallada |
-| **Blog** | Cheatsheets, tutoriales y reflexiones técnicas |
-| **Seg. Defensiva** | Artículos de Blue Team, hardening y detección |
-| **Proyectos** | Herramientas y scripts desarrollados |
+|:--|:--|
+| **Home** | Terminal interactivo con estadísticas en tiempo real del contenido publicado |
+| **Writeups** | Resoluciones de máquinas CTF filtrables por plataforma y dificultad |
+| **Portfolio** | Bio, skills con barras de progreso, herramientas y certificaciones |
+| **Blog** | Cheatsheets, tutoriales y artículos técnicos |
+| **Seg. Defensiva** | Guías de Blue Team, hardening y detección de amenazas |
+| **Proyectos** | Herramientas y scripts desarrollados personalmente |
 
 ---
 
-## 📄 Licencia
+## Proyectos incluidos
 
-Este repositorio contiene código fuente de un portfolio personal. Puedes tomar inspiración del diseño o la estructura, pero el **contenido** (writeups, artículos y datos personales) es propiedad de **iamEscri**.
+### 🌐 iamEscri.es
+Esta misma web. Infraestructura completa: Jekyll + GitHub Actions + dominio propio + HTTPS. El código del sitio es en sí mismo uno de los proyectos documentados.
+→ [Código](https://github.com/iamEscri/iamescri.github.io)
+
+### 🐚 RevShell-Gen
+Generador web de reverse shells one-liner para múltiples lenguajes (Bash, Python, PHP, Perl, Ruby, PowerShell…). Incluye codificación URL y Base64 automática. Construido con Python + Flask.
+→ [Código](https://github.com/iamEscri/revshell-gen)
+
+---
+
+## Licencia
+
+El **código fuente** del sitio puede usarse como referencia o inspiración.  
+El **contenido** (writeups, artículos, datos personales) es propiedad de **iamEscri** y no puede reproducirse sin permiso.
 
 ---
 
 <div align="center">
 
-Hecho con ☕ y muchas horas de CTFs · [@iamEscri](https://github.com/iamEscri)
+Hecho con ☕ y muchas horas de CTFs
+
+[@iamEscri](https://github.com/iamEscri) · [iamescri.es](https://iamescri.es) · [LinkedIn](https://www.linkedin.com/in/alvaro-escribano-roca-3b9a513a5/)
 
 </div>
