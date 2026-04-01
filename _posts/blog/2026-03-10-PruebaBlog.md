@@ -7,4 +7,4 @@ tags: [linux, prueba]
 description: "Referencia rápida de técnicas de escalada de privilegios en Linux para CTFs y pentesting."
 ---
 
-# Esto es una prueba
+1 ## Esto es una prueba
