@@ -4,17 +4,17 @@
 #  Se renderizan automáticamente en la sección Proyectos.
 # =============================================
 
-- name: Guia Nuclei
-  icon: "🔍"
-  desc: "Script de reconocimiento automático para CTFs. Lanza nmap, feroxbuster y nikto en paralelo y genera un reporte en markdown."
-  stack: [Python, Bash, nmap]
-  github: "https://github.com/iamEscri/nuclei-guide.git"
-  demo: ""
-  post_url: "/project/guia-nuclei/"
+- - name: "iamEscri.es"
+  icon: "🌐"
+  desc: "Web personal de ciberseguridad: writeups, proyectos y artículos de Blue Team. Construida con Jekyll y desplegada en GitHub Pages con dominio propio."
+  stack: [Jekyll, Liquid, HTML, CSS, JavaScript, GitHub Pages]
+  github: "https://github.com/iamEscri/iamescri.github.io"
+  demo: "https://iamescri.es"
+  post_url: "/project/iamescri-web/"
   stars: 0
   forks: 0
-  lang: Python
-  lang_color: "#3572A5"
+  lang: Jekyll
+  lang_color: "#fc0"
   wip: false
 
 - name: RevShell-Gen
