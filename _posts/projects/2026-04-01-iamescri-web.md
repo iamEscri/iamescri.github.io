@@ -7,7 +7,7 @@ stack: [Jekyll, Liquid, HTML, CSS, JavaScript, GitHub Pages]
 lang: Jekyll
 lang_color: "#fc0"
 github: "https://github.com/iamEscri/iamescri.github.io"
-demo: "https://iamescri.es"
+demo: ""
 tags: [jekyll, github-pages, ciberseguridad, web, sysadmin]
 ---
 
