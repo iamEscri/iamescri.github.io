@@ -9,7 +9,7 @@
   desc: "Web personal de ciberseguridad: writeups, proyectos y artículos de Blue Team. Construida con Jekyll y desplegada en GitHub Pages con dominio propio."
   stack: [Jekyll, Liquid, HTML, CSS, JavaScript, GitHub Pages]
   github: "https://github.com/iamEscri/iamescri.github.io"
-  demo: "https://iamescri.es"
+  demo: ""
   post_url: "/project/iamescri-web/"
   stars: 0
   forks: 0
