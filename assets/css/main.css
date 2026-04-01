@@ -739,6 +739,34 @@ body::before {
 .writeup-body pre { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; overflow-x: auto; margin: 20px 0; }
 .writeup-body pre code { background: none; padding: 0; color: var(--text); font-size: 13px; }
 .writeup-body blockquote { border-left: 3px solid var(--green); padding-left: 16px; color: var(--text-muted); margin: 20px 0; font-style: italic; }
+/* ===== TABLES ===== */
+.writeup-body table,
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 13px;
+  font-family: var(--font-mono);
+}
+.writeup-body th,
+.post-body th {
+  background: var(--surface);
+  color: var(--green);
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+}
+.writeup-body td,
+.post-body td {
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.writeup-body tr:nth-child(even),
+.post-body tr:nth-child(even) {
+  background: var(--bg3);
+}
 
 /* ===== BLOG POST SINGLE ===== */
 .post-body { max-width: 760px; }
