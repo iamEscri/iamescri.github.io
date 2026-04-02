@@ -17,19 +17,6 @@
   lang_color: "#fc0"
   wip: false
 
-- name: RevShell-Gen
-  icon: "🐚"
-  desc: "Generador de reverse shells one-liner para múltiples lenguajes. Con codificación URL/base64 automática."
-  stack: [Python, Flask]
-  github: "https://github.com/iamEscri/revshell-gen"
-  demo: ""
-  post_url: "/project/revshell-gen/"
-  stars: 0
-  forks: 0
-  lang: Python
-  lang_color: "#3572A5"
-  wip: false
-
 - name: "Próximamente..."
   icon: "➕"
   desc: "Nuevo proyecto en desarrollo. ¡Vuelve pronto!"
