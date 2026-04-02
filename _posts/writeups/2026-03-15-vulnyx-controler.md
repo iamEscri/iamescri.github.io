@@ -2,7 +2,7 @@
 layout: writeup
 title: "Controler"
 platform: tryhackme
-difficulty: very easy
+difficulty: hard
 os: linux
 date: 2026-03-15
 tags: [active-directory, kerberoasting, bloodhound, impacket, prueba]
