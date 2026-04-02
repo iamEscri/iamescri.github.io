@@ -446,10 +446,10 @@ body::before {
   border-radius: 20px;
   flex-shrink: 0;
 }
+.diff-very-easy { background: rgba(78,205,196,0.1); color: var(--blue); border: 1px solid rgba(78,205,196,0.2); }
 .diff-easy { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
 .diff-medium { background: rgba(255,159,67,0.1); color: var(--orange); border: 1px solid rgba(255,159,67,0.2); }
 .diff-hard { background: rgba(255,71,87,0.1); color: var(--red); border: 1px solid rgba(255,71,87,0.2); }
-.diff-insane { background: rgba(162,155,254,0.1); color: var(--purple); border: 1px solid rgba(162,155,254,0.2); }
 /* Etiquetas en español */
 .diff-muy-facil { background: rgba(78,205,196,0.1); color: var(--blue); border: 1px solid rgba(78,205,196,0.2); }
 .diff-facil { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
