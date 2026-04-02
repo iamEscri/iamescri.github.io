@@ -2,7 +2,7 @@
 layout: writeup
 title: "Pequeñas Mentirosas"
 platform: dockerlabs
-difficulty: facil
+difficulty: easy
 os: linux
 date: 2026-03-24
 tags: [fuzzing, sqli, privesc, sudo, Alvaro Escri]
