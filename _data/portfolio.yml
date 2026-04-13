@@ -26,6 +26,8 @@ skills:
     pct: 60
   - name: "CTFs / resolución de máquinas"
     pct: 70
+  - name: "Virtualización"
+    pct: 90
 
 tools:
 - nmap
