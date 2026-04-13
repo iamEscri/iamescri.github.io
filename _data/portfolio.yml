@@ -34,6 +34,14 @@ objetivos:
     status: "pending"
   - text: "Conseguir primer empleo en SOC / Blue Team"
     status: "pending"
+  - text: "Completar Máster en Ciberseguridad (ENNIT)"
+    status: "done"
+  - text: "Obtener CompTIA Security+"
+    status: "done"
+  - text: "Preparar eJPT / eCPPT"
+    status: "pending"
+  - text: "Conseguir primer empleo en SOC / Blue Team"
+    status: "pending"
 
 
 # --- EN DESARROLLO (panel derecho) ---
