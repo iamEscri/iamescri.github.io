@@ -92,17 +92,22 @@ body::before {
 
 .site-name {
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 17px;
   color: var(--green);
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
   font-weight: 700;
+  text-shadow: 0 0 10px rgba(0,255,136,0.4);
 }
 
 .site-tag {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-dim);
   font-family: var(--font-mono);
+  line-height: 1.5;
+  border-left: 2px solid var(--green);
+  padding-left: 8px;
+  margin-top: 2px;
 }
 
 .sidebar-nav { flex: 1; padding: 24px 0; }
