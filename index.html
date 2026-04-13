@@ -42,10 +42,9 @@ section: home
         </div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat objetivos.txt</span></div>
         <div class="t-line"><span class="t-out"><span class="t-comment"># objetivos 2025</span></span></div>
-        <div class="t-line"><span class="t-out"><span class="t-ok">✔</span> Completar Máster en Ciberseguridad (ENNIT)</span></div>
-        <div class="t-line"><span class="t-out"><span class="t-ok">✔</span> Obtener CompTIA Security+</span></div>
-        <div class="t-line"><span class="t-out"><span class="t-pend">◎</span> Preparar eJPT / eCPPT</span></div>
-        <div class="t-line"><span class="t-out"><span class="t-pend">◎</span> Conseguir primer empleo en SOC / Blue Team</span></div>
+        {% for obj in portfolio.objetivos %}
+        <div class="t-line"><span class="t-out">{% if obj.status == "done" %}<span class="t-ok">✔</span>{% else %}<span class="t-pend">◎</span>{% endif %} {{ obj.text }}</span></div>
+        {% endfor %}
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"><span class="t-cursor"></span></span></div>
       </div>
     </div>
@@ -54,41 +53,34 @@ section: home
     <div class="hero-side">
 
       <!-- En desarrollo -->
+      {% assign wip_items = portfolio.en_desarrollo | where: "status", "in-progress" %}
+      {% if wip_items.size > 0 %}
       <div class="side-widget">
         <div class="side-widget-title"><i class="fas fa-spinner fa-spin"></i> En desarrollo</div>
-
+        {% for item in wip_items %}
         <div class="dev-item">
-          <div class="dev-item-icon">🔐</div>
+          <div class="dev-item-icon">{{ item.icon }}</div>
           <div class="dev-item-info">
-            <div class="dev-item-name">CompTIA Security+</div>
-            <div class="dev-item-sub">Certificación · CompTIA</div>
+            <div class="dev-item-name">{{ item.name }}</div>
+            <div class="dev-item-sub">{{ item.sub }}</div>
           </div>
           <span class="dev-status-badge">en proceso</span>
         </div>
-
-        <div class="dev-item">
-          <div class="dev-item-icon">🛡️</div>
-          <div class="dev-item-info">
-            <div class="dev-item-name">Máster Ciberseguridad</div>
-            <div class="dev-item-sub">Formación · ENNIT</div>
-          </div>
-          <span class="dev-status-badge">en proceso</span>
-        </div>
+        {% endfor %}
       </div>
+      {% endif %}
 
       <!-- Stack activo -->
+      {% if portfolio.stack_activo.size > 0 %}
       <div class="side-widget">
         <div class="side-widget-title"><i class="fas fa-layer-group"></i> Stack activo</div>
         <div class="stack-tags">
-          <span class="stack-tag">Elastic SIEM</span>
-          <span class="stack-tag">Splunk</span>
-          <span class="stack-tag">Wireshark</span>
-          <span class="stack-tag">Nmap</span>
-          <span class="stack-tag">Linux</span>
-          <span class="stack-tag">Docker</span>
-          <span class="stack-tag">Bash</span>
+          {% for tool in portfolio.stack_activo %}
+          <span class="stack-tag">{{ tool }}</span>
+          {% endfor %}
         </div>
       </div>
+      {% endif %}
 
       <!-- Disponibilidad -->
       {% if portfolio.available %}
@@ -96,7 +88,7 @@ section: home
         <div class="avail-dot"></div>
         <div>
           <div class="avail-title">Disponible para trabajar</div>
-          <div class="avail-sub">Blue Team · SOC · Defensa</div>
+          <div class="avail-sub">{{ portfolio.available_roles | default: "Blue Team · SOC · Defensa" }}</div>
         </div>
       </div>
       {% endif %}
@@ -177,46 +169,20 @@ section: home
     <div class="home-card">
       <div class="home-card-title"><i class="fas fa-road"></i> Roadmap Certs</div>
       <div class="roadmap-list">
-        <div class="roadmap-item status-done">
+        {% for cert in portfolio.roadmap %}
+        <div class="roadmap-item status-{{ cert.status }}">
           <div class="roadmap-dot"></div>
           <div class="roadmap-info">
-            <div class="roadmap-name">ASIR</div>
-            <div class="roadmap-sub">IES Beniaján · 2025</div>
+            <div class="roadmap-name">{{ cert.name }}</div>
+            <div class="roadmap-sub">{{ cert.org }}{% if cert.date and cert.date != "" %} · {{ cert.date }}{% endif %}</div>
           </div>
-          <span class="roadmap-badge done">obtenida</span>
+          {% if cert.status == "done" %}<span class="roadmap-badge done">obtenida</span>
+          {% elsif cert.status == "wip" %}<span class="roadmap-badge wip">en curso</span>
+          {% elsif cert.status == "next" %}<span class="roadmap-badge next">próximo</span>
+          {% else %}<span class="roadmap-badge next">futuro</span>
+          {% endif %}
         </div>
-        <div class="roadmap-item status-wip">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-info">
-            <div class="roadmap-name">Security+</div>
-            <div class="roadmap-sub">CompTIA · en progreso</div>
-          </div>
-          <span class="roadmap-badge wip">en curso</span>
-        </div>
-        <div class="roadmap-item status-wip">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-info">
-            <div class="roadmap-name">Máster Ciberseguridad</div>
-            <div class="roadmap-sub">ENNIT · en progreso</div>
-          </div>
-          <span class="roadmap-badge wip">en curso</span>
-        </div>
-        <div class="roadmap-item status-next">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-info">
-            <div class="roadmap-name">eJPT</div>
-            <div class="roadmap-sub">eLearnSecurity · objetivo</div>
-          </div>
-          <span class="roadmap-badge next">próximo</span>
-        </div>
-        <div class="roadmap-item status-next">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-info">
-            <div class="roadmap-name">eCPPT / OSCP</div>
-            <div class="roadmap-sub">objetivo futuro</div>
-          </div>
-          <span class="roadmap-badge next">futuro</span>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
