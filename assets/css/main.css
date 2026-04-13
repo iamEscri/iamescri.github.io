@@ -641,23 +641,62 @@ body::before {
 .card-os { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
 
 /* ===== PORTFOLIO ===== */
-.portfolio-layout { display: grid; grid-template-columns: minmax(260px, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.3fr); gap: 24px; align-items: start; }
+/* ===== PORTFOLIO — 2 filas ===== */
 
-.portfolio-col { display: flex; flex-direction: column; gap: 0; }
+/* Fila 1: perfil (ancho fijo) + skills (resto del espacio) */
+.portfolio-row-top {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+/* Fila 2: herramientas + objetivos + certificaciones, 3 columnas iguales */
+.portfolio-row-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.portfolio-bottom-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+/* Skills en 2 columnas dentro del bloque */
+.portfolio-skills-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+
+.skills-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 32px;
+}
+
+.portfolio-col {}
 
 .profile-card {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 28px 24px;
+  padding: 32px;
   text-align: center;
   position: sticky;
   top: 80px;
+  height: fit-content;
 }
 
 /* Avatar más grande y con animación de pulso */
 .profile-avatar {
-  width: 120px; height: 120px;
+  width: 150px; height: 150px;
   border-radius: 50%;
   border: 3px solid var(--green);
   box-shadow: 0 0 0 6px rgba(0,255,136,0.07), 0 0 40px var(--green-glow);
@@ -1104,13 +1143,15 @@ body::before {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
-  .portfolio-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }
-  .portfolio-col:last-child { grid-column: 1 / -1; }
-}
-@media (max-width: 1100px) {
-  .portfolio-layout { grid-template-columns: 1fr; }
+  .portfolio-row-top { grid-template-columns: 1fr; }
+  .portfolio-row-bottom { grid-template-columns: 1fr; }
   .portfolio-col { }
+  .profile-card { position: static; }}
+@media (max-width: 1100px) {
+  .portfolio-row-top { grid-template-columns: 1fr; }
+  .portfolio-row-bottom { grid-template-columns: 1fr; }
   .profile-card { position: static; }
+  .skills-grid-2col { grid-template-columns: 1fr; }
   .blog-layout { grid-template-columns: 1fr; }
   .home-grid { grid-template-columns: 1fr; }
   .home-grid--three { grid-template-columns: 1fr; }
