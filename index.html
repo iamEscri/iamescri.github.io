@@ -255,7 +255,8 @@ section: home
   </div>
 
   <div class="portfolio-layout">
-    <!-- Perfil -->
+
+    <!-- COL 1: Perfil -->
     <div class="profile-card">
       <div class="profile-avatar">
         {% if site.avatar %}
@@ -303,8 +304,8 @@ section: home
       </div>
     </div>
 
-    <!-- Skills & certs -->
-    <div class="portfolio-right">
+    <!-- COL 2: Skills & Herramientas -->
+    <div class="portfolio-col">
 
       {% if portfolio.skills %}
       <div class="skills-section">
@@ -323,10 +324,30 @@ section: home
       </div>
       {% endif %}
 
+      {% if portfolio.tools %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
+        <div class="card-tags">
+          {% for tool in portfolio.tools %}
+          {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
+          <span class="tool-tag">
+            <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
+            {{ tool }}
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+    <!-- COL 3: Certificaciones & Objetivos -->
+    <div class="portfolio-col">
+
       {% if portfolio.certifications %}
       <div class="skills-section">
         <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
-        <div class="certs-grid">
+        <div class="certs-grid certs-grid-single">
           {% for cert in portfolio.certifications %}
           <div class="cert-card {{ cert.status }}">
             <div class="cert-icon">{{ cert.icon }}</div>
@@ -343,23 +364,22 @@ section: home
       </div>
       {% endif %}
 
-      {% if portfolio.tools %}
-      {% assign devicons = "nmap:nmap,wireshark:wireshark,tcpdump:linux,burpsuite:burpsuite,metasploit:metasploit-plain,linux:linux,bash:bash,splunk:splunk,elastic:elasticsearch" | split: "," %}
+      {% if portfolio.objetivos %}
       <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
-        <div class="card-tags">
-          {% for tool in portfolio.tools %}
-          {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
-          <span class="tool-tag">
-            <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
-            {{ tool }}
-          </span>
+        <div class="skills-title"><i class="fas fa-crosshairs"></i> Objetivos</div>
+        <div class="objetivos-list">
+          {% for obj in portfolio.objetivos %}
+          <div class="objetivo-item {{ obj.status }}">
+            <span class="objetivo-icon">{% if obj.status == 'done' %}✔{% else %}◎{% endif %}</span>
+            <span class="objetivo-text">{{ obj.text }}</span>
+          </div>
           {% endfor %}
         </div>
       </div>
       {% endif %}
 
     </div>
+
   </div>
 </section>
 
