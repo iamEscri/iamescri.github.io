@@ -36,9 +36,13 @@ section: home
         <div class="t-line"><span class="t-out green">{{ site.title }}</span></div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat about.txt</span></div>
         <div class="t-line"><span class="t-out">{{ portfolio.bio | default: site.description }}</span></div>
-        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups/</span></div>
+        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups/ | head -n 3</span></div>
         <div class="t-line">
-          <span class="t-out">{% for wu in all_writeups limit:6 %}<span class="t-file">{{ wu.title | truncate: 20, "…" }}</span>{% unless forloop.last %} {% endunless %}{% endfor %}</span>
+          <span class="t-out">{% for wu in all_writeups limit:3 %}<span class="t-file">{{ wu.title }}</span>{% unless forloop.last %}<br><span style="display:inline-block;width:16px;"></span>{% endunless %}{% endfor %}</span>
+        </div>
+        <div class="t-line" style="margin-top:4px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups | wc -l</span></div>
+        <div class="t-line">
+          <span class="t-out"><span class="t-comment">{{ all_writeups | size }} total</span></span>
         </div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat objetivos.txt</span></div>
         <div class="t-line"><span class="t-out"><span class="t-comment"># objetivos 2025</span></span></div>
