@@ -302,6 +302,19 @@ section: home
     <!-- Skills & certs -->
     <div class="portfolio-right">
 
+      <!-- SOBRE MÍ -->
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-user-circle"></i> Sobre mí</div>
+        <div class="portfolio-about-block">
+          <p>{{ portfolio.bio | default: site.description }}</p>
+          <div class="portfolio-about-meta">
+            <span><i class="fas fa-map-marker-alt"></i> {{ portfolio.location | default: "España" }}</span>
+            <span><i class="fas fa-bullseye"></i> Blue Team · SOC · Defensa</span>
+            {% if portfolio.available %}<span class="about-available"><i class="fas fa-circle"></i> Disponible para trabajar</span>{% endif %}
+          </div>
+        </div>
+      </div>
+
       {% if portfolio.skills %}
       <div class="skills-section">
         <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
@@ -354,6 +367,77 @@ section: home
         </div>
       </div>
       {% endif %}
+
+      <!-- ROADMAP DE OBJETIVOS -->
+      {% if portfolio.objetivos %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-crosshairs"></i> Objetivos</div>
+        <div class="portfolio-objetivos">
+          {% for obj in portfolio.objetivos %}
+          <div class="portfolio-obj-item {% if obj.status == 'done' %}obj-done{% else %}obj-pending{% endif %}">
+            <div class="obj-icon">{% if obj.status == 'done' %}<i class="fas fa-check-circle"></i>{% else %}<i class="fas fa-circle"></i>{% endif %}</div>
+            <span>{{ obj.text }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- FORMACIÓN / TIMELINE -->
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-graduation-cap"></i> Formación & Experiencia</div>
+        <div class="portfolio-timeline">
+          {% for cert in portfolio.roadmap %}
+          <div class="timeline-item status-{{ cert.status }}">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-name">{{ cert.name }}</div>
+              <div class="timeline-sub">{{ cert.org }}{% if cert.date and cert.date != "" %} · {{ cert.date }}{% endif %}</div>
+            </div>
+            {% if cert.status == "done" %}<span class="roadmap-badge done">obtenida</span>
+            {% elsif cert.status == "wip" %}<span class="roadmap-badge wip">en curso</span>
+            {% elsif cert.status == "next" %}<span class="roadmap-badge next">próximo</span>
+            {% else %}<span class="roadmap-badge next">futuro</span>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- ACTIVIDAD RECIENTE -->
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-history"></i> Actividad Reciente</div>
+        <div class="portfolio-activity">
+          {% for wu in all_writeups limit:3 %}
+          {% assign plat = wu.platform | downcase %}
+          <a href="{{ wu.url | relative_url }}" class="activity-item">
+            <div class="activity-type writeup-type"><i class="fas fa-flag"></i></div>
+            <div class="activity-info">
+              <div class="activity-title">{{ wu.title }}</div>
+              <div class="activity-meta">Writeup · <span class="platform-pill pill-{{ plat }}" style="font-size:10px;padding:1px 7px;">{{ wu.platform }}</span> · {{ wu.date | date: "%d %b %Y" }}</div>
+            </div>
+          </a>
+          {% endfor %}
+          {% for post in all_blog limit:2 %}
+          <a href="{{ post.url | relative_url }}" class="activity-item">
+            <div class="activity-type blog-type"><i class="fas fa-pencil-alt"></i></div>
+            <div class="activity-info">
+              <div class="activity-title">{{ post.title }}</div>
+              <div class="activity-meta">Blog · {{ post.date | date: "%d %b %Y" }}</div>
+            </div>
+          </a>
+          {% endfor %}
+          {% for post in all_defensive limit:2 %}
+          <a href="{{ post.url | relative_url }}" class="activity-item">
+            <div class="activity-type def-type"><i class="fas fa-shield-alt"></i></div>
+            <div class="activity-info">
+              <div class="activity-title">{{ post.title }}</div>
+              <div class="activity-meta">Seg. Defensiva · {{ post.date | date: "%d %b %Y" }}</div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
 
     </div>
   </div>
