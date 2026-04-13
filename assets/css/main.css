@@ -641,9 +641,9 @@ body::before {
 .card-os { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
 
 /* ===== PORTFOLIO ===== */
-.portfolio-layout { display: grid; grid-template-columns: 300px 1fr 1fr; gap: 28px; align-items: start; }
+.portfolio-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1.2fr); gap: 24px; align-items: stretch; }
 
-.portfolio-col {}
+.portfolio-col { display: flex; flex-direction: column; gap: 0; }
 
 .profile-card {
   background: var(--bg2);
@@ -1104,6 +1104,10 @@ body::before {
 .highlight .o { color: #ff79c6; }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .portfolio-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }
+  .portfolio-col:last-child { grid-column: 1 / -1; }
+}
 @media (max-width: 1100px) {
   .portfolio-layout { grid-template-columns: 1fr; }
   .portfolio-col { }
