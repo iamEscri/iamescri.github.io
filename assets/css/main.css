@@ -831,6 +831,138 @@ body::before {
 }
 .tool-tag:hover img { filter: grayscale(0) brightness(1); }
 
+/* ===== PORTFOLIO EXTRAS ===== */
+.portfolio-about-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.portfolio-about-block p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 14px 0;
+}
+.portfolio-about-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.portfolio-about-meta span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.portfolio-about-meta .about-available {
+  color: var(--green);
+}
+.portfolio-about-meta .about-available i {
+  font-size: 8px;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+/* Objetivos */
+.portfolio-objetivos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.portfolio-obj-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: border-color 0.2s;
+}
+.portfolio-obj-item.obj-done {
+  border-left: 2px solid var(--green);
+  color: var(--text);
+}
+.portfolio-obj-item.obj-pending {
+  border-left: 2px solid var(--border);
+  opacity: 0.7;
+}
+.obj-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.obj-done .obj-icon { color: var(--green); }
+.obj-pending .obj-icon { color: var(--text-muted); font-size: 10px; }
+
+/* Timeline */
+.portfolio-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--border);
+  padding-left: 20px;
+  margin-left: 8px;
+}
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-dot {
+  position: absolute;
+  left: -27px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg2);
+  flex-shrink: 0;
+}
+.timeline-item.status-done .timeline-dot { background: var(--green); border-color: var(--green); }
+.timeline-item.status-wip .timeline-dot { background: #f59e0b; border-color: #f59e0b; animation: blink 1.5s ease-in-out infinite; }
+.timeline-item.status-next .timeline-dot { background: var(--surface); border-color: var(--text-muted); }
+.timeline-item.status-future .timeline-dot { background: var(--surface); border-color: var(--border); opacity: 0.5; }
+.timeline-content { flex: 1; min-width: 0; }
+.timeline-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.timeline-sub { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* Actividad reciente */
+.portfolio-activity { display: flex; flex-direction: column; gap: 8px; }
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+.activity-item:hover { border-color: var(--green); background: rgba(0,255,136,0.03); }
+.activity-type {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.writeup-type { background: rgba(0,255,136,0.1); color: var(--green); }
+.blog-type { background: rgba(96,165,250,0.1); color: #60a5fa; }
+.def-type { background: rgba(251,146,60,0.1); color: #fb923c; }
+.activity-info { min-width: 0; }
+.activity-title { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.activity-meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+
 /* ===== BLOG ===== */
 .blog-layout { display: grid; grid-template-columns: 1fr 280px; gap: 32px; }
 .blog-posts {}
