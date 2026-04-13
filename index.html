@@ -250,149 +250,186 @@ section: home
     <p class="section-desc">Skills, herramientas y certificaciones. Lo que sé, lo que uso, lo que estoy aprendiendo.</p>
   </div>
 
-  <div class="portfolio-layout">
-    <!-- Perfil -->
-    <div class="profile-card">
-      <div class="profile-avatar">
-        {% if site.avatar %}
-        <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}">
-        {% else %}
-        💀
-        {% endif %}
-      </div>
-      <div class="profile-name">{{ site.title }}</div>
-      <div class="profile-handle">@{{ site.author | default: site.title }}</div>
-      {% if portfolio.available %}
-      <div class="profile-available">disponible para trabajar</div>
-      {% endif %}
-      <p class="profile-bio">{{ portfolio.bio | default: site.description }}</p>
+  <div class="post-layout">
 
-      <div class="profile-stats">
-        <div class="p-stat">
-          <div class="p-stat-num">{{ all_writeups | size }}</div>
-          <div class="p-stat-label">writeups</div>
-        </div>
-        <div class="p-stat">
-          <div class="p-stat-num">{{ all_blog | size }}</div>
-          <div class="p-stat-label">posts</div>
-        </div>
-        <div class="p-stat">
-          <div class="p-stat-num">{{ projects | where: "wip", false | size }}</div>
-          <div class="p-stat-label">proyectos</div>
-        </div>
-        <div class="p-stat">
-          <div class="p-stat-num">{{ portfolio.certifications | where: "status", "obtained" | size }}</div>
-          <div class="p-stat-label">certs</div>
-        </div>
-      </div>
-
-      <div class="profile-socials">
-        {% if site.social.github %}
-        <a href="{{ site.social.github }}" target="_blank"><i class="fab fa-github"></i></a>
-        {% endif %}
-        {% if site.social.linkedin %}
-        <a href="{{ site.social.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
-        {% endif %}
-        {% if site.social.hackthebox %}
-        <a href="{{ site.social.hackthebox }}" target="_blank"><i class="fas fa-cube"></i></a>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Skills & certs -->
-    <div class="portfolio-right">
+    <!-- CONTENIDO PRINCIPAL (izquierda) -->
+    <div class="post-main writeup-body">
 
       <!-- SOBRE MÍ -->
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-user-circle"></i> Sobre mí</div>
-        <div class="portfolio-about-block">
-          <p>{{ portfolio.bio | default: site.description }}</p>
-          <div class="portfolio-about-meta">
-            <span><i class="fas fa-map-marker-alt"></i> {{ portfolio.location | default: "España" }}</span>
-            <span><i class="fas fa-bullseye"></i> Blue Team · SOC · Defensa</span>
-            {% if portfolio.available %}<span class="about-available"><i class="fas fa-circle"></i> Disponible para trabajar</span>{% endif %}
-          </div>
-        </div>
+      <h2 id="sobre-mi"><i class="fas fa-user" style="margin-right:8px;"></i>Sobre mí</h2>
+      <p>{{ portfolio.bio | default: site.description }}</p>
+      <div class="portfolio-meta-chips">
+        <span><i class="fas fa-map-marker-alt"></i> {{ portfolio.location | default: "España" }}</span>
+        <span><i class="fas fa-crosshairs"></i> Blue Team · SOC · Defensa</span>
+        {% if portfolio.available %}<span class="chip-green"><i class="fas fa-circle"></i> Disponible para trabajar</span>{% endif %}
       </div>
 
+      <!-- SKILLS -->
       {% if portfolio.skills %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
-        {% for skill in portfolio.skills %}
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">{{ skill.name }}</span>
-            <span class="skill-pct">{{ skill.pct }}%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" data-width="{{ skill.pct }}" style="width:0%"></div>
+      <h2 id="skills"><i class="fas fa-chart-bar" style="margin-right:8px;"></i>Skills</h2>
+      {% for skill in portfolio.skills %}
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">{{ skill.name }}</span>
+          <span class="skill-pct">{{ skill.pct }}%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-fill" data-width="{{ skill.pct }}" style="width:0%"></div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <!-- HERRAMIENTAS -->
+      {% if portfolio.tools %}
+      <h2 id="herramientas"><i class="fas fa-tools" style="margin-right:8px;"></i>Herramientas</h2>
+      <div class="card-tags" style="margin-bottom:8px;">
+        {% for tool in portfolio.tools %}
+        {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
+        <span class="tool-tag">
+          <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
+          {{ tool }}
+        </span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- CERTIFICACIONES -->
+      {% if portfolio.certifications %}
+      <h2 id="certificaciones"><i class="fas fa-certificate" style="margin-right:8px;"></i>Certificaciones</h2>
+      <div class="certs-grid">
+        {% for cert in portfolio.certifications %}
+        <div class="cert-card {{ cert.status }}">
+          <div class="cert-icon">{{ cert.icon }}</div>
+          <div>
+            <div class="cert-name">{{ cert.name }}</div>
+            <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
+            <span class="cert-status-badge {{ cert.status }}">
+              {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
+            </span>
           </div>
         </div>
         {% endfor %}
       </div>
       {% endif %}
 
-      {% if portfolio.certifications %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
-        <div class="certs-grid">
-          {% for cert in portfolio.certifications %}
-          <div class="cert-card {{ cert.status }}">
-            <div class="cert-icon">{{ cert.icon }}</div>
-            <div>
-              <div class="cert-name">{{ cert.name }}</div>
-              <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
-              <span class="cert-status-badge {{ cert.status }}">
-                {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
-              </span>
+      <!-- PROYECTOS -->
+      {% assign active_projects = projects | where: "wip", false %}
+      {% if active_projects.size > 0 %}
+      <h2 id="proyectos"><i class="fas fa-code-branch" style="margin-right:8px;"></i>Proyectos</h2>
+      {% for project in active_projects %}
+      <div class="portfolio-project-card">
+        <div class="ppc-header">
+          <span class="ppc-icon">{{ project.icon }}</span>
+          <div class="ppc-title-wrap">
+            <div class="ppc-name">{{ project.name }}</div>
+            <div class="ppc-lang" {% if project.lang_color %}style="color:{{ project.lang_color }}"{% endif %}>
+              {% if project.lang %}<i class="fas fa-circle" style="font-size:9px;"></i> {{ project.lang }}{% endif %}
             </div>
           </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      {% if portfolio.tools %}
-      {% assign devicons = "nmap:nmap,wireshark:wireshark,tcpdump:linux,burpsuite:burpsuite,metasploit:metasploit-plain,linux:linux,bash:bash,splunk:splunk,elastic:elasticsearch" | split: "," %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
-        <div class="card-tags">
-          {% for tool in portfolio.tools %}
-          {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
-          <span class="tool-tag">
-            <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
-            {{ tool }}
-          </span>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- ROADMAP DE OBJETIVOS -->
-      {% if portfolio.objetivos %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-crosshairs"></i> Objetivos</div>
-        <div class="portfolio-objetivos">
-          {% for obj in portfolio.objetivos %}
-          <div class="portfolio-obj-item {% if obj.status == 'done' %}obj-done{% else %}obj-pending{% endif %}">
-            <div class="obj-icon">{% if obj.status == 'done' %}<i class="fas fa-check-circle"></i>{% else %}<i class="fas fa-circle"></i>{% endif %}</div>
-            <span>{{ obj.text }}</span>
+          <div class="ppc-links">
+            {% if project.github and project.github != "" %}<a href="{{ project.github }}" target="_blank"><i class="fab fa-github"></i></a>{% endif %}
+            {% if project.demo and project.demo != "" %}<a href="{{ project.demo }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>{% endif %}
+            {% if project.post_url and project.post_url != "" %}<a href="{{ project.post_url | relative_url }}"><i class="fas fa-book-open"></i></a>{% endif %}
           </div>
+        </div>
+        <p class="ppc-desc">{{ project.desc }}</p>
+        <div class="card-tags">
+          {% for tech in project.stack %}
+          <span class="tag">{{ tech }}</span>
           {% endfor %}
         </div>
       </div>
+      {% endfor %}
       {% endif %}
 
-      <!-- FORMACIÓN / TIMELINE -->
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-graduation-cap"></i> Formación & Experiencia</div>
-        <div class="portfolio-timeline">
+      <!-- OBJETIVOS -->
+      {% if portfolio.objetivos %}
+      <h2 id="objetivos"><i class="fas fa-crosshairs" style="margin-right:8px;"></i>Objetivos</h2>
+      {% for obj in portfolio.objetivos %}
+      <div class="portfolio-obj-row {% if obj.status == 'done' %}obj-done{% else %}obj-pending{% endif %}">
+        {% if obj.status == 'done' %}
+        <i class="fas fa-check-circle obj-icon"></i>
+        {% else %}
+        <i class="far fa-circle obj-icon"></i>
+        {% endif %}
+        <span>{{ obj.text }}</span>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+    </div><!-- /.post-main -->
+
+    <!-- SIDEBAR (derecha, sticky) -->
+    <aside class="post-sidebar">
+
+      <!-- Perfil compacto -->
+      <div class="post-sidebar-card" style="text-align:center;">
+        <div class="profile-avatar" style="width:80px;height:80px;margin:0 auto 12px;font-size:32px;">
+          {% if site.avatar %}
+          <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}">
+          {% else %}
+          💀
+          {% endif %}
+        </div>
+        <div style="font-weight:700;font-size:15px;margin-bottom:4px;">{{ site.title }}</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);margin-bottom:10px;">@{{ site.author | default: site.title }}</div>
+        {% if portfolio.available %}
+        <div class="profile-available" style="justify-content:center;margin-bottom:14px;">disponible para trabajar</div>
+        {% endif %}
+        <div class="profile-socials">
+          {% if site.social.github %}<a href="{{ site.social.github }}" target="_blank"><i class="fab fa-github"></i></a>{% endif %}
+          {% if site.social.linkedin %}<a href="{{ site.social.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>{% endif %}
+          {% if site.social.hackthebox %}<a href="{{ site.social.hackthebox }}" target="_blank"><i class="fas fa-cube"></i></a>{% endif %}
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="post-sidebar-card">
+        <div class="post-sidebar-title"><i class="fas fa-chart-line"></i> Estadísticas</div>
+        <div class="profile-stats">
+          <div class="p-stat">
+            <div class="p-stat-num">{{ all_writeups | size }}</div>
+            <div class="p-stat-label">writeups</div>
+          </div>
+          <div class="p-stat">
+            <div class="p-stat-num">{{ all_blog | size }}</div>
+            <div class="p-stat-label">posts</div>
+          </div>
+          <div class="p-stat">
+            <div class="p-stat-num">{{ projects | where: "wip", false | size }}</div>
+            <div class="p-stat-label">proyectos</div>
+          </div>
+          <div class="p-stat">
+            <div class="p-stat-num">{{ portfolio.certifications | where: "status", "obtained" | size }}</div>
+            <div class="p-stat-label">certs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido (TOC) -->
+      <div class="post-sidebar-card">
+        <div class="post-sidebar-title"><i class="fas fa-list-ul"></i> Contenido</div>
+        <nav>
+          <a href="#sobre-mi" class="toc-link">Sobre mí</a>
+          {% if portfolio.skills %}<a href="#skills" class="toc-link">Skills</a>{% endif %}
+          {% if portfolio.tools %}<a href="#herramientas" class="toc-link">Herramientas</a>{% endif %}
+          {% if portfolio.certifications %}<a href="#certificaciones" class="toc-link">Certificaciones</a>{% endif %}
+          {% assign ap = projects | where: "wip", false %}{% if ap.size > 0 %}<a href="#proyectos" class="toc-link">Proyectos</a>{% endif %}
+          {% if portfolio.objetivos %}<a href="#objetivos" class="toc-link">Objetivos</a>{% endif %}
+        </nav>
+      </div>
+
+      <!-- Roadmap -->
+      <div class="post-sidebar-card">
+        <div class="post-sidebar-title"><i class="fas fa-road"></i> Roadmap Certs</div>
+        <div class="roadmap-list">
           {% for cert in portfolio.roadmap %}
-          <div class="timeline-item status-{{ cert.status }}">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="timeline-name">{{ cert.name }}</div>
-              <div class="timeline-sub">{{ cert.org }}{% if cert.date and cert.date != "" %} · {{ cert.date }}{% endif %}</div>
+          <div class="roadmap-item status-{{ cert.status }}">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-info">
+              <div class="roadmap-name">{{ cert.name }}</div>
+              <div class="roadmap-sub">{{ cert.org }}{% if cert.date and cert.date != "" %} · {{ cert.date }}{% endif %}</div>
             </div>
             {% if cert.status == "done" %}<span class="roadmap-badge done">obtenida</span>
             {% elsif cert.status == "wip" %}<span class="roadmap-badge wip">en curso</span>
@@ -404,43 +441,10 @@ section: home
         </div>
       </div>
 
-      <!-- ACTIVIDAD RECIENTE -->
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-history"></i> Actividad Reciente</div>
-        <div class="portfolio-activity">
-          {% for wu in all_writeups limit:3 %}
-          {% assign plat = wu.platform | downcase %}
-          <a href="{{ wu.url | relative_url }}" class="activity-item">
-            <div class="activity-type writeup-type"><i class="fas fa-flag"></i></div>
-            <div class="activity-info">
-              <div class="activity-title">{{ wu.title }}</div>
-              <div class="activity-meta">Writeup · <span class="platform-pill pill-{{ plat }}" style="font-size:10px;padding:1px 7px;">{{ wu.platform }}</span> · {{ wu.date | date: "%d %b %Y" }}</div>
-            </div>
-          </a>
-          {% endfor %}
-          {% for post in all_blog limit:2 %}
-          <a href="{{ post.url | relative_url }}" class="activity-item">
-            <div class="activity-type blog-type"><i class="fas fa-pencil-alt"></i></div>
-            <div class="activity-info">
-              <div class="activity-title">{{ post.title }}</div>
-              <div class="activity-meta">Blog · {{ post.date | date: "%d %b %Y" }}</div>
-            </div>
-          </a>
-          {% endfor %}
-          {% for post in all_defensive limit:2 %}
-          <a href="{{ post.url | relative_url }}" class="activity-item">
-            <div class="activity-type def-type"><i class="fas fa-shield-alt"></i></div>
-            <div class="activity-info">
-              <div class="activity-title">{{ post.title }}</div>
-              <div class="activity-meta">Seg. Defensiva · {{ post.date | date: "%d %b %Y" }}</div>
-            </div>
-          </a>
-          {% endfor %}
-        </div>
-      </div>
+    </aside>
 
-    </div>
-  </div>
+  </div><!-- /.post-layout -->
+
 </section>
 
 
