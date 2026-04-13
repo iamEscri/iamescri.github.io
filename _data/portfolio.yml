@@ -52,7 +52,7 @@ certifications:
     date: "En progreso"
     icon: "🔐"
     status: "in-progress"
-    - name: "Máster en Ciberseguridad"
+  - name: "Máster en Ciberseguridad"
     org: "ENNIT"
     date: "En progreso"
     icon: "🛡️"
