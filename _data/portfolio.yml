@@ -42,18 +42,14 @@ tools:
 - docker
 
 certifications:
-  - name: "eJPT"
+  - name: "ASIR"
     org: "INE / eLearnSecurity"
     date: "2025"
     icon: "🎯"
     status: "obtained"
-  - name: "OSCP"
-    org: "Offensive Security"
+  - name: "Security+"
+    org: "CompTIA"
     date: "En progreso"
     icon: "🔐"
     status: "in-progress"
-  - name: "HTB Pro Hacker"
-    org: "HackTheBox"
-    date: "2025"
-    icon: "🟩"
-    status: "obtained"
+  
