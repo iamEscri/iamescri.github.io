@@ -389,6 +389,12 @@ body::before {
   border-radius: 4px;
   padding: 3px 8px;
   color: var(--text-dim);
+  cursor: default;
+  transition: border-color 0.2s, color 0.2s;
+}
+.stack-tag:hover {
+  border-color: var(--green);
+  color: var(--green);
 }
 
 /* Disponibilidad */
