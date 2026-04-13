@@ -8,7 +8,7 @@ lang: Jekyll
 lang_color: "#fc0"
 github: "https://github.com/iamEscri/iamescri.github.io"
 demo: ""
-tags: [jekyll, github-pages, ciberseguridad, web, sysadmin, sudo]
+tags: [jekyll, github-pages, ciberseguridad, web, sysadmin]
 ---
 
 ## ¿Qué es este proyecto?
