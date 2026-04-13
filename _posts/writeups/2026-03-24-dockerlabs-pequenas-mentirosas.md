@@ -1,6 +1,6 @@
 ---
 layout: writeup
-title: "Pequeñas Mentirosas"
+title: "Pequeñas-Mentirosas"
 platform: dockerlabs
 difficulty: very-easy
 os: linux
