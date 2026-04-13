@@ -38,7 +38,7 @@ section: home
         <div class="t-line"><span class="t-out">{{ portfolio.bio | default: site.description }}</span></div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups/ | head -n 3</span></div>
         <div class="t-line">
-          <span class="t-out">{% for wu in all_writeups limit:3 %}<span class="t-file">{{ wu.title }}</span>{% unless forloop.last %}<br><span style="display:inline-block;width:16px;"></span>{% endunless %}{% endfor %}</span>
+          <span class="t-out" style="display:block;">{% for wu in all_writeups limit:3 %}<span class="t-file" style="display:block;">{{ wu.title }}</span>{% endfor %}</span>
         </div>
         <div class="t-line" style="margin-top:4px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups | wc -l</span></div>
         <div class="t-line">
