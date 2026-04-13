@@ -1,17 +1,100 @@
 # =============================================
 #  _data/portfolio.yml
-#  Edita esto para personalizar tu portfolio.
+#  Todo lo que ves en la home se edita aquí.
 # =============================================
+
+
+# --- BIO Y ESTADO GENERAL ---
 
 bio: >
   Técnico en Sistemas (ASIR) enfocado en ciberseguridad defensiva.
   Actualmente en formación en entornos SOC, análisis de logs y detección de amenazas.
   Trabajo con entornos Linux, redes y herramientas de seguridad, documentando todo el proceso mediante writeups y artículos técnicos.
   Mi objetivo es especializarme en Blue Team y formar parte de un SOC.
-  
 
 location: "España"
+
+# Cambia a false para ocultar el widget "Disponible para trabajar"
 available: true
+
+# Texto que aparece debajo de "Disponible para trabajar"
+available_roles: "Blue Team · SOC · Defensa"
+
+
+# --- OBJETIVOS (terminal: cat objetivos.txt) ---
+# status: "done"    → ✔ verde  (objetivo conseguido o en curso activo)
+# status: "pending" → ◎ gris   (objetivo futuro o pendiente)
+
+objetivos:
+  - text: "Completar Máster en Ciberseguridad (ENNIT)"
+    status: "done"
+  - text: "Obtener CompTIA Security+"
+    status: "done"
+  - text: "Preparar eJPT / eCPPT"
+    status: "pending"
+  - text: "Conseguir primer empleo en SOC / Blue Team"
+    status: "pending"
+
+
+# --- EN DESARROLLO (panel derecho) ---
+# Muestra certificaciones o proyectos que estás cursando ahora mismo.
+# status: "in-progress" → se muestra con badge amarillo "en proceso"
+# status: "done"        → NO se muestra (ya terminado, desaparece solo)
+
+en_desarrollo:
+  - name: "CompTIA Security+"
+    icon: "🔐"
+    sub: "Certificación · CompTIA"
+    status: "in-progress"
+  - name: "Máster Ciberseguridad"
+    icon: "🛡️"
+    sub: "Formación · ENNIT"
+    status: "in-progress"
+
+
+# --- STACK ACTIVO (panel derecho) ---
+# Añade o quita herramientas libremente.
+
+stack_activo:
+  - "Elastic SIEM"
+  - "Splunk"
+  - "Wireshark"
+  - "Nmap"
+  - "Linux"
+  - "Docker"
+  - "Bash"
+
+
+# --- ROADMAP DE CERTIFICACIONES (tercera columna inferior) ---
+# status: "done"   → punto verde,           badge "obtenida"
+# status: "wip"    → punto amarillo pulsante, badge "en curso"
+# status: "next"   → punto gris,             badge "próximo"
+# status: "future" → punto gris,             badge "futuro"
+
+roadmap:
+  - name: "ASIR"
+    org: "IES Beniaján"
+    date: "2025"
+    status: "done"
+  - name: "Security+"
+    org: "CompTIA"
+    date: "en progreso"
+    status: "wip"
+  - name: "Máster Ciberseguridad"
+    org: "ENNIT"
+    date: "en progreso"
+    status: "wip"
+  - name: "eJPT"
+    org: "eLearnSecurity"
+    date: "objetivo"
+    status: "next"
+  - name: "eCPPT / OSCP"
+    org: "objetivo futuro"
+    date: ""
+    status: "future"
+
+
+# --- SKILLS (página Portfolio) ---
 
 skills:
   - name: "Linux (administración básica)"
@@ -29,21 +112,27 @@ skills:
   - name: "Virtualización"
     pct: 90
 
+
+# --- HERRAMIENTAS (página Portfolio) ---
+
 tools:
-- nmap
-- wireshark
-- tcpdump
-- burpsuite
-- metasploit
-- linux
-- bash
-- splunk
-- elastic
-- docker
+  - nmap
+  - wireshark
+  - tcpdump
+  - burpsuite
+  - metasploit
+  - linux
+  - bash
+  - splunk
+  - elastic
+  - docker
+
+
+# --- CERTIFICACIONES (página Portfolio) ---
 
 certifications:
   - name: "ASIR"
-    org: " IES Beniaján / Murcia"
+    org: "IES Beniaján / Murcia"
     date: "2025"
     icon: "🎯"
     status: "obtained"
