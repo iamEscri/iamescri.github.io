@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Introducción al Blue Team: Detectar antes de que sea tarde"
+category: defensive
 date: 2026-03-26
 read_time: 6
 tags: [blue-team, siem, deteccion, hardening]
