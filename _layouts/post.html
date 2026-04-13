@@ -22,8 +22,15 @@
   {% include topbar.html %}
   <div class="content">
 
-    <a href="{{ '/' | relative_url }}" class="back-btn">
-      <i class="fas fa-arrow-left"></i> Volver
+    {% if page.category == 'defensive' %}
+      {% assign back_section = 'defensive' %}
+      {% assign back_label = 'Seg. Defensiva' %}
+    {% else %}
+      {% assign back_section = 'blog' %}
+      {% assign back_label = 'Blog' %}
+    {% endif %}
+    <a href="{{ '/' | relative_url }}#{{ back_section }}" class="back-btn">
+      <i class="fas fa-arrow-left"></i> Volver a {{ back_label }}
     </a>
 
     <div class="post-layout">
