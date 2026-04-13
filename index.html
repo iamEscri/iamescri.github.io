@@ -68,7 +68,7 @@ section: home
             <div class="dev-item-name">{{ item.name }}</div>
             <div class="dev-item-sub">{{ item.sub }}</div>
           </div>
-          <span class="dev-status-badge">en proceso</span>
+          <span class="dev-status-badge">en progreso</span>
         </div>
         {% endfor %}
       </div>
@@ -181,7 +181,7 @@ section: home
             <div class="roadmap-sub">{{ cert.org }}{% if cert.date and cert.date != "" %} · {{ cert.date }}{% endif %}</div>
           </div>
           {% if cert.status == "done" %}<span class="roadmap-badge done">obtenida</span>
-          {% elsif cert.status == "wip" %}<span class="roadmap-badge wip">en curso</span>
+          {% elsif cert.status == "wip" %}<span class="roadmap-badge wip">en progreso</span>
           {% elsif cert.status == "next" %}<span class="roadmap-badge next">próximo</span>
           {% else %}<span class="roadmap-badge next">futuro</span>
           {% endif %}
