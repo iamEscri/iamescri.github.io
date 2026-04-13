@@ -1106,7 +1106,7 @@ body::before {
 }
 
 /* ---- Responsive: ocultar sidebar en móvil ---- */
-@media (max-width: 900px) {
+@media (max-width: 1300px) {
   .post-layout {
     grid-template-columns: 1fr;
   }
