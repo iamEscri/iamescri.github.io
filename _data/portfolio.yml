@@ -37,6 +37,7 @@ tools:
 - bash
 - splunk
 - elastic
+- docker
 
 certifications:
   - name: "eJPT"
