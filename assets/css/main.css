@@ -630,7 +630,7 @@ body::before {
 .card-os { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
 
 /* ===== PORTFOLIO ===== */
-.portfolio-layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; }
+.portfolio-layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: start; }
 
 .profile-card {
   background: var(--bg2);
@@ -712,7 +712,22 @@ body::before {
 .profile-socials a { color: var(--text-muted); font-size: 18px; transition: color 0.2s; }
 .profile-socials a:hover { color: var(--green); }
 
-.portfolio-right {}
+.portfolio-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  align-items: start;
+}
+
+/* Skills ocupa columna izquierda entera */
+.portfolio-right .skills-section:first-child {
+  grid-column: 1;
+}
+
+/* Certs y herramientas van a la columna derecha */
+.portfolio-right .skills-section:not(:first-child) {
+  grid-column: 2;
+}
 
 .skills-section { margin-bottom: 36px; }
 .skills-title {
@@ -1071,8 +1086,16 @@ body::before {
 .highlight .o { color: #ff79c6; }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 1300px) and (min-width: 1101px) {
+  .portfolio-layout { grid-template-columns: 300px 1fr 230px; gap: 20px; }
+}
+
 @media (max-width: 1100px) {
   .portfolio-layout { grid-template-columns: 1fr; }
+  .portfolio-right { grid-template-columns: 1fr; }
+  .portfolio-right .skills-section:first-child,
+  .portfolio-right .skills-section:not(:first-child) { grid-column: 1; }
+  .portfolio-panel { display: none; }
   .profile-card { position: static; }
   .blog-layout { grid-template-columns: 1fr; }
   .home-grid { grid-template-columns: 1fr; }
