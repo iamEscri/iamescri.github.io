@@ -57,19 +57,14 @@ iamescri.github.io/
 │   └── writeup-card.html                   # Componente de tarjeta de writeup
 │
 ├── 📁 _posts/
-│   ├── writeups/
-│   │   ├── 2026-03-15-vulnyx-controler.md
-│   │   ├── 2026-03-24-dockerlabs-pequenas-mentirosas.md
-│   │   └── 2026-03-26-PruebaAlvaro.md
+│   ├── writeups/  
+│   │   
 │   ├── blog/
-│   │   ├── 2026-03-10-PruebaBlog.md
-│   │   └── 2026-03-10-cheatsheet-privesc-linux.md
+│   │   
 │   ├── defensive/
-│   │   ├── 2026-03-26-SecurizarSSH.md
-│   │   └── 2026-03-26-mi-primer-articulo.md
+│   │   
 │   └── projects/
-│       ├── 2026-01-02-revshell-gen.md
-│       └── 2026-04-01-iamescri-web.md
+│       
 │
 ├── 📁 assets/
 │   ├── css/main.css                        # Estilos globales (tema hacker oscuro)
@@ -77,9 +72,8 @@ iamescri.github.io/
 │   ├── favicon.ico / favicon.png
 │   └── img/
 │       ├── blog/                           # Imágenes para posts de blog
-│       ├── defensiva/
-│       │   └── securizar-ssh/
-│       │       └── terminal.png
+│       ├── defensiva/  
+│       │     
 │       └── writeups/
 │           ├── dockerlabs/
 │           └── hackthebox/
