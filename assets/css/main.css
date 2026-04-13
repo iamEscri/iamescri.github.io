@@ -641,7 +641,7 @@ body::before {
 .card-os { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
 
 /* ===== PORTFOLIO ===== */
-.portfolio-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1.2fr); gap: 24px; align-items: stretch; }
+.portfolio-layout { display: grid; grid-template-columns: minmax(260px, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.3fr); gap: 24px; align-items: start; }
 
 .portfolio-col { display: flex; flex-direction: column; gap: 0; }
 
@@ -649,16 +649,15 @@ body::before {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 28px 24px;
   text-align: center;
   position: sticky;
   top: 80px;
-  height: fit-content;
 }
 
 /* Avatar más grande y con animación de pulso */
 .profile-avatar {
-  width: 150px; height: 150px;
+  width: 120px; height: 120px;
   border-radius: 50%;
   border: 3px solid var(--green);
   box-shadow: 0 0 0 6px rgba(0,255,136,0.07), 0 0 40px var(--green-glow);
