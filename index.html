@@ -205,7 +205,7 @@ section: home
           <div class="p-stat-label">proyectos</div>
         </div>
         <div class="p-stat">
-          <div class="p-stat-num">{{ portfolio.certifications | size }}</div>
+          <div class="p-stat-num">{{ portfolio.certifications | where: "status", "obtained" | size }}</div>
           <div class="p-stat-label">certs</div>
         </div>
       </div>
