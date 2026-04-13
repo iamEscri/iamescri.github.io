@@ -154,6 +154,28 @@ function updateCounts() {
   // Total en tab "Todas"
   const tabAllEl = document.getElementById('tab-count-all');
   if (tabAllEl) tabAllEl.textContent = total;
+
+  // Guardar en localStorage para que las subpáginas puedan leerlos
+  try {
+    const saved = {};
+    platforms.forEach(p => {
+      saved[p] = document.querySelectorAll('.writeup-card[data-platform="' + p + '"]').length;
+    });
+    saved['total'] = total;
+    localStorage.setItem('writeup-counts', JSON.stringify(saved));
+  } catch(e) {}
+}
+
+// ── Restore counters in subpages (desde localStorage) ──
+function restoreCountsInSubpage() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('writeup-counts') || 'null');
+    if (!saved) return;
+    ['dockerlabs', 'hackthebox', 'tryhackme', 'vulnyx'].forEach(p => {
+      const sideEl = document.getElementById('count-' + p);
+      if (sideEl && saved[p] !== undefined) sideEl.textContent = saved[p];
+    });
+  } catch(e) {}
 }
 
 // ── Skill bar animation ──────────────────────
@@ -169,7 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Manejar navegación con hash (volver desde subpágina)
   handleHashNavigation();
 
-  if (!IS_SUBPAGE) {
+  if (IS_SUBPAGE) {
+    restoreCountsInSubpage();
+  } else {
     updateCounts();
 
     // Animar skills al entrar al portfolio
