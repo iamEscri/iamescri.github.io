@@ -88,13 +88,14 @@ section: home
 
       <!-- Disponibilidad -->
       {% if portfolio.available %}
-      <div class="side-widget avail-widget">
+      <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="side-widget avail-widget avail-widget--link">
         <div class="avail-dot"></div>
-        <div>
+        <div class="avail-body">
           <div class="avail-title">Disponible para trabajar</div>
           <div class="avail-sub">{{ portfolio.available_roles | default: "Blue Team · SOC · Defensa" }}</div>
+          <div class="avail-linkedin">[ Ver LinkedIn ]</div>
         </div>
-      </div>
+      </a>
       {% endif %}
 
     </div>
