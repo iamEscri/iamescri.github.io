@@ -643,12 +643,12 @@ body::before {
 /* ===== PORTFOLIO ===== */
 /* ===== PORTFOLIO — 2 filas ===== */
 
-/* Fila 1: perfil (ancho fijo) + skills (resto del espacio) */
+/* Fila 1: perfil (más estrecho) + skills (resto) — ambos se estiran al 100% */
 .portfolio-row-top {
   display: grid;
-  grid-template-columns: minmax(280px, 360px) 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
   margin-bottom: 24px;
 }
 
@@ -657,7 +657,7 @@ body::before {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .portfolio-bottom-card {
@@ -687,11 +687,8 @@ body::before {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 28px 24px;
   text-align: center;
-  position: sticky;
-  top: 80px;
-  height: fit-content;
 }
 
 /* Avatar más grande y con animación de pulso */
