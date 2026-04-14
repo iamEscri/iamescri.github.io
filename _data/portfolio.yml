@@ -15,7 +15,7 @@ bio: >
 location: "España"
 
 # Cambia a false para ocultar el widget "Disponible para trabajar"
-available: false
+available: true
 
 # Texto que aparece debajo de "Disponible para trabajar"
 available_roles: "Blue Team · SOC · Defensa"
