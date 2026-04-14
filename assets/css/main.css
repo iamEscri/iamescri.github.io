@@ -338,6 +338,7 @@ body::before {
 /* ===== HERO SIDE PANEL ===== */
 .hero-side { display: flex; flex-direction: column; gap: 16px; height: 100%; }
 .hero-side .side-widget { flex: 1; }
+.hero-side .avail-widget { flex: 0 0 auto; }
 
 .side-widget {
   background: var(--bg2);
