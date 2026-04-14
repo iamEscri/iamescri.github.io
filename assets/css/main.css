@@ -405,9 +405,12 @@ body::before {
 /* Disponibilidad */
 .avail-widget {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  gap: 10px;
   border-color: rgba(0,255,136,0.25) !important;
+  text-align: center;
 }
 .avail-dot {
   width: 10px; height: 10px; border-radius: 50%;
@@ -417,8 +420,37 @@ body::before {
   animation: pulse 2s infinite;
 }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.2)} }
+.avail-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
 .avail-title { font-size: 13px; font-weight: 600; color: var(--green); }
 .avail-sub { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.avail-linkedin {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  margin-top: 12px;
+  padding: 5px 14px;
+  border: 1px solid rgba(0,255,136,0.35);
+  border-radius: 4px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.avail-widget--link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.avail-widget--link:hover {
+  border-color: rgba(0,255,136,0.5) !important;
+  background: rgba(0,255,136,0.04);
+}
+.avail-widget--link:hover .avail-linkedin {
+  background: rgba(0,255,136,0.1);
+  border-color: rgba(0,255,136,0.6);
+}
 
 /* Terminal goals extras */
 .t-comment { color: var(--text-muted); }
