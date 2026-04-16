@@ -756,7 +756,7 @@ body::before {
 .profile-socials a { color: var(--text-muted); font-size: 18px; transition: color 0.2s; }
 .profile-socials a:hover { color: var(--green); }
 
-.portfolio-right {}
+.portfolio-right { display: flex; flex-direction: column; min-width: 0; }
 
 /* Contacto en profile-card */
 .profile-contact {
