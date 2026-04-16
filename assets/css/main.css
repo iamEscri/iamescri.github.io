@@ -739,7 +739,22 @@ body::before {
   50%       { opacity: 0.2; }
 }
 
-.profile-bio { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+.profile-bio {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  text-align: left;
+  border-left: 2px solid rgba(0,255,136,0.25);
+  padding-left: 12px;
+}
+.bio-highlight {
+  color: var(--green);
+  font-weight: 600;
+}
+.bio-secondary {
+  color: var(--text);
+}
 
 /* Stats con más peso visual */
 .profile-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
