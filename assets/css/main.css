@@ -682,6 +682,7 @@ body::before {
   grid-template-columns: 320px 1fr;
   gap: 24px;
   margin-bottom: 24px;
+  align-items: stretch;
 }
 
 /* Row inferior: herramientas, objetivos y certificaciones en 3 columnas iguales */
@@ -705,6 +706,28 @@ body::before {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-skills-panel .skills-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+/* Skills en 2 columnas para aprovechar el espacio horizontal */
+.portfolio-skills-panel .skills-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  flex: 1;
+  align-content: space-between;
+}
+
+.portfolio-skills-panel .skill-item {
+  margin-bottom: 0;
 }
 
 /* Objetivos list */
