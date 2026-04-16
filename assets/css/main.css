@@ -32,8 +32,8 @@
 
 /* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: clip; }
-body {
+html { scroll-behavior: smooth; }
+body { overflow-x: clip; 
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
