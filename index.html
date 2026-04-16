@@ -321,20 +321,6 @@ section: home
     <!-- Skills & certs -->
     <div class="portfolio-right">
 
-      {% if portfolio.objetivos %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-bullseye"></i> Objetivos</div>
-        <div class="obj-list">
-          {% for obj in portfolio.objetivos %}
-          <div class="obj-item {{ obj.status }}">
-            <span class="obj-dot"></span>
-            <span class="obj-text">{{ obj.text }}</span>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
       {% if portfolio.skills %}
       <div class="skills-section">
         <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
@@ -349,6 +335,20 @@ section: home
           </div>
         </div>
         {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if portfolio.objetivos %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-bullseye"></i> Objetivos</div>
+        <div class="obj-list">
+          {% for obj in portfolio.objetivos %}
+          <div class="obj-item {{ obj.status }}">
+            <span class="obj-dot"></span>
+            <span class="obj-text">{{ obj.text }}</span>
+          </div>
+          {% endfor %}
+        </div>
       </div>
       {% endif %}
 
