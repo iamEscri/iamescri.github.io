@@ -12,6 +12,12 @@ bio: >
   Trabajo con entornos Linux, redes y herramientas de seguridad, documentando todo el proceso mediante writeups y artículos técnicos.
   Mi objetivo es especializarme en Blue Team y formar parte de un SOC.
 
+bio_highlights:
+  - "ciberseguridad defensiva"
+  - "SOC"
+  - "Linux"
+  - "Blue Team"
+
 location: "España"
 
 # Cambia a false para ocultar el widget "Disponible para trabajar"
