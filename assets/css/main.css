@@ -251,6 +251,7 @@ body::before {
 /* ===== CONTENT ===== */
 .content { padding: 40px; max-width: 1200px; }
 .content:has(#section-home.active) { max-width: none; }
+.content:has(#section-portfolio.active) { max-width: none; }
 
 /* Sin max-width en páginas de post/writeup/proyecto/defensiva para que el grid ocupe todo */
 .content:has(.post-layout) { max-width: none; }
