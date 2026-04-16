@@ -255,9 +255,10 @@ section: home
     <p class="section-desc">Skills, herramientas y certificaciones. Lo que sé, lo que uso, lo que estoy aprendiendo.</p>
   </div>
 
-  <!-- ROW SUPERIOR: perfil + skills -->
-  <div class="portfolio-row-top">
-    <!-- Perfil -->
+  <!-- LAYOUT PORTFOLIO: perfil izquierda + stack vertical derecha -->
+  <div class="portfolio-layout">
+
+    <!-- Columna izquierda: perfil -->
     <div class="profile-card">
       <div class="profile-avatar">
         {% if site.avatar %}
@@ -305,12 +306,13 @@ section: home
       </div>
     </div>
 
-    <!-- Skills panel (top right) -->
-    <div class="portfolio-skills-panel">
+    <!-- Columna derecha: stack vertical -->
+    <div class="portfolio-right-stack">
+
+      <!-- Skills -->
       {% if portfolio.skills %}
-      <div class="skills-section">
+      <div class="portfolio-panel">
         <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
-        <div class="skills-list">
         {% for skill in portfolio.skills %}
         <div class="skill-item">
           <div class="skill-header">
@@ -322,70 +324,68 @@ section: home
           </div>
         </div>
         {% endfor %}
-        </div>
       </div>
       {% endif %}
-    </div>
 
-  </div><!-- end portfolio-row-top -->
-
-  <!-- ROW INFERIOR: herramientas · objetivos · certificaciones -->
-  <div class="portfolio-row-bottom">
-
-    <!-- Herramientas -->
-    {% if portfolio.tools %}
-    <div class="portfolio-panel">
-      <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
-      <div class="card-tags">
-        {% for tool in portfolio.tools %}
-        {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
-        <span class="tool-tag">
-          <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
-          {{ tool }}
-        </span>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    <!-- Objetivos -->
-    <div class="portfolio-panel">
-      <div class="skills-title"><i class="fas fa-crosshairs"></i> Objetivos</div>
-      <div class="objectives-list">
-        {% for obj in portfolio.objetivos %}
-        <div class="objective-item {% if obj.status == 'done' %}done{% else %}pending{% endif %}">
-          <span class="obj-icon">{% if obj.status == 'done' %}✔{% else %}◎{% endif %}</span>
-          <span class="obj-text">{{ obj.text }}</span>
-          <span class="obj-badge {% if obj.status == 'done' %}done{% else %}pending{% endif %}">
-            {% if obj.status == 'done' %}conseguido{% else %}pendiente{% endif %}
-          </span>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- Certificaciones -->
-    {% if portfolio.certifications %}
-    <div class="portfolio-panel">
-      <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
-      <div class="certs-grid" style="grid-template-columns: 1fr;">
-        {% for cert in portfolio.certifications %}
-        <div class="cert-card {{ cert.status }}">
-          <div class="cert-icon">{{ cert.icon }}</div>
-          <div>
-            <div class="cert-name">{{ cert.name }}</div>
-            <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
-            <span class="cert-status-badge {{ cert.status }}">
-              {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
+      <!-- Objetivos -->
+      <div class="portfolio-panel">
+        <div class="skills-title"><i class="fas fa-crosshairs"></i> Objetivos</div>
+        <div class="objectives-list">
+          {% for obj in portfolio.objetivos %}
+          <div class="objective-item {% if obj.status == 'done' %}done{% else %}pending{% endif %}">
+            <span class="obj-icon">{% if obj.status == 'done' %}✔{% else %}◎{% endif %}</span>
+            <span class="obj-text">{{ obj.text }}</span>
+            <span class="obj-badge {% if obj.status == 'done' %}done{% else %}pending{% endif %}">
+              {% if obj.status == 'done' %}conseguido{% else %}pendiente{% endif %}
             </span>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
-    </div>
-    {% endif %}
 
-  </div><!-- end portfolio-row-bottom -->
+      <!-- Herramientas + Certificaciones en 2 columnas -->
+      <div class="portfolio-bottom-row">
+
+        {% if portfolio.tools %}
+        <div class="portfolio-panel">
+          <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
+          <div class="card-tags">
+            {% for tool in portfolio.tools %}
+            {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
+            <span class="tool-tag">
+              <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
+              {{ tool }}
+            </span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if portfolio.certifications %}
+        <div class="portfolio-panel">
+          <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
+          <div class="certs-grid" style="grid-template-columns: 1fr;">
+            {% for cert in portfolio.certifications %}
+            <div class="cert-card {{ cert.status }}">
+              <div class="cert-icon">{{ cert.icon }}</div>
+              <div>
+                <div class="cert-name">{{ cert.name }}</div>
+                <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
+                <span class="cert-status-badge {{ cert.status }}">
+                  {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
+                </span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div><!-- end portfolio-bottom-row -->
+
+    </div><!-- end portfolio-right-stack -->
+
+  </div><!-- end portfolio-layout -->
 
 </section>
 
