@@ -740,13 +740,11 @@ body::before {
 }
 
 .profile-bio {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
   line-height: 1.8;
   margin-bottom: 24px;
   text-align: left;
-  border-left: 2px solid rgba(0,255,136,0.25);
-  padding-left: 12px;
 }
 .bio-highlight {
   color: var(--green);
