@@ -255,10 +255,8 @@ section: home
     <p class="section-desc">Skills, herramientas y certificaciones. Lo que sé, lo que uso, lo que estoy aprendiendo.</p>
   </div>
 
-  <!-- LAYOUT PORTFOLIO: perfil izquierda + stack vertical derecha -->
   <div class="portfolio-layout">
-
-    <!-- Columna izquierda: perfil -->
+    <!-- Perfil -->
     <div class="profile-card">
       <div class="profile-avatar">
         {% if site.avatar %}
@@ -306,12 +304,11 @@ section: home
       </div>
     </div>
 
-    <!-- Columna derecha: stack vertical -->
-    <div class="portfolio-right-stack">
+    <!-- Skills & certs -->
+    <div class="portfolio-right">
 
-      <!-- Skills -->
       {% if portfolio.skills %}
-      <div class="portfolio-panel">
+      <div class="skills-section">
         <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
         {% for skill in portfolio.skills %}
         <div class="skill-item">
@@ -327,66 +324,44 @@ section: home
       </div>
       {% endif %}
 
-      <!-- Objetivos -->
-      <div class="portfolio-panel">
-        <div class="skills-title"><i class="fas fa-crosshairs"></i> Objetivos</div>
-        <div class="objectives-list">
-          {% for obj in portfolio.objetivos %}
-          <div class="objective-item {% if obj.status == 'done' %}done{% else %}pending{% endif %}">
-            <span class="obj-icon">{% if obj.status == 'done' %}✔{% else %}◎{% endif %}</span>
-            <span class="obj-text">{{ obj.text }}</span>
-            <span class="obj-badge {% if obj.status == 'done' %}done{% else %}pending{% endif %}">
-              {% if obj.status == 'done' %}conseguido{% else %}pendiente{% endif %}
-            </span>
+      {% if portfolio.certifications %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
+        <div class="certs-grid">
+          {% for cert in portfolio.certifications %}
+          <div class="cert-card {{ cert.status }}">
+            <div class="cert-icon">{{ cert.icon }}</div>
+            <div>
+              <div class="cert-name">{{ cert.name }}</div>
+              <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
+              <span class="cert-status-badge {{ cert.status }}">
+                {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
+              </span>
+            </div>
           </div>
           {% endfor %}
         </div>
       </div>
+      {% endif %}
 
-      <!-- Herramientas + Certificaciones en 2 columnas -->
-      <div class="portfolio-bottom-row">
-
-        {% if portfolio.tools %}
-        <div class="portfolio-panel">
-          <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
-          <div class="card-tags">
-            {% for tool in portfolio.tools %}
-            {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
-            <span class="tool-tag">
-              <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
-              {{ tool }}
-            </span>
-            {% endfor %}
-          </div>
+      {% if portfolio.tools %}
+      {% assign devicons = "nmap:nmap,wireshark:wireshark,tcpdump:linux,burpsuite:burpsuite,metasploit:metasploit-plain,linux:linux,bash:bash,splunk:splunk,elastic:elasticsearch" | split: "," %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
+        <div class="card-tags">
+          {% for tool in portfolio.tools %}
+          {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
+          <span class="tool-tag">
+            <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
+            {{ tool }}
+          </span>
+          {% endfor %}
         </div>
-        {% endif %}
+      </div>
+      {% endif %}
 
-        {% if portfolio.certifications %}
-        <div class="portfolio-panel">
-          <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
-          <div class="certs-grid" style="grid-template-columns: 1fr;">
-            {% for cert in portfolio.certifications %}
-            <div class="cert-card {{ cert.status }}">
-              <div class="cert-icon">{{ cert.icon }}</div>
-              <div>
-                <div class="cert-name">{{ cert.name }}</div>
-                <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
-                <span class="cert-status-badge {{ cert.status }}">
-                  {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
-                </span>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-
-      </div><!-- end portfolio-bottom-row -->
-
-    </div><!-- end portfolio-right-stack -->
-
-  </div><!-- end portfolio-layout -->
-
+    </div>
+  </div>
 </section>
 
 
