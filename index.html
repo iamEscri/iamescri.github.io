@@ -289,6 +289,22 @@ section: home
         </div>
       </div>
 
+      <!-- Contacto -->
+      <div class="profile-contact">
+        {% if site.email and site.email != "" %}
+        <a href="mailto:{{ site.email }}" class="profile-contact-link">
+          <i class="fas fa-envelope"></i>
+          <span>{{ site.email }}</span>
+        </a>
+        {% endif %}
+        {% if site.social.linkedin %}
+        <a href="{{ site.social.linkedin }}" target="_blank" class="profile-contact-link">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+        {% endif %}
+      </div>
+
       <div class="profile-socials">
         {% if site.social.github %}
         <a href="{{ site.social.github }}" target="_blank"><i class="fab fa-github"></i></a>
@@ -304,6 +320,20 @@ section: home
 
     <!-- Skills & certs -->
     <div class="portfolio-right">
+
+      {% if portfolio.objetivos %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-bullseye"></i> Objetivos</div>
+        <div class="obj-list">
+          {% for obj in portfolio.objetivos %}
+          <div class="obj-item {{ obj.status }}">
+            <span class="obj-dot"></span>
+            <span class="obj-text">{{ obj.text }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
 
       {% if portfolio.skills %}
       <div class="skills-section">
