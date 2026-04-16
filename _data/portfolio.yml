@@ -113,6 +113,62 @@ skills:
     pct: 70
   - name: "Virtualización"
     pct: 90
+     - name: "Linux (administración básica)"
+    pct: 85
+  - name: "Redes (TCP/IP, servicios)"
+    pct: 80
+  - name: "Análisis de logs"
+    pct: 50
+  - name: "Hardening básico"
+    pct: 55
+  - name: "Herramientas de seguridad"
+    pct: 60
+  - name: "CTFs / resolución de máquinas"
+    pct: 70
+  - name: "Virtualización"
+    pct: 90
+     - name: "Linux (administración básica)"
+    pct: 85
+  - name: "Redes (TCP/IP, servicios)"
+    pct: 80
+  - name: "Análisis de logs"
+    pct: 50
+  - name: "Hardening básico"
+    pct: 55
+  - name: "Herramientas de seguridad"
+    pct: 60
+  - name: "CTFs / resolución de máquinas"
+    pct: 70
+  - name: "Virtualización"
+    pct: 90
+     - name: "Linux (administración básica)"
+    pct: 85
+  - name: "Redes (TCP/IP, servicios)"
+    pct: 80
+  - name: "Análisis de logs"
+    pct: 50
+  - name: "Hardening básico"
+    pct: 55
+  - name: "Herramientas de seguridad"
+    pct: 60
+  - name: "CTFs / resolución de máquinas"
+    pct: 70
+  - name: "Virtualización"
+    pct: 90
+     - name: "Linux (administración básica)"
+    pct: 85
+  - name: "Redes (TCP/IP, servicios)"
+    pct: 80
+  - name: "Análisis de logs"
+    pct: 50
+  - name: "Hardening básico"
+    pct: 55
+  - name: "Herramientas de seguridad"
+    pct: 60
+  - name: "CTFs / resolución de máquinas"
+    pct: 70
+  - name: "Virtualización"
+    pct: 90
 
 
 # --- HERRAMIENTAS (página Portfolio) ---
