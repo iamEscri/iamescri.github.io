@@ -806,16 +806,28 @@ body::before {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
+  cursor: default;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
 }
+.obj-item:hover {
+  border-color: var(--green);
+  background: rgba(0,255,136,0.04);
+  transform: translateX(4px);
+}
+.obj-item:hover .obj-text { color: var(--text); }
+.obj-item:hover .obj-dot { box-shadow: 0 0 8px var(--green-glow); }
 .obj-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
   background: var(--text-muted);
+  transition: box-shadow 0.2s, background 0.2s;
 }
 .obj-item.done .obj-dot { background: var(--green); box-shadow: 0 0 6px var(--green-glow); }
 .obj-item.done .obj-text { color: var(--text); }
 .obj-item.pending .obj-dot { background: var(--border); }
+.obj-item.done:hover { border-color: var(--green); }
+.obj-item.done:hover .obj-dot { box-shadow: 0 0 12px var(--green-glow); }
 
 .skills-section { margin-bottom: 36px; }
 .skills-title {
