@@ -36,13 +36,13 @@ section: home
         <div class="t-line"><span class="t-out green">{{ site.title }}</span></div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat about.txt</span></div>
         <div class="t-line"><span class="t-out">{{ portfolio.bio | default: site.description }}</span></div>
-        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups/ | head -n 3</span></div>
+        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls projects/ | head -n 3</span></div>
         <div class="t-line">
-          <span class="t-out" style="display:block;">{% for wu in all_writeups limit:3 %}<span class="t-file" style="display:block;">{{ wu.title }}</span>{% endfor %}</span>
+          <span class="t-out" style="display:block;">{% assign real_projects = projects | where: "wip", false %}{% for proj in real_projects limit:3 %}<span class="t-file" style="display:block;">{{ proj.name }}</span>{% endfor %}</span>
         </div>
-        <div class="t-line" style="margin-top:4px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls writeups | wc -l</span></div>
+        <div class="t-line" style="margin-top:4px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls projects | wc -l</span></div>
         <div class="t-line">
-          <span class="t-out"><span class="t-comment">{{ all_writeups | size }} total</span></span>
+          <span class="t-out"><span class="t-comment">{{ real_projects | size }} total</span></span>
         </div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat objetivos.txt</span></div>
         <div class="t-line"><span class="t-out"><span class="t-comment"># objetivos 2025</span></span></div>
@@ -128,24 +128,22 @@ section: home
 
   <!-- Recent activity -->
   <div class="home-grid home-grid--three">
-    <!-- Últimos writeups -->
+    <!-- Últimas entradas seg. defensiva -->
     <div class="home-card">
-      <div class="home-card-title"><i class="fas fa-flag"></i> Últimos Writeups</div>
-      {% for wu in all_writeups limit:5 %}
-      {% assign plat = wu.platform | downcase %}
-      <div class="recent-item" onclick="window.location='{{ wu.url | relative_url }}'">
+      <div class="home-card-title"><i class="fas fa-shield-alt"></i> Últimas Entradas Seg. Defensiva</div>
+      {% for post in all_defensive limit:5 %}
+      <div class="recent-item" onclick="window.location='{{ post.url | relative_url }}'">
         <div class="recent-num">0{{ forloop.index }}</div>
         <div class="recent-info">
-          <div class="recent-title">{{ wu.title }}</div>
-          <div class="recent-date">{{ wu.date | date: "%d %b %Y" }}</div>
+          <div class="recent-title">{{ post.title }}</div>
+          <div class="recent-date">{{ post.date | date: "%d %b %Y" }}</div>
         </div>
-        <span class="platform-pill pill-{{ plat }}">{{ wu.platform }}</span>
       </div>
       {% endfor %}
-      {% if all_writeups.size == 0 %}
+      {% if all_defensive.size == 0 %}
       <div class="recent-item" style="opacity:.5;cursor:default;">
         <div class="recent-num">—</div>
-        <div class="recent-info"><div class="recent-title">Sin writeups todavía</div><div class="recent-date">¡Sube el primero!</div></div>
+        <div class="recent-info"><div class="recent-title">Sin artículos todavía</div><div class="recent-date">¡Escribe el primero!</div></div>
       </div>
       {% endif %}
     </div>
