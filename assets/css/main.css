@@ -440,6 +440,9 @@ body::before {
   border: 1px solid rgba(0,255,136,0.35);
   border-radius: 4px;
   transition: background 0.2s, border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .avail-widget--link {
   text-decoration: none;
