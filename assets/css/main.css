@@ -674,7 +674,7 @@ body::before {
 .card-os { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
 
 /* ===== PORTFOLIO ===== */
-.portfolio-layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; }
+.portfolio-layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: start; }
 
 .profile-card {
   background: var(--bg2);
