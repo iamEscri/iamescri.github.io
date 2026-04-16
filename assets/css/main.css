@@ -251,8 +251,6 @@ body::before {
 /* ===== CONTENT ===== */
 .content { padding: 40px; max-width: 1200px; }
 .content:has(#section-home.active) { max-width: none; }
-.content:has(#section-portfolio.active) { max-width: none; }
-.content:has(#section-portfolio.active) { max-width: none; }
 
 /* Sin max-width en páginas de post/writeup/proyecto/defensiva para que el grid ocupe todo */
 .content:has(.post-layout) { max-width: none; }
@@ -676,71 +674,7 @@ body::before {
 .card-os { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
 
 /* ===== PORTFOLIO ===== */
-
-/* ── PORTFOLIO LAYOUT: perfil fijo izquierda + stack vertical derecha ── */
-.portfolio-layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 24px;
-  align-items: start;
-}
-
-/* Columna derecha: stack vertical de paneles */
-.portfolio-right-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* Fila inferior dentro del stack: herramientas + certs en 2 columnas */
-.portfolio-bottom-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-/* Panel genérico reutilizado en todos los bloques */
-.portfolio-panel {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
-
-/* Clases antiguas mantenidas por compatibilidad — redirigen al nuevo sistema */
-.portfolio-row-top  { display: none; }
-.portfolio-row-bottom { display: none; }
-.portfolio-skills-panel { display: none; }
-
-/* Objetivos list */
-.objectives-list { display: flex; flex-direction: column; gap: 10px; }
-.objective-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.2s;
-}
-.objective-item:hover { border-color: var(--border); }
-.objective-item.done { border-left: 3px solid var(--green); }
-.objective-item.pending { border-left: 3px solid var(--border); }
-.obj-icon { font-size: 14px; min-width: 20px; text-align: center; }
-.obj-text { font-size: 12px; color: var(--text-dim); font-family: var(--font-mono); line-height: 1.4; flex: 1; }
-.objective-item.done .obj-text { color: var(--text); }
-.obj-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 2px 7px;
-  border-radius: 3px;
-  white-space: nowrap;
-}
-.obj-badge.done { background: rgba(0,255,136,0.1); color: var(--green); }
-.obj-badge.pending { background: rgba(100,116,139,0.15); color: var(--text-muted); }
+.portfolio-layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; }
 
 .profile-card {
   background: var(--bg2);
@@ -822,6 +756,7 @@ body::before {
 .profile-socials a { color: var(--text-muted); font-size: 18px; transition: color 0.2s; }
 .profile-socials a:hover { color: var(--green); }
 
+.portfolio-right {}
 
 .skills-section { margin-bottom: 36px; }
 .skills-title {
@@ -1182,7 +1117,6 @@ body::before {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
   .portfolio-layout { grid-template-columns: 1fr; }
-  .portfolio-bottom-row { grid-template-columns: 1fr; }
   .profile-card { position: static; }
   .blog-layout { grid-template-columns: 1fr; }
   .home-grid { grid-template-columns: 1fr; }
