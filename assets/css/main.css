@@ -252,6 +252,7 @@ body::before {
 .content { padding: 40px; max-width: 1200px; }
 .content:has(#section-home.active) { max-width: none; }
 .content:has(#section-portfolio.active) { max-width: none; }
+.content:has(#section-portfolio.active) { max-width: none; }
 
 /* Sin max-width en páginas de post/writeup/proyecto/defensiva para que el grid ocupe todo */
 .content:has(.post-layout) { max-width: none; }
@@ -676,23 +677,29 @@ body::before {
 
 /* ===== PORTFOLIO ===== */
 
-/* Row superior: perfil (más ancho) + skills (2 columnas internas) */
-.portfolio-row-top {
+/* ── PORTFOLIO LAYOUT: perfil fijo izquierda + stack vertical derecha ── */
+.portfolio-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 24px;
-  margin-bottom: 24px;
-  align-items: stretch;
+  align-items: start;
 }
 
-/* Row inferior: herramientas, objetivos y certificaciones en 3 columnas iguales */
-.portfolio-row-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+/* Columna derecha: stack vertical de paneles */
+.portfolio-right-stack {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
-/* Cada panel del bottom row */
+/* Fila inferior dentro del stack: herramientas + certs en 2 columnas */
+.portfolio-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Panel genérico reutilizado en todos los bloques */
 .portfolio-panel {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -700,35 +707,10 @@ body::before {
   padding: 24px;
 }
 
-/* Panel de skills dentro del top row */
-.portfolio-skills-panel {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-}
-
-.portfolio-skills-panel .skills-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0;
-}
-
-/* Skills en 2 columnas para aprovechar el espacio horizontal */
-.portfolio-skills-panel .skills-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 40px;
-  flex: 1;
-  align-content: space-between;
-}
-
-.portfolio-skills-panel .skill-item {
-  margin-bottom: 0;
-}
+/* Clases antiguas mantenidas por compatibilidad — redirigen al nuevo sistema */
+.portfolio-row-top  { display: none; }
+.portfolio-row-bottom { display: none; }
+.portfolio-skills-panel { display: none; }
 
 /* Objetivos list */
 .objectives-list { display: flex; flex-direction: column; gap: 10px; }
@@ -1199,8 +1181,8 @@ body::before {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
-  .portfolio-row-top { grid-template-columns: 1fr; }
-  .portfolio-row-bottom { grid-template-columns: 1fr; }
+  .portfolio-layout { grid-template-columns: 1fr; }
+  .portfolio-bottom-row { grid-template-columns: 1fr; }
   .profile-card { position: static; }
   .blog-layout { grid-template-columns: 1fr; }
   .home-grid { grid-template-columns: 1fr; }
