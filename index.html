@@ -268,7 +268,20 @@ section: home
       {% if portfolio.available %}
       <div class="profile-available">disponible para trabajar</div>
       {% endif %}
-      <p class="profile-bio">{{ portfolio.bio | default: site.description }}</p>
+      <p class="profile-bio" id="profile-bio">{{ portfolio.bio }}</p>
+      <script>
+        (function() {
+          var highlights = [{% for word in portfolio.bio_highlights %}"{{ word }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
+          var bio = document.getElementById('profile-bio');
+          if (!bio || !highlights.length) return;
+          var html = bio.innerHTML;
+          highlights.forEach(function(word) {
+            var regex = new RegExp('(' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            html = html.replace(regex, '<span class="bio-highlight">$1</span>');
+          });
+          bio.innerHTML = html;
+        })();
+      </script>
 
       <div class="profile-stats">
         <div class="p-stat">
