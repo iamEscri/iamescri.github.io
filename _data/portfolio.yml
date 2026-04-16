@@ -113,7 +113,7 @@ skills:
     pct: 70
   - name: "Virtualización"
     pct: 90
-     - name: "Linux (administración básica)"
+  - name: "Linux (administración básica)"
     pct: 85
   - name: "Redes (TCP/IP, servicios)"
     pct: 80
@@ -127,7 +127,7 @@ skills:
     pct: 70
   - name: "Virtualización"
     pct: 90
-     - name: "Linux (administración básica)"
+  - name: "Linux (administración básica)"
     pct: 85
   - name: "Redes (TCP/IP, servicios)"
     pct: 80
@@ -141,7 +141,7 @@ skills:
     pct: 70
   - name: "Virtualización"
     pct: 90
-     - name: "Linux (administración básica)"
+  - name: "Linux (administración básica)"
     pct: 85
   - name: "Redes (TCP/IP, servicios)"
     pct: 80
@@ -155,7 +155,7 @@ skills:
     pct: 70
   - name: "Virtualización"
     pct: 90
-     - name: "Linux (administración básica)"
+  - name: "Linux (administración básica)"
     pct: 85
   - name: "Redes (TCP/IP, servicios)"
     pct: 80
