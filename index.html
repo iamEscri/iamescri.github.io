@@ -310,6 +310,7 @@ section: home
       {% if portfolio.skills %}
       <div class="skills-section">
         <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
+        <div class="skills-list">
         {% for skill in portfolio.skills %}
         <div class="skill-item">
           <div class="skill-header">
@@ -321,6 +322,7 @@ section: home
           </div>
         </div>
         {% endfor %}
+        </div>
       </div>
       {% endif %}
     </div>
