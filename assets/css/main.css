@@ -1252,11 +1252,11 @@ body::before {
 /* ---- Sidebar derecha ---- */
 .post-sidebar {
   position: sticky;
-  top: 32px;
+  top: calc(56px + 32px);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-height: calc(100vh - 32px - 56px);
+  max-height: calc(100vh - 56px - 64px);
   overflow-y: auto;
   scrollbar-width: none;
 }
