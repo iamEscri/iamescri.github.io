@@ -10,7 +10,7 @@
   stack: [Jekyll, Liquid, HTML, CSS, JavaScript, GitHub Pages]
   github: "https://github.com/iamEscri/iamescri.github.io"
   demo: ""
-  post_url: "/project/iamescri-web/"
+  post_url: "/projects/iamescri-web/"
   stars: 0
   forks: 0
   lang: Jekyll
