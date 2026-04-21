@@ -1256,7 +1256,11 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-height: calc(100vh - 32px - 56px);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+.post-sidebar::-webkit-scrollbar { display: none; }
 
 .post-sidebar-card {
   background: var(--bg2);
