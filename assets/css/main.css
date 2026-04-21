@@ -152,6 +152,38 @@ body::before {
 
 .nav-item.active .nav-badge { background: var(--green-glow); color: var(--green); }
 
+.recent-sidebar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 24px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.recent-sidebar-item:hover { color: var(--text-dim); background: rgba(255,255,255,0.02); border-left-color: var(--border); }
+.recent-sidebar-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-dim);
+}
+.recent-sidebar-meta { display: flex; justify-content: space-between; align-items: center; }
+.recent-sidebar-cat {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  opacity: 0.7;
+  background: var(--green-glow);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.recent-sidebar-date { font-size: 10px; color: var(--text-muted); opacity: 0.6; }
+
 .sidebar-footer {
   padding: 24px;
   border-top: 1px solid var(--border);
