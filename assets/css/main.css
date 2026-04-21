@@ -176,12 +176,13 @@ body::before {
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--green);
-  opacity: 0.7;
-  background: var(--green-glow);
   padding: 1px 5px;
   border-radius: 3px;
 }
+.cat--writeup  { color: #4ade80; background: rgba(74,222,128,0.08); }
+.cat--blog     { color: #fb923c; background: rgba(251,146,60,0.08); }
+.cat--defensive{ color: #60a5fa; background: rgba(96,165,250,0.08); }
+.cat--projects { color: #a78bfa; background: rgba(167,139,250,0.08); }
 .recent-sidebar-date { font-size: 10px; color: var(--text-muted); opacity: 0.6; }
 
 .sidebar-footer {
