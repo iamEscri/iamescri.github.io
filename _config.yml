@@ -67,7 +67,7 @@ defaults:
       type: posts
     values:
       layout: project
-      category: project
+      category: projects
 
 # Exclude from build
 exclude:
