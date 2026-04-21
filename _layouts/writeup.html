@@ -156,7 +156,8 @@
     a.className = 'toc-link toc-' + h.tagName.toLowerCase();
     a.addEventListener('click', function(e) {
       e.preventDefault();
-      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const top = h.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: top, behavior: 'smooth' });
     });
     nav.appendChild(a);
   });
