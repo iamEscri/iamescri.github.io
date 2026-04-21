@@ -57,31 +57,19 @@
       Proyectos
     </div>
 
-    <div class="nav-section" style="margin-top:24px;">plataformas</div>
-
-    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('dockerlabs', null)">
-      <i class="fas fa-box"></i>
-      DockerLabs
-      <span class="nav-badge" id="count-dockerlabs">0</span>
-    </div>
-
-    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('hackthebox', null)">
-      <i class="fas fa-cube"></i>
-      HackTheBox
-      <span class="nav-badge" id="count-hackthebox">0</span>
-    </div>
-
-    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('tryhackme', null)">
-      <i class="fas fa-shield-alt"></i>
-      TryHackMe
-      <span class="nav-badge" id="count-tryhackme">0</span>
-    </div>
-
-    <div class="nav-item" onclick="showSection('writeups', document.querySelector('[data-section=writeups]')); filterPlatform('vulnyx', null)">
-      <i class="fas fa-spider"></i>
-      Vulnyx
-      <span class="nav-badge" id="count-vulnyx">0</span>
-    </div>
+    {% assign recent_posts = site.posts | sort: 'date' | reverse %}
+    {% if recent_posts.size > 0 %}
+    <div class="nav-section" style="margin-top:24px;">actividad reciente</div>
+    {% for post in recent_posts limit:3 %}
+    <a href="{{ post.url | relative_url }}" class="recent-sidebar-item">
+      <span class="recent-sidebar-title">{{ post.title }}</span>
+      <span class="recent-sidebar-meta">
+        <span class="recent-sidebar-cat">{{ post.category }}</span>
+        <span class="recent-sidebar-date">{{ post.date | date: "%d %b" }}</span>
+      </span>
+    </a>
+    {% endfor %}
+    {% endif %}
 
   </nav>
 
