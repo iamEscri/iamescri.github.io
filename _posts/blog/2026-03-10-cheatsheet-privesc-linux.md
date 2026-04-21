@@ -2,7 +2,7 @@
 layout: post
 title: "Cheatsheet: Escalada de Privilegios en Linux"
 read_time: ""
-date: 2026-03-10
+date: 2026-04-21
 tags: [linux, privesc, suid, sudo, capabilities]
 description: "Referencia rápida de técnicas de escalada de privilegios en Linux para CTFs y pentesting."
 ---
