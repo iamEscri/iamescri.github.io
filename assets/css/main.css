@@ -285,6 +285,10 @@ body::before {
 .content { padding: 40px; max-width: 1200px; }
 .content:has(#section-home.active) { max-width: none; }
 .content:has(#section-portfolio.active) { max-width: none; }
+.content:has(#section-writeups.active) { max-width: none; }
+.content:has(#section-blog.active) { max-width: none; }
+.content:has(#section-defensive.active) { max-width: none; }
+.content:has(#section-projects.active) { max-width: none; }
 
 /* Sin max-width en páginas de post/writeup/proyecto/defensiva para que el grid ocupe todo */
 .content:has(.post-layout) { max-width: none; }
