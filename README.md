@@ -332,6 +332,6 @@ El **contenido** (writeups, artículos, datos personales) es propiedad de **iamE
 
 Hecho con ☕ y muchas horas de CTFs
 
-[@iamEscri](https://github.com/iamEscri) · [iamescri.es](https://iamescri.es) · [LinkedIn](https://www.linkedin.com/in/alvaro-escribano-roca-3b9a513a5/)
+[@iamEscri](https://github.com/iamEscri) · [iamescri.es](https://iamescri.es) · [LinkedIn](https://www.linkedin.com/in/alvaro-escribano-3b9a513a5/)
 
 </div>
