@@ -1064,7 +1064,10 @@ body::before {
 
 .widget-title { font-family: var(--font-mono); font-size: 11px; color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
 
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; max-height: 200px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.tag-cloud::-webkit-scrollbar { width: 4px; }
+.tag-cloud::-webkit-scrollbar-track { background: transparent; }
+.tag-cloud::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 .tag-cloud-item { font-family: var(--font-mono); font-size: 11px; padding: 4px 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
 .tag-cloud-item:hover { border-color: var(--green); color: var(--green); }
 
