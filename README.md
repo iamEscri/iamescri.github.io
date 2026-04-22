@@ -10,7 +10,7 @@
 [![GitHub Pages](https://img.shields.io/github/deployments/iamEscri/iamescri.github.io/github-pages?style=flat-square&label=GitHub%20Pages&logo=github&logoColor=white)](https://iamescri.github.io)
 [![Jekyll](https://img.shields.io/badge/Jekyll-4.3-CC0000?style=flat-square&logo=jekyll&logoColor=white)](https://jekyllrb.com)
 [![GitHub Actions](https://img.shields.io/github/actions/workflow/status/iamEscri/iamescri.github.io/deploy.yml?branch=main&style=flat-square&label=CI%2FCD&logo=githubactions&logoColor=white)](https://github.com/iamEscri/iamescri.github.io/actions)
-[![License](https://img.shields.io/badge/Contenido-©_iamEscri-grey?style=flat-square)](./LICENSE)
+[![License](https://img.shields.io/badge/Licencia-MIT-grey?style=flat-square)](./LICENSE)
 
 </div>
 
@@ -38,42 +38,38 @@ iamescri.github.io/
 ├── 📄 _config.yml                          # Configuración global de Jekyll
 ├── 📄 Gemfile                              # Dependencias Ruby/Jekyll
 ├── 📄 index.html                           # Página principal (SPA con secciones dinámicas)
-├── 📄 robots.txt                           # Directivas para crawlers
 ├── 📄 CNAME                                # Dominio personalizado → iamescri.es
+├── 📄 robots.txt                           # Directivas para crawlers + Sitemap
+├── 📄 LICENSE                              # Licencia MIT
 │
 ├── 📁 _data/
-│   ├── portfolio.yml                       # Skills, herramientas y certificaciones
-│   └── projects.yml                        # Metadatos de proyectos propios
+│   ├── portfolio.yml                       # Bio, skills, objetivos, herramientas, roadmap de certs
+│   └── projects.yml                        # Metadatos de proyectos (renderizados automáticamente)
 │
 ├── 📁 _layouts/
 │   ├── default.html                        # Layout base (sidebar + topbar)
 │   ├── post.html                           # Layout para blog y seguridad defensiva
 │   ├── writeup.html                        # Layout para writeups CTF
-│   └── project.html                        # Layout para proyectos
+│   └── project.html                        # Layout para páginas de detalle de proyecto
 │
 ├── 📁 _includes/
 │   ├── sidebar.html                        # Navegación lateral
-│   ├── topbar.html                         # Barra superior con búsqueda
+│   ├── topbar.html                         # Barra superior
 │   └── writeup-card.html                   # Componente de tarjeta de writeup
 │
-├── 📁 _posts/
-│   ├── writeups/  
-│   │   
+├── 📁 _posts/                              # ⚠️ Las páginas de cada sección se generan
+│   ├── writeups/                           #    dinámicamente. No editar la salida de Jekyll.
 │   ├── blog/
-│   │   
 │   ├── defensive/
-│   │   
-│   └── projects/
-│       
+│   └── projects/                           # Página de detalle de cada proyecto
 │
 ├── 📁 assets/
-│   ├── css/main.css                        # Estilos globales (tema hacker oscuro)
+│   ├── css/main.css                        # Estilos globales (tema hacker oscuro, sin frameworks)
 │   ├── js/main.js                          # JavaScript vanilla del sitio
 │   ├── favicon.ico / favicon.png
 │   └── img/
 │       ├── blog/                           # Imágenes para posts de blog
-│       ├── defensiva/  
-│       │     
+│       ├── defensiva/                      # Subdirectorio por artículo
 │       └── writeups/
 │           ├── dockerlabs/
 │           └── hackthebox/
@@ -97,8 +93,8 @@ iamescri.github.io/
 | Resaltado de código | Rouge |
 | Hosting | GitHub Pages |
 | CI/CD | GitHub Actions |
-| Dominio | `iamescri.es` con HTTPS via Let's Encrypt |
-| Ruby | 3.3 (via `ruby/setup-ruby`) |
+| Dominio | `iamescri.es` con HTTPS vía Let's Encrypt |
+| Ruby | 3.3 (vía `ruby/setup-ruby`) |
 
 **Plugins Jekyll activos:**
 
@@ -133,7 +129,7 @@ bundle exec jekyll serve
 # Disponible en → http://localhost:4000
 ```
 
-> 💡 Para regenerar el sitio automáticamente al editar archivos usa `bundle exec jekyll serve --livereload`
+> 💡 Para regenerar el sitio automáticamente al editar archivos: `bundle exec jekyll serve --livereload`
 
 ---
 
@@ -147,37 +143,88 @@ Archivo en `_posts/writeups/` con formato `YYYY-MM-DD-nombre-maquina.md`:
 ---
 layout: writeup
 title: "Nombre de la máquina"
-platform: HackTheBox        # HackTheBox | TryHackMe | Vulnyx | DockerLabs
-difficulty: Medium           # Easy | Medium | Hard | Insane
-os: Linux                    # Linux | Windows
+platform: dockerlabs        # dockerlabs | hackthebox | tryhackme | vulnyx
+difficulty: facil            # facil | medio | dificil | insane
+os: linux                    # linux | windows
 tags: [nmap, sqli, privesc]
 date: YYYY-MM-DD
+description: "Descripción breve de la máquina."
 ---
 ```
 
-### Post de blog o seguridad defensiva
+### Post de blog
 
-Archivo en `_posts/blog/` o `_posts/defensive/`:
+Archivo en `_posts/blog/`:
 
 ```yaml
 ---
 layout: post
 title: "Título del artículo"
-category: tutorial           # tutorial | cheatsheet | reflexion | herramienta
-description: "Descripción breve"
-tags: [linux, hardening]
 date: YYYY-MM-DD
+read_time: 5
+tags: [linux, privesc]
+description: "Descripción breve."
+---
+```
+
+### Artículo de seguridad defensiva
+
+Archivo en `_posts/defensive/`:
+
+```yaml
+---
+layout: post
+title: "Título del artículo"
+category: defensive
+date: YYYY-MM-DD
+read_time: 5
+tags: [ssh, logs, siem]
+description: "Descripción breve."
 ---
 ```
 
 ### Proyecto
 
-1. Crea un archivo en `_posts/projects/` con el front matter del layout `project`
-2. Añade la entrada correspondiente en `_data/projects.yml`
+Los proyectos tienen **dos partes**:
+
+**1. Página de detalle** — Archivo en `_posts/projects/` con el layout `project`:
+
+```yaml
+---
+layout: project
+title: "Nombre del Proyecto"
+icon: "🔧"
+description: "Descripción del proyecto."
+stack: [Python, Bash]
+lang: Python
+lang_color: "#3572A5"
+github: "https://github.com/iamEscri/nombre-proyecto"
+demo: ""
+category: projects
+tags: [python, bash, herramienta]
+---
+
+Descripción detallada del proyecto en Markdown...
+```
+
+**2. Tarjeta en la sección Proyectos** — Entrada en `_data/projects.yml`:
+
+```yaml
+- name: "NombreProyecto"
+  icon: "🔧"
+  desc: "Descripción breve para la tarjeta."
+  stack: [Python, Bash]
+  github: "https://github.com/iamEscri/nombre-proyecto"
+  demo: ""
+  post_url: "/projects/nombre-proyecto/"
+  stars: 0
+  forks: 0
+  lang: Python
+  lang_color: "#3572A5"
+  wip: false
+```
 
 ### Imágenes por sección
-
-Guarda las imágenes en la ruta correspondiente dentro de `assets/img/`:
 
 | Sección | Ruta |
 |:--|:--|
@@ -188,6 +235,29 @@ Guarda las imágenes en la ruta correspondiente dentro de `assets/img/`:
 
 ---
 
+## Personalización
+
+Todo el contenido visible se controla desde dos ficheros YAML, sin tocar HTML ni CSS:
+
+| Qué cambiar | Fichero | Campo |
+|:--|:--|:--|
+| Nombre, tagline, email, redes | `_config.yml` | `title`, `tagline`, `email`, `social.*` |
+| Bio y highlights | `_data/portfolio.yml` | `bio`, `bio_highlights` |
+| Disponibilidad para trabajar | `_data/portfolio.yml` | `available: true/false` |
+| Texto bajo "Disponible" | `_data/portfolio.yml` | `available_roles` |
+| Objetivos del terminal | `_data/portfolio.yml` | `objetivos[].status` → `done` / `pending` |
+| Panel "En desarrollo" | `_data/portfolio.yml` | `en_desarrollo[].status` → `in-progress` / `done` |
+| Stack activo (home) | `_data/portfolio.yml` | `stack_activo` |
+| Skills con barras | `_data/portfolio.yml` | `skills[].pct` (0–100) |
+| Herramientas (iconos Devicons) | `_data/portfolio.yml` | `tools` |
+| Certificaciones | `_data/portfolio.yml` | `certifications[].status` → `obtained` / `in-progress` |
+| Roadmap de certs | `_data/portfolio.yml` | `roadmap[].status` → `done` / `wip` / `next` / `future` |
+| Proyectos | `_data/projects.yml` | — |
+| Avatar | `assets/favicon.png` + `_config.yml` → `avatar` | — |
+| Colores | `assets/css/main.css` | Variables `:root` |
+
+---
+
 ## Pipeline de despliegue (CI/CD)
 
 Cada `push` a `main` dispara el workflow `.github/workflows/deploy.yml` automáticamente:
@@ -195,13 +265,14 @@ Cada `push` a `main` dispara el workflow `.github/workflows/deploy.yml` automát
 ```
 push → main
   └─ JOB: build
-       ├─ Checkout del repositorio
-       ├─ Setup Ruby 3.3
+       ├─ Checkout (actions/checkout@v4)
+       ├─ Setup Ruby 3.3 (ruby/setup-ruby@v1)
        ├─ bundle install
+       ├─ configure-pages (actions/configure-pages@v5)
        ├─ jekyll build  (JEKYLL_ENV=production)
-       └─ Upload artifact
+       └─ upload-pages-artifact (actions/upload-pages-artifact@v3)
   └─ JOB: deploy
-       └─ Deploy a GitHub Pages → iamescri.es
+       └─ deploy-pages (actions/deploy-pages@v4) → iamescri.es
 ```
 
 > No se requiere ningún paso manual. El tiempo medio de despliegue es de ~1 minuto.
@@ -231,9 +302,9 @@ El archivo `CNAME` en la raíz del repositorio contiene el valor `iamescri.es`. 
 
 | Sección | Descripción |
 |:--|:--|
-| **Home** | Terminal interactivo con estadísticas en tiempo real del contenido publicado |
+| **Home** | Terminal interactivo con estadísticas calculadas automáticamente del contenido publicado |
 | **Writeups** | Resoluciones de máquinas CTF filtrables por plataforma y dificultad |
-| **Portfolio** | Bio, skills con barras de progreso, herramientas y certificaciones |
+| **Portfolio** | Bio, skills con barras de progreso, herramientas con iconos Devicons y certificaciones |
 | **Blog** | Cheatsheets, tutoriales y artículos técnicos |
 | **Seg. Defensiva** | Guías de Blue Team, hardening y detección de amenazas |
 | **Proyectos** | Herramientas y scripts desarrollados personalmente |
@@ -246,15 +317,13 @@ El archivo `CNAME` en la raíz del repositorio contiene el valor `iamescri.es`. 
 Esta misma web. Infraestructura completa: Jekyll + GitHub Actions + dominio propio + HTTPS. El código del sitio es en sí mismo uno de los proyectos documentados.
 → [Código](https://github.com/iamEscri/iamescri.github.io)
 
-### 🐚 RevShell-Gen
-Generador web de reverse shells one-liner para múltiples lenguajes (Bash, Python, PHP, Perl, Ruby, PowerShell…). Incluye codificación URL y Base64 automática. Construido con Python + Flask.
-→ [Código](https://github.com/iamEscri/revshell-gen)
-
 ---
 
 ## Licencia
 
-El **código fuente** del sitio puede usarse como referencia o inspiración.  
+Este repositorio está bajo licencia **MIT**.
+
+El **código fuente** puede usarse como referencia o inspiración.  
 El **contenido** (writeups, artículos, datos personales) es propiedad de **iamEscri** y no puede reproducirse sin permiso.
 
 ---
