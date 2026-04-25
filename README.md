@@ -2,7 +2,7 @@
 
 <img src="https://iamescri.es/assets/favicon.png" width="80" alt="iamEscri logo" />
 
-> © 2026 iamEscri — Portfolio personal de ciberseguridad
+© 2026 iamEscri — Portfolio personal de ciberseguridad
 
 # iamEscri · Blue Team & SOC Portfolio
 
