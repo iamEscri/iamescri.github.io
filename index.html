@@ -151,7 +151,7 @@ section: home
     <!-- Últimos posts blog -->
     <div class="home-card">
       <div class="home-card-title"><i class="fas fa-pencil-alt"></i> Últimas Entradas del Blog</div>
-      {% for post in all_blog limit:4 %}
+      {% for post in all_blog limit:5 %}
       <div class="recent-item" onclick="window.location='{{ post.url | relative_url }}'">
         <div class="recent-num">0{{ forloop.index }}</div>
         <div class="recent-info">
