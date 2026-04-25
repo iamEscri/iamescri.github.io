@@ -52,7 +52,7 @@ en_desarrollo:
   - name: "CompTIA Security+"
     icon: "🔐"
     sub: "Certificación · CompTIA"
-    status: "in-progress"
+    status: "next"
   - name: "Máster Ciberseguridad"
     icon: "🛡️"
     sub: "Formación · ENNIT"
