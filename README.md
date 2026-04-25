@@ -2,7 +2,9 @@
 
 <img src="https://iamescri.es/assets/favicon.png" width="80" alt="iamEscri logo" />
 
-# iamEscri · Portfolio de Ciberseguridad
+> © 2026 iamEscri — Portfolio personal de ciberseguridad
+
+# iamEscri · Blue Team & SOC Portfolio
 
 **Técnico IT (ASIR) · Ciberseguridad · Blue Team & SOC en formación**
 
@@ -13,6 +15,15 @@
 [![License](https://img.shields.io/badge/Licencia-MIT-grey?style=flat-square)](./LICENSE)
 
 </div>
+
+---
+
+## Objetivo del proyecto
+
+Este portfolio documenta mi evolución práctica en ciberseguridad,
+con foco en Blue Team, detección de amenazas y entornos SOC.
+
+El objetivo es demostrar habilidades reales mediante contenido técnico reproducible.
 
 ---
 
@@ -321,10 +332,16 @@ Esta misma web. Infraestructura completa: Jekyll + GitHub Actions + dominio prop
 
 ## Licencia
 
-Este repositorio está bajo licencia **MIT**.
+El **código fuente** está bajo licencia **MIT** — puede usarse como referencia o inspiración.
 
-El **código fuente** puede usarse como referencia o inspiración.  
-El **contenido** (writeups, artículos, datos personales) es propiedad de **iamEscri** y no puede reproducirse sin permiso.
+El **contenido** (writeups, artículos, datos personales) está protegido y no puede ser copiado ni redistribuido sin permiso explícito del autor.
+
+---
+
+## Aviso
+
+Este repositorio es un portfolio personal.  
+No está permitido su uso para suplantación de identidad ni la reproducción completa del sitio.
 
 ---
 
