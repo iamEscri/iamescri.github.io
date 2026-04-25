@@ -49,9 +49,9 @@ objetivos:
 # status: "done"        → NO se muestra (ya terminado, desaparece solo)
 
 en_desarrollo:
-  - name: "CompTIA Security+"
-    icon: "🔐"
-    sub: "Certificación · CompTIA"
+  - name: "VulnSOC Assistant"
+    icon: "🤖"
+    sub: "TFM · Sistema IA de Análisis de Vulnerabilidades para SOC"
     status: "in-progress"
   - name: "Máster Ciberseguridad"
     icon: "🛡️"
