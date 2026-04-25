@@ -84,14 +84,14 @@ roadmap:
     org: "IES Beniaján"
     date: "2025"
     status: "done"
-  - name: "Security+"
-    org: "CompTIA"
-    date: "Próximo"
-    status: "next"
   - name: "Máster Ciberseguridad"
     org: "ENNIT"
     date: "en progreso"
     status: "wip"
+  - name: "Security+"
+    org: "CompTIA"
+    date: "Próximo"
+    status: "next"
   
  
 
