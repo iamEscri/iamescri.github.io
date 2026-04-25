@@ -45,7 +45,7 @@ section: home
           <span class="t-out"><span class="t-comment">{{ real_projects | size }} total</span></span>
         </div>
         <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat objetivos.txt</span></div>
-        <div class="t-line"><span class="t-out"><span class="t-comment"># objetivos 2025</span></span></div>
+        <div class="t-line"><span class="t-out"><span class="t-comment"># objetivos 2026</span></span></div>
         {% for obj in portfolio.objetivos %}
         <div class="t-line"><span class="t-out">{% if obj.status == "done" %}<span class="t-ok">✔</span>{% else %}<span class="t-pend">◎</span>{% endif %} {{ obj.text }}</span></div>
         {% endfor %}
