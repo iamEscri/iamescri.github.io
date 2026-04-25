@@ -86,20 +86,14 @@ roadmap:
     status: "done"
   - name: "Security+"
     org: "CompTIA"
-    date: "en progreso"
-    status: "wip"
+    date: "Próximo"
+    status: "next"
   - name: "Máster Ciberseguridad"
     org: "ENNIT"
     date: "en progreso"
     status: "wip"
-  - name: "eJPT"
-    org: "eLearnSecurity"
-    date: "objetivo"
-    status: "next"
-  - name: "eCPPT / OSCP"
-    org: "objetivo futuro"
-    date: ""
-    status: "future"
+  
+ 
 
 
 # --- SKILLS (página Portfolio) ---
