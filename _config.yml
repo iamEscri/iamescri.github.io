@@ -15,7 +15,7 @@ url: "https://iamescri.es"
 
 twitter:
   username: iamEscri
-  card: summary
+  card: summary_large_image
 
 # Redes sociales (pon tus URLs reales)
 social:
@@ -51,23 +51,31 @@ collections:
 # Defaults
 defaults:
   - scope:
+      path: ""
+    values:
+      image: /assets/img/og-default.png
+
+  - scope:
       path: "_posts/writeups"
       type: posts
     values:
       layout: writeup
       category: writeup
+
   - scope:
       path: "_posts/blog"
       type: posts
     values:
       layout: post
       category: blog
+
   - scope:
       path: "_posts/defensive"
       type: posts
     values:
       layout: post
       category: defensive
+
   - scope:
       path: "_posts/projects"
       type: posts
