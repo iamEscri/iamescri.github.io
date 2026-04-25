@@ -376,7 +376,7 @@ section: home
               <div class="cert-name">{{ cert.name }}</div>
               <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
               <span class="cert-status-badge {{ cert.status }}">
-                {% if cert.status == "obtained" %}obtenida{% else %}en progreso{% endif %}
+                {% if cert.status == "obtained" %}obtenida{% elsif cert.status == "next" %}próximo{% elsif cert.status == "future" %}futuro{% else %}en progreso{% endif %}
               </span>
             </div>
           </div>
