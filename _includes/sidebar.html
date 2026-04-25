@@ -59,22 +59,24 @@
 
     {% assign recent_posts = site.posts | sort: 'date' | reverse %}
     {% if recent_posts.size > 0 %}
-    <div class="nav-section" style="margin-top:24px;">actividad reciente</div>
-    {% for post in recent_posts limit:3 %}
-    <a href="{{ post.url | relative_url }}" class="recent-sidebar-item">
-      <span class="recent-sidebar-title">{{ post.title }}</span>
-      <span class="recent-sidebar-meta">
-        {% assign cat = post.category %}
-        {% if cat == 'writeup' %}{% assign cat_label = 'Writeup' %}
-        {% elsif cat == 'blog' %}{% assign cat_label = 'Blog' %}
-        {% elsif cat == 'defensive' %}{% assign cat_label = 'Defensa' %}
-        {% elsif cat == 'projects' %}{% assign cat_label = 'Proyecto' %}
-        {% else %}{% assign cat_label = cat %}{% endif %}
-        <span class="recent-sidebar-cat cat--{{ cat }}">{{ cat_label }}</span>
-        <span class="recent-sidebar-date">{{ post.date | date: "%d %b" }}</span>
-      </span>
-    </a>
-    {% endfor %}
+    <div class="sidebar-recent-box">
+      <div class="nav-section" style="margin-top:0; padding-top:0;">actividad reciente</div>
+      {% for post in recent_posts limit:3 %}
+      <a href="{{ post.url | relative_url }}" class="recent-sidebar-item">
+        <span class="recent-sidebar-title">{{ post.title }}</span>
+        <span class="recent-sidebar-meta">
+          {% assign cat = post.category %}
+          {% if cat == 'writeup' %}{% assign cat_label = 'Writeup' %}
+          {% elsif cat == 'blog' %}{% assign cat_label = 'Blog' %}
+          {% elsif cat == 'defensive' %}{% assign cat_label = 'Defensa' %}
+          {% elsif cat == 'projects' %}{% assign cat_label = 'Proyecto' %}
+          {% else %}{% assign cat_label = cat %}{% endif %}
+          <span class="recent-sidebar-cat cat--{{ cat }}">{{ cat_label }}</span>
+          <span class="recent-sidebar-date">{{ post.date | date: "%d %b" }}</span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
     {% endif %}
 
   </nav>
