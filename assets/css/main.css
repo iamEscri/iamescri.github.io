@@ -110,7 +110,7 @@ body::before {
   margin-top: 2px;
 }
 
-.sidebar-nav { padding: 24px 0; }
+.sidebar-nav { flex: 1; padding: 24px 0; }
 
 .nav-section {
   padding: 0 24px 8px;
@@ -186,8 +186,7 @@ body::before {
 .recent-sidebar-date { font-size: 10px; color: var(--text-muted); opacity: 0.6; }
 
 .sidebar-contact {
-  padding: 12px 16px 14px;
-  border-top: 1px solid var(--border);
+  padding: 0 16px 14px;
 }
 .sidebar-contact .nav-section { margin-bottom: 8px; }
 .contact-row {
@@ -204,7 +203,6 @@ body::before {
 .c-val { color: var(--text-dim); font-size: 10px; font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.15s; }
 
 .sidebar-footer {
-  margin-top: auto;
   padding: 24px;
   border-top: 1px solid var(--border);
 }
