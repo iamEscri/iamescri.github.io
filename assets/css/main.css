@@ -1433,3 +1433,27 @@ body::before {
 
 /* ---- Eliminar el max-width antiguo del post-body ---- */
 .post-body { max-width: unset; }
+
+/* ===== SIDEBAR RECENT BOX ===== */
+.sidebar-recent-box {
+  margin: 16px 12px 0;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 0 6px;
+}
+
+.sidebar-recent-box .nav-section {
+  padding: 0 12px 8px;
+  margin-top: 0;
+}
+
+.sidebar-recent-box .recent-sidebar-item {
+  padding: 7px 12px;
+  border-radius: 6px;
+}
+
+.sidebar-recent-box .recent-sidebar-item:hover {
+  background: rgba(255,255,255,0.04);
+  border-left-color: transparent;
+}
