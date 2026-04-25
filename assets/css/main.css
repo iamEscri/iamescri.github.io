@@ -67,6 +67,7 @@ body::before {
   padding: 32px 0;
   z-index: 100;
   transition: transform 0.3s ease;
+  overflow-y: auto;
 }
 
 .sidebar-brand {
@@ -1268,6 +1269,9 @@ body::before {
   .home-grid--three { grid-template-columns: 1fr; }
   .home-hero-grid { grid-template-columns: 1fr; }
 }
+
+.sidebar { scrollbar-width: none; }
+.sidebar::-webkit-scrollbar { display: none; }
 
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); }
