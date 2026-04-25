@@ -1440,7 +1440,7 @@ body::before {
   background: var(--surface);
   border: 0.5px solid var(--border);
   border-radius: 8px;
-  padding: 12px 0 6px;
+  padding: 10px 0 4px;
 }
 
 .sidebar-recent-box .nav-section {
@@ -1449,11 +1449,29 @@ body::before {
 }
 
 .sidebar-recent-box .recent-sidebar-item {
-  padding: 7px 12px;
-  border-radius: 6px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-left: none;
+  gap: 8px;
+  border-radius: 0;
 }
 
 .sidebar-recent-box .recent-sidebar-item:hover {
   background: rgba(255,255,255,0.04);
-  border-left-color: transparent;
+  border-left: none;
+}
+
+.sidebar-recent-box .recent-sidebar-title {
+  flex: 1;
+  font-size: 11px;
+}
+
+.sidebar-recent-box .recent-sidebar-meta {
+  flex-shrink: 0;
+}
+
+.sidebar-recent-box .recent-sidebar-date {
+  display: none;
 }
