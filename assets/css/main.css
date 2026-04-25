@@ -1441,6 +1441,7 @@ body::before {
   flex-direction: column;
   gap: 6px;
   margin-bottom: 8px;
+  margin-top: 4px;
 }
 
 .recent-sidebar-card {
