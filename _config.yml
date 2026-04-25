@@ -6,10 +6,16 @@ title: iamEscri
 tagline: "Técnico IT (ASIR) | Ciberseguridad | Blue Team & SOC (en formación)"
 description: "Portfolio de ciberseguridad enfocado en Blue Team, SOC, análisis y defensa."
 author: iamEscri
+name: "Álvaro Escribano"
 avatar: /assets/favicon.png
+logo: /assets/favicon.png
 email: "iamescricontacto@gmail.com"
 baseurl: ""
 url: "https://iamescri.es"
+
+twitter:
+  username: iamEscri
+  card: summary
 
 # Redes sociales (pon tus URLs reales)
 social:
@@ -76,4 +82,3 @@ exclude:
   - Gemfile.lock
   - README.md
   - .github
-
