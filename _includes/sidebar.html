@@ -76,34 +76,34 @@
     </div>
     {% endif %}
 
-  </nav>
+    <div class="sidebar-contact">
+      <div class="nav-section" style="margin-top:24px;">contacto</div>
+      {% if site.email %}
+      <a href="mailto:{{ site.email }}" class="contact-row">
+        <span class="c-prompt">❯</span>
+        <span class="c-key">mail</span>
+        <span class="c-val">{{ site.email }}</span>
+      </a>
+      {% endif %}
+      {% if site.social.linkedin %}
+      {% assign linkedin_path = site.social.linkedin | remove: 'https://www.linkedin.com' | remove: 'https://linkedin.com' %}
+      <a href="{{ site.social.linkedin }}" target="_blank" class="contact-row">
+        <span class="c-prompt">❯</span>
+        <span class="c-key">linkedin</span>
+        <span class="c-val">linkedin.com{{ linkedin_path }}</span>
+      </a>
+      {% endif %}
+      {% if site.social.github %}
+      {% assign github_path = site.social.github | remove: 'https://github.com' %}
+      <a href="{{ site.social.github }}" target="_blank" class="contact-row">
+        <span class="c-prompt">❯</span>
+        <span class="c-key">github</span>
+        <span class="c-val">github.com{{ github_path }}</span>
+      </a>
+      {% endif %}
+    </div>
 
-  <div class="sidebar-contact">
-    <div class="nav-section">contacto</div>
-    {% if site.email %}
-    <a href="mailto:{{ site.email }}" class="contact-row">
-      <span class="c-prompt">❯</span>
-      <span class="c-key">mail</span>
-      <span class="c-val">{{ site.email }}</span>
-    </a>
-    {% endif %}
-    {% if site.social.linkedin %}
-    {% assign linkedin_path = site.social.linkedin | remove: 'https://www.linkedin.com' | remove: 'https://linkedin.com' %}
-    <a href="{{ site.social.linkedin }}" target="_blank" class="contact-row">
-      <span class="c-prompt">❯</span>
-      <span class="c-key">linkedin</span>
-      <span class="c-val">linkedin.com{{ linkedin_path }}</span>
-    </a>
-    {% endif %}
-    {% if site.social.github %}
-    {% assign github_path = site.social.github | remove: 'https://github.com' %}
-    <a href="{{ site.social.github }}" target="_blank" class="contact-row">
-      <span class="c-prompt">❯</span>
-      <span class="c-key">github</span>
-      <span class="c-val">github.com{{ github_path }}</span>
-    </a>
-    {% endif %}
-  </div>
+  </nav>
 
   <div class="sidebar-footer">
     <div class="social-links">
