@@ -74,6 +74,48 @@ function filterPlatform(platform, tabEl) {
   });
 }
 
+// ── Blog category filter ─────────────────────
+function filterBlogCategory(category, tabEl) {
+  if (IS_SUBPAGE) return;
+
+  document.querySelectorAll('.blog-category-tabs .platform-tab').forEach(t => t.classList.remove('active'));
+  if (tabEl) tabEl.classList.add('active');
+
+  var visible = 0;
+  document.querySelectorAll('#blog-posts-list .blog-card').forEach(function(card) {
+    var cat = card.dataset.blogCategory || 'all';
+    var match = category === 'all' || cat === category || (cat && cat.split(',').map(function(c){return c.trim();}).indexOf(category) !== -1);
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+
+  // Renumber visible cards
+  var idx = 1;
+  document.querySelectorAll('#blog-posts-list .blog-card').forEach(function(card) {
+    if (card.style.display !== 'none') {
+      var num = card.querySelector('.blog-card-num');
+      if (num) num.textContent = String(idx).padStart(2, '0');
+      idx++;
+    }
+  });
+}
+
+function initBlogCategoryCounts() {
+  var counts = { all: 0, ciberseguridad: 0, herramientas: 0, automatizacion: 0 };
+  document.querySelectorAll('#blog-posts-list .blog-card').forEach(function(card) {
+    counts.all++;
+    var cat = card.dataset.blogCategory || '';
+    cat.split(',').forEach(function(c) {
+      c = c.trim();
+      if (counts[c] !== undefined) counts[c]++;
+    });
+  });
+  Object.keys(counts).forEach(function(k) {
+    var el = document.getElementById('blog-tab-count-' + k);
+    if (el) el.textContent = counts[k];
+  });
+}
+
 // ── Live search (global) ─────────────────────
 function handleSearch(val) {
   if (IS_SUBPAGE) return;
@@ -195,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     restoreCountsInSubpage();
   } else {
     updateCounts();
+    initBlogCategoryCounts();
 
     // Animar skills al entrar al portfolio
     const portfolioNav = document.querySelector('[data-section="portfolio"]');
