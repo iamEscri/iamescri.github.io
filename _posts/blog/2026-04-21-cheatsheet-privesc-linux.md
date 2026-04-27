@@ -4,6 +4,7 @@ title: "Cheatsheet: Escalada de Privilegios en Linux"
 read_time: ""
 date: 2026-04-21
 tags: [linux, privesc, suid, sudo, capabilities]
+blog_category: ciberseguridad
 description: "Referencia rápida de técnicas de escalada de privilegios en Linux para CTFs y pentesting."
 ---
 
