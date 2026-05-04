@@ -51,7 +51,7 @@ objetivos:
 en_desarrollo:
   - name: "VulnSOC Assistant"
     icon: "🤖"
-    sub: "TFM · Sistema IA de Análisis de Vulnerabilidades para SOC"
+    sub: "TFM · Automatización de análisis de vulnerabilidades con IA para entornos SOC"
     status: "in-progress"
   - name: "Máster Ciberseguridad"
     icon: "🛡️"
