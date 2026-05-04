@@ -65,7 +65,7 @@ en_desarrollo:
 stack_activo:
   - "Elastic SIEM"
   - "Splunk"
-  - "Wireshark"
+  - "Automatización"
   - "Nmap"
   - "Linux"
   - "Docker"
