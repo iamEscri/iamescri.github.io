@@ -923,17 +923,22 @@ body::before {
 /* Skill bars más gruesas y con número animado */
 .skill-item {
   margin-bottom: 0;
-  padding: 14px 0;
+  padding: 14px 10px;
   border-bottom: 1px solid rgba(30,45,61,0.6);
+  border-radius: 6px;
+  transition: background 0.18s ease;
+  cursor: default;
 }
 .skill-item:last-child { border-bottom: none; }
+.skill-item:hover { background: rgba(0,255,136,0.04); }
+.skill-item:hover .skill-name { color: var(--green); }
 .skill-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0; }
-.skill-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.skill-name { font-size: 14px; font-weight: 500; color: var(--text); transition: color 0.18s ease; }
 .skill-desc {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  margin-top: 4px;
+  margin-top: 5px;
   line-height: 1.5;
 }
 .skill-badge {
@@ -952,14 +957,14 @@ body::before {
   border: 1px solid rgba(0,255,136,0.25);
 }
 .skill-badge--intermedio {
+  background: rgba(255,140,0,0.10);
+  color: #ff9a3c;
+  border: 1px solid rgba(255,140,0,0.28);
+}
+.skill-badge--aprendiendo {
   background: rgba(100,116,139,0.12);
   color: var(--text-dim);
   border: 1px solid rgba(100,116,139,0.28);
-}
-.skill-badge--aprendiendo {
-  background: rgba(255,211,42,0.08);
-  color: var(--yellow);
-  border: 1px solid rgba(255,211,42,0.25);
 }
 
 /* Cert cards con badge de status */
