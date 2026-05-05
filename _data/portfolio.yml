@@ -99,21 +99,28 @@ roadmap:
 # --- SKILLS (página Portfolio) ---
 
 skills:
-  - name: "Linux (administración básica)"
-    pct: 85
-  - name: "Redes (TCP/IP, servicios)"
-    pct: 80
+  # level: "aprendiendo" | "intermedio" | "avanzado"
+  - name: "Linux"
+    desc: "Administración, permisos, servicios, bash scripting"
+    level: "intermedio"
+  - name: "Redes"
+    desc: "TCP/IP, servicios, troubleshooting, análisis de tráfico"
+    level: "intermedio"
   - name: "Análisis de logs"
-    pct: 50
-  - name: "Hardening básico"
-    pct: 55
-  - name: "Herramientas de seguridad"
-    pct: 60
+    desc: "Syslog, journald, correlación de eventos, SIEM"
+    level: "aprendiendo"
+  - name: "Hardening"
+    desc: "Configuración segura, SSH, permisos, CIS Benchmarks"
+    level: "aprendiendo"
+  - name: "Herramientas SOC"
+    desc: "Wazuh, Elastic SIEM, Nmap, Wireshark"
+    level: "intermedio"
   - name: "CTFs / resolución de máquinas"
-    pct: 70
+    desc: "Enumeración, explotación básica, privilege escalation"
+    level: "intermedio"
   - name: "Virtualización"
-    pct: 90
-    
+    desc: "VMware, entornos de laboratorio, redes virtuales"
+    level: "avanzado"
   
 
 
