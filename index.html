@@ -336,16 +336,14 @@ section: home
 
       {% if portfolio.skills %}
       <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-chart-bar"></i> Skills</div>
+        <div class="skills-title"><i class="fas fa-layer-group"></i> Skills</div>
         {% for skill in portfolio.skills %}
         <div class="skill-item">
           <div class="skill-header">
             <span class="skill-name">{{ skill.name }}</span>
-            <span class="skill-pct">{{ skill.pct }}%</span>
+            <span class="skill-badge skill-badge--{{ skill.level }}">{{ skill.level }}</span>
           </div>
-          <div class="skill-bar">
-            <div class="skill-fill" data-width="{{ skill.pct }}" style="width:0%"></div>
-          </div>
+          {% if skill.desc %}<div class="skill-desc">{{ skill.desc }}</div>{% endif %}
         </div>
         {% endfor %}
       </div>
