@@ -1008,6 +1008,17 @@ body::before {
 .cert-status-badge.obtained { background: rgba(0,255,136,0.1); color: var(--green); }
 .cert-status-badge.in-progress { background: rgba(255,211,42,0.1); color: var(--yellow); }
 
+/* Formación Complementaria */
+.cert-card.complementary { opacity: 0.85; }
+.cert-card.complementary::before { background: var(--border); }
+.cert-card.complementary.completed::before { background: var(--blue); }
+.cert-card.complementary:hover { border-color: var(--blue); }
+.complementary-platform-icon { font-size: 22px; }
+.complementary-platform-icon.udemy { color: #a435f0; }
+.complementary-platform-icon.youtube { color: #ff0000; }
+.cert-status-badge.complementary.completed { background: rgba(78,205,196,0.12); color: var(--blue); }
+.cert-status-badge.complementary.in-progress { background: rgba(255,211,42,0.1); color: var(--yellow); }
+
 /* Tool tags con icono Devicons */
 .tool-tag {
   font-family: var(--font-mono);
