@@ -383,6 +383,34 @@ section: home
       </div>
       {% endif %}
 
+      {% if portfolio.complementary_training %}
+      <div class="skills-section">
+        <div class="skills-title"><i class="fas fa-graduation-cap"></i> Formación Complementaria</div>
+        <div class="certs-grid">
+          {% for course in portfolio.complementary_training %}
+          <div class="cert-card complementary {{ course.status }}">
+            <div class="cert-icon">
+              {% if course.platform == "udemy" %}
+                <i class="fab fa-udemy complementary-platform-icon udemy"></i>
+              {% elsif course.platform == "youtube" %}
+                <i class="fab fa-youtube complementary-platform-icon youtube"></i>
+              {% else %}
+                📚
+              {% endif %}
+            </div>
+            <div>
+              <div class="cert-name">{{ course.name }}</div>
+              <div class="cert-date">{{ course.org }} · {{ course.date }}</div>
+              <span class="cert-status-badge complementary {{ course.status }}">
+                {% if course.status == "completed" %}completado{% else %}en progreso{% endif %}
+              </span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
       {% if portfolio.tools %}
       {% assign devicons = "nmap:nmap,wireshark:wireshark,tcpdump:linux,burpsuite:burpsuite,metasploit:metasploit-plain,linux:linux,bash:bash,splunk:splunk,elastic:elasticsearch" | split: "," %}
       <div class="skills-section">
