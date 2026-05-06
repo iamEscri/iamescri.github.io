@@ -157,3 +157,10 @@ certifications:
     date: "En progreso"
     icon: "🛡️"
     status: "in-progress"
+
+complementary_training:
+  - name: "Curso Completo de Claude Code: Crea Aplicaciones con IA"
+    org: "Udemy"
+    date: "2026"
+    platform: "udemy"
+    status: "completed"
