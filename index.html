@@ -400,7 +400,7 @@ section: home
             </div>
             <div>
               <div class="cert-name">{{ course.name }}</div>
-              <div class="cert-date">{{ course.org }} · {{ course.date }}</div>
+              <div class="cert-date">{{ course.org }}{% if course.duration %} · {{ course.duration }}{% endif %} · {{ course.date }}</div>
               <span class="cert-status-badge complementary {{ course.status }}">
                 {% if course.status == "completed" %}completado{% else %}en progreso{% endif %}
               </span>
