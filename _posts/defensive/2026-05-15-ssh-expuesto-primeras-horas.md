@@ -269,6 +269,8 @@ Ahora tras 24 horas con el hardening aplicado el contador está en 3.842 intento
 
 Fail2ban ha baneado 4 IPs en total y mantiene 3 bloqueadas actualmente. Pero mirando los datos es evidente que no es la medida que detiene los ataques ya que hay IPs con cientos de intentos que nunca son baneadas porque espacian sus conexiones por debajo del `maxretry`, por lo que Fail2ban reduce el ruido pero no lo elimina.
 
+![Baneos nuevos](/assets/img/defensiva/SSH-expuesto/23-baneos-nuevos.png)
+
 Lo que realmente cierra la puerta son las decisiones 1 y 2. Sin root accesible y sin autenticación por contraseña, esos 3.842 intentos no tienen ninguna entrada posible. Los bots pueden seguir intentando indefinidamente — el resultado siempre será el mismo.
 
 ---
