@@ -172,9 +172,9 @@ Al reiniciar el servicio ssh comprobé que la contraseña seguía funcionando. E
 /etc/ssh/sshd_config.d/50-cloud-init.conf
 ```
 
-![Archivo cloud-init con PasswordAuthentication yes](/assets/img/defensiva/SSH-expuesto/15-cloud-init.png)
-
 Este archivo tenía `PasswordAuthentication yes` y tiene prioridad sobre `sshd_config`. Tuve que modificarlo también para que el cambio surtiera efecto.
+
+![Archivo cloud-init con PasswordAuthentication yes](/assets/img/defensiva/SSH-expuesto/15-cloud-init.png)
 
 Ahora si yo intento conectarme como usuario alvaro via contraseña me da permiso denegado.
 
