@@ -8,6 +8,8 @@ tags: [ssh, hardening, linux, blue-team, fail2ban, vps, hetzner]
 description: "Desplegué un VPS, lo dejé expuesto sin tocar nada y monitoricé lo que llegaba. 506 intentos en 2 horas. Esto es lo que hice y por qué."
 ---
 
+Antes de instalar cualquier servicio en un VPS nuevo, decidí dejarlo expuesto sin tocar nada para ver qué pasaba. En menos de 3 horas, 506 intentos desde IPs distintas. Esto es lo que observé y las decisiones que tomé.
+
 ## El contexto — por qué monté este laboratorio
 
 Quería montar un VPS para producción y antes de instalar nada preferí revisar algunas configuraciones básicas de seguridad.
