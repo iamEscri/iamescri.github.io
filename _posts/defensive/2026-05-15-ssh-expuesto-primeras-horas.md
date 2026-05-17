@@ -112,7 +112,7 @@ Ahora si intento entrar como root me dice permiso denegado.
 
 ![Permiso denegado al intentar entrar como root](/assets/img/defensiva/SSH-expuesto/09-root-denied.png)
 
-Esta medida tiene una limitación clara: deshabilitar root solo tiene valor si el resto de usuarios con acceso sudo tienen contraseñas robustas. Si un atacante consigue entrar con un usuario que tiene sudo y contraseña débil puede ejecutar `sudo su` y convertirse en root igualmente. La medida reduce la superficie de ataque pero no la elimina.
+Esta medida tiene una limitación clara y es que deshabilitar root solo tiene valor si el resto de usuarios con acceso sudo tienen contraseñas robustas ya que si un atacante consigue entrar con un usuario que tiene sudo y contraseña débil puede ejecutar `sudo su` y convertirse en root igualmente. La medida reduce la superficie de ataque pero no la elimina.
 
 ---
 
