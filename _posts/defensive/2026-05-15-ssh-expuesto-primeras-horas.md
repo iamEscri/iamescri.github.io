@@ -200,7 +200,9 @@ sudo apt update && sudo apt install fail2ban -y
 
 ![Instalación de fail2ban](/assets/img/defensiva/SSH-expuesto/17-fail2ban-install.png)
 
-Antes de configurar fail2ban tuve en cuenta que nunca se edita directamente `jail.conf`. Un detalle que aprendí rápido: ese archivo se sobreescribe en cada actualización de fail2ban y pierdes todo. La forma correcta es crear `jail.local` — fail2ban lo lee con prioridad y las actualizaciones no lo tocan.
+Antes de configurar fail2ban tuve en cuenta que nunca se edita directamente `jail.conf` y esto es debido a que este es el archivo de configuración original que viene con fail2ban y se sobreescribe cada vez que el paquete se actualiza donde cualquier cambio que haga ahí desaparece en la próxima actualización.
+
+Lo que hice es crear una copia llamada `jail.local` donde Fail2ban lee los dos archivos pero jail.local tiene prioridad y nunca se toca en las actualizaciones. Es la forma que tiene fail2ban de separar la configuración por defecto de la configuración del usuario.
 
 ```bash
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
