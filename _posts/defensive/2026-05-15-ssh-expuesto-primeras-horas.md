@@ -14,7 +14,7 @@ Antes de instalar nada en un VPS nuevo, lo primero que revisé fue SSH. Lo dejé
 
 Quería montar un VPS para producción y antes de instalar nada preferí revisar algunas configuraciones básicas de seguridad.
 
-Lo primero que revisé fue el protocolo SSH ya que por defecto cualquier servidor de Linux expone SSH en el puerto 22 sin ninguna restricción y esto provoca que cualquier máquina en internet pueda intentar conectarse al servidor por SSH.
+Lo primero que revisé fue el protocolo SSH ya que por defecto cualquier servidor de Linux expone SSH en el puerto `22` sin ninguna restricción y esto provoca que cualquier máquina en internet pueda intentar conectarse al servidor por SSH.
 
 Además no hace falta conocer la IP ya que existen bots en internet que están escaneando direcciones IPs constantemente. Entonces hasta aquí hay dos riesgos concretos:
 
@@ -22,7 +22,7 @@ El primero es que si las credenciales son débiles pueden entrar.
 
 El segundo riesgo es que aunque no entren cada intento consume recursos del servidor como CPU, memoria, escrituras en disco para los logs y esto en un VPS con recursos limitados puede perjudicar al rendimiento o directamente dejar el servicio inaccesible.
 
-Para comprobarlo antes de tocar nada decidí dejar el servidor expuesto unas horas y monitorizar los logs de auth.log, lo que vi me dejó bastante claro por qué SSH es siempre lo primero que hay que revisar.
+Para comprobarlo antes de tocar nada decidí dejar el servidor expuesto unas horas y monitorizar los logs de `auth.log`, lo que vi me dejó bastante claro por qué SSH es siempre lo primero que hay que revisar.
 
 ---
 
@@ -36,7 +36,7 @@ Y estos fueron los usuarios que probaron con el acceso:
 
 ![Usuarios que probaron el acceso](/assets/img/defensiva/SSH-expuesto/02-usuarios-atacantes.png)
 
-221 intentos directamente contra root y 332 contra usuarios que no existen en el sistema y esto es debido a que los bots tienen listas de usuarios comunes donde van probando el acceso.
+221 intentos directamente contra `root` y **332 contra usuarios que no existen en el sistema** y esto es debido a que los bots tienen listas de usuarios comunes donde van probando el acceso.
 
 Primero van a por root porque es el usuario que siempre existe y tiene acceso total. Si entra el servidor es prácticamente suyo porque puede realizar cualquier acción con permisos.
 
@@ -50,11 +50,11 @@ Esta sería la línea original sin filtrar con expresiones regulares donde se ve
 
 ## Decisión 1 — deshabilitar root
 
-Viendo los logs me quedó claro que el primer objetivo de cualquier bot es el usuario root y esto es debido a que es el usuario que existe en cualquier servidor Linux por defecto y tiene permisos totales sobre el sistema. Si consiguen entrar como root el servidor es prácticamente suyo sin necesidad de escalar privilegios.
+Viendo los logs me quedó claro que el primer objetivo de cualquier bot es el usuario `root` y esto es debido a que es el usuario que existe en cualquier servidor Linux por defecto y tiene permisos totales sobre el sistema. Si consiguen entrar como `root` el servidor es prácticamente suyo sin necesidad de escalar privilegios.
 
-Por eso la primera decisión que hice fue deshabilitar el usuario root para acceso SSH donde simplemente le digo al servicio SSH que no acepte conexiones con ese usuario.
+Por eso la primera decisión que hice fue deshabilitar el usuario `root` para acceso SSH donde simplemente le digo al servicio SSH que no acepte conexiones con ese usuario.
 
-Antes de deshabilitar root necesitaba un usuario alternativo con acceso sudo porque de lo contrario me quedaría fuera del servidor ya que yo accedía por usuario root.
+Antes de deshabilitar `root` necesitaba un usuario alternativo con acceso `sudo` porque de lo contrario me quedaría fuera del servidor ya que yo accedía por usuario `root`.
 
 Por ello creé el usuario alvaro usando el comando:
 
@@ -74,9 +74,9 @@ usermod -aG sudo alvaro
 
 Por motivos obvios de seguridad el usuario que acabo de crear tiene una contraseña robusta.
 
-Ahora será con el usuario alvaro por el cual nos conectamos por ssh en lugar de root. Ahora si procedo a deshabilitar el usuario root para acceder por ssh.
+Ahora será con el usuario `alvaro` por el cual nos conectamos por `ssh` en lugar de `root`. Ahora si procedo a deshabilitar el usuario `root` para acceder por `ssh`.
 
-Para hacerlo edité el archivo de configuración de SSH:
+Para hacerlo edité el archivo de configuración de SSH `sshd_config`:
 
 ```bash
 nano /etc/ssh/sshd_config
@@ -112,7 +112,7 @@ Ahora si intento entrar como root me dice permiso denegado.
 
 ![Permiso denegado al intentar entrar como root](/assets/img/defensiva/SSH-expuesto/09-root-denied.png)
 
-Esta medida tiene una limitación clara y es que deshabilitar root solo tiene valor si el resto de usuarios con acceso sudo tienen contraseñas robustas ya que si un atacante consigue entrar con un usuario que tiene sudo y contraseña débil puede ejecutar `sudo su` y convertirse en root igualmente. La medida reduce la superficie de ataque pero no la elimina.
+Esta medida tiene una limitación clara y es que deshabilitar `root` solo tiene valor si el resto de usuarios con acceso `sudo` tienen contraseñas robustas ya que si un atacante consigue entrar con un usuario que tiene `sudo` y contraseña débil puede ejecutar `sudo su` y convertirse en `root` igualmente. **La medida reduce la superficie de ataque pero no la elimina.**
 
 ---
 
@@ -122,7 +122,7 @@ La primera medida reduce la superficie de ataque pero no elimina el vector de fu
 
 Con autenticación por clave el servidor deja de aceptar contraseñas y solo puede entrar quien tenga el archivo de clave privada correspondiente evitando así que puedan realizar intentos de fuerza bruta sobre el servidor.
 
-Para generar el par de claves usé ed25519 en lugar del clásico RSA y esto es debido a que Ed25519 es más moderno, genera claves más cortas con el mismo nivel de seguridad y es más rápido en la verificación. En 2026 no hay razón para usar RSA salvo compatibilidad con sistemas muy antiguos.
+Para generar el par de claves usé `ed25519` en lugar del clásico `RSA` y esto es debido a que `Ed25519` es más moderno, genera claves más cortas con el mismo nivel de seguridad y es más rápido en la verificación. En 2026 no hay razón para usar `RSA` salvo compatibilidad con sistemas muy antiguos.
 
 ```bash
 ssh-keygen -t ed25519 -C "iamescri-labSSH" -f ~/.ssh/iamescri_labSSH
@@ -162,11 +162,11 @@ PasswordAuthentication no
 
 ![PasswordAuthentication no en sshd_config](/assets/img/defensiva/SSH-expuesto/14-PasswordAuthentication.png)
 
-Este es el paso que cierra el vector de fuerza bruta, si no hacemos este cambio la contraseña sigue siendo una vía de entrada.
+**Este es el paso que cierra el vector de fuerza bruta**, si no hacemos este cambio la contraseña sigue siendo una vía de entrada.
 
 La limitación de esta medida es que si pierdes la clave privada y no tienes otra forma de acceso al servidor te quedas sin poder entrar. Por eso es recomendable tener más de una clave autorizada o al menos un método de acceso de emergencia como la consola web del proveedor del servidor.
 
-Al reiniciar el servicio ssh comprobé que la contraseña seguía funcionando. El problema estaba en que Ubuntu 24.04 en Hetzner incluye un archivo de configuración de cloud-init que sobreescribe la configuración principal de SSH que estaba en la ruta:
+Al reiniciar el servicio `ssh` comprobé que la contraseña seguía funcionando. El problema estaba en que Ubuntu 24.04 en Hetzner incluye un archivo de configuración de `cloud-init` que sobreescribe la configuración principal de SSH que estaba en la ruta:
 
 ```
 /etc/ssh/sshd_config.d/50-cloud-init.conf
@@ -176,11 +176,11 @@ Este archivo tenía `PasswordAuthentication yes` y tiene prioridad sobre `sshd_c
 
 ![Archivo cloud-init con PasswordAuthentication yes](/assets/img/defensiva/SSH-expuesto/15-cloud-init.png)
 
-Ahora si yo intento conectarme como usuario alvaro via contraseña me da permiso denegado.
+Ahora si yo intento conectarme como usuario `alvaro` via contraseña me da permiso denegado.
 
 ![Permission denied al intentar entrar con contraseña](/assets/img/defensiva/SSH-expuesto/16-password-denied.png)
 
-A partir de este momento el servidor solo acepta conexiones SSH mediante clave privada. Cualquier intento de autenticación por contraseña es denegado sin importar si la contraseña es correcta o no.
+A partir de este momento **el servidor solo acepta conexiones SSH mediante clave privada**. Cualquier intento de autenticación por contraseña es denegado sin importar si la contraseña es correcta o no.
 
 Los bots pueden seguir intentando entrar pero ya no tienen ningún vector válido de entrada.
 
@@ -190,7 +190,7 @@ Los bots pueden seguir intentando entrar pero ya no tienen ningún vector válid
 
 Aunque las dos medidas anteriores eliminan el vector de fuerza bruta los bots siguen intentando conectarse. Cada intento genera ruido en los logs y consume recursos del servidor como CPU, memoria o escrituras en disco. En un VPS con recursos limitados ese ruido constante tiene un coste real aunque ningún intento tenga éxito.
 
-Es por eso que decidí implementar fail2ban que monitoriza los logs en tiempo real y banea automáticamente las IPs que superan un número de intentos fallidos en un tiempo determinado.
+Es por eso que decidí implementar `fail2ban` que monitoriza los logs en tiempo real y banea automáticamente las IPs que superan un número de intentos fallidos en un tiempo determinado.
 
 No es una medida de seguridad crítica en este contexto ya que con la autenticación por clave ya está cerrado el vector de entrada, pero sí una medida para reducir el ruido, limpiar los logs y liberar recursos.
 
@@ -261,9 +261,9 @@ La limitación de fail2ban es que no protege contra ataques distribuidos. Si un 
 
 ## El después — comparativa real
 
-Cuando dejé el servidor expuesto sin tocar nada, en 2 horas y 23 minutos acumuló 506 intentos fallidos desde 3 IPs distintas. Eso fue antes de aplicar ninguna medida.
+Cuando dejé el servidor expuesto sin tocar nada, en 2 horas y 23 minutos acumuló **506 intentos fallidos** desde 3 IPs distintas. Eso fue antes de aplicar ninguna medida.
 
-Ahora tras 24 horas con el hardening aplicado el contador está en 3.842 intentos desde más de 20 IPs distintas. La IP más persistente lleva 1.081 intentos ella sola desde el primer minuto pero ninguna consiguió entrar.
+Ahora tras 24 horas con el hardening aplicado el contador está en **3.842 intentos** desde más de 20 IPs distintas. La IP más persistente lleva **1.081 intentos** ella sola desde el primer minuto pero ninguna consiguió entrar.
 
 ![Comparativa de intentos tras el hardening](/assets/img/defensiva/SSH-expuesto/22-comparativa-fail2ban.png)
 
@@ -271,7 +271,7 @@ Fail2ban ha baneado 4 IPs en total y mantiene 3 bloqueadas actualmente. Pero mir
 
 ![Baneos nuevos](/assets/img/defensiva/SSH-expuesto/23-baneos-nuevos.png)
 
-Lo que realmente cierra la puerta son las decisiones 1 y 2. Sin root accesible y sin autenticación por contraseña, esos 3.842 intentos no tienen ninguna entrada posible. Los bots pueden seguir intentando indefinidamente — el resultado siempre será el mismo.
+**Lo que realmente cierra la puerta son las decisiones 1 y 2.** Sin `root` accesible y sin autenticación por contraseña, esos 3.842 intentos no tienen ninguna entrada posible. Los bots pueden seguir intentando indefinidamente — el resultado siempre será el mismo.
 
 ---
 
