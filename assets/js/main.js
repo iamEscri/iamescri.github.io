@@ -101,7 +101,7 @@ function filterBlogCategory(category, tabEl) {
 }
 
 function initBlogCategoryCounts() {
-  var counts = { all: 0, ciberseguridad: 0, herramientas: 0, automatizacion: 0 };
+  var counts = { all: 0, analisis: 0, herramientas: 0, automatizacion: 0 };
   document.querySelectorAll('#blog-posts-list .blog-card').forEach(function(card) {
     counts.all++;
     var cat = card.dataset.blogCategory || '';
