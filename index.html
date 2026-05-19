@@ -9,651 +9,465 @@ section: home
 {% assign all_defensive = site.posts | where: "category", "defensive" %}
 {% assign portfolio    = site.data.portfolio %}
 {% assign projects     = site.data.projects %}
+{% assign recent_all   = site.posts | sort: "date" | reverse %}
 
 <!-- ====================================================
-     SECTION: HOME
+     HOME
      ==================================================== -->
 <section class="section active" id="section-home">
-  <div class="section-header">
-    <div class="section-label">bienvenido</div>
-    <h2 class="section-title">Hola, soy <span class="accent">{{ site.title }}</span></h2>
-    <p class="section-desc">{{ site.description }}</p>
-  </div>
 
-  <!-- Hero grid: terminal + side panel -->
-  <div class="home-hero-grid">
-
-    <!-- Terminal -->
-    <div class="hero-terminal">
-      <div class="terminal-bar">
-        <div class="t-dot red"></div>
-        <div class="t-dot yellow"></div>
-        <div class="t-dot green"></div>
-        <span class="terminal-title">{{ site.title }}@kali: ~</span>
-      </div>
-      <div class="terminal-body">
-        <div class="t-line"><span class="t-prompt">❯</span><span class="t-cmd"> whoami</span></div>
-        <div class="t-line"><span class="t-out green">{{ site.title }}</span></div>
-        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat about.txt</span></div>
-        <div class="t-line"><span class="t-out">{{ portfolio.bio | default: site.description }}</span></div>
-        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls projects/ | head -n 3</span></div>
-        <div class="t-line">
-          <span class="t-out" style="display:block;">{% assign real_projects = projects | where: "wip", false %}{% for proj in real_projects limit:3 %}<span class="t-file" style="display:block;">{{ proj.name }}</span>{% endfor %}</span>
-        </div>
-        <div class="t-line" style="margin-top:4px;"><span class="t-prompt">❯</span><span class="t-cmd"> ls projects | wc -l</span></div>
-        <div class="t-line">
-          <span class="t-out"><span class="t-comment">{{ real_projects | size }} total</span></span>
-        </div>
-        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"> cat objetivos.txt</span></div>
-        <div class="t-line"><span class="t-out"><span class="t-comment"># objetivos 2026</span></span></div>
-        {% for obj in portfolio.objetivos %}
-        <div class="t-line"><span class="t-out">{% if obj.status == "done" %}<span class="t-ok">✔</span>{% else %}<span class="t-pend">◎</span>{% endif %} {{ obj.text }}</span></div>
-        {% endfor %}
-        <div class="t-line" style="margin-top:8px;"><span class="t-prompt">❯</span><span class="t-cmd"><span class="t-cursor"></span></span></div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">// {{ site.author | downcase }} · murcia, españa</div>
+      <h1 class="hero-h1"><b>Defensiva.</b> Sistemas.<br><i>Automatización.</i></h1>
+      <p class="hero-desc">
+        Técnico IT con base en <em>ASIR</em>, en transición activa hacia
+        <em>ciberseguridad defensiva</em> y automatización con IA.
+        Construyo infraestructura Linux real, la securizo, la monitorizo
+        y documento el proceso con criterio técnico.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showSection('projects',document.getElementById('nav-projects'))">Ver proyectos</button>
+        <button class="btn-ghost"   onclick="showSection('defensive',document.getElementById('nav-defensive'))">Seg. Defensiva →</button>
+        <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="btn-ghost">LinkedIn →</a>
       </div>
     </div>
 
-    <!-- Panel derecho: estado actual -->
-    <div class="hero-side">
-
-      <!-- En desarrollo -->
-      {% assign wip_items = portfolio.en_desarrollo | where: "status", "in-progress" %}
-      {% if wip_items.size > 0 %}
-      <div class="side-widget">
-        <div class="side-widget-title"><i class="fas fa-spinner fa-spin"></i> En desarrollo</div>
-        {% for item in wip_items %}
-        <div class="dev-item">
-          <div class="dev-item-icon">{{ item.icon }}</div>
-          <div class="dev-item-info">
-            <div class="dev-item-name">{{ item.name }}</div>
-            <div class="dev-item-sub">{{ item.sub }}</div>
+    <div class="hero-right">
+      <!-- EN DESARROLLO -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="panel-title-dot" style="background:#f59e0b"></div>
+            En desarrollo
           </div>
-          <span class="dev-status-badge">en progreso</span>
+          <div class="panel-badge-wip">
+            <div class="panel-badge-wip-dot"></div>activo
+          </div>
         </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-
-      <!-- Stack activo -->
-      {% if portfolio.stack_activo.size > 0 %}
-      <div class="side-widget">
-        <div class="side-widget-title"><i class="fas fa-layer-group"></i> Stack activo</div>
-        <div class="stack-tags">
-          {% for tool in portfolio.stack_activo %}
-          <span class="stack-tag">{{ tool }}</span>
+        <div class="dev-list">
+          {% assign wip_items = portfolio.en_desarrollo | where: "status", "in-progress" %}
+          {% assign bar_colors = "#5b6af0,#0ea5a0,#8b5cf6,#363c47" | split: "," %}
+          {% for item in wip_items %}
+          {% assign color = bar_colors[forloop.index0] | default: "#363c47" %}
+          <div class="dev-item">
+            <div class="dev-bar" style="background:{{ color }}"></div>
+            <div class="dev-body">
+              <div class="dev-name">{{ item.name }}</div>
+              <div class="dev-sub">{{ item.sub }}</div>
+            </div>
+          </div>
           {% endfor %}
         </div>
       </div>
-      {% endif %}
 
-      <!-- Disponibilidad -->
-      {% if portfolio.available %}
-      <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="side-widget avail-widget avail-widget--link">
-        <div class="avail-dot"></div>
-        <div class="avail-body">
-          <div class="avail-title">Disponible para trabajar</div>
-          <div class="avail-sub">{{ portfolio.available_roles | default: "Blue Team · SOC · Defensa" }}</div>
-          <div class="avail-linkedin"><i class="fab fa-linkedin"></i> Ver LinkedIn</div>
+      <!-- STACK ACTIVO -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="panel-title-dot" style="background:#5b6af0"></div>
+            Stack activo
+          </div>
+          <span class="panel-meta">2026</span>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-item"><span class="stack-item-icon">🐧</span><span class="stack-item-name">Linux</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🐳</span><span class="stack-item-name">Docker</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🛡️</span><span class="stack-item-name">Wazuh</span></div>
+          <div class="stack-item"><span class="stack-item-icon">📊</span><span class="stack-item-name">Grafana</span></div>
+          <div class="stack-item"><span class="stack-item-icon">⚙️</span><span class="stack-item-name">n8n</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🔐</span><span class="stack-item-name">Fail2ban</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🤖</span><span class="stack-item-name">Claude API</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🔀</span><span class="stack-item-name">Traefik</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- PUBLICACIONES TÉCNICAS (home preview) -->
+  <div class="sec">
+    <div class="pub-header">
+      <div>
+        <div class="sec-eyebrow">// contenido técnico</div>
+        <h2 class="sec-title">Publicaciones técnicas</h2>
+        <p class="sec-sub" style="margin-bottom:0">Análisis, laboratorios y decisiones técnicas documentadas con criterio.</p>
+      </div>
+      <div class="category-tabs">
+        <span class="category-tab active" onclick="filterPubCategory('all',this)">Todo</span>
+        <span class="category-tab" onclick="filterPubCategory('defensiva',this)">Defensiva</span>
+        <span class="category-tab" onclick="filterPubCategory('infra',this)">Infra</span>
+        <span class="category-tab" onclick="filterPubCategory('auto',this)">Automatización</span>
+        <span class="category-tab" onclick="filterPubCategory('lab',this)">Lab</span>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      {% assign pub_posts = all_defensive | concat: all_blog | sort: "date" | reverse %}
+      {% assign featured = pub_posts | first %}
+      {% if featured %}
+      <a href="{{ featured.url | relative_url }}" class="pub-card pub-card-wide pub-card-featured" data-category="{{ featured.blog_category | default: 'defensiva' }}">
+        <span class="pub-tag tag-{{ featured.blog_category | default: 'defensiva' }}">
+          {% if featured.category == 'defensive' %}Seg. Defensiva{% else %}{{ featured.blog_category | default: 'Blog' }}{% endif %}
+        </span>
+        <div class="pub-card-title">{{ featured.title }}</div>
+        <div class="pub-card-desc">{{ featured.description | default: featured.excerpt | strip_html | truncate: 200 }}</div>
+        <div class="pub-card-meta">
+          {% for tag in featured.tags limit:5 %}
+          <span class="pub-meta-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        <div class="pub-card-footer">
+          <span class="pub-card-date">{{ featured.date | date: "%b %Y" }}</span>
+          <span class="pub-card-link">Leer →</span>
         </div>
       </a>
       {% endif %}
 
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="stats-grid stats-grid--four">
-    <div class="stat-card">
-      <div class="stat-icon">🚩</div>
-      <div class="stat-number">{{ all_writeups | size }}</div>
-      <div class="stat-label">writeups totales</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">✍️</div>
-      <div class="stat-number">{{ all_blog | size }}</div>
-      <div class="stat-label">posts de blog</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🔵</div>
-      <div class="stat-number">{{ all_defensive | size }}</div>
-      <div class="stat-label">seg. defensiva</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">⚙️</div>
-      <!-- Bug #3 fix: excluir proyectos WIP del contador -->
-      <div class="stat-number">{{ projects | where: "wip", false | size }}</div>
-      <div class="stat-label">proyectos</div>
-    </div>
-  </div>
-
-  <!-- Recent activity -->
-  <div class="home-grid home-grid--three">
-    <!-- Últimas entradas seg. defensiva -->
-    <div class="home-card">
-      <div class="home-card-title"><i class="fas fa-shield-alt"></i> Últimas Entradas Seg. Defensiva</div>
-      {% for post in all_defensive limit:5 %}
-      <div class="recent-item" onclick="window.location='{{ post.url | relative_url }}'">
-        <div class="recent-num">0{{ forloop.index }}</div>
-        <div class="recent-info">
-          <div class="recent-title">{{ post.title }}</div>
-          <div class="recent-date">{{ post.date | date: "%d %b %Y" }}</div>
+      {% assign rest_posts = pub_posts | offset: 1 %}
+      {% for post in rest_posts limit:5 %}
+      {% assign tag_class = "tag-defensiva" %}
+      {% if post.category == 'blog' %}{% assign tag_class = "tag-infra" %}{% endif %}
+      <a href="{{ post.url | relative_url }}" class="pub-card" data-category="{{ post.blog_category | default: 'defensiva' }}">
+        <span class="pub-tag {{ tag_class }}">
+          {% if post.category == 'defensive' %}Seg. Defensiva{% else %}{{ post.blog_category | default: 'Blog' | capitalize }}{% endif %}
+        </span>
+        <div class="pub-card-title">{{ post.title }}</div>
+        <div class="pub-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="pub-card-meta">
+          {% for tag in post.tags limit:3 %}
+          <span class="pub-meta-tag">{{ tag }}</span>
+          {% endfor %}
         </div>
-      </div>
+        <div class="pub-card-footer">
+          <span class="pub-card-date">{{ post.date | date: "%b %Y" }}</span>
+          <span class="pub-card-link">Leer →</span>
+        </div>
+      </a>
       {% endfor %}
-      {% if all_defensive.size == 0 %}
-      <div class="recent-item" style="opacity:.5;cursor:default;">
-        <div class="recent-num">—</div>
-        <div class="recent-info"><div class="recent-title">Sin artículos todavía</div><div class="recent-date">¡Escribe el primero!</div></div>
-      </div>
-      {% endif %}
     </div>
+  </div>
 
-    <!-- Últimos posts blog -->
-    <div class="home-card">
-      <div class="home-card-title"><i class="fas fa-pencil-alt"></i> Últimas Entradas del Blog</div>
-      {% for post in all_blog limit:5 %}
-      <div class="recent-item" onclick="window.location='{{ post.url | relative_url }}'">
-        <div class="recent-num">0{{ forloop.index }}</div>
-        <div class="recent-info">
-          <div class="recent-title">{{ post.title }}</div>
-          <div class="recent-date">{{ post.date | date: "%d %b %Y" }}</div>
-        </div>
-      </div>
-      {% endfor %}
-      {% if all_blog.size == 0 %}
-      <div class="recent-item" style="opacity:.5;cursor:default;">
-        <div class="recent-num">—</div>
-        <div class="recent-info"><div class="recent-title">Sin posts todavía</div><div class="recent-date">¡Escribe el primero!</div></div>
-      </div>
-      {% endif %}
-    </div>
+  <hr class="section-sep">
 
-    <!-- Roadmap de certificaciones -->
-    <div class="home-card">
-      <div class="home-card-title"><i class="fas fa-road"></i> Roadmap Certs</div>
-      <div class="roadmap-list">
-        {% for cert in portfolio.roadmap %}
-        <div class="roadmap-item status-{{ cert.status }}">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-info">
-            <div class="roadmap-name">{{ cert.name }}</div>
-            <div class="roadmap-sub">{{ cert.org }}{% if cert.date and cert.date != "" %} · {{ cert.date }}{% endif %}</div>
+  <!-- ACTIVIDAD RECIENTE -->
+  <div class="sec">
+    <div class="sec-eyebrow">// actividad</div>
+    <h2 class="sec-title" style="margin-bottom:36px">Actividad reciente</h2>
+    <div class="activity-grid">
+      <div class="activity-panel">
+        <div class="activity-panel-header">
+          <div class="activity-panel-title">
+            <div class="panel-title-dot" style="background:#5b6af0"></div>
+            Publicaciones y laboratorio
           </div>
-          {% if cert.status == "done" %}<span class="roadmap-badge done">obtenida</span>
-          {% elsif cert.status == "wip" %}<span class="roadmap-badge wip">en progreso</span>
-          {% elsif cert.status == "next" %}<span class="roadmap-badge next">próximo</span>
-          {% else %}<span class="roadmap-badge next">futuro</span>
-          {% endif %}
+          <span class="panel-meta">últimas entradas</span>
         </div>
-        {% endfor %}
+        <div class="activity-list">
+          {% assign act_icons = "📝,🐳,⚙️,🔐" | split: "," %}
+          {% assign act_icon_classes = "icon-blue,icon-teal,icon-purple,icon-amber" | split: "," %}
+          {% for post in recent_all limit:4 %}
+          <div class="activity-item">
+            <div class="activity-icon {{ act_icon_classes[forloop.index0] }}">{{ act_icons[forloop.index0] }}</div>
+            <div class="activity-body">
+              <div class="activity-title">{{ post.title | truncate: 50 }}</div>
+              <div class="activity-desc">
+                {% if post.category == 'defensive' %}Seg. Defensiva{% elsif post.category == 'blog' %}Blog{% elsif post.category == 'writeup' %}Writeup{% else %}{{ post.category }}{% endif %}
+                {% if post.tags.first %} · {{ post.tags | first }}{% endif %}
+              </div>
+            </div>
+            <div class="activity-time">{{ post.date | date: "%d %b" }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="activity-panel">
+        <div class="activity-panel-header">
+          <div class="activity-panel-title">
+            <div class="panel-title-dot" style="background:#0ea5a0"></div>
+            Commits — GitHub
+          </div>
+        </div>
+        <div class="activity-list">
+          {% for post in recent_all limit:4 %}
+          <div class="activity-item">
+            <div class="activity-git-label">git</div>
+            <div class="activity-body">
+              <div class="activity-title" style="font-family:var(--font-mono);font-size:12px">
+                {% if post.category == 'defensive' or post.category == 'blog' %}docs:{% elsif post.category == 'writeup' %}docs:{% else %}feat:{% endif %}
+                {{ post.title | downcase | truncate: 40 | remove: ":" }}
+              </div>
+              <div class="activity-repo">iamEscri/iamescri.github.io</div>
+            </div>
+            <div class="activity-time">{{ post.date | date: "%d %b" }}</div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
+
 </section>
 
-
 <!-- ====================================================
-     SECTION: WRITEUPS
+     SOBRE MÍ
      ==================================================== -->
-<section class="section" id="section-writeups">
-  <div class="section-header">
-    <div class="section-label">writeups</div>
-    <h2 class="section-title">Máquinas <span class="accent">Comprometidas</span></h2>
-    <p class="section-desc">Todos mis writeups categorizados por plataforma. Filtra, busca, y aprende.</p>
-  </div>
+<section class="section" id="section-about">
+  <div class="sec">
+    <div class="sec-eyebrow">// sobre mí</div>
+    <h2 class="sec-title">Construyo y securizo<br>infraestructura real.</h2>
 
-  <!-- Platform tabs -->
-  <!-- Bug #6 fix: IDs renombrados a tab-count-* para no colisionar con los del sidebar -->
-  <div class="platform-tabs">
-    <div class="platform-tab active" onclick="filterPlatform('all', this)">
-      <i class="fas fa-layer-group"></i> Todas
-      <span class="tab-count" id="tab-count-all">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterPlatform('dockerlabs', this)">
-      <i class="fab fa-docker"></i> DockerLabs
-      <span class="tab-count" id="tab-count-dockerlabs">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterPlatform('hackthebox', this)">
-      <i class="fas fa-cube"></i> HackTheBox
-      <span class="tab-count" id="tab-count-hackthebox">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterPlatform('tryhackme', this)">
-      <i class="fas fa-shield-alt"></i> TryHackMe
-      <span class="tab-count" id="tab-count-tryhackme">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterPlatform('vulnyx', this)">
-      <i class="fas fa-spider"></i> Vulnyx
-      <span class="tab-count" id="tab-count-vulnyx">0</span>
-    </div>
-  </div>
-
-  <!-- Writeup cards grid -->
-  <div class="writeups-grid">
-    {% for wu in all_writeups %}
-      {% include writeup-card.html writeup=wu %}
-    {% endfor %}
-    {% if all_writeups.size == 0 %}
-    <div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-muted);font-family:var(--font-mono);font-size:13px;">
-      <div style="font-size:40px;margin-bottom:16px;">🚩</div>
-      Todavía no hay writeups.<br>
-      Crea un fichero <code>.md</code> en <code>_posts/writeups/</code> para empezar.
-    </div>
-    {% endif %}
-  </div>
-</section>
-
-
-<!-- ====================================================
-     SECTION: PORTFOLIO
-     ==================================================== -->
-<section class="section" id="section-portfolio">
-  <div class="section-header">
-    <div class="section-label">portfolio</div>
-    <h2 class="section-title">Sobre <span class="accent">Mí</span></h2>
-    <p class="section-desc">Skills, herramientas y certificaciones. Lo que sé, lo que uso, lo que estoy aprendiendo.</p>
-  </div>
-
-  <div class="portfolio-layout">
-    <!-- Perfil -->
-    <div class="profile-card">
-      <div class="profile-avatar">
-        {% if site.avatar %}
-        <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}">
-        {% else %}
-        💀
-        {% endif %}
-      </div>
-      <div class="profile-name">{{ site.title }}</div>
-      <div class="profile-handle">@{{ site.author | default: site.title }}</div>
-      {% if portfolio.available %}
-      <div class="profile-available">disponible para trabajar</div>
-      {% endif %}
-      <p class="profile-bio" id="profile-bio">{{ portfolio.bio }}</p>
-      <script>
-        (function() {
-          var highlights = [{% for word in portfolio.bio_highlights %}"{{ word }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
-          var bio = document.getElementById('profile-bio');
-          if (!bio || !highlights.length) return;
-          var html = bio.innerHTML;
-          highlights.forEach(function(word) {
-            var regex = new RegExp('(' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-            html = html.replace(regex, '<span class="bio-highlight">$1</span>');
-          });
-          bio.innerHTML = html;
-        })();
-      </script>
-
-      <div class="profile-stats">
-        <div class="p-stat">
-          <div class="p-stat-num">{{ all_writeups | size }}</div>
-          <div class="p-stat-label">writeups</div>
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="about-body">
+          <p>Tengo base en <em>Administración de Sistemas (ASIR)</em> y estoy en transición activa hacia ciberseguridad defensiva. Mi enfoque no es el pentesting ni los CTFs como destino final — son herramientas de comprensión técnica.</p>
+          <p>Lo que me interesa de verdad es <em>construir infraestructura que sea difícil de comprometer</em>: entornos Linux endurecidos, monitorización real con Wazuh y Grafana, pipelines de automatización que reduzcan ruido y mejoren la detección.</p>
+          <p>Trabajo con laboratorios propios, VPS en producción y workflows reales con n8n + IA. <em>Todo está documentado aquí</em> — no como tutoriales, sino como análisis técnico razonado con criterio operativo.</p>
         </div>
-        <div class="p-stat">
-          <div class="p-stat-num">{{ all_blog | size }}</div>
-          <div class="p-stat-label">posts</div>
-        </div>
-        <div class="p-stat">
-          <div class="p-stat-num">{{ projects | where: "wip", false | size }}</div>
-          <div class="p-stat-label">proyectos</div>
-        </div>
-        <div class="p-stat">
-          <div class="p-stat-num">{{ portfolio.certifications | where: "status", "obtained" | size }}</div>
-          <div class="p-stat-label">certs</div>
-        </div>
-      </div>
 
-      <!-- Contacto -->
-      <div class="profile-contact">
-        {% if site.email and site.email != "" %}
-        <a href="mailto:{{ site.email }}" class="profile-contact-link">
-          <i class="fas fa-envelope"></i>
-          <span>{{ site.email }}</span>
-        </a>
-        {% endif %}
-        {% if site.social.linkedin %}
-        <a href="{{ site.social.linkedin }}" target="_blank" class="profile-contact-link">
-          <i class="fab fa-linkedin"></i>
-          <span>LinkedIn</span>
-        </a>
-        {% endif %}
-      </div>
-
-      <div class="profile-socials">
-        {% if site.social.github %}
-        <a href="{{ site.social.github }}" target="_blank"><i class="fab fa-github"></i></a>
-        {% endif %}
-        {% if site.social.linkedin %}
-        <a href="{{ site.social.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
-        {% endif %}
-        {% if site.social.hackthebox %}
-        <a href="{{ site.social.hackthebox }}" target="_blank"><i class="fas fa-cube"></i></a>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Skills & certs -->
-    <div class="portfolio-right">
-
-      {% if portfolio.skills %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-layer-group"></i> Skills</div>
-        {% for skill in portfolio.skills %}
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">{{ skill.name }}</span>
-            <span class="skill-badge skill-badge--{{ skill.level }}">{{ skill.level }}</span>
+        <!-- CONTACTO 2x2 -->
+        <div class="contact-grid">
+          <div class="contact-cell">
+            <div class="contact-label">GitHub</div>
+            <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="contact-val-link">@iamEscri</a>
           </div>
-          {% if skill.desc %}<div class="skill-desc">{{ skill.desc }}</div>{% endif %}
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-
-      {% if portfolio.objetivos %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-bullseye"></i> Objetivos</div>
-        <div class="obj-list">
-          {% for obj in portfolio.objetivos %}
-          <div class="obj-item {{ obj.status }}">
-            <span class="obj-dot"></span>
-            <span class="obj-text">{{ obj.text }}</span>
+          <div class="contact-cell">
+            <div class="contact-label">LinkedIn</div>
+            <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="contact-val-link">álvaro escribano</a>
           </div>
-          {% endfor %}
+          <div class="contact-cell">
+            <div class="contact-label">Email</div>
+            <span class="contact-val-email">{{ site.email }}</span>
+          </div>
+          <div class="contact-cell">
+            <div class="contact-label">Disponible</div>
+            <span class="contact-val-avail">{{ portfolio.available_roles | default: "Blue Team · SOC" }}</span>
+          </div>
         </div>
       </div>
-      {% endif %}
 
-      {% if portfolio.certifications %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-certificate"></i> Certificaciones</div>
-        <div class="certs-grid">
-          {% for cert in portfolio.certifications %}
-          <div class="cert-card {{ cert.status }}">
-            <div class="cert-icon">{{ cert.icon }}</div>
-            <div>
-              <div class="cert-name">{{ cert.name }}</div>
-              <div class="cert-date">{{ cert.org }} · {{ cert.date }}</div>
-              <span class="cert-status-badge {{ cert.status }}">
-                {% if cert.status == "obtained" %}obtenida{% elsif cert.status == "next" %}próximo{% elsif cert.status == "future" %}futuro{% else %}en progreso{% endif %}
-              </span>
+      <div class="about-right">
+        <!-- ÁREAS DE TRABAJO -->
+        <div class="about-panel">
+          <div class="about-panel-title">Áreas de trabajo</div>
+          <div class="area-block">
+            <div class="area-name">Sistemas</div>
+            <div class="pills">
+              <span class="pill">Linux</span><span class="pill">Ubuntu Server</span><span class="pill">SSH</span><span class="pill">Bash</span><span class="pill">Networking</span>
             </div>
           </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      {% if portfolio.complementary_training %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-graduation-cap"></i> Formación Complementaria</div>
-        <div class="certs-grid">
-          {% for course in portfolio.complementary_training %}
-          <div class="cert-card complementary {{ course.status }}">
-            <div class="cert-icon">
-              {% if course.platform == "udemy" %}
-                <i class="fab fa-udemy complementary-platform-icon udemy"></i>
-              {% elsif course.platform == "youtube" %}
-                <i class="fab fa-youtube complementary-platform-icon youtube"></i>
-              {% else %}
-                📚
-              {% endif %}
-            </div>
-            <div>
-              <div class="cert-name">{{ course.name }}</div>
-              <div class="cert-date">{{ course.org }}{% if course.duration %} · {{ course.duration }}{% endif %} · {{ course.date }}</div>
-              <span class="cert-status-badge complementary {{ course.status }}">
-                {% if course.status == "completed" %}completado{% else %}en progreso{% endif %}
-              </span>
+          <div class="area-block">
+            <div class="area-name">Infraestructura</div>
+            <div class="pills">
+              <span class="pill">Docker</span><span class="pill">VPS</span><span class="pill">Traefik</span><span class="pill">Nginx</span>
             </div>
           </div>
-          {% endfor %}
+          <div class="area-block">
+            <div class="area-name">Defensiva</div>
+            <div class="pills">
+              <span class="pill pill-accent">Wazuh</span><span class="pill pill-accent">Fail2ban</span><span class="pill pill-accent">Suricata</span><span class="pill pill-accent">UFW</span>
+            </div>
+          </div>
+          <div class="area-block">
+            <div class="area-name">Automatización</div>
+            <div class="pills">
+              <span class="pill">n8n</span><span class="pill">Claude API</span><span class="pill">workflows IA</span>
+            </div>
+          </div>
+          <div class="area-block">
+            <div class="area-name">Monitorización</div>
+            <div class="pills">
+              <span class="pill">Grafana</span><span class="pill">Splunk</span><span class="pill">Elastic</span>
+            </div>
+          </div>
         </div>
-      </div>
-      {% endif %}
 
-      {% if portfolio.tools %}
-      {% assign devicons = "nmap:nmap,wireshark:wireshark,tcpdump:linux,burpsuite:burpsuite,metasploit:metasploit-plain,linux:linux,bash:bash,splunk:splunk,elastic:elasticsearch" | split: "," %}
-      <div class="skills-section">
-        <div class="skills-title"><i class="fas fa-tools"></i> Herramientas</div>
-        <div class="card-tags">
-          {% for tool in portfolio.tools %}
-          {% assign icon_url = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/" | append: tool | append: "/" | append: tool | append: "-original.svg" %}
-          <span class="tool-tag">
-            <img src="{{ icon_url }}" alt="{{ tool }}" onerror="this.style.display='none'">
-            {{ tool }}
-          </span>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ====================================================
-     SECTION: BLOG
-     ==================================================== -->
-<section class="section" id="section-blog">
-  <div class="section-header">
-    <div class="section-label">blog</div>
-    <h2 class="section-title">Notas & <span class="accent">Artículos</span></h2>
-    <p class="section-desc">Tutoriales, cheatsheets y reflexiones sobre hacking y seguridad.</p>
-  </div>
-
-  <!-- Blog category filter tabs -->
-  <div class="platform-tabs blog-category-tabs">
-    <div class="platform-tab active" onclick="filterBlogCategory('all', this)">
-      <i class="fas fa-layer-group"></i> Todos
-      <span class="tab-count" id="blog-tab-count-all">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterBlogCategory('analisis', this)">
-      <i class="fas fa-microscope"></i> Análisis
-      <span class="tab-count" id="blog-tab-count-analisis">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterBlogCategory('herramientas', this)">
-      <i class="fas fa-tools"></i> Herramientas
-      <span class="tab-count" id="blog-tab-count-herramientas">0</span>
-    </div>
-    <div class="platform-tab" onclick="filterBlogCategory('automatizacion', this)">
-      <i class="fas fa-robot"></i> Automatización
-      <span class="tab-count" id="blog-tab-count-automatizacion">0</span>
-    </div>
-  </div>
-
-  <div class="blog-layout">
-    <div class="blog-posts" id="blog-posts-list">
-      {% for post in all_blog %}
-      <div class="blog-card" data-blog-category="{{ post.blog_category | default: 'all' }}" onclick="window.location='{{ post.url | relative_url }}'">
-        <div class="blog-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
-        <div>
-          <div class="blog-card-title">{{ post.title }}</div>
-          <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-          <div class="blog-card-meta">
-            <span><i class="fas fa-calendar"></i> {{ post.date | date: "%d %b %Y" }}</span>
-            {% if post.tags and post.tags.size > 0 %}
-            <span class="blog-card-tags">
-              {% for tag in post.tags %}<span class="blog-tag">#{{ tag }}</span>{% endfor %}
+        <!-- ROADMAP -->
+        <div class="about-panel">
+          <div class="about-panel-title">Roadmap</div>
+          {% for item in portfolio.roadmap %}
+          <div class="road-item">
+            <div class="road-dot
+              {% if item.status == 'done' %}road-dot-done
+              {% elsif item.status == 'wip' %}road-dot-wip
+              {% else %}road-dot-next{% endif %}"></div>
+            <div class="road-name">
+              {{ item.name }}
+              {% if item.org %}<span class="road-org"> — {{ item.org }}</span>{% endif %}
+            </div>
+            <span class="road-badge
+              {% if item.status == 'done' %}badge-done
+              {% elsif item.status == 'wip' %}badge-wip
+              {% else %}badge-next{% endif %}">
+              {% if item.status == 'done' %}obtenida{% elsif item.status == 'wip' %}en curso{% else %}próximo{% endif %}
             </span>
-            {% endif %}
           </div>
-        </div>
-      </div>
-      {% endfor %}
-      {% if all_blog.size == 0 %}
-      <div style="text-align:center;padding:60px 0;color:var(--text-muted);font-family:var(--font-mono);font-size:13px;">
-        <div style="font-size:40px;margin-bottom:16px;">✍️</div>
-        Todavía no hay entradas de blog.<br>
-        Crea un fichero <code>.md</code> en <code>_posts/blog/</code>.
-      </div>
-      {% endif %}
-    </div>
-
-    <!-- Sidebar del blog -->
-    <div>
-      {% assign blog_tags = all_blog | map: "tags" | join: "," | split: "," | uniq | sort %}
-      {% if blog_tags.size > 0 %}
-      <div class="blog-sidebar-widget">
-        <div class="widget-title"><i class="fas fa-tags"></i> Tags</div>
-        <div class="tag-cloud">
-          {% for tag in blog_tags %}
-          {% if tag != "" %}
-          <span class="tag-cloud-item">#{{ tag }}</span>
-          {% endif %}
           {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <div class="blog-sidebar-widget">
-        <div class="widget-title"><i class="fas fa-info-circle"></i> Sobre esta sección</div>
-        <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.7;">
-          Tutoriales, cheatsheets y reflexiones sobre hacking ético, CTFs y pentesting. Conocimiento práctico para llevar al campo.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
 <!-- ====================================================
-     SECTION: SEGURIDAD DEFENSIVA
+     DEFENSIVA
      ==================================================== -->
 <section class="section" id="section-defensive">
-  <div class="section-header">
-    <div class="section-label">seguridad defensiva</div>
-    <h2 class="section-title">Seguridad <span class="accent">Defensiva</span></h2>
-    <p class="section-desc">Guías, técnicas y herramientas para defender sistemas. Blue team, detección, hardening y respuesta a incidentes.</p>
-  </div>
-
-  <div class="blog-layout">
-    <div class="blog-posts">
+  <div class="sec">
+    <div class="sec-eyebrow">// seg. defensiva</div>
+    <h2 class="sec-title">Seguridad Defensiva</h2>
+    <p class="sec-sub">Hardening, análisis de logs, detección de amenazas y monitorización real.</p>
+    <div class="blog-grid" style="margin-top:40px">
       {% for post in all_defensive %}
-      <div class="blog-card" onclick="window.location='{{ post.url | relative_url }}'">
-        <div class="blog-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
-        <div>
-          <div class="blog-card-title">{{ post.title }}</div>
-          <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-          <div class="blog-card-meta">
-            <span><i class="fas fa-calendar"></i> {{ post.date | date: "%d %b %Y" }}</span>
-            {% if post.tags and post.tags.size > 0 %}
-            <span class="blog-card-tags">
-              {% for tag in post.tags %}<span class="blog-tag">#{{ tag }}</span>{% endfor %}
-            </span>
-            {% endif %}
-          </div>
+      <a href="{{ post.url | relative_url }}" class="blog-card">
+        <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
+        <div class="blog-card-title">{{ post.title }}</div>
+        <div class="blog-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="blog-card-footer">
+          <span>{{ post.date | date: "%d %b %Y" }}</span>
+          <span>{{ post.tags | first }}</span>
         </div>
-      </div>
+      </a>
       {% endfor %}
-      {% if all_defensive.size == 0 %}
-      <div style="text-align:center;padding:60px 0;color:var(--text-muted);font-family:var(--font-mono);font-size:13px;">
-        <div style="font-size:40px;margin-bottom:16px;">🛡️</div>
-        Todavía no hay artículos de seguridad defensiva.<br>
-        Crea un fichero <code>.md</code> en <code>_posts/defensive/</code>.
-      </div>
-      {% endif %}
-    </div>
-
-    <!-- Sidebar de seguridad defensiva -->
-    <div>
-      {% assign def_tags = all_defensive | map: "tags" | join: "," | split: "," | uniq | sort %}
-      {% if def_tags.size > 0 %}
-      <div class="blog-sidebar-widget">
-        <div class="widget-title"><i class="fas fa-tags"></i> Tags</div>
-        <div class="tag-cloud">
-          {% for tag in def_tags %}
-          {% if tag != "" %}
-          <span class="tag-cloud-item">#{{ tag }}</span>
-          {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <div class="blog-sidebar-widget">
-        <div class="widget-title"><i class="fas fa-info-circle"></i> Sobre esta sección</div>
-        <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.7;">
-          Artículos enfocados en el lado defensivo de la ciberseguridad: detección de amenazas, hardening, análisis de logs, SIEM, respuesta a incidentes y más.
-        </div>
-      </div>
     </div>
   </div>
 </section>
-
 
 <!-- ====================================================
-     SECTION: PROJECTS
+     INFRAESTRUCTURA
      ==================================================== -->
-<section class="section" id="section-projects">
-  <div class="section-header">
-    <div class="section-label">proyectos</div>
-    <h2 class="section-title">Proyectos <span class="accent">Personales</span></h2>
-    <p class="section-desc">Scripts, herramientas y experimentos. Todo en GitHub.</p>
-  </div>
-
-  <div class="projects-grid">
-    {% for project in projects %}
-    <div class="project-card{% unless project.wip %} project-card--clickable{% endunless %}"
-         data-wip="{{ project.wip }}"
-         {% if project.wip %}style="border-style:dashed;opacity:.6;"{% endif %}
-         {% unless project.wip %}{% if project.post_url and project.post_url != "" %}onclick="window.location='{{ project.post_url | relative_url }}'"{% endif %}{% endunless %}>
-
-      <!-- Cabecera: icono + botones -->
-      <div class="project-header">
-        <div class="project-icon">{{ project.icon }}</div>
-        <div class="project-links">
-          {% unless project.wip %}
-          {% if project.post_url and project.post_url != "" %}
-          <span class="project-read-more">
-            Ver más <i class="fas fa-arrow-right" style="font-size:10px;"></i>
-          </span>
-          {% endif %}
-          {% endunless %}
-          {% if project.github and project.github != "" %}
-          <a href="{{ project.github }}" target="_blank" title="Ver en GitHub" class="project-github-btn" onclick="event.stopPropagation()">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-          </a>
-          {% endif %}
-          {% if project.demo and project.demo != "" %}
-          <a href="{{ project.demo }}" target="_blank" title="Demo" class="project-demo-btn" onclick="event.stopPropagation()">
-            <i class="fas fa-external-link-alt"></i>
-            <span>Demo</span>
-          </a>
-          {% endif %}
+<section class="section" id="section-infra">
+  <div class="sec">
+    <div class="sec-eyebrow">// infraestructura</div>
+    <h2 class="sec-title">Infraestructura</h2>
+    <p class="sec-sub">Docker, Linux, VPS, reverse proxy, firewall y servicios reales.</p>
+    <div class="blog-grid" style="margin-top:40px">
+      {% assign infra_posts = all_blog | where_exp: "p", "p.tags contains 'docker' or p.tags contains 'linux' or p.tags contains 'vps' or p.tags contains 'infraestructura'" %}
+      {% if infra_posts.size == 0 %}{% assign infra_posts = all_blog %}{% endif %}
+      {% for post in infra_posts %}
+      <a href="{{ post.url | relative_url }}" class="blog-card">
+        <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
+        <div class="blog-card-title">{{ post.title }}</div>
+        <div class="blog-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="blog-card-footer">
+          <span>{{ post.date | date: "%d %b %Y" }}</span>
+          <span>{{ post.tags | first }}</span>
         </div>
-      </div>
-
-      <!-- Nombre y descripción corta (siempre visible) -->
-      <div class="project-name">{{ project.name }}</div>
-      <p class="project-desc">{{ project.desc }}</p>
-
-      <div class="project-stack">
-        {% for tech in project.stack %}
-        <span class="stack-badge">{{ tech }}</span>
-        {% endfor %}
-      </div>
-
-      {% unless project.wip %}
-      <div class="project-stats">
-        <div class="project-stat"><i class="fas fa-star"></i> {{ project.stars | default: 0 }}</div>
-        <div class="project-stat"><i class="fas fa-code-branch"></i> {{ project.forks | default: 0 }}</div>
-        {% if project.lang and project.lang != "" %}
-        <div class="project-stat">
-          <i class="fas fa-circle" style="font-size:8px;color:{{ project.lang_color }}"></i>
-          {{ project.lang }}
-        </div>
-        {% endif %}
-      </div>
-      {% else %}
-      <div class="project-stats">
-        <div class="project-stat" style="color:var(--text-muted)"><i class="fas fa-hammer"></i> WIP</div>
-      </div>
-      {% endunless %}
+      </a>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </section>
 
+<!-- ====================================================
+     AUTOMATIZACIÓN
+     ==================================================== -->
+<section class="section" id="section-auto">
+  <div class="sec">
+    <div class="sec-eyebrow">// automatización</div>
+    <h2 class="sec-title">Automatización con IA</h2>
+    <p class="sec-sub">Pipelines n8n, workflows defensivos y automatización con Claude API.</p>
+    <div class="blog-grid" style="margin-top:40px">
+      {% assign auto_posts = all_blog | where_exp: "p", "p.tags contains 'automatizacion' or p.tags contains 'n8n' or p.tags contains 'ia'" %}
+      {% if auto_posts.size == 0 %}{% assign auto_posts = all_blog %}{% endif %}
+      {% for post in auto_posts %}
+      <a href="{{ post.url | relative_url }}" class="blog-card">
+        <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
+        <div class="blog-card-title">{{ post.title }}</div>
+        <div class="blog-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="blog-card-footer">
+          <span>{{ post.date | date: "%d %b %Y" }}</span>
+          <span>{{ post.tags | first }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
+<!-- ====================================================
+     LABORATORIO / WRITEUPS
+     ==================================================== -->
+<section class="section" id="section-writeups">
+  <div class="sec">
+    <div class="sec-eyebrow">// laboratorio técnico</div>
+    <h2 class="sec-title">Laboratorio</h2>
+    <p class="sec-sub">Demostraciones técnicas complementarias — metodología, enumeración y análisis.</p>
+
+    <div class="platform-tabs" style="margin-top:36px">
+      <span class="platform-tab active" onclick="filterPlatform('all',this)">Todas <span id="tab-count-all">0</span></span>
+      <span class="platform-tab" onclick="filterPlatform('hackthebox',this)">HackTheBox <span id="tab-count-hackthebox">0</span></span>
+      <span class="platform-tab" onclick="filterPlatform('tryhackme',this)">TryHackMe <span id="tab-count-tryhackme">0</span></span>
+      <span class="platform-tab" onclick="filterPlatform('dockerlabs',this)">DockerLabs <span id="tab-count-dockerlabs">0</span></span>
+      <span class="platform-tab" onclick="filterPlatform('vulnyx',this)">Vulnyx <span id="tab-count-vulnyx">0</span></span>
+    </div>
+
+    <div class="writeup-grid">
+      {% for post in all_writeups %}
+      <a href="{{ post.url | relative_url }}" class="writeup-card" data-platform="{{ post.platform | downcase }}">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span class="platform-pill pill-{{ post.platform | downcase }}">{{ post.platform }}</span>
+          {% if post.difficulty %}<span class="diff-badge diff-{{ post.difficulty | downcase | replace: ' ','-' }}">{{ post.difficulty }}</span>{% endif %}
+          {% if post.os %}<span style="font-family:var(--font-mono);font-size:11px;color:var(--text3)">{{ post.os }}</span>{% endif %}
+        </div>
+        <div style="font-size:15px;font-weight:500;color:#fff;letter-spacing:-.02em;line-height:1.35">{{ post.title }}</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6">{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          {% for tag in post.tags limit:4 %}<span class="pub-meta-tag">{{ tag }}</span>{% endfor %}
+        </div>
+        <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--text3)">
+          <span>{{ post.date | date: "%d %b %Y" }}</span>
+          <span style="color:var(--accent2)">Leer →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     PROYECTOS
+     ==================================================== -->
+<section class="section" id="section-projects">
+  <div class="sec">
+    <div class="sec-eyebrow">// proyectos</div>
+    <h2 class="sec-title">Proyectos</h2>
+    <p class="sec-sub">Infraestructura real, herramientas propias y automatizaciones documentadas.</p>
+    <div class="projects-grid" style="margin-top:40px">
+      {% for project in projects %}
+      {% assign target_url = project.post_url | default: project.github %}
+      <a href="{{ target_url }}" {% if project.post_url %}{% else %}target="_blank" rel="noopener"{% endif %}
+         class="project-card" data-wip="{{ project.wip | default: false }}">
+        <div class="project-icon">{{ project.icon }}</div>
+        <div class="project-name">{{ project.name }}</div>
+        <div class="project-desc">{{ project.desc }}</div>
+        {% if project.stack %}
+        <div class="project-stack">
+          {% for tech in project.stack limit:4 %}
+          <span class="project-tag">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="project-footer">
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text3)">
+            {% if project.lang %}
+            <span class="project-lang-dot" style="background:{{ project.lang_color }}"></span>{{ project.lang }}
+            {% endif %}
+          </span>
+          {% if project.wip %}
+          <span class="wip-badge">Coming Soon</span>
+          {% else %}
+          <div class="project-stats">
+            <span>★ {{ project.stars | default: 0 }}</span>
+            <span>⑂ {{ project.forks | default: 0 }}</span>
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
