@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} · {{ site.title }}</title>
+<meta name="description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | default: site.description }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <meta property="og:title" content="{{ page.title }} · {{ site.title }}">
@@ -20,166 +20,135 @@
 </head>
 <body class="is-subpage">
 
-<button class="hamburger" onclick="toggleSidebar()" aria-label="Menú">
-  <i class="fas fa-bars"></i>
-</button>
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="main-wrap">
+  <!-- TOPNAV -->
+  <nav class="topnav">
+    <div class="topnav-logo" onclick="window.location.href='{{ '/' | relative_url }}'">
+      <div class="topnav-logo-mark">
+        <svg viewBox="0 0 15 15"><line x1="7.5" y1="1" x2="7.5" y2="14"/><line x1="1" y1="7.5" x2="14" y2="7.5"/><circle cx="7.5" cy="7.5" r="2.2" fill="white" stroke="none"/></svg>
+      </div>
+      <span class="topnav-logo-text">iamEscri</span>
+    </div>
+    <div class="topnav-links">
+      <span class="topnav-link" onclick="showSection('home',null)">Inicio</span>
+      <span class="topnav-link" onclick="showSection('about',null)">Sobre mí</span>
+      <span class="topnav-link {% if page.category == 'defensive' %}active{% endif %}" onclick="showSection('defensive',null)">Defensiva</span>
+      <span class="topnav-link" onclick="showSection('infra',null)">Infraestructura</span>
+      <span class="topnav-link" onclick="showSection('auto',null)">Automatización</span>
+      <span class="topnav-link {% if page.category == 'writeup' %}active{% endif %}" onclick="showSection('writeups',null)">Laboratorio</span>
+      <span class="topnav-link" onclick="showSection('projects',null)">Proyectos</span>
+    </div>
+    <div class="topnav-right">
+      <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="topnav-gh">GitHub →</a>
+    </div>
+  </nav>
 
-{% include sidebar.html %}
-
-<div class="main">
-  {% include topbar.html %}
   <div class="content">
-
     {% if page.category == 'defensive' %}
       {% assign back_section = 'defensive' %}
       {% assign back_label = 'Seg. Defensiva' %}
     {% else %}
-      {% assign back_section = 'blog' %}
+      {% assign back_section = 'infra' %}
       {% assign back_label = 'Blog' %}
     {% endif %}
-    <a href="{{ '/' | relative_url }}#{{ back_section }}" class="back-btn">
-      <i class="fas fa-arrow-left"></i> Volver a {{ back_label }}
-    </a>
+    <a href="{{ '/#' | append: back_section | relative_url }}" class="back-btn">← Volver a {{ back_label }}</a>
 
     <div class="post-layout">
-
-      <!-- CONTENIDO PRINCIPAL -->
       <div class="post-main">
         <div class="writeup-hero">
-          <div style="font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px">
             {{ page.category | default: "blog" }}
           </div>
           <h1 class="writeup-title">{{ page.title }}</h1>
-          <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:16px;">
-            <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">
-              <i class="fas fa-calendar"></i> {{ page.date | date: "%d %b %Y" }}
-            </span>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:16px">
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--text3)">{{ page.date | date: "%d %b %Y" }}</span>
             {% if page.tags %}
-            <div class="card-tags" style="margin:0;">
-              {% for tag in page.tags %}
-              <span class="tag">#{{ tag }}</span>
-              {% endfor %}
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              {% for tag in page.tags %}<span class="tag">#{{ tag }}</span>{% endfor %}
             </div>
             {% endif %}
           </div>
         </div>
-
-        <div class="writeup-body" id="post-content">
-          {{ content }}
-        </div>
+        <div class="writeup-body" id="post-content">{{ content }}</div>
       </div>
 
-      <!-- SIDEBAR DERECHA -->
       <aside class="post-sidebar">
-
-        <!-- TOC -->
         <div class="post-sidebar-card" id="toc-box">
-          <div class="post-sidebar-title">
-            <i class="fas fa-list-ul"></i> Contenido
-          </div>
-          <nav id="toc-nav">
-            <span class="toc-loading">Cargando...</span>
-          </nav>
+          <div class="post-sidebar-title">Contenido</div>
+          <nav id="toc-nav"><span class="toc-loading">Cargando...</span></nav>
         </div>
 
-        <!-- ARTÍCULOS RELACIONADOS -->
         {% assign current_tags = page.tags %}
         {% assign related = "" | split: "" %}
         {% for post in site.posts %}
           {% if post.url != page.url %}
             {% for tag in current_tags %}
               {% if post.tags contains tag %}
-                {% unless related contains post %}
-                  {% assign related = related | push: post %}
-                {% endunless %}
+                {% unless related contains post %}{% assign related = related | push: post %}{% endunless %}
               {% endif %}
             {% endfor %}
           {% endif %}
         {% endfor %}
-
         {% if related.size > 0 %}
         <div class="post-sidebar-card">
-          <div class="post-sidebar-title">
-            <i class="fas fa-link"></i> Relacionados
-          </div>
+          <div class="post-sidebar-title">Relacionados</div>
           <ul class="related-list">
             {% for post in related limit:4 %}
-            <li>
-              <a href="{{ post.url | relative_url }}" class="related-item">
-                <span class="related-item-cat">{{ post.category | default: "blog" }}</span>
-                <span class="related-item-title">{{ post.title }}</span>
-                <span class="related-item-date">{{ post.date | date: "%d %b %Y" }}</span>
-              </a>
-            </li>
+            <li><a href="{{ post.url | relative_url }}" class="related-item">
+              <span class="related-item-cat">{{ post.category | default: "blog" }}</span>
+              <span class="related-item-title">{{ post.title }}</span>
+              <span class="related-item-date">{{ post.date | date: "%d %b %Y" }}</span>
+            </a></li>
             {% endfor %}
           </ul>
         </div>
         {% endif %}
 
-        <!-- TAGS DEL POST -->
         {% if page.tags %}
         <div class="post-sidebar-card">
-          <div class="post-sidebar-title">
-            <i class="fas fa-tags"></i> Tags
-          </div>
+          <div class="post-sidebar-title">Tags</div>
           <div class="sidebar-tags">
-            {% for tag in page.tags %}
-            <span class="tag">#{{ tag }}</span>
-            {% endfor %}
+            {% for tag in page.tags %}<span class="tag">#{{ tag }}</span>{% endfor %}
           </div>
         </div>
         {% endif %}
-
       </aside>
-
-    </div><!-- /.post-layout -->
+    </div>
   </div>
 </div>
 
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 <script>
-// Generar TOC dinámicamente desde los h2 y h3 del artículo
 (function() {
-  const content = document.getElementById('post-content');
-  const nav = document.getElementById('toc-nav');
+  var content = document.getElementById('post-content');
+  var nav = document.getElementById('toc-nav');
   if (!content || !nav) return;
-
-  const headings = content.querySelectorAll('h2, h3');
-  if (headings.length === 0) {
-    document.getElementById('toc-box').style.display = 'none';
-    return;
-  }
-
+  var headings = content.querySelectorAll('h2, h3');
+  if (headings.length === 0) { document.getElementById('toc-box').style.display='none'; return; }
   nav.innerHTML = '';
-  headings.forEach((h, i) => {
+  headings.forEach(function(h, i) {
     if (!h.id) h.id = 'heading-' + i;
-    const a = document.createElement('a');
+    var a = document.createElement('a');
     a.href = '#' + h.id;
     a.textContent = h.textContent;
     a.className = 'toc-link toc-' + h.tagName.toLowerCase();
     a.addEventListener('click', function(e) {
       e.preventDefault();
-      const top = h.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      window.scrollTo({ top: h.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
     });
     nav.appendChild(a);
   });
-
-  // Highlight activo al hacer scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = nav.querySelector(`a[href="#${id}"]`);
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var link = nav.querySelector('a[href="#' + entry.target.id + '"]');
       if (!link) return;
       if (entry.isIntersecting) {
-        nav.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+        nav.querySelectorAll('.toc-link').forEach(function(l) { l.classList.remove('active'); });
         link.classList.add('active');
       }
     });
   }, { rootMargin: '0px 0px -70% 0px' });
-
-  headings.forEach(h => observer.observe(h));
+  headings.forEach(function(h) { observer.observe(h); });
 })();
 </script>
 </body>
