@@ -6,8 +6,7 @@
 <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 <meta name="description" content="{{ page.description | default: site.description }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
@@ -15,19 +14,47 @@
 </head>
 <body>
 
-<!-- ===== MOBILE HAMBURGER ===== -->
-<button class="hamburger" onclick="toggleSidebar()" aria-label="Menú">
-  <i class="fas fa-bars"></i>
-</button>
+<button class="hamburger" onclick="toggleMobileNav()" aria-label="Menú">&#9776;</button>
+<div class="overlay" id="overlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <span class="mobile-nav-link" onclick="showSection('home',this);closeMobileNav()">Inicio</span>
+  <span class="mobile-nav-link" onclick="showSection('about',this);closeMobileNav()">Sobre mí</span>
+  <span class="mobile-nav-link" onclick="showSection('defensive',this);closeMobileNav()">Defensiva</span>
+  <span class="mobile-nav-link" onclick="showSection('infra',this);closeMobileNav()">Infraestructura</span>
+  <span class="mobile-nav-link" onclick="showSection('auto',this);closeMobileNav()">Automatización</span>
+  <span class="mobile-nav-link" onclick="showSection('writeups',this);closeMobileNav()">Laboratorio</span>
+  <span class="mobile-nav-link" onclick="showSection('projects',this);closeMobileNav()">Proyectos</span>
+</nav>
 
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="main-wrap">
+  <!-- TOPNAV -->
+  <nav class="topnav">
+    <div class="topnav-logo" onclick="showSection('home', null)">
+      <div class="topnav-logo-mark">
+        <svg viewBox="0 0 15 15"><line x1="7.5" y1="1" x2="7.5" y2="14"/><line x1="1" y1="7.5" x2="14" y2="7.5"/><circle cx="7.5" cy="7.5" r="2.2" fill="white" stroke="none"/></svg>
+      </div>
+      <span class="topnav-logo-text">iamEscri</span>
+    </div>
+    <div class="topnav-links">
+      <span class="topnav-link active" id="nav-home"      onclick="showSection('home',this)">Inicio</span>
+      <span class="topnav-link"        id="nav-about"     onclick="showSection('about',this)">Sobre mí</span>
+      <span class="topnav-link"        id="nav-defensive" onclick="showSection('defensive',this)">Defensiva</span>
+      <span class="topnav-link"        id="nav-infra"     onclick="showSection('infra',this)">Infraestructura</span>
+      <span class="topnav-link"        id="nav-auto"      onclick="showSection('auto',this)">Automatización</span>
+      <span class="topnav-link"        id="nav-writeups"  onclick="showSection('writeups',this)">Laboratorio</span>
+      <span class="topnav-link"        id="nav-projects"  onclick="showSection('projects',this)">Proyectos</span>
+    </div>
+    <div class="topnav-right">
+      {% if site.data.portfolio.available %}
+      <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="topnav-avail">
+        <div class="topnav-avail-dot"></div>Disponible
+      </a>
+      {% endif %}
+      <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="topnav-gh">GitHub →</a>
+    </div>
+  </nav>
 
-<!-- ===== SIDEBAR ===== -->
-{% include sidebar.html %}
-
-<!-- ===== MAIN ===== -->
-<div class="main">
-  {% include topbar.html %}
+  <!-- CONTENT -->
   <div class="content">
     {{ content }}
   </div>
