@@ -242,19 +242,17 @@ section: home
      ==================================================== -->
 <section class="section" id="section-about">
   <div class="sec">
-    <div class="about-grid">
+    <div class="sec-eyebrow">// sobre mí</div>
 
-      <!-- IZQUIERDA -->
+    <!-- FILA SUPERIOR: texto + áreas -->
+    <div class="about-grid">
       <div class="about-left">
-        <div class="sec-eyebrow">// sobre mí</div>
         <h2 class="about-title">Construyo y securizo<br><span class="about-title-muted">infraestructura real.</span></h2>
         <div class="about-body">
           <p>Tengo base en <em>Administración de Sistemas (ASIR)</em> y estoy en transición activa hacia ciberseguridad defensiva. Mi enfoque no es el pentesting ni los CTFs como destino final — son herramientas de comprensión técnica.</p>
           <p>Lo que me interesa de verdad es <em>construir infraestructura que sea difícil de comprometer</em>: entornos Linux endurecidos, monitorización real con Wazuh y Grafana, pipelines de automatización que reduzcan ruido y mejoren la detección.</p>
           <p>Trabajo con laboratorios propios, VPS en producción y workflows reales con n8n + IA. <em>Todo está documentado aquí</em> — no como tutoriales, sino como análisis técnico razonado con criterio operativo.</p>
         </div>
-
-        <!-- CONTACTO -->
         <div class="about-contact">
           <div class="about-contact-row">
             <span class="about-contact-label">GitHub</span>
@@ -275,68 +273,74 @@ section: home
         </div>
       </div>
 
-      <!-- DERECHA -->
       <div class="about-right">
-
-        <!-- ÁREAS DE TRABAJO -->
-        <div class="about-block">
-          <div class="about-block-label">Áreas de trabajo</div>
-          {% assign areas = portfolio.areas | default: "" %}
-          <div class="about-area-row">
-            <div class="about-area-name">Sistemas</div>
-            <div class="about-pills"><span class="about-pill">Linux</span><span class="about-pill">Ubuntu Server</span><span class="about-pill">SSH</span><span class="about-pill">Bash</span><span class="about-pill">Networking</span></div>
-          </div>
-          <div class="about-area-row">
-            <div class="about-area-name">Infraestructura</div>
-            <div class="about-pills"><span class="about-pill">Docker</span><span class="about-pill">VPS</span><span class="about-pill">Traefik</span><span class="about-pill">Nginx</span></div>
-          </div>
-          <div class="about-area-row">
-            <div class="about-area-name">Defensiva</div>
-            <div class="about-pills"><span class="about-pill">Wazuh</span><span class="about-pill">Fail2ban</span><span class="about-pill">Suricata</span><span class="about-pill">UFW</span></div>
-          </div>
-          <div class="about-area-row">
-            <div class="about-area-name">Automatización</div>
-            <div class="about-pills"><span class="about-pill">n8n</span><span class="about-pill">Claude API</span><span class="about-pill">workflows IA</span></div>
-          </div>
-          <div class="about-area-row">
-            <div class="about-area-name">Monitorización</div>
-            <div class="about-pills"><span class="about-pill">Grafana</span><span class="about-pill">Splunk</span><span class="about-pill">Elastic</span></div>
-          </div>
+        <div class="about-block-label">Áreas de trabajo</div>
+        <div class="about-area-row">
+          <div class="about-area-name">Sistemas</div>
+          <div class="about-pills"><span class="about-pill">Linux</span><span class="about-pill">Ubuntu Server</span><span class="about-pill">SSH</span><span class="about-pill">Bash</span><span class="about-pill">Networking</span></div>
         </div>
+        <div class="about-area-row">
+          <div class="about-area-name">Infraestructura</div>
+          <div class="about-pills"><span class="about-pill">Docker</span><span class="about-pill">VPS</span><span class="about-pill">Traefik</span><span class="about-pill">Nginx</span></div>
+        </div>
+        <div class="about-area-row">
+          <div class="about-area-name">Defensiva</div>
+          <div class="about-pills"><span class="about-pill">Wazuh</span><span class="about-pill">Fail2ban</span><span class="about-pill">Suricata</span><span class="about-pill">UFW</span></div>
+        </div>
+        <div class="about-area-row">
+          <div class="about-area-name">Automatización</div>
+          <div class="about-pills"><span class="about-pill">n8n</span><span class="about-pill">Claude API</span><span class="about-pill">workflows IA</span></div>
+        </div>
+        <div class="about-area-row">
+          <div class="about-area-name">Monitorización</div>
+          <div class="about-pills"><span class="about-pill">Grafana</span><span class="about-pill">Splunk</span><span class="about-pill">Elastic</span></div>
+        </div>
+      </div>
+    </div>
 
-        <!-- CERTIFICACIONES -->
-        <div class="about-block">
-          <div class="about-block-label">Certificaciones</div>
+    <!-- SEPARADOR -->
+    <hr class="about-sep">
+
+    <!-- FILA INFERIOR: certificaciones + formación — ancho completo -->
+    <div class="about-bottom">
+
+      <!-- CERTIFICACIONES -->
+      <div class="about-bottom-block">
+        <div class="about-block-label">Certificaciones</div>
+        <div class="about-cert-strip">
           {% for cert in portfolio.certifications %}
-          <div class="about-cert-row">
-            <div>
-              <div class="about-cert-name">{{ cert.name }}</div>
-              <div class="about-cert-meta">{{ cert.org }}{% if cert.date %} · {{ cert.date }}{% endif %}</div>
-            </div>
-            <span class="about-badge {% if cert.status == 'obtained' %}about-badge-done{% elsif cert.status == 'in-progress' %}about-badge-wip{% else %}about-badge-next{% endif %}">
+          <div class="about-cert-cell">
+            <div class="about-cert-status {% if cert.status == 'obtained' %}about-cert-done{% elsif cert.status == 'in-progress' %}about-cert-wip{% else %}about-cert-next{% endif %}">
               {% if cert.status == 'obtained' %}obtenida{% elsif cert.status == 'in-progress' %}en curso{% else %}próximo{% endif %}
-            </span>
+            </div>
+            <div class="about-cert-name">{{ cert.name }}</div>
+            <div class="about-cert-meta">{{ cert.org }}{% if cert.date %} · {{ cert.date }}{% endif %}</div>
           </div>
           {% endfor %}
         </div>
-
-        <!-- FORMACIÓN TÉCNICA ACTIVA -->
-        {% if portfolio.complementary_training %}
-        <div class="about-block">
-          <div class="about-block-label">Stack operativo actual</div>
-          <div class="about-active-grid">
-            {% for course in portfolio.complementary_training %}
-            <div class="about-active-row">
-              <div class="about-active-dot {% if course.status == 'in-progress' %}about-active-dot-on{% endif %}"></div>
-              <span class="about-active-name">{{ course.name }}</span>
-              <span class="about-active-meta">{{ course.org }}{% if course.duration %} · {{ course.duration }}{% endif %}{% if course.date %} · {{ course.date }}{% endif %}</span>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-
       </div>
+
+      <!-- FORMACIÓN COMPLEMENTARIA -->
+      {% if portfolio.complementary_training %}
+      <div class="about-bottom-block">
+        <div class="about-block-label">Formación complementaria</div>
+        <table class="about-course-table">
+          {% for course in portfolio.complementary_training %}
+          <tr>
+            <td class="about-course-name">{{ course.name }}</td>
+            <td class="about-course-platform">{{ course.org }}</td>
+            <td class="about-course-duration">{% if course.duration %}{{ course.duration }}{% else %}—{% endif %}</td>
+            <td class="about-course-status">
+              <span class="about-badge {% if course.status == 'completed' %}about-badge-done{% elsif course.status == 'in-progress' %}about-badge-wip{% else %}about-badge-next{% endif %}">
+                {% if course.status == 'completed' %}completado{% elsif course.status == 'in-progress' %}en curso{% else %}pendiente{% endif %}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      {% endif %}
+
     </div>
   </div>
 </section>
