@@ -82,9 +82,9 @@ section: home
             <span class="hero-counter-num">{{ defensive_count }}</span>
             <span class="hero-counter-label">Defensiva</span>
           </button>
-          <button class="hero-counter-item" onclick="showSection('blog',document.getElementById('nav-blog'))">
+          <button class="hero-counter-item" onclick="showSection('infra',document.getElementById('nav-infra'))">
             <span class="hero-counter-num">{{ blog_count }}</span>
-            <span class="hero-counter-label">Blog</span>
+            <span class="hero-counter-label">Infra</span>
           </button>
         </div>
       </div>
@@ -146,6 +146,16 @@ section: home
       {% assign stack_items = portfolio.stack_activo %}
       {% for tool in stack_items %}
       <div class="home-stack-item">
+        <div class="home-stack-icon">
+          {% if tool.icon_type == "devicon" %}
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ tool.icon }}/{{ tool.icon }}-original.svg"
+               alt="{{ tool.name }}"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span style="display:none;font-size:20px">{{ tool.icon | default: "▪" }}</span>
+          {% else %}
+          <span style="font-size:22px">{{ tool.icon }}</span>
+          {% endif %}
+        </div>
         <div class="home-stack-name">{{ tool.name }}</div>
         <div class="home-stack-role">{{ tool.role | upcase }}</div>
       </div>
