@@ -87,41 +87,38 @@ section: home
 
   <hr class="section-sep">
 
-  <!-- STATS BAR -->
+  <!-- PUBLICACIONES TÉCNICAS (home preview) -->
   {% assign writeups_count = all_writeups | size %}
   {% assign defensive_count = all_defensive | size %}
   {% assign blog_count = all_blog | size %}
-  {% assign projects_posts = site.posts | where: "category", "project" %}
   {% assign projects_count = site.data.projects | size %}
-  <div class="stats-bar">
-    <div class="stat-item">
-      <span class="stat-num">{{ writeups_count }}</span>
-      <span class="stat-label">writeups</span>
-    </div>
-    <div class="stat-sep">·</div>
-    <div class="stat-item">
-      <span class="stat-num">{{ defensive_count }}</span>
-      <span class="stat-label">artículos defensivos</span>
-    </div>
-    <div class="stat-sep">·</div>
-    <div class="stat-item">
-      <span class="stat-num">{{ blog_count }}</span>
-      <span class="stat-label">posts técnicos</span>
-    </div>
-    <div class="stat-sep">·</div>
-    <div class="stat-item">
-      <span class="stat-num">{{ projects_count }}</span>
-      <span class="stat-label">proyectos</span>
-    </div>
-  </div>
-
-  <!-- PUBLICACIONES TÉCNICAS (home preview) -->
   <div class="sec">
     <div class="pub-header">
       <div>
         <div class="sec-eyebrow">// contenido técnico</div>
         <h2 class="sec-title">Publicaciones técnicas</h2>
         <p class="sec-sub" style="margin-bottom:0">Análisis, laboratorios y decisiones técnicas documentadas con criterio.</p>
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-num">{{ writeups_count }}</span>
+            <span class="stat-label">writeups</span>
+          </div>
+          <div class="stat-sep">·</div>
+          <div class="stat-item">
+            <span class="stat-num">{{ defensive_count }}</span>
+            <span class="stat-label">defensiva</span>
+          </div>
+          <div class="stat-sep">·</div>
+          <div class="stat-item">
+            <span class="stat-num">{{ blog_count }}</span>
+            <span class="stat-label">blog</span>
+          </div>
+          <div class="stat-sep">·</div>
+          <div class="stat-item">
+            <span class="stat-num">{{ projects_count }}</span>
+            <span class="stat-label">proyectos</span>
+          </div>
+        </div>
       </div>
       <div class="category-tabs">
         <span class="category-tab active" onclick="filterPubCategory('all',this)">Todo</span>
