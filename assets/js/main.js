@@ -68,11 +68,11 @@ function updateCounts() {
   var total = 0;
   platforms.forEach(function(p) {
     var count = document.querySelectorAll('.writeup-card[data-platform="' + p + '"]').length;
-    var el = document.getElementById('count-' + p);
+    var el = document.getElementById('tab-count-' + p);
     if (el) el.textContent = count;
     total += count;
   });
-  var totalEl = document.getElementById('count-total');
+  var totalEl = document.getElementById('tab-count-all');
   if (totalEl) totalEl.textContent = total;
   try {
     var saved = {};
@@ -89,9 +89,11 @@ function restoreCountsInSubpage() {
     var saved = JSON.parse(localStorage.getItem('writeup-counts') || 'null');
     if (!saved) return;
     ['dockerlabs','hackthebox','tryhackme','vulnyx'].forEach(function(p) {
-      var el = document.getElementById('count-' + p);
+      var el = document.getElementById('tab-count-' + p);
       if (el && saved[p] !== undefined) el.textContent = saved[p];
     });
+    var allEl = document.getElementById('tab-count-all');
+    if (allEl && saved['total'] !== undefined) allEl.textContent = saved['total'];
   } catch(e) {}
 }
 
