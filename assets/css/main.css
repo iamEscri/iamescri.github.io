@@ -422,11 +422,11 @@ img { max-width: 100%; }
   width: 76px;
   flex-shrink: 0;
 }
-.about-contact-link { font-size: 13px; color: var(--accent2); text-decoration: none; }
-.about-contact-val  { font-size: 13px; color: var(--text2); }
+.about-contact-link { font-size: 14px; color: var(--accent2); text-decoration: none; }
+.about-contact-val  { font-size: 14px; color: var(--text2); }
 .about-avail-row { display: flex; align-items: center; gap: 8px; padding-top: 16px; }
 .about-avail-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-.about-avail-text { font-family: var(--font-mono); font-size: 11px; color: var(--green); }
+.about-avail-text { font-family: var(--font-mono); font-size: 12px; color: var(--green); }
 
 /* ÁREAS — columna derecha */
 .about-right { padding-top: 4px; }
@@ -467,11 +467,11 @@ img { max-width: 100%; }
 .about-pills { display: flex; flex-wrap: wrap; gap: 5px; }
 .about-pill {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text2);
   border: 0.5px solid var(--border);
   border-radius: 2px;
-  padding: 3px 9px;
+  padding: 3px 10px;
   letter-spacing: .01em;
 }
 
@@ -513,7 +513,7 @@ img { max-width: 100%; }
 .about-cert-cell.cert-next::before     { background: rgba(255,255,255,.08); }
 .about-cert-status {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .05em;
   margin-bottom: 12px;
 }
@@ -521,7 +521,7 @@ img { max-width: 100%; }
 .about-cert-cell.cert-wip      .about-cert-status { color: var(--amber); }
 .about-cert-cell.cert-next     .about-cert-status { color: var(--text4); }
 .about-cert-name {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
   font-weight: 400;
   margin-bottom: 5px;
@@ -529,7 +529,7 @@ img { max-width: 100%; }
 }
 .about-cert-meta {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text4);
   line-height: 1.5;
 }
@@ -542,24 +542,34 @@ img { max-width: 100%; }
 .about-course-table tr { border-bottom: 0.5px solid var(--border); }
 .about-course-table tr:first-child { border-top: 0.5px solid var(--border); }
 .about-course-table tr:last-child { border-bottom: none; }
-.about-course-table td { padding: 12px 0; vertical-align: middle; }
+.about-course-table td { padding: 13px 0; vertical-align: middle; }
 .about-course-name {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text);
   font-weight: 400;
   line-height: 1.3;
   padding-right: 24px;
 }
+.about-course-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent2);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-right: 24px;
+  opacity: .7;
+}
+.about-course-link:hover { opacity: 1; }
 .about-course-platform {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text4);
   white-space: nowrap;
   padding-right: 24px;
 }
 .about-course-duration {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text4);
   white-space: nowrap;
   padding-right: 24px;
@@ -567,8 +577,8 @@ img { max-width: 100%; }
 .about-course-status { text-align: right; }
 .about-badge {
   font-family: var(--font-mono);
-  font-size: 10px;
-  padding: 2px 7px;
+  font-size: 11px;
+  padding: 2px 8px;
   border-radius: 2px;
   white-space: nowrap;
   border: 0.5px solid;
