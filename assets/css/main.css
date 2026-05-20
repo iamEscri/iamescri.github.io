@@ -1231,7 +1231,7 @@ img { max-width: 100%; }
 
 /* ===== CONTENT AREA (subpages) ===== */
 body.is-subpage .main-wrap { padding-top: var(--nav-h); }
-body.is-subpage .content { padding: 48px 125px; min-width: 900px; }
+body.is-subpage .content { padding: 48px 125px; }
 
 /* ===== RECENT SIDEBAR ITEMS ===== */
 .recent-item {
@@ -1259,7 +1259,7 @@ body.is-subpage .content { padding: 48px 125px; min-width: 900px; }
 /* ===== MOBILE ===== */
 .hamburger { display: none; }
 
-@media (max-width: 700px) {
+@media (max-width: 1100px) {
   .topnav-links { display: none; }
   .topnav { padding: 0 24px; }
   .hamburger {
@@ -1290,7 +1290,7 @@ body.is-subpage .content { padding: 48px 125px; min-width: 900px; }
   .post-sidebar { display: none; }
   .sec { padding: 60px 24px; }
   .section-sep { margin: 0 24px; }
-  body.is-subpage .content { padding: 36px 24px; }
+  body.is-subpage .content { padding: 36px 28px; }
   .about-active-meta { display: none; }
 }
 
