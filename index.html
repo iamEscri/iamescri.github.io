@@ -263,34 +263,19 @@ section: home
 
       <div class="about-right">
         <div class="about-block-label">Áreas de trabajo</div>
+        {% for area in portfolio.areas_trabajo %}
         <div class="about-area-row">
           <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Sistemas</div><div class="about-pills"><span class="about-pill">Linux</span><span class="about-pill">Ubuntu Server</span><span class="about-pill">SSH</span><span class="about-pill">Bash</span><span class="about-pill">Networking</span></div></div>
+          <div class="about-area-content">
+            <div class="about-area-name">{{ area.name }}</div>
+            <div class="about-pills">
+              {% for skill in area.skills %}
+              <span class="about-pill">{{ skill }}</span>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-        <div class="about-area-row">
-          <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Infraestructura</div><div class="about-pills"><span class="about-pill">Docker</span><span class="about-pill">VPS</span><span class="about-pill">Traefik</span><span class="about-pill">Nginx</span></div></div>
-        </div>
-        <div class="about-area-row">
-          <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Defensiva</div><div class="about-pills"><span class="about-pill">Wazuh</span><span class="about-pill">Fail2ban</span><span class="about-pill">Suricata</span><span class="about-pill">UFW</span></div></div>
-        </div>
-        <div class="about-area-row">
-          <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Automatización</div><div class="about-pills"><span class="about-pill">n8n</span><span class="about-pill">Claude API</span><span class="about-pill">workflows IA</span></div></div>
-        </div>
-        <div class="about-area-row">
-          <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Monitorización</div><div class="about-pills"><span class="about-pill">Grafana</span><span class="about-pill">Splunk</span><span class="about-pill">Elastic</span></div></div>
-        </div>
-        <div class="about-area-row">
-          <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Redes</div><div class="about-pills"><span class="about-pill">TCP/IP</span><span class="about-pill">DNS</span><span class="about-pill">VLANs</span><span class="about-pill">pfSense</span><span class="about-pill">Wireshark</span></div></div>
-        </div>
-        <div class="about-area-row">
-          <div class="about-area-accent"></div>
-          <div class="about-area-content"><div class="about-area-name">Virtualización</div><div class="about-pills"><span class="about-pill">Proxmox</span><span class="about-pill">VMware</span><span class="about-pill">KVM</span><span class="about-pill">LXC</span></div></div>
-        </div>
+        {% endfor %}
       </div>
     </div>
 
