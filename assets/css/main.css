@@ -17,10 +17,10 @@
   --text2:  #8b919e;
   --text3:  #545a66;
   --text4:  #363c47;
-  --accent: #5b6af0;
-  --accent2:#7c8af5;
-  --accent3:rgba(91,106,240,.1);
-  --accent4:rgba(91,106,240,.2);
+  --accent: #00e5a0;
+  --accent2:#00e5a0;
+  --accent3:rgba(0,229,160,.1);
+  --accent4:rgba(0,229,160,.2);
   --teal:   #0ea5a0;
   --amber:  #d97706;
   --green:  #16a34a;
@@ -452,10 +452,10 @@ img { max-width: 100%; }
   transition: background .18s;
 }
 .about-contact-row--static { cursor: default; }
-.about-contact-row:not(.about-contact-row--static):hover { background: rgba(99,102,241,.06); }
+.about-contact-row:not(.about-contact-row--static):hover { background: rgba(0,229,160,.06); }
 .about-contact-row:not(.about-contact-row--static):hover .about-contact-icon {
-  background: rgba(99,102,241,.12);
-  border-color: rgba(99,102,241,.3);
+  background: rgba(0,229,160,.12);
+  border-color: rgba(0,229,160,.3);
   color: var(--accent2);
 }
 .about-contact-row:not(.about-contact-row--static):hover .about-contact-arrow { opacity: 1; transform: translateX(3px); }
@@ -518,7 +518,7 @@ img { max-width: 100%; }
 .about-area-row:hover .about-area-accent { background: var(--accent2); }
 .about-area-row:hover .about-area-name { color: var(--accent2); }
 .about-area-row:hover .about-pill {
-  border-color: rgba(129,140,248,.25);
+  border-color: rgba(0,229,160,.25);
   color: var(--text);
 }
 .about-area-accent {
@@ -644,7 +644,7 @@ img { max-width: 100%; }
 .training-row:not(.training-row--static):hover { background: rgba(255,255,255,.03); }
 .training-row:not(.training-row--static):hover .training-name { color: var(--accent2); }
 .training-row:not(.training-row--static):hover .training-open {
-  border-color: rgba(129,140,248,.5);
+  border-color: rgba(0,229,160,.5);
   color: var(--accent2);
 }
 .training-name {
@@ -1664,7 +1664,7 @@ body.is-subpage .content { padding: 48px 125px; }
   display: inline-block;
 }
 .home-activity-row:hover .home-act-badge { opacity: .85; transform: translateY(-1px); }
-.badge-defensiva { background: rgba(91,106,240,.12); color: #818cf8; border: 1px solid rgba(91,106,240,.2); }
+.badge-defensiva { background: rgba(0,229,160,.08); color: #00e5a0; border: 1px solid rgba(0,229,160,.2); }
 .badge-infra     { background: rgba(14,165,160,.10); color: #2dd4bf; border: 1px solid rgba(14,165,160,.2); }
 .badge-auto      { background: rgba(245,158,11,.10); color: #fbbf24; border: 1px solid rgba(245,158,11,.18); }
 .badge-blog      { background: rgba(100,116,139,.10); color: #94a3b8; border: 1px solid rgba(100,116,139,.18); }
@@ -1752,7 +1752,7 @@ body.is-subpage .content { padding: 48px 125px; }
 
 /* Botones con micro-lift */
 .btn-primary { transition: background .15s, transform .15s, box-shadow .15s; }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(91,106,240,.35); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,229,160,.25); }
 .btn-ghost   { transition: color .15s, border-color .15s, transform .15s; }
 .btn-ghost:hover  { transform: translateY(-1px); }
 
