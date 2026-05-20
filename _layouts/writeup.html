@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <meta property="og:title" content="{{ page.title }} · {{ site.title }}">
 <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | default: site.description }}">
@@ -24,9 +25,9 @@
   <nav class="topnav">
     <div class="topnav-logo" onclick="window.location.href='{{ '/' | relative_url }}'">
       <div class="topnav-logo-mark">
-        <svg viewBox="0 0 15 15"><line x1="7.5" y1="1" x2="7.5" y2="14"/><line x1="1" y1="7.5" x2="14" y2="7.5"/><circle cx="7.5" cy="7.5" r="2.2" fill="white" stroke="none"/></svg>
+        <img src="/assets/logo.png" alt="iamEscri logo" style="width:50px;height:50px;object-fit:contain;">
       </div>
-      <span class="topnav-logo-text">iamEscri</span>
+      <span class="topnav-logo-text">iam<span class="logo-accent">Escri</span></span>
     </div>
     <div class="topnav-links">
       <span class="topnav-link" onclick="showSection('home',null)">Inicio</span>
