@@ -104,3 +104,46 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCounts();
   }
 });
+
+// ── Code block headers + copy button ─────────────────
+(function() {
+  var LANG_COLORS = {
+    bash:'#00e5a0',shell:'#00e5a0',sh:'#00e5a0',
+    python:'#7dd3fc',py:'#7dd3fc',
+    yaml:'#fde68a',yml:'#fde68a',json:'#fde68a',
+    ini:'#c084fc',conf:'#c084fc',config:'#c084fc',
+    javascript:'#f59e0b',js:'#f59e0b',
+    html:'#f87171',xml:'#f87171',
+    sql:'#818cf8',ruby:'#f87171',
+    text:'rgba(255,255,255,.3)',plaintext:'rgba(255,255,255,.3)'
+  };
+  function init() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      if (block.querySelector('.code-block-header')) return;
+      var lang = '';
+      var m = block.className.match(/language-(\w+)/);
+      if (m) lang = m[1].toLowerCase();
+      if (!lang) {
+        var ic = block.querySelector('code');
+        if (ic) { var m2 = ic.className.match(/language-(\w+)/); if (m2) lang = m2[1].toLowerCase(); }
+      }
+      var color = LANG_COLORS[lang] || 'rgba(255,255,255,.3)';
+      var hdr = document.createElement('div');
+      hdr.className = 'code-block-header';
+      hdr.innerHTML = '<div class="code-block-lang"><span class="code-block-lang-dot" style="background:'+color+'"></span>'+(lang||'code')+'</div><button class="code-copy-btn">copiar</button>';
+      block.insertBefore(hdr, block.firstChild);
+      hdr.querySelector('.code-copy-btn').addEventListener('click', function() {
+        var pre = block.querySelector('pre');
+        if (!pre) return;
+        navigator.clipboard.writeText(pre.innerText).then(function() {
+          var btn = hdr.querySelector('.code-copy-btn');
+          btn.textContent = '✓ copiado';
+          btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='copiar'; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+    });
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
+})();
