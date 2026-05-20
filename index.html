@@ -224,17 +224,28 @@ section: home
           <p>Trabajo con laboratorios propios, VPS en producción y workflows reales con n8n + IA. <em>Todo está documentado aquí</em> — no como tutoriales, sino como análisis técnico razonado con criterio operativo.</p>
         </div>
         <div class="about-contact">
-          <div class="about-contact-row">
-            <span class="about-contact-label">GitHub</span>
-            <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="about-contact-link">@iamEscri</a>
-          </div>
-          <div class="about-contact-row">
-            <span class="about-contact-label">LinkedIn</span>
-            <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="about-contact-link">álvaro escribano</a>
-          </div>
-          <div class="about-contact-row">
-            <span class="about-contact-label">Email</span>
-            <span class="about-contact-val">{{ site.email }}</span>
+          <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="about-contact-row">
+            <div class="about-contact-icon"><i class="ti ti-brand-github"></i></div>
+            <div class="about-contact-body">
+              <div class="about-contact-label">GitHub</div>
+              <span class="about-contact-link">@iamEscri</span>
+            </div>
+            <span class="about-contact-arrow">↗</span>
+          </a>
+          <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="about-contact-row">
+            <div class="about-contact-icon"><i class="ti ti-brand-linkedin"></i></div>
+            <div class="about-contact-body">
+              <div class="about-contact-label">LinkedIn</div>
+              <span class="about-contact-link">Álvaro Escribano</span>
+            </div>
+            <span class="about-contact-arrow">↗</span>
+          </a>
+          <div class="about-contact-row about-contact-row--static">
+            <div class="about-contact-icon"><i class="ti ti-mail"></i></div>
+            <div class="about-contact-body">
+              <div class="about-contact-label">Email</div>
+              <span class="about-contact-val">{{ site.email }}</span>
+            </div>
           </div>
           <div class="about-avail-row">
             <div class="about-avail-dot"></div>
