@@ -317,12 +317,14 @@ section: home
           <div class="training-row training-row--static">
           {% endif %}
             <div class="training-name">{{ course.name }}</div>
-            <div class="training-org">{{ course.org }}</div>
-            <div class="training-dur">{% if course.duration %}{{ course.duration }}{% else %}—{% endif %}</div>
+            <div class="training-meta">
+              <span class="training-org">{{ course.org }}</span>
+              {% if course.duration %}<span class="training-dur">{{ course.duration }}</span>{% endif %}
+            </div>
             <span class="training-badge {% if course.status == 'completed' %}badge-done{% elsif course.status == 'in-progress' %}badge-wip{% else %}badge-next{% endif %}">
               {% if course.status == 'completed' %}completado{% elsif course.status == 'in-progress' %}en curso{% else %}pendiente{% endif %}
             </span>
-            <span class="training-arrow">↗</span>
+            {% if course.url %}<span class="training-open">Abrir curso ↗</span>{% endif %}
           {% if course.url %}
           </a>
           {% else %}
