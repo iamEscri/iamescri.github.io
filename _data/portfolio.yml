@@ -153,6 +153,48 @@ roadmap:
  
 
 
+# --- ÁREAS DE TRABAJO (sección Sobre mí) ---
+# Añade, quita o reordena áreas libremente.
+# Cada área tiene un nombre y una lista de skills/herramientas.
+
+areas_trabajo:
+  - name: "Sistemas"
+    skills: [Linux, "Ubuntu Server", SSH, Bash, Networking]
+  - name: "Infraestructura"
+    skills: [Docker, VPS, Traefik, Nginx]
+  - name: "Defensiva"
+    skills: [Wazuh, Fail2ban, Suricata, UFW]
+  - name: "Automatización"
+    skills: [n8n, "Claude API", "workflows IA"]
+  - name: "Monitorización"
+    skills: [Grafana, Splunk, Elastic]
+  - name: "Redes"
+    skills: ["TCP/IP", DNS, VLANs, pfSense, Wireshark]
+  - name: "Virtualización"
+    skills: [Proxmox, VMware, KVM, LXC]
+
+
+# --- ÁREAS DE TRABAJO (sección Sobre mí) ---
+# Añade, quita o reordena áreas libremente.
+# Cada área tiene un nombre y una lista de skills/herramientas.
+
+areas_trabajo:
+  - name: "Sistemas"
+    skills: [Linux, "Ubuntu Server", SSH, Bash, Networking]
+  - name: "Infraestructura"
+    skills: [Docker, VPS, Traefik, Nginx]
+  - name: "Defensiva"
+    skills: [Wazuh, Fail2ban, Suricata, UFW]
+  - name: "Automatización"
+    skills: [n8n, "Claude API", "workflows IA"]
+  - name: "Monitorización"
+    skills: [Grafana, Splunk, Elastic]
+  - name: "Redes"
+    skills: ["TCP/IP", DNS, VLANs, pfSense, Wireshark]
+  - name: "Virtualización"
+    skills: [Proxmox, VMware, KVM, LXC]
+
+
 # --- SKILLS (página Portfolio) ---
 
 skills:
