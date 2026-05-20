@@ -36,7 +36,7 @@
       <span class="topnav-link {% if page.category == 'defensive' %}active{% endif %}" onclick="showSection('defensive',null)">Defensiva</span>
       <span class="topnav-link {% if page.category == 'infra' %}active{% endif %}" onclick="showSection('infra',null)">Infraestructura</span>
       <span class="topnav-link {% if page.category == 'auto' %}active{% endif %}" onclick="showSection('auto',null)">Automatización</span>
-      <span class="topnav-link {% if page.category == 'writeup' %}active{% endif %}" onclick="showSection('writeups',null)">Laboratorio</span>
+      <span class="topnav-link {% if page.category == 'writeup' %}active{% endif %}" onclick="showSection('writeups',null)">Writeups</span>
       <span class="topnav-link" onclick="showSection('projects',null)">Proyectos</span>
     </div>
     <div class="topnav-right">
@@ -56,7 +56,7 @@
       {% assign back_label = 'Automatización' %}
     {% elsif page.category == 'writeup' %}
       {% assign back_section = 'writeups' %}
-      {% assign back_label = 'Laboratorio' %}
+      {% assign back_label = 'Writeups' %}
     {% else %}
       {% assign back_section = 'home' %}
       {% assign back_label = 'Inicio' %}
