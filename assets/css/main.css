@@ -935,13 +935,34 @@ img { max-width: 100%; }
   border-radius: var(--radius-lg);
   padding: 22px;
   cursor: pointer;
-  transition: border-color .2s;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
 }
-.blog-card:hover { border-color: var(--border2); }
+.blog-card:hover {
+  border-color: var(--accent2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.2);
+}
+.blog-card:hover .blog-card-title { color: var(--accent2); }
+.blog-card:hover .blog-card-tag { border-color: rgba(0,229,160,.25); color: rgba(255,255,255,.8); }
+.blog-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.blog-card-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  transition: border-color .15s, color .15s;
+}
 .blog-card-num {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -972,6 +993,7 @@ img { max-width: 100%; }
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text3);
+  margin-top: auto;
 }
 
 /* ===== WRITEUP CARDS ===== */
@@ -1227,7 +1249,8 @@ img { max-width: 100%; }
 .related-item-title { font-size: 13px; color: var(--text); font-weight: 400; }
 .related-item-date  { font-size: 11px; color: var(--text4); font-family: var(--font-mono); }
 .sidebar-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { font-size: 11px; font-family: var(--font-mono); color: var(--text3); background: var(--bg3); border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px; }
+.tag { font-size: 11px; font-family: var(--font-mono); color: var(--text3); background: var(--bg3); border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px; transition: border-color .15s, color .15s, background .15s; cursor: default; }
+.tag:hover { border-color: var(--accent2); color: var(--accent2); background: rgba(0,229,160,.06); }
 
 /* ===== CONTENT AREA (subpages) ===== */
 body.is-subpage .main-wrap { padding-top: var(--nav-h); }
