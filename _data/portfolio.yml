@@ -52,18 +52,34 @@ en_desarrollo:
   - name: "VulnSOC Assistant"
     icon: "🤖"
     sub: "TFM · IA para análisis de vulnerabilidades en SOC"
+    category: "Defensiva"
+    year: "2025 — TFM"
+    desc: "TFM en curso. Asistente para análisis y priorización de vulnerabilidades en SOC, con razonamiento por LLM sobre contexto de host, red y CVE."
+    stack: [Python, "Claude API", Wazuh, FastAPI]
     status: "in-progress"
   - name: "Pipeline Wazuh + n8n"
     icon: "⚙️"
     sub: "Triaje automático de alertas con Claude API"
-    status: "in-progress"
+    category: "Automatización"
+    year: "2025"
+    desc: "Triaje automático de alertas Wazuh con enriquecimiento contextual vía Claude y rutado a respuesta (notificación, bloqueo, ticket)."
+    stack: [Wazuh, n8n, Docker, Traefik]
+    status: "active"
   - name: "Homelab defensivo"
     icon: "🛡️"
     sub: "Grafana · Docker · detección y monitorización"
-    status: "in-progress"
+    category: "Infraestructura"
+    year: "2024"
+    desc: "Laboratorio personal con Docker, Grafana, Loki y Wazuh. Hardening progresivo de hosts Linux y monitorización de telemetría real."
+    stack: [Linux, Docker, Grafana, Loki]
+    status: "active"
   - name: "Máster Ciberseguridad"
     icon: "🎓"
     sub: "ENNIT · Blue Team · análisis forense"
+    category: "Formación"
+    year: "2024 — 2026"
+    desc: "ENNIT · Blue Team y análisis forense. Material y laboratorios documentados en abierto a medida que avanzan los módulos."
+    stack: ["Blue Team", DFIR, OSINT]
     status: "in-progress"
 
 
@@ -72,14 +88,26 @@ en_desarrollo:
 # Añade o quita herramientas libremente.
 
 stack_activo:
-  - "Elastic SIEM"
-  - "Splunk"
-  - "Automatización"
-  - "Nmap"
-  - "Linux"
-  - "Docker"
-  - "Bash"
-  - "Hardening"
+  - name: "Linux"
+    role: "host"
+  - name: "Docker"
+    role: "runtime"
+  - name: "Wazuh"
+    role: "SIEM"
+  - name: "Grafana"
+    role: "observability"
+  - name: "Loki"
+    role: "logs"
+  - name: "n8n"
+    role: "automation"
+  - name: "Fail2ban"
+    role: "hardening"
+  - name: "Traefik"
+    role: "ingress"
+  - name: "Claude API"
+    role: "LLM"
+  - name: "Proxmox"
+    role: "hypervisor"
 
 
 # --- ROADMAP DE CERTIFICACIONES (tercera columna inferior) ---
