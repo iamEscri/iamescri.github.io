@@ -118,24 +118,35 @@ document.addEventListener('DOMContentLoaded', function() {
     text:'rgba(255,255,255,.3)',plaintext:'rgba(255,255,255,.3)'
   };
   function init() {
-    document.querySelectorAll('.highlight').forEach(function(block) {
-      if (block.querySelector('.code-block-header')) return;
+    // Rouge wraps: <div class="language-XXX highlighter-rouge"><div class="highlight">...
+    // So we target the outer wrapper, not .highlight directly
+    document.querySelectorAll('.highlighter-rouge').forEach(function(wrapper) {
+      if (wrapper.querySelector('.code-block-header')) return;
+      // Get language from outer wrapper class
       var lang = '';
-      var m = block.className.match(/language-(\w+)/);
+      var m = wrapper.className.match(/language-(\w+)/);
       if (m) lang = m[1].toLowerCase();
-      if (!lang) {
-        var ic = block.querySelector('code');
-        if (ic) { var m2 = ic.className.match(/language-(\w+)/); if (m2) lang = m2[1].toLowerCase(); }
-      }
+      // Skip inline code (no pre inside)
+      var pre = wrapper.querySelector('pre');
+      if (!pre) return;
       var color = LANG_COLORS[lang] || 'rgba(255,255,255,.3)';
+      var display = lang || 'code';
+      // Build header
       var hdr = document.createElement('div');
       hdr.className = 'code-block-header';
-      hdr.innerHTML = '<div class="code-block-lang"><span class="code-block-lang-dot" style="background:'+color+'"></span>'+(lang||'code')+'</div><button class="code-copy-btn">copiar</button>';
-      block.insertBefore(hdr, block.firstChild);
+      hdr.innerHTML =
+        '<div class="code-block-lang">' +
+          '<span class="code-block-lang-dot" style="background:'+color+'"></span>' +
+          display +
+        '</div>' +
+        '<button class="code-copy-btn">copiar</button>';
+      // Insert before .highlight div inside wrapper
+      var highlight = wrapper.querySelector('.highlight');
+      wrapper.insertBefore(hdr, highlight || wrapper.firstChild);
+      // Copy button
       hdr.querySelector('.code-copy-btn').addEventListener('click', function() {
-        var pre = block.querySelector('pre');
-        if (!pre) return;
-        navigator.clipboard.writeText(pre.innerText).then(function() {
+        var text = pre.innerText;
+        navigator.clipboard.writeText(text).then(function() {
           var btn = hdr.querySelector('.code-copy-btn');
           btn.textContent = '✓ copiado';
           btn.classList.add('copied');
