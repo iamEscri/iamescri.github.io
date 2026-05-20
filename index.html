@@ -285,11 +285,15 @@ section: home
     <!-- FILA INFERIOR: certificaciones + formación — ancho completo -->
     <div class="about-bottom">
 
-      <!-- CERTIFICACIONES -->
+      <!-- CERTIFICACIONES — ordenadas: obtained > in-progress > next -->
       <div class="about-bottom-block">
         <div class="about-block-label">Certificaciones</div>
         <div class="about-cert-strip">
-          {% for cert in portfolio.certifications %}
+          {% assign certs_obtained = portfolio.certifications | where: "status", "obtained" %}
+          {% assign certs_wip      = portfolio.certifications | where: "status", "in-progress" %}
+          {% assign certs_next     = portfolio.certifications | where: "status", "next" %}
+          {% assign certs_ordered  = certs_obtained | concat: certs_wip | concat: certs_next %}
+          {% for cert in certs_ordered %}
           <div class="about-cert-cell {% if cert.status == 'obtained' %}cert-obtained{% elsif cert.status == 'in-progress' %}cert-wip{% else %}cert-next{% endif %}">
             <div class="about-cert-status">
               {% if cert.status == 'obtained' %}obtenida{% elsif cert.status == 'in-progress' %}en curso{% else %}próximo{% endif %}
@@ -301,25 +305,31 @@ section: home
         </div>
       </div>
 
-      <!-- FORMACIÓN COMPLEMENTARIA -->
+      <!-- FORMACIÓN COMPLEMENTARIA — lista con hover -->
       {% if portfolio.complementary_training %}
       <div class="about-bottom-block">
         <div class="about-block-label">Formación complementaria</div>
-        <table class="about-course-table">
+        <div class="training-list">
           {% for course in portfolio.complementary_training %}
-          <tr>
-            <td class="about-course-name">{{ course.name }}</td>
-            <td>{% if course.url %}<a href="{{ course.url }}" target="_blank" rel="noopener" class="about-course-link">Ver curso →</a>{% endif %}</td>
-            <td class="about-course-platform">{{ course.org }}</td>
-            <td class="about-course-duration">{% if course.duration %}{{ course.duration }}{% else %}—{% endif %}</td>
-            <td class="about-course-status">
-              <span class="about-badge {% if course.status == 'completed' %}about-badge-done{% elsif course.status == 'in-progress' %}about-badge-wip{% else %}about-badge-next{% endif %}">
-                {% if course.status == 'completed' %}completado{% elsif course.status == 'in-progress' %}en curso{% else %}pendiente{% endif %}
-              </span>
-            </td>
-          </tr>
+          {% if course.url %}
+          <a href="{{ course.url }}" target="_blank" rel="noopener" class="training-row">
+          {% else %}
+          <div class="training-row training-row--static">
+          {% endif %}
+            <div class="training-name">{{ course.name }}</div>
+            <div class="training-org">{{ course.org }}</div>
+            <div class="training-dur">{% if course.duration %}{{ course.duration }}{% else %}—{% endif %}</div>
+            <span class="training-badge {% if course.status == 'completed' %}badge-done{% elsif course.status == 'in-progress' %}badge-wip{% else %}badge-next{% endif %}">
+              {% if course.status == 'completed' %}completado{% elsif course.status == 'in-progress' %}en curso{% else %}pendiente{% endif %}
+            </span>
+            <span class="training-arrow">↗</span>
+          {% if course.url %}
+          </a>
+          {% else %}
+          </div>
+          {% endif %}
           {% endfor %}
-        </table>
+        </div>
       </div>
       {% endif %}
 
