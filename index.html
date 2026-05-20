@@ -353,9 +353,11 @@ section: home
         <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
         <div class="blog-card-title">{{ post.title }}</div>
         <div class="blog-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="blog-card-tags">
+          {% for tag in post.tags limit:4 %}<span class="blog-card-tag">#{{ tag }}</span>{% endfor %}
+        </div>
         <div class="blog-card-footer">
           <span>{{ post.date | date: "%d %b %Y" }}</span>
-          <span>{{ post.tags | first }}</span>
         </div>
       </a>
       {% endfor %}
@@ -378,9 +380,11 @@ section: home
         <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
         <div class="blog-card-title">{{ post.title }}</div>
         <div class="blog-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="blog-card-tags">
+          {% for tag in post.tags limit:4 %}<span class="blog-card-tag">#{{ tag }}</span>{% endfor %}
+        </div>
         <div class="blog-card-footer">
           <span>{{ post.date | date: "%d %b %Y" }}</span>
-          <span>{{ post.tags | first }}</span>
         </div>
       </a>
       {% endfor %}
@@ -403,9 +407,11 @@ section: home
         <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
         <div class="blog-card-title">{{ post.title }}</div>
         <div class="blog-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
+        <div class="blog-card-tags">
+          {% for tag in post.tags limit:4 %}<span class="blog-card-tag">#{{ tag }}</span>{% endfor %}
+        </div>
         <div class="blog-card-footer">
           <span>{{ post.date | date: "%d %b %Y" }}</span>
-          <span>{{ post.tags | first }}</span>
         </div>
       </a>
       {% endfor %}
