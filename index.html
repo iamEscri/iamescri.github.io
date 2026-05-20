@@ -16,6 +16,11 @@ section: home
      ==================================================== -->
 <section class="section active" id="section-home">
 
+  {% assign writeups_count = all_writeups | size %}
+  {% assign defensive_count = all_defensive | size %}
+  {% assign blog_count = all_blog | size %}
+  {% assign projects_count = site.data.projects | size %}
+
   <!-- HERO -->
   <div class="hero">
     <div class="hero-left">
@@ -62,24 +67,25 @@ section: home
         </div>
       </div>
 
-      <!-- STACK ACTIVO -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">
-            <div class="panel-title-dot" style="background:#5b6af0"></div>
-            Stack activo
-          </div>
-          <span class="panel-meta">2026</span>
-        </div>
-        <div class="stack-grid">
-          <div class="stack-item"><span class="stack-item-icon">🐧</span><span class="stack-item-name">Linux</span></div>
-          <div class="stack-item"><span class="stack-item-icon">🐳</span><span class="stack-item-name">Docker</span></div>
-          <div class="stack-item"><span class="stack-item-icon">🛡️</span><span class="stack-item-name">Wazuh</span></div>
-          <div class="stack-item"><span class="stack-item-icon">📊</span><span class="stack-item-name">Grafana</span></div>
-          <div class="stack-item"><span class="stack-item-icon">⚙️</span><span class="stack-item-name">n8n</span></div>
-          <div class="stack-item"><span class="stack-item-icon">🔐</span><span class="stack-item-name">Fail2ban</span></div>
-          <div class="stack-item"><span class="stack-item-icon">🤖</span><span class="stack-item-name">Claude API</span></div>
-          <div class="stack-item"><span class="stack-item-icon">🔀</span><span class="stack-item-name">Traefik</span></div>
+      <!-- CONTADORES DE SECCIONES -->
+      <div class="panel hero-counters-panel">
+        <div class="hero-counters-grid">
+          <button class="hero-counter-item" onclick="showSection('writeups',document.getElementById('nav-writeups'))">
+            <span class="hero-counter-num">{{ writeups_count }}</span>
+            <span class="hero-counter-label">Laboratorio</span>
+          </button>
+          <button class="hero-counter-item" onclick="showSection('projects',document.getElementById('nav-projects'))">
+            <span class="hero-counter-num">{{ projects_count }}</span>
+            <span class="hero-counter-label">Proyectos</span>
+          </button>
+          <button class="hero-counter-item" onclick="showSection('defensive',document.getElementById('nav-defensive'))">
+            <span class="hero-counter-num">{{ defensive_count }}</span>
+            <span class="hero-counter-label">Defensiva</span>
+          </button>
+          <button class="hero-counter-item" onclick="showSection('blog',document.getElementById('nav-blog'))">
+            <span class="hero-counter-num">{{ blog_count }}</span>
+            <span class="hero-counter-label">Blog</span>
+          </button>
         </div>
       </div>
     </div>
@@ -87,151 +93,93 @@ section: home
 
   <hr class="section-sep">
 
-  <!-- PUBLICACIONES TÉCNICAS (home preview) -->
-  {% assign writeups_count = all_writeups | size %}
-  {% assign defensive_count = all_defensive | size %}
-  {% assign blog_count = all_blog | size %}
-  {% assign projects_count = site.data.projects | size %}
+  <!-- 01 PROYECTOS ACTIVOS -->
   <div class="sec">
-    <div class="pub-header">
-      <div>
-        <div class="sec-eyebrow">// contenido técnico</div>
-        <h2 class="sec-title">Publicaciones técnicas</h2>
-        <p class="sec-sub" style="margin-bottom:0">Análisis, laboratorios y decisiones técnicas documentadas con criterio.</p>
-        <div class="stats-bar">
-          <div class="stat-item">
-            <span class="stat-num">{{ writeups_count }}</span>
-            <span class="stat-label">writeups</span>
-          </div>
-          <div class="stat-sep">·</div>
-          <div class="stat-item">
-            <span class="stat-num">{{ defensive_count }}</span>
-            <span class="stat-label">defensiva</span>
-          </div>
-          <div class="stat-sep">·</div>
-          <div class="stat-item">
-            <span class="stat-num">{{ blog_count }}</span>
-            <span class="stat-label">blog</span>
-          </div>
-          <div class="stat-sep">·</div>
-          <div class="stat-item">
-            <span class="stat-num">{{ projects_count }}</span>
-            <span class="stat-label">proyectos</span>
-          </div>
-        </div>
-      </div>
-      <div class="category-tabs">
-        <span class="category-tab active" onclick="filterPubCategory('all',this)">Todo</span>
-        <span class="category-tab" onclick="filterPubCategory('defensiva',this)">Defensiva</span>
-        <span class="category-tab" onclick="filterPubCategory('infra',this)">Infra</span>
-        <span class="category-tab" onclick="filterPubCategory('auto',this)">Automatización</span>
-        <span class="category-tab" onclick="filterPubCategory('lab',this)">Lab</span>
+    <div class="home-section-header">
+      <div class="home-section-num">01</div>
+      <h2 class="home-section-title">Proyectos activos</h2>
+      <div class="home-section-meta">
+        <span class="home-section-count">{{ portfolio.en_desarrollo | size }} items</span>
+        <button class="home-section-link" onclick="showSection('projects',document.getElementById('nav-projects'))">Todos →</button>
       </div>
     </div>
-
-    <div class="cards-grid">
-      {% assign pub_posts = all_defensive | concat: all_blog | sort: "date" | reverse %}
-      {% assign featured = pub_posts | first %}
-      {% if featured %}
-      <a href="{{ featured.url | relative_url }}" class="pub-card pub-card-wide pub-card-featured" data-category="{{ featured.blog_category | default: 'defensiva' }}">
-        <span class="pub-tag tag-{{ featured.blog_category | default: 'defensiva' }}">
-          {% if featured.category == 'defensive' %}Seg. Defensiva{% else %}{{ featured.blog_category | default: 'Blog' }}{% endif %}
-        </span>
-        <div class="pub-card-title">{{ featured.title }}</div>
-        <div class="pub-card-desc">{{ featured.description | default: featured.excerpt | strip_html | truncate: 200 }}</div>
-        <div class="pub-card-meta">
-          {% for tag in featured.tags limit:5 %}
-          <span class="pub-meta-tag">{{ tag }}</span>
-          {% endfor %}
+    <div class="home-projects-grid">
+      {% for project in portfolio.en_desarrollo %}
+      <div class="home-project-card">
+        <div class="home-project-card-inner">
+          <div class="home-project-top">
+            <span class="home-project-cat">{{ project.category | upcase }}</span>
+            <span class="home-project-year">{{ project.year }}</span>
+          </div>
+          <div class="home-project-name">{{ project.name }}</div>
+          <div class="home-project-desc">{{ project.desc }}</div>
+          <div class="home-project-tags">
+            {% for tech in project.stack limit:4 %}
+            <span class="home-project-tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          <div class="home-project-footer">
+            {% if project.status == "active" %}
+            <span class="home-project-status status-active"><span class="status-dot dot-green"></span>activo</span>
+            {% elsif project.status == "in-progress" %}
+            <span class="home-project-status status-wip"><span class="status-dot dot-amber"></span>en desarrollo</span>
+            {% else %}
+            <span class="home-project-status status-course"><span class="status-dot" style="background:var(--text4)"></span>en curso</span>
+            {% endif %}
+          </div>
         </div>
-        <div class="pub-card-footer">
-          <span class="pub-card-date">{{ featured.date | date: "%b %Y" }}</span>
-          <span class="pub-card-link">Leer →</span>
-        </div>
-      </a>
-      {% endif %}
-
-      {% assign rest_posts = pub_posts | offset: 1 %}
-      {% for post in rest_posts limit:5 %}
-      {% assign tag_class = "tag-defensiva" %}
-      {% if post.category == 'blog' %}{% assign tag_class = "tag-infra" %}{% endif %}
-      <a href="{{ post.url | relative_url }}" class="pub-card" data-category="{{ post.blog_category | default: 'defensiva' }}">
-        <span class="pub-tag {{ tag_class }}">
-          {% if post.category == 'defensive' %}Seg. Defensiva{% else %}{{ post.blog_category | default: 'Blog' | capitalize }}{% endif %}
-        </span>
-        <div class="pub-card-title">{{ post.title }}</div>
-        <div class="pub-card-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</div>
-        <div class="pub-card-meta">
-          {% for tag in post.tags limit:3 %}
-          <span class="pub-meta-tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-        <div class="pub-card-footer">
-          <span class="pub-card-date">{{ post.date | date: "%b %Y" }}</span>
-          <span class="pub-card-link">Leer →</span>
-        </div>
-      </a>
+      </div>
       {% endfor %}
     </div>
   </div>
 
   <hr class="section-sep">
 
-  <!-- ACTIVIDAD RECIENTE -->
+  <!-- 02 STACK ACTIVO -->
   <div class="sec">
-    <div class="sec-eyebrow">// actividad</div>
-    <h2 class="sec-title" style="margin-bottom:36px">Actividad reciente</h2>
-    <div class="activity-grid">
-      <div class="activity-panel">
-        <div class="activity-panel-header">
-          <div class="activity-panel-title">
-            <div class="panel-title-dot" style="background:#5b6af0"></div>
-            Publicaciones y laboratorio
-          </div>
-          <span class="panel-meta">últimas entradas</span>
-        </div>
-        <div class="activity-list">
-          {% assign act_icons = "📝,🐳,⚙️,🔐" | split: "," %}
-          {% assign act_icon_classes = "icon-blue,icon-teal,icon-purple,icon-amber" | split: "," %}
-          {% for post in recent_all limit:4 %}
-          <div class="activity-item">
-            <div class="activity-icon {{ act_icon_classes[forloop.index0] }}">{{ act_icons[forloop.index0] }}</div>
-            <div class="activity-body">
-              <div class="activity-title">{{ post.title | truncate: 50 }}</div>
-              <div class="activity-desc">
-                {% if post.category == 'defensive' %}Seg. Defensiva{% elsif post.category == 'blog' %}Blog{% elsif post.category == 'writeup' %}Writeup{% else %}{{ post.category }}{% endif %}
-                {% if post.tags.first %} · {{ post.tags | first }}{% endif %}
-              </div>
-            </div>
-            <div class="activity-time">{{ post.date | date: "%d %b" }}</div>
-          </div>
-          {% endfor %}
-        </div>
+    <div class="home-section-header">
+      <div class="home-section-num">02</div>
+      <h2 class="home-section-title">Stack activo</h2>
+      <span class="home-section-count">2026</span>
+    </div>
+    <div class="home-stack-grid">
+      {% assign stack_items = portfolio.stack_activo %}
+      {% for tool in stack_items %}
+      <div class="home-stack-item">
+        <div class="home-stack-name">{{ tool.name }}</div>
+        <div class="home-stack-role">{{ tool.role | upcase }}</div>
       </div>
+      {% endfor %}
+    </div>
+  </div>
 
-      <div class="activity-panel">
-        <div class="activity-panel-header">
-          <div class="activity-panel-title">
-            <div class="panel-title-dot" style="background:#0ea5a0"></div>
-            Commits — GitHub
-          </div>
+  <hr class="section-sep">
+
+  <!-- 03 ACTIVIDAD RECIENTE -->
+  <div class="sec">
+    <div class="home-section-header">
+      <div class="home-section-num">03</div>
+      <h2 class="home-section-title">Actividad reciente</h2>
+      <span class="home-section-count">últimas entradas</span>
+    </div>
+    <div class="home-activity-list">
+      {% for post in recent_all limit:5 %}
+      <a href="{{ post.url | relative_url }}" class="home-activity-row">
+        <div class="home-activity-date">{{ post.date | date: "%Y-%m-%d" }}</div>
+        <div class="home-activity-cat">
+          {% if post.category == 'defensive' %}<span class="home-act-badge badge-defensiva">DEFENSIVA</span>
+          {% elsif post.category == 'blog' %}<span class="home-act-badge badge-blog">BLOG</span>
+          {% elsif post.category == 'writeup' %}<span class="home-act-badge badge-writeup">LAB</span>
+          {% else %}<span class="home-act-badge badge-project">PROYECTO</span>{% endif %}
         </div>
-        <div class="activity-list">
-          {% for post in recent_all limit:4 %}
-          <div class="activity-item">
-            <div class="activity-git-label">git</div>
-            <div class="activity-body">
-              <div class="activity-title" style="font-family:var(--font-mono);font-size:12px">
-                {% if post.category == 'defensive' or post.category == 'blog' %}docs:{% elsif post.category == 'writeup' %}docs:{% else %}feat:{% endif %}
-                {{ post.title | downcase | truncate: 40 | remove: ":" }}
-              </div>
-              <div class="activity-repo">iamEscri/iamescri.github.io</div>
-            </div>
-            <div class="activity-time">{{ post.date | date: "%d %b" }}</div>
-          </div>
-          {% endfor %}
+        <div class="home-activity-title">{{ post.title }}</div>
+        <div class="home-activity-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</div>
+        <div class="home-activity-tags">
+          {% for tag in post.tags limit:3 %}<span class="home-activity-tag">#{{ tag }}</span>{% endfor %}
         </div>
-      </div>
+        <div class="home-activity-arrow">→</div>
+      </a>
+      {% endfor %}
     </div>
   </div>
 
