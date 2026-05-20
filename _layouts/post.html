@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <meta property="og:title" content="{{ page.title }} · {{ site.title }}">
 <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | default: site.description }}">
@@ -25,16 +26,16 @@
   <nav class="topnav">
     <div class="topnav-logo" onclick="window.location.href='{{ '/' | relative_url }}'">
       <div class="topnav-logo-mark">
-        <svg viewBox="0 0 15 15"><line x1="7.5" y1="1" x2="7.5" y2="14"/><line x1="1" y1="7.5" x2="14" y2="7.5"/><circle cx="7.5" cy="7.5" r="2.2" fill="white" stroke="none"/></svg>
+        <img src="/assets/logo.png" alt="iamEscri logo" style="width:50px;height:50px;object-fit:contain;">
       </div>
-      <span class="topnav-logo-text">iamEscri</span>
+      <span class="topnav-logo-text">iam<span class="logo-accent">Escri</span></span>
     </div>
     <div class="topnav-links">
       <span class="topnav-link" onclick="showSection('home',null)">Inicio</span>
       <span class="topnav-link" onclick="showSection('about',null)">Sobre mí</span>
       <span class="topnav-link {% if page.category == 'defensive' %}active{% endif %}" onclick="showSection('defensive',null)">Defensiva</span>
-      <span class="topnav-link" onclick="showSection('infra',null)">Infraestructura</span>
-      <span class="topnav-link" onclick="showSection('auto',null)">Automatización</span>
+      <span class="topnav-link {% if page.category == 'infra' %}active{% endif %}" onclick="showSection('infra',null)">Infraestructura</span>
+      <span class="topnav-link {% if page.category == 'auto' %}active{% endif %}" onclick="showSection('auto',null)">Automatización</span>
       <span class="topnav-link {% if page.category == 'writeup' %}active{% endif %}" onclick="showSection('writeups',null)">Laboratorio</span>
       <span class="topnav-link" onclick="showSection('projects',null)">Proyectos</span>
     </div>
@@ -46,10 +47,19 @@
   <div class="content">
     {% if page.category == 'defensive' %}
       {% assign back_section = 'defensive' %}
-      {% assign back_label = 'Seg. Defensiva' %}
-    {% else %}
+      {% assign back_label = 'Defensiva' %}
+    {% elsif page.category == 'infra' %}
       {% assign back_section = 'infra' %}
-      {% assign back_label = 'Blog' %}
+      {% assign back_label = 'Infraestructura' %}
+    {% elsif page.category == 'auto' %}
+      {% assign back_section = 'auto' %}
+      {% assign back_label = 'Automatización' %}
+    {% elsif page.category == 'writeup' %}
+      {% assign back_section = 'writeups' %}
+      {% assign back_label = 'Laboratorio' %}
+    {% else %}
+      {% assign back_section = 'home' %}
+      {% assign back_label = 'Inicio' %}
     {% endif %}
     <a href="{{ '/#' | append: back_section | relative_url }}" class="back-btn">← Volver a {{ back_label }}</a>
 
