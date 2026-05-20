@@ -380,77 +380,181 @@ img { max-width: 100%; }
 /* ===== ABOUT ===== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 64px;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
   align-items: start;
   margin-top: 48px;
 }
-.about-left { display: flex; flex-direction: column; gap: 36px; }
+.about-left { display: flex; flex-direction: column; }
+.about-title {
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 32px;
+}
+.about-title-muted { color: var(--text2); font-weight: 400; }
 .about-body {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text2);
-  line-height: 1.82;
+  line-height: 1.9;
   font-weight: 300;
 }
 .about-body p { margin-bottom: 18px; }
 .about-body p:last-child { margin-bottom: 0; }
 .about-body em { color: var(--text); font-style: normal; }
 
-/* CONTACT GRID 2x2 */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* CONTACTO */
+.about-contact { margin-top: 40px; }
+.about-contact-row {
+  display: flex;
+  align-items: baseline;
   gap: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-.contact-cell {
-  padding: 18px 20px;
-  border-right: 1px solid var(--border);
+  padding: 9px 0;
   border-bottom: 1px solid var(--border);
 }
-.contact-cell:nth-child(2)  { border-right: none; }
-.contact-cell:nth-child(3)  { border-bottom: none; }
-.contact-cell:nth-child(4)  { border-right: none; border-bottom: none; }
-.contact-label {
+.about-contact-row:first-child { border-top: 1px solid var(--border); }
+.about-contact-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--text4);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.contact-val        { font-size: 14px; color: var(--text); font-weight: 400; }
-.contact-val-link   { font-size: 14px; color: var(--accent2); font-weight: 400; }
-.contact-val-avail  { font-size: 14px; color: #4ade80; font-weight: 400; }
-.contact-val-email  { font-size: 12px; color: var(--text2); font-family: var(--font-mono); word-break: break-all; }
-
-/* ABOUT RIGHT */
-.about-right { display: flex; flex-direction: column; gap: 12px; }
-.about-panel {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 22px;
-}
-.about-panel-title {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text4);
   letter-spacing: .1em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  color: var(--text4);
+  width: 76px;
+  flex-shrink: 0;
+}
+.about-contact-link { font-size: 13px; color: var(--accent2); text-decoration: none; }
+.about-contact-val  { font-size: 13px; color: var(--text2); }
+.about-avail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+}
+.about-avail-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.about-avail-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: .02em;
 }
 
-/* AREA PILLS */
-.area-block { margin-bottom: 16px; }
-.area-block:last-child { margin-bottom: 0; }
-.area-name {
+/* COLUMNA DERECHA */
+.about-right { display: flex; flex-direction: column; gap: 0; }
+.about-block {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-block:first-child { padding-top: 0; }
+.about-block:last-child  { border-bottom: none; padding-bottom: 0; }
+.about-block-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text4);
+  margin-bottom: 20px;
+}
+
+/* ÁREAS */
+.about-area-row {
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.about-area-row:first-child { padding-top: 0; }
+.about-area-row:last-child  { border-bottom: none; padding-bottom: 0; }
+.about-area-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text4);
+  margin-bottom: 8px;
+}
+.about-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.about-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 3px 8px;
+  background: transparent;
+}
+
+/* CERTIFICACIONES */
+.about-cert-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.about-cert-row:first-child { padding-top: 0; }
+.about-cert-row:last-child  { border-bottom: none; padding-bottom: 0; }
+.about-cert-name {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.3;
+}
+.about-cert-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text4);
+  margin-top: 3px;
+}
+.about-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+  letter-spacing: .02em;
+  border: 1px solid;
+}
+.about-badge-done { color: #4ade80; border-color: rgba(74,222,128,.3); background: rgba(74,222,128,.06); }
+.about-badge-wip  { color: #f59e0b; border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.06); }
+.about-badge-next { color: var(--text4); border-color: var(--border); background: transparent; }
+
+/* FORMACIÓN TÉCNICA ACTIVA */
+.about-active-grid { display: flex; flex-direction: column; gap: 0; }
+.about-active-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.about-active-row:first-child { padding-top: 0; }
+.about-active-row:last-child  { border-bottom: none; padding-bottom: 0; }
+.about-active-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.about-active-dot-on { background: var(--green); }
+.about-active-name {
+  font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text2);
-  margin-bottom: 7px;
+  flex: 1;
 }
+.about-active-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text4);
+  white-space: nowrap;
+}
+
+/* COMPATIBILIDAD: mantener pills y badges existentes en otras secciones */
 .pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .pill {
   font-family: var(--font-mono);
@@ -461,31 +565,12 @@ img { max-width: 100%; }
   padding: 3px 10px;
   border-radius: 5px;
 }
-.pill-accent {
-  color: var(--accent2);
-  background: var(--accent3);
-  border-color: var(--accent4);
-}
-
-/* ROADMAP */
-.road-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-}
-.road-item:last-child { border-bottom: none; }
-.road-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.road-dot-done { background: var(--green); }
-.road-dot-wip  { background: var(--amber); animation: pulse-dot 2s infinite; }
-.road-dot-next { background: var(--text4); }
-.road-name { font-size: 13px; color: var(--text); flex: 1; }
-.road-org  { font-size: 11px; color: var(--text3); font-family: var(--font-mono); }
+.pill-accent { color: var(--accent2); background: var(--accent3); border-color: var(--accent4); }
 .road-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); white-space: nowrap; }
 .badge-done { background: rgba(22,163,74,.1);  color: #4ade80; }
 .badge-wip  { background: rgba(217,119,6,.1);   color: #fbbf24; }
 .badge-next { background: var(--bg3); color: var(--text3); border: 1px solid var(--border); }
+
 
 /* ===== PUBLICACIONES ===== */
 .pub-header {
@@ -1052,9 +1137,7 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
   .sec { padding: 60px 24px; }
   .section-sep { margin: 0 24px; }
   body.is-subpage .content { padding: 36px 24px; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-cell { border-right: none !important; border-bottom: 1px solid var(--border) !important; }
-  .contact-cell:last-child { border-bottom: none !important; }
+  .about-active-meta { display: none; }
 }
 
 /* ===== MOBILE DRAWER NAV ===== */
@@ -1127,39 +1210,4 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
   user-select: none;
 }
 
-/* =============================================
-   CERTIFICACIONES Y FORMACIÓN COMPLEMENTARIA
-   ============================================= */
-.cert-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-}
-.cert-item:last-child { border-bottom: none; }
-.cert-icon {
-  font-size: 18px;
-  flex-shrink: 0;
-  width: 28px;
-  text-align: center;
-}
-.cert-info {
-  flex: 1;
-  min-width: 0;
-}
-.cert-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.cert-org {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text2);
-  margin-top: 2px;
-}
+
