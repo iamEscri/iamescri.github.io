@@ -1246,7 +1246,7 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
 .hero-counters-panel { overflow: visible; }
 .hero-counters-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   gap: 0;
 }
 .hero-counter-item {
@@ -1423,6 +1423,7 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  margin: 0 auto;
 }
 .home-stack-item {
   background: var(--bg2);
@@ -1438,6 +1439,7 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
 }
 .home-stack-item:nth-child(5n) { border-right: none; }
 .home-stack-item:nth-child(n+6) { border-bottom: none; }
+.home-stack-item:last-child { border-bottom: none; }
 .home-stack-item:hover { background: var(--bg3); }
 .home-stack-icon {
   width: 32px; height: 32px;
@@ -1472,32 +1474,54 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
 .home-activity-list {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  border-top: 1px solid var(--border);
 }
 .home-activity-row {
   display: grid;
-  grid-template-columns: 110px 90px 1fr auto auto auto;
-  align-items: center;
-  gap: 20px;
-  padding: 22px 24px;
+  grid-template-columns: 160px 1fr auto;
+  align-items: start;
+  gap: 24px;
+  padding: 28px 28px;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
-  background: var(--bg2);
+  background: transparent;
   transition: background .18s;
 }
 .home-activity-row:last-child { border-bottom: none; }
 .home-activity-row:hover { background: var(--bg3); }
 .home-activity-row:hover .home-activity-title { color: var(--accent2); }
 .home-activity-row:hover .home-activity-arrow { opacity: 1; transform: translateX(3px); }
+.home-activity-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 2px;
+}
+.home-activity-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.home-activity-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.home-activity-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text4);
+}
 .home-activity-date {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text4);
-  flex-shrink: 0;
 }
-.home-activity-cat { flex-shrink: 0; }
+.home-activity-cat { }
 .home-act-badge {
   font-family: var(--font-mono);
   font-size: 9px;
@@ -1507,25 +1531,23 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
   border-radius: 3px;
 }
 .badge-defensiva { background: rgba(91,106,240,.12); color: #818cf8; border: 1px solid rgba(91,106,240,.2); }
-.badge-blog      { background: rgba(245,158,11,.10); color: #fbbf24; border: 1px solid rgba(245,158,11,.18); }
+.badge-infra     { background: rgba(14,165,160,.10); color: #2dd4bf; border: 1px solid rgba(14,165,160,.2); }
+.badge-auto      { background: rgba(245,158,11,.10); color: #fbbf24; border: 1px solid rgba(245,158,11,.18); }
+.badge-blog      { background: rgba(100,116,139,.10); color: #94a3b8; border: 1px solid rgba(100,116,139,.18); }
 .badge-writeup   { background: rgba(74,222,128,.10); color: #4ade80; border: 1px solid rgba(74,222,128,.18); }
 .badge-project   { background: rgba(139,92,246,.10); color: #a78bfa; border: 1px solid rgba(139,92,246,.18); }
 .home-activity-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text);
   letter-spacing: -.02em;
   transition: color .18s;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.3;
 }
 .home-activity-desc {
-  font-size: 12px;
-  color: var(--text3);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
 }
 .home-activity-tags {
   display: flex;
@@ -1543,7 +1565,6 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
   color: var(--accent2);
   opacity: 0;
   transition: opacity .18s, transform .18s;
-  flex-shrink: 0;
 }
 
 /* =============================================
@@ -1607,6 +1628,8 @@ body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto
     gap: 6px;
   }
   .home-activity-desc, .home-activity-tags, .home-activity-arrow { display: none; }
-  .hero-counters-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .hero-counters-grid { grid-template-columns: repeat(3, 1fr); }
+  .home-activity-row { grid-template-columns: 1fr; gap: 8px; }
+  .home-activity-right { flex-direction: row; }
 }
 
