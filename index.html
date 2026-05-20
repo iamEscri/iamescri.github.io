@@ -276,24 +276,24 @@ section: home
       <div class="about-right">
         <div class="about-block-label">Áreas de trabajo</div>
         <div class="about-area-row">
-          <div class="about-area-name">Sistemas</div>
-          <div class="about-pills"><span class="about-pill">Linux</span><span class="about-pill">Ubuntu Server</span><span class="about-pill">SSH</span><span class="about-pill">Bash</span><span class="about-pill">Networking</span></div>
+          <div class="about-area-accent"></div>
+          <div class="about-area-content"><div class="about-area-name">Sistemas</div><div class="about-pills"><span class="about-pill">Linux</span><span class="about-pill">Ubuntu Server</span><span class="about-pill">SSH</span><span class="about-pill">Bash</span><span class="about-pill">Networking</span></div></div>
         </div>
         <div class="about-area-row">
-          <div class="about-area-name">Infraestructura</div>
-          <div class="about-pills"><span class="about-pill">Docker</span><span class="about-pill">VPS</span><span class="about-pill">Traefik</span><span class="about-pill">Nginx</span></div>
+          <div class="about-area-accent"></div>
+          <div class="about-area-content"><div class="about-area-name">Infraestructura</div><div class="about-pills"><span class="about-pill">Docker</span><span class="about-pill">VPS</span><span class="about-pill">Traefik</span><span class="about-pill">Nginx</span></div></div>
         </div>
         <div class="about-area-row">
-          <div class="about-area-name">Defensiva</div>
-          <div class="about-pills"><span class="about-pill">Wazuh</span><span class="about-pill">Fail2ban</span><span class="about-pill">Suricata</span><span class="about-pill">UFW</span></div>
+          <div class="about-area-accent"></div>
+          <div class="about-area-content"><div class="about-area-name">Defensiva</div><div class="about-pills"><span class="about-pill">Wazuh</span><span class="about-pill">Fail2ban</span><span class="about-pill">Suricata</span><span class="about-pill">UFW</span></div></div>
         </div>
         <div class="about-area-row">
-          <div class="about-area-name">Automatización</div>
-          <div class="about-pills"><span class="about-pill">n8n</span><span class="about-pill">Claude API</span><span class="about-pill">workflows IA</span></div>
+          <div class="about-area-accent"></div>
+          <div class="about-area-content"><div class="about-area-name">Automatización</div><div class="about-pills"><span class="about-pill">n8n</span><span class="about-pill">Claude API</span><span class="about-pill">workflows IA</span></div></div>
         </div>
         <div class="about-area-row">
-          <div class="about-area-name">Monitorización</div>
-          <div class="about-pills"><span class="about-pill">Grafana</span><span class="about-pill">Splunk</span><span class="about-pill">Elastic</span></div>
+          <div class="about-area-accent"></div>
+          <div class="about-area-content"><div class="about-area-name">Monitorización</div><div class="about-pills"><span class="about-pill">Grafana</span><span class="about-pill">Splunk</span><span class="about-pill">Elastic</span></div></div>
         </div>
       </div>
     </div>
@@ -309,8 +309,8 @@ section: home
         <div class="about-block-label">Certificaciones</div>
         <div class="about-cert-strip">
           {% for cert in portfolio.certifications %}
-          <div class="about-cert-cell">
-            <div class="about-cert-status {% if cert.status == 'obtained' %}about-cert-done{% elsif cert.status == 'in-progress' %}about-cert-wip{% else %}about-cert-next{% endif %}">
+          <div class="about-cert-cell {% if cert.status == 'obtained' %}cert-obtained{% elsif cert.status == 'in-progress' %}cert-wip{% else %}cert-next{% endif %}">
+            <div class="about-cert-status">
               {% if cert.status == 'obtained' %}obtenida{% elsif cert.status == 'in-progress' %}en curso{% else %}próximo{% endif %}
             </div>
             <div class="about-cert-name">{{ cert.name }}</div>
