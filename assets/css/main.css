@@ -69,8 +69,8 @@ img { max-width: 100%; }
   cursor: pointer;
 }
 .topnav-logo-mark {
-  width: 36px; height: 36px;
-  border-radius: 8px;
+  width: 42px; height: 42px;
+  border-radius: 0;
   background: transparent;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
