@@ -87,6 +87,34 @@ section: home
 
   <hr class="section-sep">
 
+  <!-- STATS BAR -->
+  {% assign writeups_count = all_writeups | size %}
+  {% assign defensive_count = all_defensive | size %}
+  {% assign blog_count = all_blog | size %}
+  {% assign projects_posts = site.posts | where: "category", "project" %}
+  {% assign projects_count = site.data.projects | size %}
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">{{ writeups_count }}</span>
+      <span class="stat-label">writeups</span>
+    </div>
+    <div class="stat-sep">·</div>
+    <div class="stat-item">
+      <span class="stat-num">{{ defensive_count }}</span>
+      <span class="stat-label">artículos defensivos</span>
+    </div>
+    <div class="stat-sep">·</div>
+    <div class="stat-item">
+      <span class="stat-num">{{ blog_count }}</span>
+      <span class="stat-label">posts técnicos</span>
+    </div>
+    <div class="stat-sep">·</div>
+    <div class="stat-item">
+      <span class="stat-num">{{ projects_count }}</span>
+      <span class="stat-label">proyectos</span>
+    </div>
+  </div>
+
   <!-- PUBLICACIONES TÉCNICAS (home preview) -->
   <div class="sec">
     <div class="pub-header">
@@ -307,6 +335,55 @@ section: home
           </div>
           {% endfor %}
         </div>
+
+        <!-- CERTIFICACIONES -->
+        {% if portfolio.certifications %}
+        <div class="about-panel">
+          <div class="about-panel-title">Certificaciones</div>
+          {% for cert in portfolio.certifications %}
+          <div class="cert-item">
+            <div class="cert-icon">{{ cert.icon }}</div>
+            <div class="cert-info">
+              <div class="cert-name">{{ cert.name }}</div>
+              <div class="cert-org">{{ cert.org }}{% if cert.date %} · {{ cert.date }}{% endif %}</div>
+            </div>
+            <span class="road-badge
+              {% if cert.status == 'obtained' %}badge-done
+              {% elsif cert.status == 'in-progress' %}badge-wip
+              {% else %}badge-next{% endif %}">
+              {% if cert.status == 'obtained' %}obtenida{% elsif cert.status == 'in-progress' %}en curso{% else %}próximo{% endif %}
+            </span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- CURSOS COMPLEMENTARIOS -->
+        {% if portfolio.complementary_training %}
+        <div class="about-panel">
+          <div class="about-panel-title">Formación complementaria</div>
+          {% for course in portfolio.complementary_training %}
+          <div class="cert-item">
+            <div class="cert-icon">
+              {% if course.platform == 'udemy' %}🎓
+              {% elsif course.platform == 'youtube' %}▶️
+              {% else %}📚{% endif %}
+            </div>
+            <div class="cert-info">
+              <div class="cert-name">{{ course.name }}</div>
+              <div class="cert-org">{{ course.org }}{% if course.duration %} · {{ course.duration }}{% endif %}{% if course.date %} · {{ course.date }}{% endif %}</div>
+            </div>
+            <span class="road-badge
+              {% if course.status == 'completed' %}badge-done
+              {% elsif course.status == 'in-progress' %}badge-wip
+              {% else %}badge-next{% endif %}">
+              {% if course.status == 'completed' %}completado{% elsif course.status == 'in-progress' %}en curso{% else %}pendiente{% endif %}
+            </span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
       </div>
     </div>
   </div>
