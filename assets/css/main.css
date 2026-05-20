@@ -460,16 +460,17 @@ img { max-width: 100%; }
 }
 .about-contact-row:not(.about-contact-row--static):hover .about-contact-arrow { opacity: 1; transform: translateX(3px); }
 .about-contact-icon {
-  width: 34px; height: 34px;
-  border-radius: 8px;
+  width: 36px; height: 36px;
+  border-radius: 9px;
   background: rgba(255,255,255,.04);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   font-size: 17px;
-  color: var(--text3);
+  color: rgba(255,255,255,.55);
   transition: background .18s, border-color .18s, color .18s;
 }
+.about-contact-icon svg { display: block; }
 .about-contact-body { flex: 1; }
 .about-contact-label {
   font-family: var(--font-mono);
