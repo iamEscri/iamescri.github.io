@@ -328,6 +328,7 @@ section: home
           {% for course in portfolio.complementary_training %}
           <tr>
             <td class="about-course-name">{{ course.name }}</td>
+            <td>{% if course.url %}<a href="{{ course.url }}" target="_blank" rel="noopener" class="about-course-link">Ver curso →</a>{% endif %}</td>
             <td class="about-course-platform">{{ course.org }}</td>
             <td class="about-course-duration">{% if course.duration %}{{ course.duration }}{% else %}—{% endif %}</td>
             <td class="about-course-status">
