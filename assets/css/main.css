@@ -1208,13 +1208,17 @@ img { max-width: 100%; }
 .writeup-body pre code { background: none; padding: 0; border: none; color: rgba(255,255,255,.75); }
 
 /* HIGHLIGHT WRAPPER — header + cuerpo */
-.highlight {
-  background: transparent !important;
+/* Rouge outer wrapper */
+.highlighter-rouge {
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 10px;
   margin: 24px 0;
   overflow: hidden;
-  position: relative;
+  background: #0d0f14;
+}
+.highlight {
+  background: #0d0f14 !important;
+  margin: 0;
 }
 .highlight pre {
   margin: 0;
