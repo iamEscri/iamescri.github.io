@@ -87,6 +87,7 @@ img { max-width: 100%; }
   color: var(--text);
   letter-spacing: -.02em;
 }
+.logo-accent { color: var(--green); }
 
 .topnav-links {
   display: flex;
