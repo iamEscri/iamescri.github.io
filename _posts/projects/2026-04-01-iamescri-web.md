@@ -71,7 +71,7 @@ Todo esto ocurre en aproximadamente un minuto, sin intervención manual. El resu
 
 El dominio `iamescri.es` está registrado en un proveedor externo. Para que apunte a GitHub Pages en lugar del servidor del registrador, configuré los siguientes registros DNS:
 
-```
+```text
 # Registros A — apuntan a las IPs de GitHub Pages
 185.199.108.153
 185.199.109.153
