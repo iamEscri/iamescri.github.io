@@ -1228,7 +1228,7 @@ img { max-width: 100%; }
 
 /* ===== CONTENT AREA (subpages) ===== */
 body.is-subpage .main-wrap { padding-top: var(--nav-h); }
-body.is-subpage .content { padding: 48px 52px; max-width: 1100px; margin: 0 auto; }
+body.is-subpage .content { padding: 48px 52px; max-width: 1200px; margin: 0 auto; }
 
 /* ===== RECENT SIDEBAR ITEMS ===== */
 .recent-item {
