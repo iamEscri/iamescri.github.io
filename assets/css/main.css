@@ -417,46 +417,80 @@ img { max-width: 100%; }
 }
 .about-left { display: flex; flex-direction: column; }
 .about-title {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 500;
   color: var(--text);
-  line-height: 1.25;
-  margin-bottom: 32px;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  letter-spacing: -.03em;
 }
-.about-title-muted { color: var(--text2); font-weight: 400; }
+.about-title-muted { color: var(--text2); font-weight: 300; }
 .about-body {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text2);
   line-height: 1.9;
   font-weight: 300;
+  margin-bottom: 36px;
 }
-.about-body p { margin-bottom: 18px; }
+.about-body p { margin-bottom: 16px; }
 .about-body p:last-child { margin-bottom: 0; }
 .about-body em { color: var(--text); font-style: normal; }
 
-/* CONTACTO */
-.about-contact { margin-top: 40px; }
+/* CONTACTO — nueva versión con tarjeta e iconos */
+.about-contact {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
 .about-contact-row {
   display: flex;
-  align-items: baseline;
-  padding: 9px 0;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
   border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: background .18s;
 }
-.about-contact-row:first-child { border-top: 1px solid var(--border); }
+.about-contact-row--static { cursor: default; }
+.about-contact-row:not(.about-contact-row--static):hover { background: rgba(99,102,241,.06); }
+.about-contact-row:not(.about-contact-row--static):hover .about-contact-icon {
+  background: rgba(99,102,241,.12);
+  border-color: rgba(99,102,241,.3);
+  color: var(--accent2);
+}
+.about-contact-row:not(.about-contact-row--static):hover .about-contact-arrow { opacity: 1; transform: translateX(3px); }
+.about-contact-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 17px;
+  color: var(--text3);
+  transition: background .18s, border-color .18s, color .18s;
+}
+.about-contact-body { flex: 1; }
 .about-contact-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text4);
-  width: 76px;
-  flex-shrink: 0;
+  margin-bottom: 2px;
 }
 .about-contact-link { font-size: 14px; color: var(--accent2); text-decoration: none; }
 .about-contact-val  { font-size: 14px; color: var(--text2); }
-.about-avail-row { display: flex; align-items: center; gap: 8px; padding-top: 16px; }
-.about-avail-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-.about-avail-text { font-family: var(--font-mono); font-size: 12px; color: var(--green); }
+.about-contact-arrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent2);
+  opacity: 0;
+  transition: opacity .18s, transform .18s;
+}
+.about-avail-row { display: flex; align-items: center; gap: 8px; padding: 14px 18px 16px; }
+.about-avail-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: pulse-dot 2s infinite; }
+.about-avail-text { font-family: var(--font-mono); font-size: 11px; color: var(--green); }
 
 /* ÁREAS — columna derecha */
 .about-right { padding-top: 4px; }
@@ -471,38 +505,48 @@ img { max-width: 100%; }
 .about-area-row {
   display: flex;
   gap: 16px;
-  padding: 13px 0;
+  padding: 16px 0;
   border-bottom: 1px solid rgba(255,255,255,.045);
+  transition: all .18s;
+  cursor: default;
 }
 .about-area-row:first-child { padding-top: 0; }
 .about-area-row:last-child  { border-bottom: none; padding-bottom: 0; }
+.about-area-row:hover .about-area-accent { background: var(--accent2); }
+.about-area-row:hover .about-area-name { color: var(--accent2); }
+.about-area-row:hover .about-pill {
+  border-color: rgba(129,140,248,.25);
+  color: var(--text);
+}
 .about-area-accent {
   width: 2px;
   background: var(--border);
   border-radius: 2px;
   flex-shrink: 0;
   align-self: stretch;
-  min-height: 18px;
+  min-height: 20px;
+  transition: background .2s;
 }
 .about-area-content {}
 .about-area-name {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: .09em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text4);
-  margin-bottom: 8px;
-  opacity: .8;
+  margin-bottom: 10px;
+  transition: color .18s;
 }
-.about-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.about-pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .about-pill {
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--text2);
-  border: 0.5px solid var(--border);
-  border-radius: 2px;
-  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 13px;
   letter-spacing: .01em;
+  transition: border-color .18s, color .18s;
 }
 
 /* SEPARADOR INTERNO */
