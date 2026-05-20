@@ -4,22 +4,25 @@ title: Home
 section: home
 ---
 
-{% assign all_writeups = site.posts | where: "category", "writeup" %}
-{% assign all_blog     = site.posts | where: "category", "blog" %}
+{% assign all_writeups  = site.posts | where: "category", "writeup" %}
+{% assign all_blog      = site.posts | where: "category", "blog" %}
 {% assign all_defensive = site.posts | where: "category", "defensive" %}
-{% assign portfolio    = site.data.portfolio %}
-{% assign projects     = site.data.projects %}
-{% assign recent_all   = site.posts | sort: "date" | reverse %}
+{% assign all_infra     = site.posts | where: "category", "infra" %}
+{% assign all_auto      = site.posts | where: "category", "auto" %}
+{% assign portfolio     = site.data.portfolio %}
+{% assign projects      = site.data.projects %}
+{% assign recent_all    = site.posts | sort: "date" | reverse %}
 
 <!-- ====================================================
      HOME
      ==================================================== -->
 <section class="section active" id="section-home">
 
-  {% assign writeups_count = all_writeups | size %}
+  {% assign writeups_count  = all_writeups  | size %}
   {% assign defensive_count = all_defensive | size %}
-  {% assign blog_count = all_blog | size %}
-  {% assign projects_count = site.data.projects | size %}
+  {% assign infra_count     = all_infra     | size %}
+  {% assign auto_count      = all_auto      | size %}
+  {% assign projects_count  = site.data.projects | size %}
 
   <!-- HERO -->
   <div class="hero">
@@ -83,8 +86,12 @@ section: home
             <span class="hero-counter-label">Defensiva</span>
           </button>
           <button class="hero-counter-item" onclick="showSection('infra',document.getElementById('nav-infra'))">
-            <span class="hero-counter-num">{{ blog_count }}</span>
+            <span class="hero-counter-num">{{ infra_count }}</span>
             <span class="hero-counter-label">Infra</span>
+          </button>
+          <button class="hero-counter-item" onclick="showSection('auto',document.getElementById('nav-auto'))">
+            <span class="hero-counter-num">{{ auto_count }}</span>
+            <span class="hero-counter-label">Auto</span>
           </button>
         </div>
       </div>
@@ -175,19 +182,27 @@ section: home
     <div class="home-activity-list">
       {% for post in recent_all limit:5 %}
       <a href="{{ post.url | relative_url }}" class="home-activity-row">
-        <div class="home-activity-date">{{ post.date | date: "%Y-%m-%d" }}</div>
-        <div class="home-activity-cat">
-          {% if post.category == 'defensive' %}<span class="home-act-badge badge-defensiva">DEFENSIVA</span>
-          {% elsif post.category == 'blog' %}<span class="home-act-badge badge-blog">BLOG</span>
-          {% elsif post.category == 'writeup' %}<span class="home-act-badge badge-writeup">LAB</span>
-          {% else %}<span class="home-act-badge badge-project">PROYECTO</span>{% endif %}
+        <div class="home-activity-left">
+          <div class="home-activity-date">{{ post.date | date: "%Y-%m-%d" }}</div>
+          <div class="home-activity-cat">
+            {% if post.category == "defensive" %}<span class="home-act-badge badge-defensiva">DEFENSIVA</span>
+            {% elsif post.category == "infra" %}<span class="home-act-badge badge-infra">INFRAESTRUCTURA</span>
+            {% elsif post.category == "auto" %}<span class="home-act-badge badge-auto">AUTOMATIZACIÓN</span>
+            {% elsif post.category == "writeup" %}<span class="home-act-badge badge-writeup">LAB</span>
+            {% else %}<span class="home-act-badge badge-blog">BLOG</span>{% endif %}
+          </div>
         </div>
-        <div class="home-activity-title">{{ post.title }}</div>
-        <div class="home-activity-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</div>
-        <div class="home-activity-tags">
-          {% for tag in post.tags limit:3 %}<span class="home-activity-tag">#{{ tag }}</span>{% endfor %}
+        <div class="home-activity-main">
+          <div class="home-activity-title">{{ post.title }}</div>
+          <div class="home-activity-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 160 }}</div>
+          <div class="home-activity-tags">
+            {% for tag in post.tags limit:4 %}<span class="home-activity-tag">#{{ tag }}</span>{% endfor %}
+          </div>
         </div>
-        <div class="home-activity-arrow">→</div>
+        <div class="home-activity-right">
+          {% if post.read_time %}<span class="home-activity-time">{{ post.read_time }} min</span>{% endif %}
+          <span class="home-activity-arrow">→</span>
+        </div>
       </a>
       {% endfor %}
     </div>
@@ -337,8 +352,7 @@ section: home
     <h2 class="sec-title">Infraestructura</h2>
     <p class="sec-sub">Docker, Linux, VPS, reverse proxy, firewall y servicios reales.</p>
     <div class="blog-grid" style="margin-top:40px">
-      {% assign infra_posts = all_blog | where_exp: "p", "p.tags contains 'docker' or p.tags contains 'linux' or p.tags contains 'vps' or p.tags contains 'infraestructura'" %}
-      {% if infra_posts.size == 0 %}{% assign infra_posts = all_blog %}{% endif %}
+      {% assign infra_posts = all_infra %}
       {% for post in infra_posts %}
       <a href="{{ post.url | relative_url }}" class="blog-card">
         <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
@@ -363,8 +377,7 @@ section: home
     <h2 class="sec-title">Automatización con IA</h2>
     <p class="sec-sub">Pipelines n8n, workflows defensivos y automatización con Claude API.</p>
     <div class="blog-grid" style="margin-top:40px">
-      {% assign auto_posts = all_blog | where_exp: "p", "p.tags contains 'automatizacion' or p.tags contains 'n8n' or p.tags contains 'ia'" %}
-      {% if auto_posts.size == 0 %}{% assign auto_posts = all_blog %}{% endif %}
+      {% assign auto_posts = all_auto %}
       {% for post in auto_posts %}
       <a href="{{ post.url | relative_url }}" class="blog-card">
         <div class="blog-card-num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
