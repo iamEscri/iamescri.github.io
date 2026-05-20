@@ -169,12 +169,26 @@ img { max-width: 100%; }
 
 .hero-eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text3);
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  font-size: 13px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: 0;
+  text-transform: none;
   margin-bottom: 28px;
 }
+.eyebrow-prompt { color: var(--green); }
+.eyebrow-cmd    { color: rgba(255,255,255,.6); }
+.eyebrow-arrow  { color: rgba(255,255,255,.25); margin: 0 4px; }
+.eyebrow-handle { color: rgba(255,255,255,.6); }
+.eyebrow-cursor {
+  display: inline-block;
+  width: 8px; height: 13px;
+  background: var(--green);
+  opacity: .8;
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: cur-blink 1s steps(1) infinite;
+}
+@keyframes cur-blink { 0%,49%{opacity:.8} 50%,100%{opacity:0} }
 .hero-h1 {
   font-size: 54px;
   font-weight: 300;
