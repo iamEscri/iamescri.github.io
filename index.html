@@ -22,7 +22,8 @@ section: home
   {% assign defensive_count = all_defensive | size %}
   {% assign infra_count     = all_infra     | size %}
   {% assign auto_count      = all_auto      | size %}
-  {% assign projects_count  = site.data.projects | size %}
+  {% assign active_projects = site.data.projects | where: "wip", false %}
+  {% assign projects_count  = active_projects | size %}
 
   <!-- HERO -->
   <div class="hero">
