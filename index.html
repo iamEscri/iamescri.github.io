@@ -101,37 +101,42 @@ section: home
 
   <hr class="section-sep">
 
-  <!-- 01 PROYECTOS ACTIVOS -->
+  <!-- 01 ESTADO ACTUAL -->
   <div class="sec">
     <div class="home-section-header">
-      <h2 class="home-section-title">Proyectos activos</h2>
-      <div class="home-section-meta">
-        <span class="home-section-count">{{ portfolio.en_desarrollo | size }} items</span>
-        <button class="home-section-link" onclick="showSection('projects',document.getElementById('nav-projects'))">Todos →</button>
+      <div style="display:flex;align-items:baseline;gap:14px">
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--text4);letter-spacing:.12em;text-transform:uppercase">// ahora mismo</span>
+        <h2 class="home-section-title">Estado actual</h2>
       </div>
     </div>
-    <div class="home-projects-grid">
+    <div class="estado-grid">
       {% for project in portfolio.en_desarrollo %}
-      <div class="home-project-card">
-        <div class="home-project-card-inner">
-          <div class="home-project-top">
-            <span class="home-project-cat">{{ project.category | upcase }}</span>
-            <span class="home-project-year">{{ project.year }}</span>
+      <div class="estado-card estado-{{ project.status }}">
+        <div class="estado-top">
+          <span class="estado-cat">{{ project.category | upcase }}</span>
+          <span class="estado-year">{{ project.year }}</span>
+        </div>
+        <div class="estado-name">{{ project.name }}</div>
+        <div class="estado-desc">{{ project.desc }}</div>
+        <div class="estado-tags">
+          {% for tech in project.stack limit:4 %}
+          <span class="estado-tag">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        <div class="estado-footer">
+          <div class="estado-status">
+            <span class="estado-dot"></span>
+            {% if project.status == "active" %}<span class="estado-text">activo en producción</span>
+            {% elsif project.status == "in-progress" %}<span class="estado-text">en desarrollo</span>
+            {% else %}<span class="estado-text">en curso</span>
+            {% endif %}
           </div>
-          <div class="home-project-name">{{ project.name }}</div>
-          <div class="home-project-desc">{{ project.desc }}</div>
-          <div class="home-project-tags">
-            {% for tech in project.stack limit:4 %}
-            <span class="home-project-tag">{{ tech }}</span>
-            {% endfor %}
-          </div>
-          <div class="home-project-footer">
-            {% if project.status == "active" %}
-            <span class="home-project-status status-active"><span class="status-dot dot-green"></span>activo</span>
-            {% elsif project.status == "in-progress" %}
-            <span class="home-project-status status-wip"><span class="status-dot dot-amber"></span>en desarrollo</span>
-            {% else %}
-            <span class="home-project-status status-course"><span class="status-dot" style="background:var(--text4)"></span>en curso</span>
+          <div class="estado-links">
+            {% if project.github and project.github != "" %}
+            <a href="{{ project.github }}" target="_blank" rel="noopener" class="estado-link">GitHub ↗</a>
+            {% endif %}
+            {% if project.post_url and project.post_url != "" %}
+            <a href="{{ project.post_url | relative_url }}" class="estado-link">Post →</a>
             {% endif %}
           </div>
         </div>
