@@ -128,6 +128,7 @@ section: home
             <span class="estado-dot"></span>
             {% if project.status == "active" %}<span class="estado-text">activo en producción</span>
             {% elsif project.status == "in-progress" %}<span class="estado-text">en desarrollo</span>
+            {% elsif project.status == "in-course" %}<span class="estado-text">en curso</span>
             {% else %}<span class="estado-text">en curso</span>
             {% endif %}
           </div>
