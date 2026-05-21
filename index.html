@@ -156,12 +156,11 @@ section: home
           {% if tool.icon_type == "devicon" %}
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ tool.icon }}/{{ tool.icon }}-original.svg"
                alt="{{ tool.name }}"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <span class="stack-badge-fallback" style="display:none">{{ tool.tabler | default: "▪" }}</span>
+               onerror="this.style.display='none'">
           {% elsif tool.icon_type == "tabler" %}
           <i class="ti ti-{{ tool.icon }}" aria-hidden="true"></i>
           {% else %}
-          <span style="font-size:18px">{{ tool.icon }}</span>
+          <span style="font-size:30px;line-height:1">{{ tool.icon }}</span>
           {% endif %}
         </div>
         <span class="stack-badge-name">{{ tool.name }}</span>
