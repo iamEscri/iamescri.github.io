@@ -1647,58 +1647,62 @@ body.is-subpage .content { padding: 48px 125px; }
 .dot-green { background: #4ade80; }
 .dot-amber { background: #f59e0b; }
 
-/* STACK BADGES */
+/* STACK GRID — Opción A */
 .stack-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
 }
 .stack-badge {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px;
+  padding: 20px 12px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 9px;
-  padding: 10px 16px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg2);
+  gap: 10px;
   cursor: default;
-  transition: border-color .18s, background .18s;
+  transition: border-color .2s, background .2s, transform .2s;
 }
 .stack-badge:hover {
   border-color: var(--accent2);
-  background: var(--bg3);
+  background: rgba(0,229,160,.04);
+  transform: translateY(-2px);
 }
-.stack-badge:hover .stack-badge-icon img { opacity: 1; filter: none; }
-.stack-badge:hover .stack-badge-icon i { color: var(--accent2); }
-.stack-badge:hover .stack-badge-name { color: var(--text); }
+.stack-badge:hover .stack-badge-name { color: var(--accent2); }
 .stack-badge-icon {
-  width: 20px; height: 20px;
+  width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  font-size: 32px;
+  line-height: 1;
 }
 .stack-badge-icon img {
-  width: 20px; height: 20px;
+  width: 36px; height: 36px;
   object-fit: contain;
-  filter: brightness(0) invert(0.7);
-  transition: filter .18s, opacity .18s;
 }
 .stack-badge-icon i {
-  font-size: 18px;
-  color: var(--text3);
-  transition: color .18s;
+  font-size: 28px;
+  color: rgba(255,255,255,.6);
+  transition: color .2s;
 }
+.stack-badge:hover .stack-badge-icon i { color: var(--accent2); }
 .stack-badge-name {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  color: rgba(255,255,255,.8);
+  color: rgba(255,255,255,.75);
+  text-align: center;
   letter-spacing: -.01em;
-  transition: color .18s;
+  transition: color .2s;
 }
 .stack-badge-role {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text4);
-  letter-spacing: .04em;
+  font-size: 9px;
+  color: rgba(255,255,255,.25);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 /* HOME ACTIVITY LIST (tabla estilo reference) */
