@@ -1656,7 +1656,7 @@ body.is-subpage .content { padding: 48px 125px; }
 }
 .estado-card.estado-active .estado-dot      { background: #00e5a0; animation: estado-pulse 2s infinite; }
 .estado-card.estado-in-progress .estado-dot { background: #f59e0b; animation: estado-pulse 2s infinite; }
-.estado-card.estado-in-course .estado-dot   { background: #818cf8; }
+.estado-card.estado-in-course .estado-dot   { background: #818cf8; animation: estado-pulse 2s infinite; }
 .estado-card.estado-active .estado-text      { color: #00e5a0; }
 .estado-card.estado-in-progress .estado-text { color: #f59e0b; }
 .estado-card.estado-in-course .estado-text   { color: #818cf8; }
