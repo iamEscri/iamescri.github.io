@@ -56,7 +56,9 @@ section: home
           </div>
         </div>
         <div class="dev-list">
-          {% assign wip_items = portfolio.en_desarrollo | where: "status", "in-progress" %}
+          {% assign wip_progress = portfolio.en_desarrollo | where: "status", "in-progress" %}
+          {% assign wip_course = portfolio.en_desarrollo | where: "status", "in-course" %}
+          {% assign wip_items = wip_progress | concat: wip_course %}
           {% assign bar_colors = "#5b6af0,#0ea5a0,#8b5cf6,#363c47" | split: "," %}
           {% for item in wip_items %}
           {% assign color = bar_colors[forloop.index0] | default: "#363c47" %}
