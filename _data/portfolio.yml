@@ -86,7 +86,7 @@ en_desarrollo:
     year: "2024 — 2026"
     desc: "ENNIT · Blue Team y análisis forense. Material y laboratorios documentados en abierto a medida que avanzan los módulos."
     stack: ["Blue Team", DFIR, OSINT]
-    status: "in-progress"
+    status: "in-course"
     github: ""
     post_url: ""
 
