@@ -1584,12 +1584,11 @@ body.is-subpage .content { padding: 48px 125px; }
 }
 .estado-card.estado-active::before  { background: #00e5a0; }
 .estado-card.estado-in-progress::before { background: #f59e0b; }
-.estado-card.estado-in-course::before,
-.estado-card:not(.estado-active):not(.estado-in-progress)::before { background: #818cf8; }
+.estado-card.estado-in-course::before { background: #818cf8; }
 .estado-card:hover { transform: translateY(-2px); background: rgba(255,255,255,.02); }
 .estado-card.estado-active:hover     { border-color: rgba(0,229,160,.25); }
 .estado-card.estado-in-progress:hover{ border-color: rgba(245,158,11,.25); }
-.estado-card:not(.estado-active):not(.estado-in-progress):hover { border-color: rgba(129,140,248,.25); }
+.estado-card.estado-in-course:hover { border-color: rgba(129,140,248,.25); }
 .estado-top {
   display: flex;
   justify-content: space-between;
@@ -1603,7 +1602,7 @@ body.is-subpage .content { padding: 48px 125px; }
 }
 .estado-card.estado-active .estado-cat     { color: #00e5a0; }
 .estado-card.estado-in-progress .estado-cat{ color: #f59e0b; }
-.estado-card:not(.estado-active):not(.estado-in-progress) .estado-cat { color: #818cf8; }
+.estado-card.estado-in-course .estado-cat { color: #818cf8; }
 .estado-year {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -1657,10 +1656,10 @@ body.is-subpage .content { padding: 48px 125px; }
 }
 .estado-card.estado-active .estado-dot      { background: #00e5a0; animation: estado-pulse 2s infinite; }
 .estado-card.estado-in-progress .estado-dot { background: #f59e0b; animation: estado-pulse 2s infinite; }
-.estado-card:not(.estado-active):not(.estado-in-progress) .estado-dot { background: #818cf8; }
+.estado-card.estado-in-course .estado-dot   { background: #818cf8; }
 .estado-card.estado-active .estado-text      { color: #00e5a0; }
 .estado-card.estado-in-progress .estado-text { color: #f59e0b; }
-.estado-card:not(.estado-active):not(.estado-in-progress) .estado-text { color: #818cf8; }
+.estado-card.estado-in-course .estado-text   { color: #818cf8; }
 @keyframes estado-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 .estado-links { display: flex; gap: 8px; }
 .estado-link {
