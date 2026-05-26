@@ -53,7 +53,7 @@ en_desarrollo:
     icon: "🤖"
     sub: "TFM · IA para análisis de vulnerabilidades en SOC"
     category: "Defensiva"
-    year: "2025 — TFM"
+    year: "2026 — TFM"
     desc: "TFM en curso. Asistente para análisis y priorización de vulnerabilidades en SOC, con razonamiento por LLM sobre contexto de host, red y CVE."
     stack: [Python, "Claude API", Wazuh, FastAPI]
     status: "in-progress"
