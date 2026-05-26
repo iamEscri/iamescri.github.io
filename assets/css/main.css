@@ -1163,9 +1163,9 @@ img { max-width: 100%; }
 .writeup-hero { margin-bottom: 40px; }
 .writeup-meta-line { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
 .writeup-title { font-size: 36px; font-weight: 300; letter-spacing: -.04em; line-height: 1.15; color: #fff; }
-.writeup-body { font-size: 15px; color: var(--text2); line-height: 1.8; }
-.writeup-body h2 { font-size: 22px; font-weight: 500; color: var(--text); margin: 36px 0 14px; letter-spacing: -.02em; }
-.writeup-body h3 { font-size: 17px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
+.writeup-body { font-size: 17px; color: var(--text2); line-height: 1.8; }
+.writeup-body h2 { font-size: 24px; font-weight: 500; color: var(--text); margin: 36px 0 14px; letter-spacing: -.02em; }
+.writeup-body h3 { font-size: 19px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
 .writeup-body p  { margin-bottom: 16px; }
 .writeup-body a  { color: var(--accent2); }
 .writeup-body img { border-radius: var(--radius); border: 1px solid var(--border); margin: 24px 0; }
@@ -1180,7 +1180,7 @@ img { max-width: 100%; }
   color: var(--text2);
   font-style: italic;
 }
-.writeup-body table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.writeup-body table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
 .writeup-body th { background: var(--bg3); color: var(--text); padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
 .writeup-body td { padding: 9px 14px; border: 1px solid var(--border); color: var(--text2); }
 
