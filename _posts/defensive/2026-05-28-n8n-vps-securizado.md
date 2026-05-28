@@ -19,31 +19,7 @@ La idea no es confiar en una sola medida. Es que si una falla, la siguiente cont
 
 Ninguno de estos pasos es complicado por separado. Lo que importa es que estén todos, que se entiendan y que no haya huecos entre ellos.
 
-```
-Internet
-    │
-    ▼
-┌─────────────────────────┐
-│   Firewall Hetzner      │  TCP 22, 80, 443 — resto bloqueado
-└────────────┬────────────┘
-             │
-    ▼
-┌─────────────────────────┐
-│   VPS Ubuntu 24.04      │
-│                         │
-│  ┌───────────────────┐  │
-│  │  Caddy (443/80)   │  │  TLS + IP allowlist
-│  └────────┬──────────┘  │
-│           │ red interna │
-│  ┌────────▼──────────┐  │
-│  │       n8n         │  │  puerto 5678 — nunca expuesto
-│  └────────┬──────────┘  │
-│           │             │
-│  ┌────────▼──────────┐  │
-│  │    Postgres 16    │  │  sin puertos publicados
-│  └───────────────────┘  │
-└─────────────────────────┘
-```
+![Diagrama de arquitectura: capas de seguridad del despliegue de n8n](/assets/img/defensiva/n8n-en-VPS/n8n-arquitectura.png)
 
 ---
 
