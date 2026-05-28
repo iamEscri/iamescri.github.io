@@ -14,7 +14,7 @@ Antes de instalar nada en un VPS nuevo, lo primero que revisé fue SSH. Lo dejé
 
 Quería montar un VPS para producción y antes de instalar nada preferí revisar algunas configuraciones básicas de seguridad.
 
-Lo primero que revisé fue el protocolo SSH ya que por defecto cualquier servidor de Linux expone SSH en el puerto 22 sin ninguna restricción y esto provoca que cualquier máquina en internet pueda intentar conectarse al servidor por SSH.
+Lo primero que revisé fue el protocolo SSH ya que **por defecto cualquier servidor de Linux expone SSH en el puerto 22 sin ninguna restricción** y esto provoca que cualquier máquina en internet pueda intentar conectarse al servidor por SSH.
 
 Además no hace falta conocer la IP ya que existen bots en internet que están escaneando direcciones IPs constantemente. Entonces hasta aquí hay dos riesgos concretos:
 
