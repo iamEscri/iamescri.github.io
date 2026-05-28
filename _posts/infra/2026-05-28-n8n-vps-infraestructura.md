@@ -14,6 +14,22 @@ El stack es n8n + Postgres 16 + Caddy sobre un VPS Hetzner CX22 con Ubuntu 24.04
 
 ---
 
+## Estructura del stack
+
+Cuatro componentes con roles bien separados:
+
+![Diagrama de arquitectura del stack: Internet → Caddy → n8n → Postgres en red interna Docker](/assets/img/infra/diagrama.png)
+
+**Caddy** es el único servicio con puertos publicados al exterior. Gestiona TLS automáticamente, aplica el IP allowlist y hace de proxy hacia n8n. Todo el tráfico entra y sale por aquí.
+
+**n8n** nunca es accesible directamente desde fuera. Su puerto 5678 no está publicado en el compose — solo Caddy puede llegar a él por nombre de servicio interno. Es el motor de automatización, pero desde el exterior no existe.
+
+**Postgres 16** tampoco tiene puertos publicados. Solo n8n puede conectarse a él, y únicamente dentro de la red interna Docker. La base de datos es invisible para cualquier otro proceso fuera del stack.
+
+**La red interna Docker** aísla los tres servicios del resto de contenedores que pudiera haber en el servidor. Sin esta red explícita, Docker los asignaría a la bridge por defecto, donde podrían comunicarse con otros contenedores sin relación con este stack.
+
+---
+
 ## El servidor
 
 Hetzner CX22: 2 vCPU, 4 GB RAM, ~10€/mes con IVA. Para un n8n de uso personal o pequeño equipo es más que suficiente — n8n en reposo consume poco, y Postgres con una base de datos pequeña tampoco es exigente. El margen es amplio.
@@ -55,8 +71,6 @@ Dos secretos: la contraseña de Postgres y la clave de cifrado de n8n. La segund
 ## compose.yaml
 
 Tres servicios en red interna. Ningún puerto de aplicación publicado hacia el exterior salvo los de Caddy.
-
-![Diagrama de arquitectura del stack: Internet → Caddy → n8n → Postgres en red interna Docker](/assets/img/infra/diagrama.png)
 
 ```yaml
 services:
