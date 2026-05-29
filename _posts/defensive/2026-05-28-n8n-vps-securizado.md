@@ -107,7 +107,7 @@ Si solo tocas `sshd_config` y dejas `sshd_config.d/50-cloud-init.conf` intacto l
 
 ### Fail2ban: bajar el ruido, no cerrar la puerta
 
-Con autenticación por clave el vector de fuerza bruta ya está muerto porque los bots o cualquier atacante no van a entrar probando contraseñas peero siguen intentándolo y eso genera escrituras en disco, **consume recursos y ensucia los logs con ruido** que tapa lo que sí importa. Es por ello que **decidí implementar fail2ban para banear las IPs que intentasen entrar** varias veces.
+Con autenticación por clave el vector de fuerza bruta ya está muerto porque los bots o cualquier atacante no van a entrar probando contraseñas pero siguen intentándolo provocando que se generen escrituras en disco, **consuma recursos y ensucie los logs con ruido**. Es por ello que **decidí implementar fail2ban para banear las IPs que intentasen entrar** varias veces.
 
 ```ini
 [sshd]
