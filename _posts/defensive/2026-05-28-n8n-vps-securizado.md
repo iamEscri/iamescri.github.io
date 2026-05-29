@@ -257,9 +257,9 @@ Algunas de las decisiones que tomé de este YAML:
 
 **El puerto 5678 no está publicado.** Si lo publicara en el compose cualquiera que alcanzara el servidor llegaría al panel directamente sin pasar por Caddy, sin TLS, sin control de acceso. Al no publicarlo ese puerto no existe fuera de la red interna Docker. Caddy es el único que puede llegar a n8n y lo hace por nombre de servicio. Eso **reduce la superficie** a un solo punto de entrada.
 
-**`EXECUTIONS_DATA_MAX_AGE: "168"`.** Retención de 7 días. Sin esto el historial de ejecuciones crece indefinidamente. Es fácil no darse cuenta hasta que el disco está al 90% y empiezan los problemas y es por ello que preferí ponerlo desde el primer día.
+**EXECUTIONS_DATA_MAX_AGE: "168".** Retención de 7 días. Sin esto el historial de ejecuciones crece indefinidamente. Es fácil no darse cuenta hasta que el disco está al 90% y empiezan los problemas y es por ello que preferí ponerlo desde el primer día.
 
-**`GENERIC_TIMEZONE: Europe/Madrid`.** Los timestamps en UTC dificultan correlacionar eventos con lo que realmente pasó. Con la hora local los logs tienen sentido a primera vista sin tener que hacer conversiones mentales.
+**GENERIC_TIMEZONE: Europe/Madrid.** Los timestamps en UTC dificultan correlacionar eventos con lo que realmente pasó. Con la hora local los logs tienen sentido a primera vista sin tener que hacer conversiones mentales.
 
 ---
 
@@ -351,7 +351,7 @@ Para referencia, este es el Caddyfile completo con todo lo anterior integrado:
 }
 ```
 
-Para recargar Caddy sin reiniciar el contenedor:
+Para recargar Caddy sin reiniciar el contenedor usé el siguiente comando:
 
 ```bash
 docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
