@@ -76,7 +76,7 @@ ssh-keygen -t ed25519 -C "hetzner-n8n" -f ~/.ssh/id_ed25519_hetzner
 
 La passphrase la añadí como segunda capa ya que si alguien se hace con el fichero de clave privada sin ella no le sirve de nada. El comando genera dos ficheros: la clave privada que se queda en mi máquina y la pública `.pub` que va al servidor.
 
-Para pasarla al servidor creé un usuario sin privilegios de root, copié la clave pública a su carpeta `.ssh` y ajusté los permisos SSH de manera estricta para que otros usuarios no puedan leerlo:
+Para pasarla al servidor creé un usuario no root para evitar trabajar directamente con la cuenta root , después le concedí privilegios administrativos mediante sudo para poder realizar tareas de administración, copié la clave pública a su carpeta `.ssh` y ajusté los permisos SSH de manera estricta para que otros usuarios no puedan leerlo:
 
 ```bash
 adduser n8nadmin
