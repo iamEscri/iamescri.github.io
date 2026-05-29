@@ -2,14 +2,13 @@
 layout: post
 title: "n8n en un VPS: por qué lo securicé por capas en vez de levantarlo y ya"
 date: 2026-05-28
-tags: [n8n, hardening, ssh, docker, blue-team, firewall, caddy, self-hosting]
+tags: [n8n, hardening, ssh, docker, blue-team, firewall, caddy, self-hosting, postgres, vps, hetzner, compose]
 description: "Quería practicar n8n sin pagar cloud ni dejar el panel expuesto. Monté un VPS y lo securicé capa a capa: SSH endurecido, firewall perimetral, red interna Docker, IP allowlist y secretos fuera del código."
-blog_category: ciberseguridad
 ---
 
 Quería practicar y usar n8n, la vía rápida era n8n Cloud pero es de pago todos los meses y resulta algo costoso para lo que iba a usarlo. La alternativa era montar n8n yo mismo, solo necesitaba dónde levantarlo. El problema es que un `docker run` con la instalación **por defecto expone el puerto 5678 y deja el panel de control de tus automatizaciones abierto a Internet** sin nada delante corriendo un riesgo que no me apetecía asumir solo por comodidad.
 
-Así que compré un VPS barato y monté n8n y ya que tocaba exponer a Internet un servicio que guarda credenciales y habla con APIs externas lo securicé en cada capa que podía tocar.
+Así que compré un VPS barato, monté n8n y ya que tocaba exponer a Internet un servicio que guarda credenciales y habla con APIs externas lo securicé en cada capa que podía tocar.
 
 Esto no es un tutorial de n8n, es el razonamiento detrás de cada decisión que tomé, qué riesgo cubría cada una y dónde están los límites de lo que monté.
 
@@ -37,7 +36,17 @@ No quería confiar en una sola medida, la idea es que si una falla la siguiente 
 
 Ninguno es complicado por separado, lo que importa es que estén todos, que entienda qué hace cada uno y que no queden huecos entre ellos.
 
-![Diagrama de arquitectura: capas de seguridad del despliegue de n8n](/assets/img/defensiva/n8n-en-VPS/n8n-arquitectura.png)
+![Diagrama de arquitectura: capas de seguridad del despliegue de n8n](/assets/img/defensiva/n8n-en-VPS/diagrama.png)
+
+---
+
+## El servidor
+
+Elegí un Hetzner CX22: 2 vCPU, 4 GB de RAM y unos 10€/mes con IVA. Para un n8n de uso personal es más que suficiente ya que n8n en reposo consume poco y Postgres con una base de datos pequeña tampoco exige mucho. El margen es amplio y si en algún momento necesito más Hetzner me permite escalar el plan sin reconstruir nada.
+
+La ubicación la puse en Nuremberg ya que desde España la latencia es baja y me interesaba que fuera infraestructura europea.
+
+Para el sistema operativo fui con Ubuntu 24.04 LTS ya que tiene soporte hasta 2029 y ofrece un equilibrio razonable entre estabilidad, mantenimiento y disponibilidad de paquetes. La idea era montar una infraestructura que pudiera mantenerse durante años con el menor número posible de cambios importantes y espor eso que una versión LTS tenía bastante sentido
 
 ---
 
@@ -138,6 +147,15 @@ El tráfico saliente lo dejé completamente abierto porque **n8n necesita salir 
 
 ## Docker: los servicios no se hablan por defecto
 
+Para instalar Docker usé el script oficial que detecta la distribución automáticamente:
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker n8nadmin
+```
+
+El usuario `n8nadmin` lo añadí al grupo Docker para poder trabajar con Docker Compose sin utilizar sudo en cada operación. No deja de ser una **decisión basada en confianza ya que quien controla Docker tiene un nivel de acceso muy elevado en el sistema**. En este caso al tratarse de un servidor administrado únicamente por mí preferí priorizar la operatividad.
+
 **n8n, Postgres y Caddy viven en una red interna de Docker**. Postgres no publica ningún puerto y a la base de datos no se llega desde fuera del stack, solo n8n habla con ella por nombre de servicio interno. El 5678 de n8n tampoco está expuesto. Desde fuera ese puerto no existe.
 
 Solo Caddy ve el exterior. Todo lo demás está detrás.
@@ -154,6 +172,93 @@ chmod 600 ~/n8n/secrets/*.txt
 ```
 
 La `N8N_ENCRYPTION_KEY` merece atención aparte ya que **n8n cifra con ella todas las credenciales que guardas en los workflows**. Si la clave cambia al recrear el contenedor, todas esas credenciales quedan ilegibles de golpe. La trato como clave maestra donde no debe de estar en el compose, en Git, y no se regenera salvo en un proceso controlado y a sabiendas de lo que implica.
+
+### compose.yaml
+
+Así sería el docker compose con **tres servicios en red interna**. Ningún puerto de aplicación publicado hacia el exterior salvo los de Caddy:
+
+```yaml
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: n8n
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
+    secrets:
+      - pg_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+    restart: unless-stopped
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:stable
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD_FILE: /run/secrets/pg_password
+      N8N_ENCRYPTION_KEY_FILE: /run/secrets/n8n_encryption_key
+      N8N_HOST: <SUBDOMINIO>
+      N8N_PROTOCOL: https
+      WEBHOOK_URL: https://<SUBDOMINIO>/
+      EXECUTIONS_DATA_PRUNE: "true"
+      EXECUTIONS_DATA_MAX_AGE: "168"
+      GENERIC_TIMEZONE: Europe/Madrid
+    secrets:
+      - pg_password
+      - n8n_encryption_key
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - internal
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal
+    restart: unless-stopped
+
+networks:
+  internal:
+
+volumes:
+  pgdata:
+  n8n_data:
+  caddy_data:
+  caddy_config:
+
+secrets:
+  pg_password:
+    file: ./secrets/pg_password.txt
+  n8n_encryption_key:
+    file: ./secrets/n8n_encryption_key.txt
+```
+
+Algunas de las decisiones que tomé de este YAML:
+
+**Postgres en lugar de SQLite.** n8n usa SQLite por defecto y es lo más rápido de levantar, pero SQLite no maneja bien la concurrencia y hace backup sucio si hay escrituras en curso. Con workflows ejecutándose con frecuencia decidí que Postgres es la decisión correcta desde el principio.
+
+**`stable` en lugar de `latest`.** n8n distingue explícitamente entre los dos tags. `latest` puede apuntar a versiones beta y en un despliegue que quiero mantener funcionando sin problemas no tenía sentido asumir ese riesgo cuando existe un tag específico para producción.
+
+**El puerto 5678 no está publicado.** Si lo publicara en el compose cualquiera que alcanzara el servidor llegaría al panel directamente sin pasar por Caddy, sin TLS, sin control de acceso. Al no publicarlo ese puerto no existe fuera de la red interna Docker. Caddy es el único que puede llegar a n8n y lo hace por nombre de servicio. Eso **reduce la superficie** a un solo punto de entrada.
+
+**`EXECUTIONS_DATA_MAX_AGE: "168"`.** Retención de 7 días. Sin esto el historial de ejecuciones crece indefinidamente. Es fácil no darse cuenta hasta que el disco está al 90% y empiezan los problemas y es por ello que preferí ponerlo desde el primer día.
+
+**`GENERIC_TIMEZONE: Europe/Madrid`.** Los timestamps en UTC dificultan correlacionar eventos con lo que realmente pasó. Con la hora local los logs tienen sentido a primera vista sin tener que hacer conversiones mentales.
 
 ---
 
@@ -210,6 +315,83 @@ Referrer-Policy "no-referrer"
 `X-Frame-Options DENY` impide que el panel se cargue dentro de un iframe ajeno cortando ataques de clickjacking. 
 
 `Referrer-Policy no-referrer` hace que el navegador no envíe información de origen cuando navegas fuera del panel ya que nadie necesita saber desde dónde llegaste. Y quitar el header `Server` elimina la pista de qué software está detrás, un detalle pequeño, pero reduce el reconocimiento pasivo y no cuesta nada hacerlo.
+
+### Caddyfile completo
+
+Para referencia, este es el Caddyfile completo con todo lo anterior integrado:
+
+```
+<SUBDOMINIO> {
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    Referrer-Policy "no-referrer"
+    -Server
+  }
+
+  handle /webhook/* {
+    reverse_proxy n8n:5678
+  }
+
+  handle /webhook-test/* {
+    reverse_proxy n8n:5678
+  }
+
+  handle {
+    @tuip remote_ip <IP NUESTRA>
+    handle @tuip {
+      reverse_proxy n8n:5678
+    }
+    handle {
+      respond "403 Forbidden" 403
+    }
+  }
+}
+```
+
+Para recargar Caddy sin reiniciar el contenedor:
+
+```bash
+docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+```
+
+---
+
+## DNS y TLS
+
+Para el DNS añadí un registro A apuntando el subdominio a la IP del VPS. Puse TTL 300 durante la configuración para que propagara rápido.
+
+
+
+Caddy resuelve el challenge TLS-ALPN-01 con Let's Encrypt automáticamente al arrancar. No hay ningún cron, ningún certbot, ningún proceso externo que gestionar. Los logs confirman el momento exacto en que el certificado está listo:
+
+```
+caddy  | {"level":"info","msg":"certificate obtained successfully","identifier":"<SUBDOMINIO>"}
+```
+
+A partir de ahí la renovación es automática y transparente.
+
+---
+
+## Arranque y lo que encontré la primera vez
+
+```bash
+docker compose up -d
+docker compose ps
+```
+
+El orden en el que verifico es el siguiente: primero que los tres contenedores estén en `Up`, luego los logs de Caddy para confirmar el certificado, luego acceso al panel desde mi IP y 403 desde otra IP diferente.
+
+Algo que me encontré en el primer arranque fue que el `depends_on` del compose garantiza que Postgres arranca antes que n8n, pero no espera a que Postgres esté listo para aceptar conexiones. n8n puede arrancar antes de que la base de datos haya terminado de inicializarse y falla en el primer intento de conexión provocando que en los logs se muestre un error de conexión que pueda confundir si no sabe qué es. Con `restart: unless-stopped` Docker lo reintenta automáticamente y en unos segundos se resuelve solo, pero la primera vez que lo vi tuve que investigar si era un problema real o simplemente un tema de timing. Era lo segundo.
+
+---
+
+## Lo que no sube a Git
+
+El `compose.yaml` y el `Caddyfile` van a un repositorio privado. La carpeta `secrets/` nunca aunque el repositorio sea privado, los secretos en Git siguen siendo un riesgo ya que con que se haga público por error, que un token de acceso se filtre, o que alguien con acceso de lectura no debiera tenerlo.
+
+**Los secretos viven solo en el servidor**, con permisos 600, propiedad del usuario que corre los contenedores. Es el único sitio donde tienen que estar.
 
 ---
 
