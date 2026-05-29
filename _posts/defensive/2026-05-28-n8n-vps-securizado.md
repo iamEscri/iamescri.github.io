@@ -43,7 +43,7 @@ Ninguno es complicado por separado, lo que importa es que estén todos, que enti
 
 ## SSH: lo primero que tocan
 
-Cuando se expone un servidor a Internet los intentos de acceso por SSH empiezan en cuestión de minutos, cuando los logs había IPs probando antes de  comenzar aconfigurar el servidor:
+Cuando se expone un servidor a Internet los intentos de acceso por SSH empiezan en cuestión de minutos, cuando ví los logs había IPs probando antes de comenzar a configurar el servidor:
 
 ```
 May 10 03:14:22 sshd[1837]: Invalid user admin from 218.92.0.113
@@ -52,7 +52,7 @@ May 10 03:14:31 sshd[1841]: Invalid user ubuntu from 185.224.128.39
 May 10 03:15:03 sshd[1844]: Invalid user postgres from 45.142.212.100
 ```
 
-Lo que se ve ahí es exactamente lo que esperaba ver: bots rastreando rangos de IP y probando usuarios comunes como — `admin`, `root`, `ubuntu`, `postgres`. No es un ataque dirigido solo eses ruido automatizado constante.
+Lo que se ve ahí es exactamente lo que esperaba ver: bots rastreando rangos de IP y probando usuarios comunes como  `admin`, `root`, `ubuntu`, `postgres` , esto **no es un ataque dirigido solo eses ruido automatizado constante**.
 
 El primer cambio que hice elimina los dos vectores más probados que son el login como root y autenticación por contraseña.
 
@@ -193,6 +193,8 @@ handle {
 
 ### Cabeceras de seguridad
 
+Estas son las cabeceras de seguridad que utilicé
+
 ```
 Strict-Transport-Security "max-age=31536000; includeSubDomains"
 X-Content-Type-Options "nosniff"
@@ -223,6 +225,6 @@ La autenticación de webhooks con HMAC tampoco está. Hoy quien conozca la URL d
 
 ## Lo que queda montado
 
-El servidor solo acepta SSH por clave, sin root posible. El firewall perimetral bloquea todo lo que no sean los tres puertos que necesito. Los servicios están aislados en red interna y ningún puerto de aplicación se expone directamente. El panel de n8n es invisible para cualquier IP que no sea la mía y las credenciales no aparecen en texto plano en ningún fichero de configuración.
+El servidor solo acepta SSH por `clave`, sin root posible. **El firewall perimetral bloquea todo lo que no sean los tres puertos que necesito**. Los servicios están `aislados` en red interna y ningún puerto de aplicación se expone directamente. **El panel de n8n es invisible para cualquier IP que no sea la mía** y las credenciales no aparecen en texto plano en ningún fichero de configuración.
 
 No es 100% seguro ya que eso no existe. Es una configuración donde cada decisión tiene un motivo detrás y las limitaciones están identificadas antes de convertirse en un problema. Para lo que necesitaba practicar n8n sin pagar cloud y sin dejar un panel sensible abierto al mundo me parece el equilibrio correcto.
