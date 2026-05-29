@@ -4,7 +4,7 @@ title: "SSH expuesto: lo que pasa en las primeras horas y cómo lo arreglé"
 category: defensive
 date: 2026-05-15
 read_time: 8
-tags: [ssh, hardening, linux, blue-team, fail2ban, vps, hetzner]
+tags: [ssh, hardening, blue-team, fail2ban, vps, hetzner]
 description: "Desplegué un VPS, lo dejé expuesto sin tocar nada y monitoricé lo que llegaba. 506 intentos en 2 horas. Esto es lo que hice y por qué."
 ---
 
