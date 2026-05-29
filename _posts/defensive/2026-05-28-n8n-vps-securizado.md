@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "n8n en un VPS: por qué lo securicé por capas en vez de levantarlo y ya"
+category: defensive
 date: 2026-05-28
 tags: [n8n, hardening, ssh, docker, blue-team, firewall, caddy, self-hosting, postgres, vps, hetzner, compose]
 description: "Quería practicar n8n sin pagar cloud ni dejar el panel expuesto. Monté un VPS y lo securicé capa a capa: SSH endurecido, firewall perimetral, red interna Docker, IP allowlist y secretos fuera del código."
