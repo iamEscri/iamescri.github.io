@@ -64,9 +64,37 @@ PasswordAuthentication no
 
 Root es el objetivo porque existe en todos los Linux y tiene permisos totales, si entran el servidor es suyo sin necesidad de escalar nada.
 
-La autenticación por contraseña no me convencía ya que por muy larga que sea puede probarse por fuerza bruta de forma remota. Con autenticación por clave eso desaparece y la clave privada nunca sale de tu máquina, el servidor solo verifica una firma criptográfica. No hay secreto que interceptar ni que adivinar a distancia. Así que preferí clave desde el primer momento.
+### Autenticación por clave ed25519
 
-**Para el algoritmo elegí ed25519 en lugar de RSA debido a que genera claves más cortas con el mismo nivel de seguridad**, es más rápido en verificación y es el estándar actual. RSA sigue funcionando pero a estas alturas no le vi sentido a desplegar claves RSA nuevas salvo que necesitara compatibilidad con algo antiguo y no era el caso. La passphrase la añadí como segunda capa: si alguien se hace con el fichero de clave privada sin ella no le sirve de nada, así que procedí a deshabitar la autenticación por contraseña.
+**La autenticación por contraseña** no me convencía ya que por muy larga que sea **puede probarse por fuerza bruta** de forma remota. Con autenticación por clave eso desaparece ya que la clave privada nunca sale de tu máquina y el servidor solo verifica una firma criptográfica. No hay secreto que interceptar ni que adivinar a distancia y eso por eso que preferí usar clave.
+
+Para el algoritmo **elegí ed25519 en lugar de RSA porque genera claves más cortas con el mismo nivel de seguridad**, es más rápido en verificación y es el estándar actual. RSA sigue funcionando pero no le vi sentido a desplegar claves RSA nuevas salvo que necesitara compatibilidad con algo antiguo, y no era el caso.
+
+```bash
+ssh-keygen -t ed25519 -C "hetzner-n8n" -f ~/.ssh/id_ed25519_hetzner
+```
+
+La passphrase la añadí como segunda capa ya que si alguien se hace con el fichero de clave privada sin ella no le sirve de nada. El comando genera dos ficheros: la clave privada que se queda en mi máquina y la pública `.pub` que va al servidor.
+
+Para pasarla al servidor creé un usuario sin privilegios de root, copié la clave pública a su carpeta `.ssh` y ajusté los permisos SSH de manera estricta para que otros usuarios no puedan leerlo:
+
+```bash
+adduser n8nadmin
+usermod -aG sudo n8nadmin
+mkdir -p /home/n8nadmin/.ssh
+cp /root/.ssh/authorized_keys /home/n8nadmin/.ssh/
+chown -R n8nadmin:n8nadmin /home/n8nadmin/.ssh
+chmod 700 /home/n8nadmin/.ssh
+chmod 600 /home/n8nadmin/.ssh/authorized_keys
+```
+
+Con el usuario listo y la clave en su sitio, deshabité root y contraseña:
+
+```bash
+# /etc/ssh/sshd_config
+PermitRootLogin no
+PasswordAuthentication no
+```
 
 **El detalle que me costó un rato:** en Ubuntu 24.04 hay un segundo fichero que pisa la configuración principal.
 
@@ -75,7 +103,7 @@ La autenticación por contraseña no me convencía ya que por muy larga que sea 
 PasswordAuthentication no
 ```
 
-Si solo tocas `sshd_config` y dejas `sshd_config.d/50-cloud-init.conf` intacto la autenticación por contraseña sigue activa y esto lo descubrí porque el cambio no surtía efecto y tuve que rastrear por qué. No es obvio si no sabes que ese fichero está ahí y es justo el tipo de cosa que crees haber cerrado y sigue abierta.
+Si solo tocas `sshd_config` y dejas `sshd_config.d/50-cloud-init.conf` intacto la autenticación por contraseña sigue activa. Esto lo descubrí porque el cambio no surtía efecto y tuve que rastrear por qué. No es obvio si no sabes que ese fichero está ahí y es justo el tipo de cosa que crees haber cerrado y sigue abierta.
 
 ### Fail2ban: bajar el ruido, no cerrar la puerta
 
