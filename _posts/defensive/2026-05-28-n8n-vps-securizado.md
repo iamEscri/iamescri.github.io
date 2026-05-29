@@ -112,11 +112,11 @@ Con autenticación por clave el vector de fuerza bruta ya está muerto porque lo
 ```ini
 [sshd]
 maxretry = 3
-findtime = 10
+findtime = 600
 bantime = 604800
 ```
 
-Con esta configuración **tres intentos en diez segundos provoca un ban de una semana**. Un usuario legítimo no falla tres veces en diez segundos pero un bot agresivo sí. El bantime lo dejé en una semana a propósito porque un valor enorme complica recuperarte si algún día te baneas a ti mismo por error que también puede pasar pero no debería.
+Con esta configuración **tres intentos fallidos en diez minutos provoca un ban de una semana**. Un usuario legítimo no falla tres veces en diez segundos pero un bot agresivo sí. El bantime lo dejé en una semana a propósito porque un valor enorme complica recuperarte si algún día te baneas a ti mismo por error que también puede pasar pero no debería.
 
 ---
 
