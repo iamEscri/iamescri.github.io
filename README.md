@@ -8,7 +8,7 @@
 
 **Técnico IT (ASIR) · Ciberseguridad · Blue Team & SOC en formación**
 
-[![Sitio web](https://img.shields.io/badge/🌐_Web-iamescri.es-00ff41?style=flat-square&logo=googlechrome&logoColor=white)](https://iamescri.es)
+[![Sitio web](https://img.shields.io/badge/🌐_Web-iamescri.es-00e5a0?style=flat-square&logo=googlechrome&logoColor=white)](https://iamescri.es)
 [![GitHub Pages](https://img.shields.io/github/deployments/iamEscri/iamescri.github.io/github-pages?style=flat-square&label=GitHub%20Pages&logo=github&logoColor=white)](https://iamescri.github.io)
 [![Jekyll](https://img.shields.io/badge/Jekyll-4.3-CC0000?style=flat-square&logo=jekyll&logoColor=white)](https://jekyllrb.com)
 [![GitHub Actions](https://img.shields.io/github/actions/workflow/status/iamEscri/iamescri.github.io/deploy.yml?branch=main&style=flat-square&label=CI%2FCD&logo=githubactions&logoColor=white)](https://github.com/iamEscri/iamescri.github.io/actions)
@@ -21,7 +21,7 @@
 ## Objetivo del proyecto
 
 Este portfolio documenta mi evolución práctica en ciberseguridad,
-con foco en Blue Team, detección de amenazas y entornos SOC.
+con foco en Blue Team, detección de amenazas, infraestructura y automatización con IA.
 
 El objetivo es demostrar habilidades reales mediante contenido técnico reproducible.
 
@@ -33,11 +33,12 @@ Repositorio del portfolio personal de **iamEscri** — un técnico de sistemas (
 
 El sitio está construido con **Jekyll** y desplegado en **GitHub Pages** bajo el dominio propio [`iamescri.es`](https://iamescri.es). Funciona como hub central para:
 
-- 🔍 **Writeups** de máquinas CTF (HackTheBox, DockerLabs, Vulnyx, TryHackMe)
 - 🛡️ **Seguridad defensiva** — hardening, Blue Team y detección de amenazas
-- 📝 **Blog técnico** — cheatsheets, tutoriales y reflexiones
-- 🚀 **Proyectos** — herramientas y scripts propios
-- 🧠 **Portfolio** — skills, certificaciones y herramientas
+- 🧱 **Infraestructura** — self-hosting, despliegues y endurecimiento de servicios
+- 🤖 **Automatización con IA** — workflows de seguridad con n8n + LLM
+- 🔍 **Writeups** de máquinas CTF (HackTheBox, DockerLabs, Vulnyx, TryHackMe)
+- 🚀 **Proyectos** — herramientas y scripts propios documentados
+- 🧠 **Sobre mí** — bio, áreas de trabajo, stack, skills y certificaciones
 
 ---
 
@@ -48,39 +49,40 @@ iamescri.github.io/
 │
 ├── 📄 _config.yml                          # Configuración global de Jekyll
 ├── 📄 Gemfile                              # Dependencias Ruby/Jekyll
-├── 📄 index.html                           # Página principal (SPA con secciones dinámicas)
+├── 📄 index.html                           # Página principal (SPA: secciones + navegación)
 ├── 📄 CNAME                                # Dominio personalizado → iamescri.es
 ├── 📄 robots.txt                           # Directivas para crawlers + Sitemap
 ├── 📄 LICENSE                              # Licencia MIT
 │
 ├── 📁 _data/
-│   ├── portfolio.yml                       # Bio, skills, objetivos, herramientas, roadmap de certs
+│   ├── portfolio.yml                       # Bio, áreas, skills, stack, herramientas, certs y roadmap
 │   └── projects.yml                        # Metadatos de proyectos (renderizados automáticamente)
 │
 ├── 📁 _layouts/
-│   ├── default.html                        # Layout base (sidebar + topbar)
-│   ├── post.html                           # Layout para blog y seguridad defensiva
+│   ├── default.html                        # Layout base (topbar + estructura común)
+│   ├── post.html                           # Layout para defensiva, infraestructura y automatización
 │   ├── writeup.html                        # Layout para writeups CTF
 │   └── project.html                        # Layout para páginas de detalle de proyecto
 │
-├── 📁 _includes/
-│   ├── sidebar.html                        # Navegación lateral
-│   ├── topbar.html                         # Barra superior
-│   └── writeup-card.html                   # Componente de tarjeta de writeup
+├── 📁 _includes/                           # Parciales auxiliares (la navegación vive en index.html)
+│   ├── sidebar.html
+│   ├── topbar.html
+│   └── writeup-card.html
 │
-├── 📁 _posts/                              # ⚠️ Las páginas de cada sección se generan
-│   ├── writeups/                           #    dinámicamente. No editar la salida de Jekyll.
-│   ├── blog/
-│   ├── defensive/
-│   └── projects/                           # Página de detalle de cada proyecto
+├── 📁 _posts/                              # ⚠️ Cada sección se genera dinámicamente desde aquí
+│   ├── writeups/                           #    Un .md por máquina comprometida
+│   ├── defensive/                          #    Blue Team, hardening y detección
+│   ├── infra/                              #    Infraestructura y self-hosting
+│   ├── auto/                               #    Automatización con IA (n8n + LLM)
+│   └── projects/                           #    Página de detalle de cada proyecto
 │
 ├── 📁 assets/
-│   ├── css/main.css                        # Estilos globales (tema hacker oscuro, sin frameworks)
+│   ├── css/main.css                        # Estilos globales (tema premium dark · DM Sans + DM Mono · sin frameworks)
 │   ├── js/main.js                          # JavaScript vanilla del sitio
 │   ├── favicon.ico / favicon.png
 │   └── img/
-│       ├── blog/                           # Imágenes para posts de blog
-│       ├── defensiva/                      # Subdirectorio por artículo
+│       ├── defensiva/<nombre-post>/        # Imágenes por artículo defensivo
+│       ├── infra/                          # Imágenes de infraestructura
 │       └── writeups/
 │           ├── dockerlabs/
 │           └── hackthebox/
@@ -98,7 +100,8 @@ iamescri.github.io/
 |:--|:--|
 | Generador estático | [Jekyll 4.3](https://jekyllrb.com) |
 | Plantillas | Liquid + HTML5 |
-| Estilos | CSS3 custom (sin frameworks · tema hacker dark) |
+| Estilos | CSS3 custom (sin frameworks · tema premium dark) |
+| Tipografía | DM Sans + DM Mono (Google Fonts) |
 | Scripting | JavaScript vanilla |
 | Contenido | Markdown (kramdown) |
 | Resaltado de código | Rouge |
@@ -148,33 +151,18 @@ bundle exec jekyll serve
 
 ### Writeup de CTF
 
-Archivo en `_posts/writeups/` con formato `YYYY-MM-DD-nombre-maquina.md`:
+Archivo en `_posts/writeups/` con formato `YYYY-MM-DD-plataforma-maquina.md`:
 
 ```yaml
 ---
 layout: writeup
 title: "Nombre de la máquina"
-platform: dockerlabs        # dockerlabs | hackthebox | tryhackme | vulnyx
-difficulty: facil            # facil | medio | dificil | insane
+platform: hackthebox         # hackthebox | tryhackme | dockerlabs | vulnyx
+difficulty: medium           # very easy | easy | medium | hard
 os: linux                    # linux | windows
+date: YYYY-MM-DD
 tags: [nmap, sqli, privesc]
-date: YYYY-MM-DD
 description: "Descripción breve de la máquina."
----
-```
-
-### Post de blog
-
-Archivo en `_posts/blog/`:
-
-```yaml
----
-layout: post
-title: "Título del artículo"
-date: YYYY-MM-DD
-read_time: 5
-tags: [linux, privesc]
-description: "Descripción breve."
 ---
 ```
 
@@ -189,7 +177,39 @@ title: "Título del artículo"
 category: defensive
 date: YYYY-MM-DD
 read_time: 5
-tags: [ssh, logs, siem]
+tags: [ssh, hardening, blue-team]
+description: "Descripción breve."
+---
+```
+
+### Artículo de infraestructura
+
+Archivo en `_posts/infra/`:
+
+```yaml
+---
+layout: post
+title: "Título del artículo"
+category: infra
+date: YYYY-MM-DD
+read_time: 5
+tags: [docker, self-hosting, traefik]
+description: "Descripción breve."
+---
+```
+
+### Artículo de automatización con IA
+
+Archivo en `_posts/auto/`:
+
+```yaml
+---
+layout: post
+title: "Título del artículo"
+category: auto
+date: YYYY-MM-DD
+read_time: 5
+tags: [n8n, llm, automatizacion]
 description: "Descripción breve."
 ---
 ```
@@ -235,12 +255,14 @@ Descripción detallada del proyecto en Markdown...
   wip: false
 ```
 
+> El `post_url` de la tarjeta debe coincidir con la URL que genera el `.md` de la página de detalle. Si el proyecto aún no está listo, pon `wip: true` y no hace falta crear el `.md`.
+
 ### Imágenes por sección
 
 | Sección | Ruta |
 |:--|:--|
-| Blog | `assets/img/blog/` |
 | Seguridad defensiva | `assets/img/defensiva/<nombre-post>/` |
+| Infraestructura | `assets/img/infra/` |
 | Writeups DockerLabs | `assets/img/writeups/dockerlabs/` |
 | Writeups HackTheBox | `assets/img/writeups/hackthebox/` |
 
@@ -256,12 +278,14 @@ Todo el contenido visible se controla desde dos ficheros YAML, sin tocar HTML ni
 | Bio y highlights | `_data/portfolio.yml` | `bio`, `bio_highlights` |
 | Disponibilidad para trabajar | `_data/portfolio.yml` | `available: true/false` |
 | Texto bajo "Disponible" | `_data/portfolio.yml` | `available_roles` |
-| Objetivos del terminal | `_data/portfolio.yml` | `objetivos[].status` → `done` / `pending` |
+| Objetivos del home | `_data/portfolio.yml` | `objetivos[].status` → `done` / `pending` |
 | Panel "En desarrollo" | `_data/portfolio.yml` | `en_desarrollo[].status` → `in-progress` / `done` |
 | Stack activo (home) | `_data/portfolio.yml` | `stack_activo` |
+| Áreas de trabajo (Sobre mí) | `_data/portfolio.yml` | `areas_trabajo` |
 | Skills con barras | `_data/portfolio.yml` | `skills[].pct` (0–100) |
 | Herramientas (iconos Devicons) | `_data/portfolio.yml` | `tools` |
 | Certificaciones | `_data/portfolio.yml` | `certifications[].status` → `obtained` / `in-progress` |
+| Formación complementaria | `_data/portfolio.yml` | `complementary_training` |
 | Roadmap de certs | `_data/portfolio.yml` | `roadmap[].status` → `done` / `wip` / `next` / `future` |
 | Proyectos | `_data/projects.yml` | — |
 | Avatar | `assets/favicon.png` + `_config.yml` → `avatar` | — |
@@ -313,12 +337,13 @@ El archivo `CNAME` en la raíz del repositorio contiene el valor `iamescri.es`. 
 
 | Sección | Descripción |
 |:--|:--|
-| **Home** | Terminal interactivo con estadísticas calculadas automáticamente del contenido publicado |
-| **Writeups** | Resoluciones de máquinas CTF filtrables por plataforma y dificultad |
-| **Portfolio** | Bio, skills con barras de progreso, herramientas con iconos Devicons y certificaciones |
-| **Blog** | Cheatsheets, tutoriales y artículos técnicos |
+| **Inicio** | Hero de presentación con contadores calculados automáticamente del contenido publicado |
+| **Sobre mí** | Bio, áreas de trabajo, stack, skills, certificaciones y contacto |
 | **Seg. Defensiva** | Guías de Blue Team, hardening y detección de amenazas |
-| **Proyectos** | Herramientas y scripts desarrollados personalmente |
+| **Infraestructura** | Self-hosting, despliegues y endurecimiento de servicios |
+| **Automatización con IA** | Workflows de seguridad con n8n + LLM |
+| **Writeups** | Resoluciones de máquinas CTF filtrables por plataforma y dificultad |
+| **Proyectos** | Herramientas y automatizaciones desarrolladas personalmente |
 
 ---
 
@@ -347,7 +372,7 @@ No está permitido su uso para suplantación de identidad ni la reproducción co
 
 <div align="center">
 
-Hecho con ☕ y muchas horas de CTFs
+Hecho con ☕ y muchas horas de laboratorio
 
 [@iamEscri](https://github.com/iamEscri) · [iamescri.es](https://iamescri.es) · [LinkedIn](https://www.linkedin.com/in/alvaro-escribano-3b9a513a5/)
 
