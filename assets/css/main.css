@@ -1165,8 +1165,8 @@ img { max-width: 100%; }
 .writeup-title { font-size: 36px; font-weight: 300; letter-spacing: -.04em; line-height: 1.15; color: #fff; }
 .writeup-body { font-size: 17px; color: #b4bac6; line-height: 1.8; }
 .writeup-body strong { color: #d6dae2; }
-.writeup-body h2 { font-size: 24px; font-weight: 500; color: var(--text); margin: 36px 0 14px; letter-spacing: -.02em; }
-.writeup-body h3 { font-size: 19px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
+.writeup-body h2 { font-size: 28px; font-weight: 500; color: var(--text); margin: 36px 0 14px; letter-spacing: -.02em; }
+.writeup-body h3 { font-size: 21px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
 .writeup-body p  { margin-bottom: 16px; }
 .writeup-body a  { color: var(--accent2); }
 .writeup-body img { border-radius: var(--radius); border: 1px solid var(--border); margin: 24px 0; }
