@@ -3,7 +3,7 @@
    DM Sans + DM Mono · Premium dark · No hacker
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
 
 /* ===== VARIABLES ===== */
 :root {
@@ -223,7 +223,7 @@ img { max-width: 100%; }
   margin-bottom: 40px;
   font-weight: 400;
 }
-.hero-desc em { color: var(--text); font-style: normal; font-weight: 500; }
+.hero-desc em { color: var(--text); font-style: normal; font-weight: 600; }
 
 .hero-btns { display: flex; gap: 10px; margin-bottom: 0; }
 .btn-primary {
@@ -434,7 +434,7 @@ img { max-width: 100%; }
 }
 .about-body p { margin-bottom: 16px; }
 .about-body p:last-child { margin-bottom: 0; }
-.about-body em { color: var(--text); font-style: normal; font-weight: 500; }
+.about-body em { color: var(--text); font-style: normal; font-weight: 600; }
 
 /* CONTACTO — nueva versión con tarjeta e iconos */
 .about-contact {
@@ -1164,7 +1164,7 @@ img { max-width: 100%; }
 .writeup-meta-line { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
 .writeup-title { font-size: 36px; font-weight: 300; letter-spacing: -.04em; line-height: 1.15; color: #fff; }
 .writeup-body { font-size: 17px; color: #b4bac6; line-height: 1.8; }
-.writeup-body strong { color: #d6dae2; }
+.writeup-body strong { color: #d6dae2; font-weight: 600; }
 .writeup-body h2 { font-size: 28px; font-weight: 500; color: var(--text); margin: 36px 0 14px; letter-spacing: -.02em; }
 .writeup-body h3 { font-size: 23px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
 .writeup-body p  { margin-bottom: 16px; }
