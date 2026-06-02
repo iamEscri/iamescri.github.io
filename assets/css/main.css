@@ -217,13 +217,13 @@ img { max-width: 100%; }
 
 .hero-desc {
   font-size: 16px;
-  color: var(--text2);
+  color: #b4bac6;
   line-height: 1.75;
   max-width: 480px;
   margin-bottom: 40px;
-  font-weight: 300;
+  font-weight: 400;
 }
-.hero-desc em { color: var(--text); font-style: normal; }
+.hero-desc em { color: var(--text); font-style: normal; font-weight: 500; }
 
 .hero-btns { display: flex; gap: 10px; margin-bottom: 0; }
 .btn-primary {
