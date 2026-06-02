@@ -1164,7 +1164,7 @@ img { max-width: 100%; }
 .writeup-meta-line { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
 .writeup-title { font-size: 36px; font-weight: 300; letter-spacing: -.04em; line-height: 1.15; color: #fff; }
 .writeup-body { font-size: 17px; color: #b4bac6; line-height: 1.8; }
-.writeup-body strong { color: #c8ccd6; }
+.writeup-body strong { color: #e0e3ea; }
 .writeup-body h2 { font-size: 24px; font-weight: 500; color: var(--text); margin: 36px 0 14px; letter-spacing: -.02em; }
 .writeup-body h3 { font-size: 19px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
 .writeup-body p  { margin-bottom: 16px; }
