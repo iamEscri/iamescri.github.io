@@ -434,7 +434,7 @@ img { max-width: 100%; }
 }
 .about-body p { margin-bottom: 16px; }
 .about-body p:last-child { margin-bottom: 0; }
-.about-body em { color: var(--text); font-style: normal; }
+.about-body em { color: var(--text); font-style: normal; font-weight: 500; }
 
 /* CONTACTO — nueva versión con tarjeta e iconos */
 .about-contact {
