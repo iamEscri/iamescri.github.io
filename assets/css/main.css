@@ -426,10 +426,10 @@ img { max-width: 100%; }
 }
 .about-title-muted { color: var(--text2); font-weight: 300; }
 .about-body {
-  font-size: 15px;
-  color: var(--text2);
-  line-height: 1.9;
-  font-weight: 300;
+  font-size: 16px;
+  color: #c8ccd6;
+  line-height: 1.85;
+  font-weight: 400;
   margin-bottom: 36px;
 }
 .about-body p { margin-bottom: 16px; }
