@@ -426,7 +426,7 @@ img { max-width: 100%; }
 }
 .about-title-muted { color: var(--text2); font-weight: 300; }
 .about-body {
-  font-size: 17px;
+  font-size: 16px;
   color: #b4bac6;
   line-height: 1.85;
   font-weight: 400;
