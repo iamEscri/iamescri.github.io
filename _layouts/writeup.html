@@ -30,13 +30,13 @@
       <span class="topnav-logo-text">iam<span class="logo-accent">Escri</span></span>
     </div>
     <div class="topnav-links">
-      <span class="topnav-link" onclick="showSection('home',null)">Inicio</span>
-      <span class="topnav-link" onclick="showSection('about',null)">Sobre mí</span>
-      <span class="topnav-link" onclick="showSection('defensive',null)">Defensiva</span>
-      <span class="topnav-link" onclick="showSection('infra',null)">Infraestructura</span>
-      <span class="topnav-link" onclick="showSection('auto',null)">Automatización</span>
-      <span class="topnav-link active" onclick="showSection('writeups',null)">Writeups</span>
-      <span class="topnav-link" onclick="showSection('projects',null)">Proyectos</span>
+      <a class="topnav-link" href="{{ '/#home' | relative_url }}">Inicio</a>
+      <a class="topnav-link" href="{{ '/#about' | relative_url }}">Sobre mí</a>
+      <a class="topnav-link" href="{{ '/#defensive' | relative_url }}">Defensiva</a>
+      <a class="topnav-link" href="{{ '/#infra' | relative_url }}">Infraestructura</a>
+      <a class="topnav-link" href="{{ '/#auto' | relative_url }}">Automatización</a>
+      <a class="topnav-link active" href="{{ '/#writeups' | relative_url }}">Writeups</a>
+      <a class="topnav-link" href="{{ '/#projects' | relative_url }}">Proyectos</a>
     </div>
     <div class="topnav-right">
       <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="topnav-gh">GitHub →</a>

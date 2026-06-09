@@ -17,17 +17,34 @@ function showSection(id, navEl) {
     var el = document.getElementById('nav-' + id);
     if (el) el.classList.add('active');
   }
+  updateHash(id);
   if (window.innerWidth <= 960) closeMobileNav();
   window.scrollTo(0, 0);
 }
 
+// Mantiene la URL sincronizada con la sección activa
+// (permite compartir enlaces y que funcione el botón atrás)
+function updateHash(id) {
+  if (!history.pushState) return;
+  var target = '#' + id;
+  if (window.location.hash === target) return;
+  if (id === 'home') {
+    if (!window.location.hash) return;
+    history.pushState(null, '', window.location.pathname);
+  } else {
+    history.pushState(null, '', target);
+  }
+}
+
 function handleHashNavigation() {
   if (IS_SUBPAGE) return;
-  var hash = window.location.hash.replace('#', '');
-  if (hash && document.getElementById('section-' + hash)) {
+  var hash = window.location.hash.replace('#', '') || 'home';
+  if (document.getElementById('section-' + hash)) {
     showSection(hash, null);
   }
 }
+
+window.addEventListener('hashchange', handleHashNavigation);
 
 // ── Mobile nav ───────────────────────────────
 function toggleMobileNav() {
@@ -106,6 +123,47 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCounts();
   }
 });
+
+// ── Reveal on scroll ─────────────────────────
+(function() {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var SELECTOR = [
+    '.estado-card', '.stack-badge', '.home-activity-row',
+    '.blog-card', '.writeup-card', '.project-card',
+    '.about-cert-cell', '.training-row'
+  ].join(',');
+
+  function init() {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        observer.unobserve(el);
+        el.classList.add('reveal-in');
+        // Tras la animación se limpia el estado para no interferir
+        // con las transiciones de hover del propio elemento
+        var delay = parseInt(el.style.transitionDelay, 10) || 0;
+        setTimeout(function() {
+          el.classList.remove('reveal-init', 'reveal-in');
+          el.style.transitionDelay = '';
+        }, 600 + delay);
+      });
+    }, { threshold: .08, rootMargin: '0px 0px -24px 0px' });
+
+    document.querySelectorAll(SELECTOR).forEach(function(el) {
+      var siblings = el.parentElement ? el.parentElement.children : [];
+      var idx = Array.prototype.indexOf.call(siblings, el);
+      el.classList.add('reveal-init');
+      el.style.transitionDelay = (Math.max(idx, 0) % 6) * 50 + 'ms';
+      observer.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
+})();
 
 // ── Code block headers + copy button ─────────────────
 (function() {

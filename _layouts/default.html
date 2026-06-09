@@ -17,13 +17,13 @@
 <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menú">&#9776;</button>
 <div class="overlay" id="overlay" onclick="closeMobileNav()"></div>
 <nav class="mobile-nav" id="mobile-nav">
-  <span class="mobile-nav-link" onclick="showSection('home',this);closeMobileNav()">Inicio</span>
-  <span class="mobile-nav-link" onclick="showSection('about',this);closeMobileNav()">Sobre mí</span>
-  <span class="mobile-nav-link" onclick="showSection('defensive',this);closeMobileNav()">Defensiva</span>
-  <span class="mobile-nav-link" onclick="showSection('infra',this);closeMobileNav()">Infraestructura</span>
-  <span class="mobile-nav-link" onclick="showSection('auto',this);closeMobileNav()">Automatización</span>
-  <span class="mobile-nav-link" onclick="showSection('writeups',this);closeMobileNav()">Writeups</span>
-  <span class="mobile-nav-link" onclick="showSection('projects',this);closeMobileNav()">Proyectos</span>
+  <a class="mobile-nav-link" href="#home" onclick="closeMobileNav()">Inicio</a>
+  <a class="mobile-nav-link" href="#about" onclick="closeMobileNav()">Sobre mí</a>
+  <a class="mobile-nav-link" href="#defensive" onclick="closeMobileNav()">Defensiva</a>
+  <a class="mobile-nav-link" href="#infra" onclick="closeMobileNav()">Infraestructura</a>
+  <a class="mobile-nav-link" href="#auto" onclick="closeMobileNav()">Automatización</a>
+  <a class="mobile-nav-link" href="#writeups" onclick="closeMobileNav()">Writeups</a>
+  <a class="mobile-nav-link" href="#projects" onclick="closeMobileNav()">Proyectos</a>
 </nav>
 
 <div class="main-wrap">
@@ -36,13 +36,13 @@
       <span class="topnav-logo-text">iam<span class="logo-accent">Escri</span></span>
     </div>
     <div class="topnav-links">
-      <span class="topnav-link active" id="nav-home"      onclick="showSection('home',this)">Inicio</span>
-      <span class="topnav-link"        id="nav-about"     onclick="showSection('about',this)">Sobre mí</span>
-      <span class="topnav-link"        id="nav-defensive" onclick="showSection('defensive',this)">Defensiva</span>
-      <span class="topnav-link"        id="nav-infra"     onclick="showSection('infra',this)">Infraestructura</span>
-      <span class="topnav-link"        id="nav-auto"      onclick="showSection('auto',this)">Automatización</span>
-      <span class="topnav-link"        id="nav-writeups"  onclick="showSection('writeups',this)">Writeups</span>
-      <span class="topnav-link"        id="nav-projects"  onclick="showSection('projects',this)">Proyectos</span>
+      <a class="topnav-link active" id="nav-home"      href="#home">Inicio</a>
+      <a class="topnav-link"        id="nav-about"     href="#about">Sobre mí</a>
+      <a class="topnav-link"        id="nav-defensive" href="#defensive">Defensiva</a>
+      <a class="topnav-link"        id="nav-infra"     href="#infra">Infraestructura</a>
+      <a class="topnav-link"        id="nav-auto"      href="#auto">Automatización</a>
+      <a class="topnav-link"        id="nav-writeups"  href="#writeups">Writeups</a>
+      <a class="topnav-link"        id="nav-projects"  href="#projects">Proyectos</a>
     </div>
     <div class="topnav-right">
       {% if site.data.portfolio.available %}
