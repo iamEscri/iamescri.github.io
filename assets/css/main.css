@@ -40,7 +40,8 @@ html {
 }
 body {
   font-family: var(--font-sans);
-  background: var(--bg);
+  /* el fondo lo pinta <html>: un fondo opaco aquí taparía el glow de body::before */
+  background: transparent;
   color: var(--text);
   overflow-x: hidden;
   min-height: 100vh;
@@ -59,8 +60,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(900px 520px at 78% -12%, rgba(0,229,160,.06), transparent 62%),
-    radial-gradient(720px 420px at 8% -4%, rgba(91,106,240,.05), transparent 60%);
+    radial-gradient(900px 520px at 78% -12%, rgba(0,229,160,.09), transparent 62%),
+    radial-gradient(720px 420px at 8% -4%, rgba(91,106,240,.07), transparent 60%);
 }
 
 /* Scrollbar de marca */
