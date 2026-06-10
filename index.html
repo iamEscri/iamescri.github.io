@@ -44,32 +44,23 @@ section: home
     </div>
 
     <div class="hero-right">
-      <!-- ROADMAP -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">
-            <div class="panel-title-dot" style="background:#00e5a0"></div>
-            Roadmap
-          </div>
+      <!-- STATUS (terminal) -->
+      <div class="panel term-panel">
+        <div class="term-header">
+          <span class="term-dot td-red"></span>
+          <span class="term-dot td-amber"></span>
+          <span class="term-dot td-green"></span>
+          <span class="term-title">~/status</span>
         </div>
-        <div class="roadmap-list">
-          {% for step in portfolio.roadmap %}
-          <div class="roadmap-item rm-{{ step.status }}">
-            <div class="roadmap-marker">
-              <span class="roadmap-dot"></span>
-              {% unless forloop.last %}<span class="roadmap-line"></span>{% endunless %}
-            </div>
-            <div class="roadmap-body">
-              <div class="roadmap-top">
-                <span class="roadmap-name">{{ step.name }}</span>
-                <span class="roadmap-badge">
-                  {% if step.status == 'done' %}obtenida{% elsif step.status == 'wip' %}en curso{% elsif step.status == 'next' %}próximo{% else %}futuro{% endif %}
-                </span>
-              </div>
-              <div class="roadmap-meta">{{ step.org }}{% if step.status == 'done' and step.date %} · {{ step.date }}{% endif %}</div>
-            </div>
+        <div class="term-body">
+          <div class="term-cmd"><span class="term-prompt">$</span>systemctl status</div>
+          {% for area in portfolio.status_areas %}
+          <div class="term-svc">
+            <span class="term-svc-name"><span class="term-svc-dot"></span>{{ area }}</span>
+            <span class="term-svc-state">activo</span>
           </div>
           {% endfor %}
+          <div class="term-cmd"><span class="term-prompt">$</span><span class="term-cursor"></span></div>
         </div>
       </div>
 

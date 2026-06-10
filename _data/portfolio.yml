@@ -27,6 +27,16 @@ available: true
 available_roles: "Blue Team · SOC · Defensa"
 
 
+# --- STATUS (terminal del hero) ---
+# Áreas de actividad permanentes, mostradas como servicios activos.
+
+status_areas:
+  - "Blue Team"
+  - "Infraestructura Linux"
+  - "Automatización IA"
+  - "Documentación técnica"
+
+
 # --- OBJETIVOS (terminal: cat objetivos.txt) ---
 # status: "done"    → ✔ verde  (objetivo conseguido o en curso activo)
 # status: "pending" → ◎ gris   (objetivo futuro o pendiente)
