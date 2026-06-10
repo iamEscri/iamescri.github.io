@@ -6,25 +6,18 @@
 <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 <meta name="description" content="{{ page.description | default: site.description }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 {% seo %}
 </head>
 <body>
 
-<button class="hamburger" onclick="toggleMobileNav()" aria-label="Menú">&#9776;</button>
-<div class="overlay" id="overlay" onclick="closeMobileNav()"></div>
-<nav class="mobile-nav" id="mobile-nav">
-  <a class="mobile-nav-link" href="#home" onclick="closeMobileNav()">Inicio</a>
-  <a class="mobile-nav-link" href="#about" onclick="closeMobileNav()">Sobre mí</a>
-  <a class="mobile-nav-link" href="#defensive" onclick="closeMobileNav()">Defensiva</a>
-  <a class="mobile-nav-link" href="#infra" onclick="closeMobileNav()">Infraestructura</a>
-  <a class="mobile-nav-link" href="#auto" onclick="closeMobileNav()">Automatización</a>
-  <a class="mobile-nav-link" href="#writeups" onclick="closeMobileNav()">Writeups</a>
-  <a class="mobile-nav-link" href="#projects" onclick="closeMobileNav()">Proyectos</a>
-</nav>
+{% include mobile-nav.html %}
 
 <div class="main-wrap">
   <!-- TOPNAV -->
@@ -58,6 +51,8 @@
   <div class="content">
     {{ content }}
   </div>
+
+  {% include footer.html %}
 </div>
 
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>

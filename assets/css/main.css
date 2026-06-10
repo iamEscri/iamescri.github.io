@@ -3,7 +3,7 @@
    DM Sans + DM Mono · Premium dark · No hacker
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+/* Las fuentes se cargan desde el <head> de los layouts (un solo origen de carga) */
 
 /* ===== VARIABLES ===== */
 :root {
@@ -189,7 +189,12 @@ button:focus-visible,
 /* ===== MAIN WRAPPER ===== */
 .main-wrap {
   padding-top: var(--nav-h);
+  /* footer anclado abajo aunque la sección tenga poco contenido */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+.main-wrap > .content { flex: 1; }
 
 /* ===== SECTIONS ===== */
 .section { display: none; }
@@ -1458,6 +1463,8 @@ body.is-subpage .content { padding: 48px 125px; }
 
 @media (max-width: 1100px) {
   .topnav-links { display: none; }
+  /* GitHub y Disponible viven en el footer; así el hamburger no se solapa */
+  .topnav-right { display: none; }
   .topnav { padding: 0 24px; }
   .hamburger {
     display: flex;
@@ -2079,4 +2086,214 @@ body.is-subpage .content { padding: 48px 125px; }
   .stack-badges { grid-template-columns: repeat(2, 1fr); }
   .writeup-grid { grid-template-columns: 1fr; }
 }
+
+/* =============================================
+   ROADMAP (hero derecho)
+   ============================================= */
+.roadmap-list {
+  padding: 8px 18px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.roadmap-item {
+  display: flex;
+  gap: 14px;
+  padding: 10px 0;
+}
+.roadmap-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10px;
+  flex-shrink: 0;
+  padding-top: 5px;
+}
+.roadmap-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.roadmap-line {
+  width: 2px;
+  flex: 1;
+  min-height: 12px;
+  margin-top: 7px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.rm-done .roadmap-dot { background: #4ade80; }
+.rm-wip .roadmap-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 0 4px rgba(245,158,11,.12);
+  animation: pulse-dot 2s infinite;
+}
+.rm-next .roadmap-dot,
+.rm-future .roadmap-dot { background: var(--text4); }
+.roadmap-body { flex: 1; min-width: 0; }
+.roadmap-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.roadmap-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -.01em;
+  line-height: 1.35;
+}
+.roadmap-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.rm-done .roadmap-badge { color: #4ade80; background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.18); }
+.rm-wip .roadmap-badge { color: #f59e0b; background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.18); }
+.rm-next .roadmap-badge,
+.rm-future .roadmap-badge { color: var(--text3); background: rgba(255,255,255,.04); border: 1px solid var(--border); }
+.roadmap-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 3px;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  background: rgba(255,255,255,.012);
+}
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.footer-logo {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+.footer-tagline {
+  font-size: 12px;
+  color: var(--text3);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.footer-link {
+  font-size: 13px;
+  color: var(--text2);
+  transition: color .15s;
+}
+.footer-link:hover { color: var(--accent2); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1160px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 12px 52px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+.footer-avail {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #4ade80;
+}
+.footer-avail-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-dot 2s infinite;
+}
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 24px;
+  }
+  .footer-brand { flex-direction: column; gap: 4px; }
+  .footer-links { gap: 18px; flex-wrap: wrap; }
+  .footer-bottom { padding: 12px 24px; }
+}
+
+/* =============================================
+   404
+   ============================================= */
+.nf-wrap {
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+}
+.nf-code {
+  font-family: var(--font-mono);
+  font-size: 96px;
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1;
+  background: linear-gradient(100deg, #00e5a0 15%, #4dd0e1 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 28px;
+}
+.nf-term {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text2);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 22px;
+  margin-bottom: 14px;
+  text-align: left;
+  line-height: 1.9;
+}
+.nf-term .term-prompt { color: var(--accent2); }
+.nf-term-err { color: #f87171; }
+.nf-desc {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 28px;
+  max-width: 420px;
+  line-height: 1.7;
+}
+.nf-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 

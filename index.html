@@ -44,27 +44,29 @@ section: home
     </div>
 
     <div class="hero-right">
-      <!-- EN DESARROLLO -->
+      <!-- ROADMAP -->
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">
-            <div class="panel-title-dot" style="background:#f59e0b"></div>
-            En desarrollo
+            <div class="panel-title-dot" style="background:#00e5a0"></div>
+            Roadmap
           </div>
-
         </div>
-        <div class="dev-list">
-          {% assign wip_progress = portfolio.en_desarrollo | where: "status", "in-progress" %}
-          {% assign wip_course = portfolio.en_desarrollo | where: "status", "in-course" %}
-          {% assign wip_items = wip_progress | concat: wip_course %}
-          {% assign bar_colors = "#5b6af0,#0ea5a0,#8b5cf6,#363c47" | split: "," %}
-          {% for item in wip_items %}
-          {% assign color = bar_colors[forloop.index0] | default: "#363c47" %}
-          <div class="dev-item">
-            <div class="dev-bar" style="background:{{ color }}"></div>
-            <div class="dev-body">
-              <div class="dev-name">{{ item.name }}</div>
-              <div class="dev-sub">{{ item.sub }}</div>
+        <div class="roadmap-list">
+          {% for step in portfolio.roadmap %}
+          <div class="roadmap-item rm-{{ step.status }}">
+            <div class="roadmap-marker">
+              <span class="roadmap-dot"></span>
+              {% unless forloop.last %}<span class="roadmap-line"></span>{% endunless %}
+            </div>
+            <div class="roadmap-body">
+              <div class="roadmap-top">
+                <span class="roadmap-name">{{ step.name }}</span>
+                <span class="roadmap-badge">
+                  {% if step.status == 'done' %}obtenida{% elsif step.status == 'wip' %}en curso{% elsif step.status == 'next' %}próximo{% else %}futuro{% endif %}
+                </span>
+              </div>
+              <div class="roadmap-meta">{{ step.org }}{% if step.status == 'done' and step.date %} · {{ step.date }}{% endif %}</div>
             </div>
           </div>
           {% endfor %}

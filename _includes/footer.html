@@ -1,0 +1,20 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">iam<span class="logo-accent">Escri</span></span>
+      <span class="footer-tagline">Ciberseguridad defensiva, infraestructura y automatización con IA.</span>
+    </div>
+    <nav class="footer-links">
+      <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="footer-link">GitHub ↗</a>
+      <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" class="footer-link">LinkedIn ↗</a>
+      <a href="mailto:{{ site.email }}" class="footer-link">Email</a>
+      <a href="{{ '/feed.xml' | relative_url }}" class="footer-link">RSS</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>© {{ 'now' | date: "%Y" }} {{ site.name }}</span>
+    {% if site.data.portfolio.available %}
+    <span class="footer-avail"><span class="footer-avail-dot"></span>Disponible — {{ site.data.portfolio.available_roles }}</span>
+    {% endif %}
+  </div>
+</footer>

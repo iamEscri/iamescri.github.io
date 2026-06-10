@@ -1,0 +1,11 @@
+<button class="hamburger" onclick="toggleMobileNav()" aria-label="Menú">&#9776;</button>
+<div class="overlay" id="overlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <a class="mobile-nav-link" href="{{ '/#home' | relative_url }}" onclick="closeMobileNav()">Inicio</a>
+  <a class="mobile-nav-link" href="{{ '/#about' | relative_url }}" onclick="closeMobileNav()">Sobre mí</a>
+  <a class="mobile-nav-link" href="{{ '/#defensive' | relative_url }}" onclick="closeMobileNav()">Defensiva</a>
+  <a class="mobile-nav-link" href="{{ '/#infra' | relative_url }}" onclick="closeMobileNav()">Infraestructura</a>
+  <a class="mobile-nav-link" href="{{ '/#auto' | relative_url }}" onclick="closeMobileNav()">Automatización</a>
+  <a class="mobile-nav-link" href="{{ '/#writeups' | relative_url }}" onclick="closeMobileNav()">Writeups</a>
+  <a class="mobile-nav-link" href="{{ '/#projects' | relative_url }}" onclick="closeMobileNav()">Proyectos</a>
+</nav>

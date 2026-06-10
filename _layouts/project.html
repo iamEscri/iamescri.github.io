@@ -6,9 +6,10 @@
 <title>{{ page.title }} · {{ site.title }}</title>
 <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <meta property="og:title" content="{{ page.title }} · {{ site.title }}">
 <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | default: site.description }}">
@@ -20,6 +21,8 @@
 <meta name="twitter:image" content="{{ page.image | default: '/assets/img/og-default.png' | absolute_url }}">
 </head>
 <body class="is-subpage">
+
+{% include mobile-nav.html %}
 
 <div class="main-wrap">
   <!-- TOPNAV -->
@@ -112,6 +115,8 @@
 
     </div>
   </div>
+
+  {% include footer.html %}
 </div>
 
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>

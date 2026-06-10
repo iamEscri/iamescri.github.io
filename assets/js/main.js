@@ -122,6 +122,11 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     updateCounts();
   }
+  // Imágenes de posts en lazy: los writeups cargan 15-20 capturas
+  document.querySelectorAll('.writeup-body img').forEach(function(img) {
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  });
 });
 
 // ── Reveal on scroll ─────────────────────────

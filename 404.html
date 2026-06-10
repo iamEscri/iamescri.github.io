@@ -1,0 +1,47 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 · {{ site.title }}</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
+</head>
+<body class="is-subpage">
+
+<div class="main-wrap">
+  <nav class="topnav">
+    <div class="topnav-logo" onclick="window.location.href='{{ '/' | relative_url }}'">
+      <div class="topnav-logo-mark">
+        <img src="/assets/logo.png" alt="iamEscri logo" style="width:50px;height:50px;object-fit:contain;">
+      </div>
+      <span class="topnav-logo-text">iam<span class="logo-accent">Escri</span></span>
+    </div>
+    <div class="topnav-right">
+      <a href="{{ site.social.github }}" target="_blank" rel="noopener" class="topnav-gh">GitHub →</a>
+    </div>
+  </nav>
+
+  <div class="nf-wrap">
+    <div class="nf-code">404</div>
+    <div class="nf-term">
+      <span class="term-prompt">$</span> cat ruta-solicitada<br>
+      <span class="nf-term-err">cat: ruta-solicitada: No existe el archivo o el directorio</span>
+    </div>
+    <p class="nf-desc">La página que buscas no existe o ha cambiado de sitio. Puede que el enlace sea antiguo o que haya una errata en la URL.</p>
+    <div class="nf-btns">
+      <a href="{{ '/' | relative_url }}" class="btn-primary">Volver al inicio</a>
+      <a href="{{ '/#writeups' | relative_url }}" class="btn-ghost">Ver writeups →</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
