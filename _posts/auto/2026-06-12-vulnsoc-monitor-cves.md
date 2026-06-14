@@ -10,13 +10,13 @@ description: "Cómo construí un flujo en n8n que consulta NVD cada mañana, des
 
 ## El problema
 
-**Cada día se publican cientos de CVEs nuevas** en NVD. Si alguien intenta revisarlas una por una se daría cuenta de que **la mayoría de esas CVEs no tienen nada que ver con su entorno** como por ejemplo plugins de WordPress que no utiliza, dispositivos IoT que nunca ha visto o productos que ni siquiera forman parte de su infraestructura.
+**Cada día se publican cientos de CVEs nuevas** en NVD. Si alguien intenta revisarlas una por una se daría cuenta de que **la mayoría de esas CVEs no tienen nada que ver con su entorno**, como por ejemplo plugins de WordPress que no utiliza, dispositivos IoT que nunca ha visto o productos que ni siquiera forman parte de su infraestructura.
 
 Al final de todas las vulnerabilidades publicadas **solo unas pocas CVEs suelen afectar a tecnologías que tiene desplegadas**. El problema no es encontrar vulnerabilidades. `El problema es el tiempo que se pierde` revisando y descartando cientos de CVEs hasta dar con las pocas que realmente afectan a los sistemas que utilizamos.
 
 ## Objetivo
 
-El objetivo de esta automatización era **recibir cada mañana un mensaje en Telegram con únicamente las vulnerabilidades nuevas que afectan a **las tecnologías que utilizo** donde ya estén priorizadas según su probabilidad real de explotación y no solo por su puntuación CVSS.
+El objetivo de esta automatización era **recibir cada mañana un mensaje** en Telegram con únicamente las vulnerabilidades nuevas que afectan a **las tecnologías que utilizo** donde ya estén priorizadas según su probabilidad real de explotación y no solo por su puntuación CVSS.
 
 También quería que el sistema enviara **una notificación cuando no hubiera nada relevante**, así De esa forma tendría la confirmación de que el flujo se había ejecutado correctamente y de que no había vulnerabilidades nuevas para las tecnologías monitorizadas.
 
@@ -24,9 +24,9 @@ También quería que el sistema enviara **una notificación cuando no hubiera na
 
 Lo que más me costó no fue la configuración de los nodos sino **el orden en que ponerlos.**
 
-Lo primero que se me ocurrió fue traer todas las CVEs y que un LLM me dijera cuáles me afectan. Esto **provoca unas 200 llamadas al día a una API de pago** para que el modelo me diga "esto no va contigo" 197 veces, por lo que esta opción es `cara y lenta`. Y además dependía de que el modelo interpretara correctamente las tecnologías monitorizadas.
+Lo primero que se me ocurrió fue obtener todas las CVEs publicadas durante el día y dejar que un `LLM` decidiera cuáles eran relevantes para las tecnologías que monitorizo. Esto **provoca unas 200 llamadas al día a una API de pago** para que el modelo me diga "esto no va contigo" 197 veces, por lo que esta opción es `cara y lenta`. Y además dependía de que el modelo interpretara correctamente las tecnologías monitorizadas.
 
-Así que le di la vuelta. En vez de analizarlo todo, lo primero que hace el flujo es comparar cada CVE contra mi lista de tecnologías, y lo que no toca ninguna se descarta ahí mismo. **Las pocas que sobreviven al filtro son las que pasan a consultarse contra EPSS y KEV para priorizarlas**. Así el proceso más costoso solo se ejecuta sobre las CVEs relevantes y no sobre cientos de vulnerabilidades que nunca van a afectar al entorno monitorizado.
+Así que le di la vuelta. En vez de analizarlo todo lo que hace el flujo es **comparar cada CVE contra mi lista de tecnologías** y lo que no toca ninguna se descarta ahí mismo. **Las pocas que sobreviven al filtro son las que pasan a consultarse contra EPSS y KEV para priorizarlas**. Así el proceso más costoso solo se ejecuta sobre las CVEs relevantes y no sobre cientos de vulnerabilidades que nunca van a afectar al entorno monitorizado.
 
 El primer filtro es la watchlist, que es una lista que mantengo yo a mano con las tecnologías que tengo desplegadas como docker, nginx, postgresql, openssh, wazuh, proxmox, grafana, caddy, nextcloud... **Si una CVE no afecta a ninguna de esas va fuera**, da igual que sea un 10 de CVSS. Si no lo tengo montado no es mi problema. Solo **con este paso se va la inmensa mayoría del ruido.**
 
