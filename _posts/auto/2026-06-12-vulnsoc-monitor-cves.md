@@ -48,9 +48,10 @@ Y hay un detalle de orden que me costó ver y es que el **EPSS y KEV se consulta
 
 ## Cómo funciona
 
-**El sistema hace cada mañana el mismo proceso que realizaría manualmente un administrador de sistemas o un analista de seguridad.** que es mirar las vulnerabilidades nuevas, se queda solo con las que afectan a algo que tengo montado, comprueba cuáles son peligrosas de verdad y me avisa por Telegram. Todo lo demás lo tira por el camino. Paso a paso el flujo es este:
+**El sistema hace cada mañana el mismo proceso que realizaría manualmente un administrador de sistemas o un analista de seguridad.** que es mirar las vulnerabilidades nuevas, se queda solo con las que afectan a algo que tengo montado, comprueba cuáles son peligrosas de verdad y me avisa por Telegram. Todo lo demás lo tira por el camino. 
 
-El flujo funciona de la siguiente manera:
+Paso a paso el flujo es este:
+
 ```
 Cron 08:00
    ↓
@@ -74,14 +75,14 @@ Filter by Watchlist (CPE o descripción)
 ```
 ![Canvas del flujo en n8n con los nodos encadenados](/assets/img/auto/FlujoN8N.png)
 
-Cada caja del diagrama es un nodo de n8n. Un temporizador lo arranca a las 8:00, **pide a NVD las vulnerabilidades del último día**, las separa una a una y las pasa por el filtro de la watchlist. Si no queda ninguna que me afecte, me llega un aviso de que hoy no hay nada y ahí termina. Si queda alguna, sigue: **consulta su probabilidad de explotación en EPSS**, la cruza con el catálogo de CISA, le pone una prioridad y construye el mensaje que acaba en `Telegram`.
+Cada caja del diagrama es un nodo de n8n. Un temporizador lo arranca a las 8:00, **pide a NVD las vulnerabilidades del último día**, las separa una a una y las pasa por el filtro de la watchlist. Si no queda ninguna que me afecte, me llega un aviso de que hoy no hay nada y ahí termina. Si queda alguna **consulta su probabilidad de explotación en EPSS**, la cruza con el catálogo de CISA, le pone una prioridad y construye el mensaje que acaba en `Telegram`.
 
 El nodo que más trabajo tiene es el de **Aggregate + Priority** . Es el que descarga la lista KEV de CISA una vez por ejecución, cruza cada CVE con su score de EPSS, aplica el criterio de entrada y le asigna una prioridad (KEV - EXPLOTADA, CRITICA, ALTA, MEDIA) con su emoji. También lleva un tope de 15 alertas por ejecución como medida de seguridad, para que un día con una avalancha de `CVEs` no me reviente el canal con 40 mensajes.
 
 ## Prueba de funcionamiento
 
 Lo probé en los dos casos que me iba a encontrar de verdad: **el día que sale algo y el día que no sale nada.**
-Para el primer escenario tuve que forzar una coincidencia., ya que como justo no había ninguna CVE de mi stack ese día metí wordpress en la watchlist a propósito para forzar que saltara algo y ver el flujo entero funcionando.
+Para el primer escenario tuve que forzar una coincidencia, ya que como justo no había ninguna CVE de mi stack ese día metí wordpress en la watchlist a propósito para forzar que saltara algo y ver el flujo entero funcionando.
 
 El sistema generó el siguiente mensaje:
 
@@ -101,7 +102,7 @@ Esta decisión fue deliberada.. Si el sistema se queda callado no sé si es que 
 
 **El flujo depende de tres fuentes externas**: NVD, EPSS y el feed de KEV de CISA. Si NVD no responde un día, no hay ejecución y punto.
 
-Hay un fallo que prefiero contar yo antes de que me pille por sorpresa. La descarga del catálogo KEV está metida en un try/catch que no avisa si algo va mal. ¿Qué pasa si un día GitHub no responde y la descarga falla? Pues que el sistema no se rompe, sigue funcionando tan tranquilo, pero **se queda sin la lista de KEV**. Y entonces ninguna CVE se marca como "explotada activamente", aunque alguna lo esté de verdad.
+Hay un fallo , y es que la descarga del catálogo KEV está metida en un try/catch que no avisa si algo va mal. ¿Qué pasa si un día GitHub no responde y la descarga falla? Pues que el sistema no se rompe, sigue funcionando tan tranquilo, pero **se queda sin la lista de KEV**. Y entonces ninguna CVE se marca como "explotada activamente", aunque alguna lo esté de verdad.
 
 La watchlist también es manual, esto significa que **el sistema no descubre automáticamente nuevas tecnologías incorporadas al entorno**. Si monto una tecnología nueva y se me olvida añadirla a la lista, sus CVEs pasarán desapercibidas aunque sean críticas. El filtro es tan bueno como la lista que yo mantenga al día.
 
@@ -112,7 +113,7 @@ Y por último **el matching por descripción puede dar algún falso positivo** y
 
 Al final el problema nunca fue encontrar vulnerabilidades, sino **encontrar las relevantes entre las cientos que se publican cada día**. Hacerlo a mano significaba revisar decenas o cientos de CVEs cada mañana para acabar quedándome con ninguna la mayoría de las veces, invirtiendo tiempo todos los días para no perder algo importante cuando realmente apareciera.
 
-****Ahora ese trabajo se realiza automáticamente****. Primero filtra por las tecnologías monitorizadas, después consulta EPSS y KEV y finalmente decide si una vulnerabilidad merece una alerta. La mayoría de días no recibo nada, y eso ya me vale como respuesta. Y cuando llega algo, llega con el contexto suficiente para saber qué es, a qué afecta y si requiere atención inmediata o puede esperar.
+**Ahora ese trabajo se realiza automáticamente**. Primero filtra por las tecnologías monitorizadas, después consulta EPSS y KEV y finalmente decide si una vulnerabilidad merece una alerta. La mayoría de días no recibo nada, y eso ya me vale como respuesta. Y cuando llega algo, llega con el contexto suficiente para saber qué es, a qué afecta y si requiere atención inmediata o puede esperar.
 
 En una ejecución normal el flujo suele reducir varios cientos de CVEs publicadas durante las últimas 24 horas a entre 0 y 3 alertas relevantes.
 
