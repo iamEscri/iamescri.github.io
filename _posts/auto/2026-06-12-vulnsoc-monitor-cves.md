@@ -12,11 +12,11 @@ description: "Cómo construí un flujo en n8n que consulta NVD cada mañana, des
 
 **Cada día se publican cientos de CVEs nuevas** en NVD. Si alguien intenta revisarlas una por una se daría cuenta de que **la mayoría de esas CVEs no tienen nada que ver con su entorno** como por ejemplo plugins de WordPress que no utiliza, dispositivos IoT que nunca ha visto o productos que ni siquiera forman parte de su infraestructura.
 
-Al final de todas las vulnerabilidades publicadas **solo unas pocas CVEs suelen afectar a tecnologías que tiene desplegadas**. El problema claramente de estar revisando una por una es `el tiempo que se pierde revisando` y descartando cientos de CVEs hasta encontrar las que de verdad afectan a los sistemas que utiliza y que además merecen atención por su impacto o criticidad.
+Al final de todas las vulnerabilidades publicadas **solo unas pocas CVEs suelen afectar a tecnologías que tiene desplegadas**. El problema no es encontrar vulnerabilidades. `El problema es el tiempo que se pierde` revisando y descartando cientos de CVEs hasta dar con las pocas que realmente afectan a los sistemas que utilizamos.
 
 ## Objetivo
 
-El objetivo de esta automatización era **recibir cada mañana un mensaje en Telegram con únicamente las vulnerabilidades nuevas que afectan a las tecnologías que utilizo** donde ya estén priorizadas según su probabilidad real de explotación y no solo por su puntuación CVSS.
+El objetivo de esta automatización era **recibir cada mañana un mensaje en Telegram con únicamente las vulnerabilidades nuevas que afectan a **las tecnologías que utilizo** donde ya estén priorizadas según su probabilidad real de explotación y no solo por su puntuación CVSS.
 
 También quería que el sistema enviara **una notificación cuando no hubiera nada relevante**, así De esa forma tendría la confirmación de que el flujo se había ejecutado correctamente y de que no había vulnerabilidades nuevas para las tecnologías monitorizadas.
 
@@ -24,9 +24,9 @@ También quería que el sistema enviara **una notificación cuando no hubiera na
 
 Lo que más me costó no fue la configuración de los nodos sino **el orden en que ponerlos.**
 
-Lo primero que se me ocurrió fue traer todas las CVEs y que un LLM me dijera cuáles me afectan. Esto **provoca unas 200 llamadas al día a una API de pago** para que el modelo me diga "esto no va contigo" 197 veces, por lo que esta opción es `cara y lenta`. Y encima dependía de que el modelo entendiera bien qué tengo montado, que no es poco.
+Lo primero que se me ocurrió fue traer todas las CVEs y que un LLM me dijera cuáles me afectan. Esto **provoca unas 200 llamadas al día a una API de pago** para que el modelo me diga "esto no va contigo" 197 veces, por lo que esta opción es `cara y lenta`. Y además dependía de que el modelo interpretara correctamente las tecnologías monitorizadas.
 
-Así que le di la vuelta. En vez de analizarlo todo, lo primero que hace el flujo es comparar cada CVE contra mi lista de tecnologías, y lo que no toca ninguna se descarta ahí mismo. Las pocas que quedan son las que pasan a consultarse contra EPSS y KEV para priorizarlas. Así el paso pesado solo se ejecuta sobre las que de verdad me afectan y no sobre las 200
+Así que le di la vuelta. En vez de analizarlo todo, lo primero que hace el flujo es comparar cada CVE contra mi lista de tecnologías, y lo que no toca ninguna se descarta ahí mismo. **Las pocas que sobreviven al filtro son las que pasan a consultarse contra EPSS y KEV para priorizarlas**. Así el proceso más costoso solo se ejecuta sobre las CVEs relevantes y no sobre cientos de vulnerabilidades que nunca van a afectar al entorno monitorizado.
 
 El primer filtro es la watchlist, que es una lista que mantengo yo a mano con las tecnologías que tengo desplegadas como docker, nginx, postgresql, openssh, wazuh, proxmox, grafana, caddy, nextcloud... **Si una CVE no afecta a ninguna de esas va fuera**, da igual que sea un 10 de CVSS. Si no lo tengo montado no es mi problema. Solo **con este paso se va la inmensa mayoría del ruido.**
 
@@ -34,7 +34,7 @@ Aquí viene la parte que más vueltas me hizo dar y es la de **cómo decidir si 
 
 **La solución fue tirar del CPE** que es el identificador oficial del producto que NVD le asigna a cada CVE (vendor:producto, por ejemplo nginx:nginx). Si el CPE dice roxy-wi:roxy-wi no es nginx por mucho que el texto lo nombre. Es preciso porque va contra un dato estructurado, no contra texto suelto.
 
-**El problema es que las CVEs recién publicadas todavía no tienen CPE**. NVD tarda horas o días en analizarlas y esas primeras horas son las que más me interesan. Así que monté dos rutas dentro del mismo nodo: **si la CVE ya está analizada y tiene CPE comparo contra cpeTerms** que es lo preciso. Si todavía está sin analizar me voy a la descripción y comparo contra `descTerms` pero solo con términos que son lo bastante únicos como para no generar ruido. Cosas genéricas como nginx o apache no las meto en esa lista, porque en descripción darían mismo ruido .
+**El problema es que las CVEs recién publicadas todavía no tienen CPE**. NVD tarda horas o días en analizarlas y esas primeras horas son las que más me interesan. Así que monté dos rutas dentro del mismo nodo: **si la CVE ya está analizada y tiene CPE comparo contra cpeTerms** que es lo preciso. Si todavía está sin analizar me voy a la descripción y comparo contra `descTerms` pero solo con términos que son lo bastante únicos como para no generar ruido. Cosas genéricas como nginx o apache no las meto en esa lista, porque en descripción generarían el mismo ruido.
 
 **Con la CVE ya filtrada entra la parte de priorizar y aquí es donde sumo EPSS y KEV**. El CVSS por sí solo no me vale porque mide lo grave que podría ser no si la están explotando de verdad. **EPSS me da la probabilidad de que se explote en los próximos 30 días**, y **KEV (el catálogo de CISA) me dice si ya se está explotando ahí fuera**. Una cosa es "esto podría ser peligroso" y otra muy distinta "esto lo están usando ahora mismo".
 
@@ -42,13 +42,13 @@ El criterio de entrada final lo dejé así:
 
 `Entra si:  CVSS >= 7   O   EPSS >= 50%   O   está en KEV`
 
-Con que cumpla una de las tres pasa el filtro. Lo monté de esta manera a propósito porque quería que algo con un CVSS no tan alto pero con un EPSS por las nubes ,es decir, que se está explotando aunque no parezca gran cosa, esto es importante para que no se me escapara solo por la nota que le da `NVD`.
+**La idea es que una vulnerabilidad no quede fuera únicamente por tener un CVSS moderado**. Si existen evidencias de explotación activa o una probabilidad muy alta de explotación, sigue mereciendo atención. Lo monté de esta manera a propósito porque quería que algo con un CVSS no tan alto pero con un EPSS por las nubes ,es decir, que se está explotando aunque no parezca gran cosa, esto es importante para que no se me escapara solo por la nota que le da `NVD`.
 
 Y hay un detalle de orden que me costó ver y es que el **EPSS y KEV se consultan después del filtro de watchlist**. Al principio lo tenía mal porque descartaba por CVSS bajo antes de mirar el EPSS y claro, una CVE de CVSS 6 con EPSS del 99% se me caía sin que el sistema llegara a enterarse de que la estaban explotando. En cuanto me di cuenta reordené: **primero miro si me afecta, luego saco todos los datos, y solo entonces decido**. Parece una tontería pero es lo que más mejoró el criterio del sistema entero.
 
 ## Cómo funciona
 
-**El sistema hace cada mañana lo que yo haría a mano si tuviera tiempo** que es mirar las vulnerabilidades nuevas, se queda solo con las que afectan a algo que tengo montado, comprueba cuáles son peligrosas de verdad y me avisa por Telegram. Todo lo demás lo tira por el camino. Paso a paso el flujo es este:
+**El sistema hace cada mañana el mismo proceso que realizaría manualmente un administrador de sistemas o un analista de seguridad.** que es mirar las vulnerabilidades nuevas, se queda solo con las que afectan a algo que tengo montado, comprueba cuáles son peligrosas de verdad y me avisa por Telegram. Todo lo demás lo tira por el camino. Paso a paso el flujo es este:
 
 El flujo funciona de la siguiente manera:
 ```
@@ -81,9 +81,9 @@ El nodo que más trabajo tiene es el de **Aggregate + Priority** . Es el que des
 ## Prueba de funcionamiento
 
 Lo probé en los dos casos que me iba a encontrar de verdad: **el día que sale algo y el día que no sale nada.**
-Para el primero hice un poco de trampam, ya que como justo no había ninguna CVE de mi stack ese día metí wordpress en la watchlist a propósito para forzar que saltara algo y ver el flujo entero funcionando.
+Para el primer escenario tuve que forzar una coincidencia., ya que como justo no había ninguna CVE de mi stack ese día metí wordpress en la watchlist a propósito para forzar que saltara algo y ver el flujo entero funcionando.
 
-El bot de telegram me genero el siguiente mensaje:
+El sistema generó el siguiente mensaje:
 
 ![Mensaje con CVes](/assets/img/auto/MensajeCVE.png)
 
@@ -94,7 +94,7 @@ El otro caso es el más habitual, el del día en que no hay nada mío afectado. 
 
 ![Mensaje sin nada](/assets/img/auto/Sinnada.png)
 
-Y esto lo hice a posta. Si el bot se queda callado no sé si es que no había nada o que se ha caído el flujo y no me he enterado y por ello prefiero que me diga "hoy nada" y así sé que ha corrido y que de verdad no había nada que me afectara.
+Esta decisión fue deliberada.. Si el sistema se queda callado no sé si es que no había nada o que se ha caído el flujo y no me he enterado y por ello prefiero que me diga "hoy nada" y así sé que ha corrido y que de verdad no había nada que me afectara.
 
 ## Limitaciones
 
@@ -102,15 +102,19 @@ Y esto lo hice a posta. Si el bot se queda callado no sé si es que no había na
 
 Hay un fallo que prefiero contar yo antes de que me pille por sorpresa. La descarga del catálogo KEV está metida en un try/catch que no avisa si algo va mal. ¿Qué pasa si un día GitHub no responde y la descarga falla? Pues que el sistema no se rompe, sigue funcionando tan tranquilo, pero **se queda sin la lista de KEV**. Y entonces ninguna CVE se marca como "explotada activamente", aunque alguna lo esté de verdad.
 
-La watchlist también es manual. Si monto una tecnología nueva y se me olvida añadirla a la lista, sus CVEs pasarán desapercibidas aunque sean críticas. El filtro es tan bueno como la lista que yo mantenga al día.
+La watchlist también es manual, esto significa que **el sistema no descubre automáticamente nuevas tecnologías incorporadas al entorno**. Si monto una tecnología nueva y se me olvida añadirla a la lista, sus CVEs pasarán desapercibidas aunque sean críticas. El filtro es tan bueno como la lista que yo mantenga al día.
 
 Y por último **el matching por descripción puede dar algún falso positivo** ya que un término como "caddy" puede aparecer en una descripción por casualidad y no porque la CVE afecte de verdad al servidor. De momento no me ha pasado, pero es el precio de no depender solo del CPE para las CVEs que aún no lo tienen.
 
 
 ## Conclusión
 
-Al final el problema nunca fue encontrar vulnerabilidades sino **encontrar las mías entre las cientos que salen cada día**. Hacerlo a mano significaba revisar 200 CVEs cada mañana para acabar quedándome con ninguna casi siempre — un rato perdido todos los días para arriesgarme a que justo el día que no mirara se me colara algo importante.
+## Conclusión
 
-Ahora eso `lo hace el flujo` solo donde filtra primero por lo que tengo montado, descarta el 99% que no me toca y solo lo que queda lo cruza con EPSS y KEV para ordenarlo por lo urgente que es de verdad. La mayoría de días no recibo nada, y eso ya me vale como respuesta. Y el día que llega algo, llega masticado donde me dice qué es, a qué me afecta y si tengo que correr o puede esperar.
+Al final el problema nunca fue encontrar vulnerabilidades, sino **encontrar las relevantes entre las cientos que se publican cada día**. Hacerlo a mano significaba revisar decenas o cientos de CVEs cada mañana para acabar quedándome con ninguna la mayoría de las veces, invirtiendo tiempo todos los días para no perder algo importante cuando realmente apareciera.
 
-No he montado esto para recibir más alertas. Lo he montado justo para lo contrario: para recibir muchas menos, pero que cuando suene el móvil sea por algo que merece la pena mirar.
+****Ahora ese trabajo se realiza automáticamente****. Primero filtra por las tecnologías monitorizadas, después consulta EPSS y KEV y finalmente decide si una vulnerabilidad merece una alerta. La mayoría de días no recibo nada, y eso ya me vale como respuesta. Y cuando llega algo, llega con el contexto suficiente para saber qué es, a qué afecta y si requiere atención inmediata o puede esperar.
+
+En una ejecución normal el flujo suele reducir varios cientos de CVEs publicadas durante las últimas 24 horas a entre 0 y 3 alertas relevantes.
+
+No he montado esto para recibir más alertas. Lo he montado justo para lo contrario: para recibir muchas menos, pero que cuando suene el móvil sea por algo que realmente merece la pena mirar.
