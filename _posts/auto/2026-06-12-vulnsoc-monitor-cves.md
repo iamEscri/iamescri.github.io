@@ -90,6 +90,7 @@ El sistema generó el siguiente mensaje:
 La CVE era la `CVE-2026-9848` que es una inyección SQL en un plugin de WordPress. El sistema la marcó como ALTA  y me gustó ver que lo hizo bien ya que tiene un CVSS de 7.5 así que entra por severidad, pero como el EPSS está a 0 y no aparece en KEV, no la sube a crítica. Que es exactamente lo que quería. La alerta me llega con todo lo que necesito para decidir de un vistazo si me pongo con ello o no: el CVSS, el EPSS, si está en KEV, la prioridad, un resumen de qué es y **el enlace a NVD por si quiero leer más**.
 
 
+
 El otro caso es el más habitual, el del día en que no hay nada mío afectado. Aquí podría no mandar nada, pero preferí que avise igualmente:
 
 ![Mensaje sin nada](/assets/img/auto/Sinnada.png)
@@ -106,8 +107,6 @@ La watchlist también es manual, esto significa que **el sistema no descubre aut
 
 Y por último **el matching por descripción puede dar algún falso positivo** ya que un término como "caddy" puede aparecer en una descripción por casualidad y no porque la CVE afecte de verdad al servidor. De momento no me ha pasado, pero es el precio de no depender solo del CPE para las CVEs que aún no lo tienen.
 
-
-## Conclusión
 
 ## Conclusión
 
