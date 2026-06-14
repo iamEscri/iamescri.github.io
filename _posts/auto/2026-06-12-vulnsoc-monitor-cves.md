@@ -92,7 +92,7 @@ La CVE era la `CVE-2026-9848` que es una inyección SQL en un plugin de WordPres
 
 El otro caso es el más habitual, el del día en que no hay nada mío afectado. Aquí podría no mandar nada, pero preferí que avise igualmente:
 
-[Mensaje sin nada](/assets/img/auto/Sinnada.png)
+![Mensaje sin nada](/assets/img/auto/Sinnada.png)
 
 Y esto lo hice a posta. Si el bot se queda callado no sé si es que no había nada o que se ha caído el flujo y no me he enterado y por ello prefiero que me diga "hoy nada" y así sé que ha corrido y que de verdad no había nada que me afectara.
 
