@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "VulnSOC: un monitor de CVEs que filtra el ruido antes de que llegue a mi Telegram"
+title: "VulnSOC: un sistema para detectar qué CVEs afectan realmente a tu entorno"
 category: auto
 date: 2026-06-12
 read_time: 9
