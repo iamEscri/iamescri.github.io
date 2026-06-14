@@ -8,6 +8,8 @@ tags: [n8n, nvd, epss, kev, cve, automatizacion, telegram, vulnsoc]
 description: "Cómo construí un flujo en n8n que consulta NVD cada mañana, descarta lo que no afecta a mi stack, prioriza por CVSS/EPSS/KEV y manda solo lo relevante a Telegram."
 ---
 
+Cómo construí un flujo en n8n que consulta NVD cada mañana, descarta lo que no afecta a mi stack, prioriza por CVSS/EPSS/KEV y manda solo lo relevante a Telegram.
+
 ## El problema
 
 **Cada día se publican cientos de CVEs nuevas** en NVD. Si alguien intenta revisarlas una por una se daría cuenta de que **la mayoría de esas CVEs no tienen nada que ver con su entorno**, como por ejemplo plugins de WordPress que no utiliza, dispositivos IoT que nunca ha visto o productos que ni siquiera forman parte de su infraestructura.
