@@ -96,7 +96,7 @@ El otro caso es el más habitual, el del día en que no hay nada mío afectado. 
 
 ![Mensaje sin nada](/assets/img/auto/Sinnada.png)
 
-Esta decisión fue deliberada.. Si el sistema se queda callado no sé si es que no había nada o que se ha caído el flujo y no me he enterado y por ello prefiero que me diga "hoy nada" y así sé que ha corrido y que de verdad no había nada que me afectara.
+Esta decisión es importante y necesaria, ya que **si el sistema se queda callado no sé si es que no había nada o que se ha caído el flujo** y no me he enterado y por ello prefiero que me diga "hoy nada" y así sé que ha corrido y que de verdad no había nada que me afectara.
 
 ## Limitaciones
 
