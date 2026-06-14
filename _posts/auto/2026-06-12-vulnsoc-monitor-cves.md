@@ -109,7 +109,7 @@ Y por último **el matching por descripción puede dar algún falso positivo** y
 
 ## Conclusión
 
-Al final el problema nunca fue encontrar vulnerabilidades sino **e**ncontrar las mías entre las cientos que salen cada día**. Hacerlo a mano significaba revisar 200 CVEs cada mañana para acabar quedándome con ninguna casi siempre — un rato perdido todos los días para arriesgarme a que justo el día que no mirara se me colara algo importante.
+Al final el problema nunca fue encontrar vulnerabilidades sino **encontrar las mías entre las cientos que salen cada día**. Hacerlo a mano significaba revisar 200 CVEs cada mañana para acabar quedándome con ninguna casi siempre — un rato perdido todos los días para arriesgarme a que justo el día que no mirara se me colara algo importante.
 
 Ahora eso `lo hace el flujo` solo donde filtra primero por lo que tengo montado, descarta el 99% que no me toca y solo lo que queda lo cruza con EPSS y KEV para ordenarlo por lo urgente que es de verdad. La mayoría de días no recibo nada, y eso ya me vale como respuesta. Y el día que llega algo, llega masticado donde me dice qué es, a qué me afecta y si tengo que correr o puede esperar.
 
