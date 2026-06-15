@@ -4,17 +4,17 @@
 #  Se renderizan automáticamente en la sección Proyectos.
 # =============================================
 
-- name: "iamEscri.es"
-  icon: "🌐"
-  desc: "Web personal de ciberseguridad: writeups, proyectos y artículos de Blue Team. Construida con Jekyll y desplegada en GitHub Pages con dominio propio."
-  stack: [Jekyll, Liquid, HTML, CSS, JavaScript, GitHub Pages]
-  github: "https://github.com/iamEscri/iamescri.github.io"
-  demo: ""
-  post_url: "/projects/iamescri-web/"
+- name: "VulnSOC Assistant"
+  icon: "🛡️"
+  desc: "Herramienta web para SOC que analiza un CVE y devuelve prioridad real, análisis con IA y detección. Motor de scoring propio que extiende el CVSS con contexto de explotación."
+  stack: [Python, Streamlit, NVD, KEV, EPSS, Groq, Llama 3.3]
+  github: "https://github.com/iamEscri/vulnsoc-assistant"
+  demo: "https://vulnsoc-assistant.streamlit.app"
+  post_url: "/projects/vulnsoc-assistant/"
   stars: 0
   forks: 0
-  lang: Jekyll
-  lang_color: "#fc0"
+  lang: Python
+  lang_color: "#3572A5"
   wip: false
 
 - name: "Próximamente..."
