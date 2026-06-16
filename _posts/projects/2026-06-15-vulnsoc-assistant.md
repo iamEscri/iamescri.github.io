@@ -175,9 +175,7 @@ Esto responde de antemano a la duda de "las reglas de IA pueden ser basura". Si 
 
 ![Regla Sigma generada para el CVE, con su origen indicado](/assets/img/projects/vulnsoc-assistant/07-regla-sigma.png)
 
-Todo lo anterior se puede exportar a un PDF para pasárselo al equipo sin tener que abrir la herramienta, que al final es como se mueve un informe en un SOC.
-
-![Informe en PDF generado a partir del análisis completo](/assets/img/projects/vulnsoc-assistant/08-pdf.png)
+**Todo lo anterior se puede exportar a un PDF** para pasárselo al equipo sin tener que abrir la herramienta, que al final es como se mueve un informe en un SOC.
 
 ---
 
