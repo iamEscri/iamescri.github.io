@@ -79,7 +79,7 @@ Filter by Watchlist (CPE o descripción)
 
 Cada caja del diagrama es un nodo de n8n. Un temporizador lo arranca a las 8:00, **pide a NVD las vulnerabilidades del último día**, las separa una a una y las pasa por el filtro de la watchlist. Si no queda ninguna que me afecte, me llega un aviso de que hoy no hay nada y ahí termina. Si queda alguna **consulta su probabilidad de explotación en EPSS**, la cruza con el catálogo de CISA, le pone una prioridad y construye el mensaje que acaba en `Telegram`.
 
-El nodo que más trabajo tiene es el de **Aggregate + Priority** . Es el que descarga la lista KEV de CISA una vez por ejecución, cruza cada CVE con su score de EPSS, aplica el criterio de entrada y le asigna una prioridad (KEV - EXPLOTADA, CRITICA, ALTA, MEDIA) con su emoji. También lleva un tope de 15 alertas por ejecución como medida de seguridad, para que un día con una avalancha de `CVEs` no me reviente el canal con 40 mensajes.
+El nodo que más trabajo tiene es el de **Aggregate + Priority** . Es el que descarga la lista KEV de CISA una vez por ejecución, cruza cada CVE con su score de EPSS, aplica el criterio de entrada y le asigna una prioridad (KEV - EXPLOTADA, CRITICA, ALTA, MEDIA) con su emoji. También lleva un tope de 30 alertas por ejecución como medida de seguridad, para que un día con una avalancha de `CVEs` no me reviente el canal con 40 mensajes.
 
 ## Prueba de funcionamiento
 
