@@ -104,11 +104,13 @@ Esta decisión es importante y necesaria, ya que **si el sistema se queda callad
 
 **El flujo depende de tres fuentes externas**: NVD, EPSS y el feed de KEV de CISA. Si NVD no responde un día, no hay ejecución y punto.
 
-Hay un fallo , y es que la descarga del catálogo KEV está metida en un try/catch que no avisa si algo va mal. ¿Qué pasa si un día GitHub no responde y la descarga falla? Pues que el sistema no se rompe, sigue funcionando tan tranquilo, pero **se queda sin la lista de KEV**. Y entonces ninguna CVE se marca como "explotada activamente", aunque alguna lo esté de verdad.
+Luego las CVEs recién publicadas suelen tardar horas o incluso días en recibir un `CPE` por parte de NVD, así que si quiero detectarlas desde el primer momento no me queda otra que buscarlas también por descripción.
+
+El problema es que **buscar por descripción genera más ruido y puede dar lugar a algún falso positivo**. Aun así prefiero asumir ese ruido adicional antes que dejar pasar una vulnerabilidad importante durante sus primeras horas de vida. Para mí **es mejor revisar una alerta de más que no enterarme de algo** que realmente afecta a las tecnologías monitorizadas.
 
 La watchlist también es manual, esto significa que **el sistema no descubre automáticamente nuevas tecnologías incorporadas al entorno**. Si monto una tecnología nueva y se me olvida añadirla a la lista, sus CVEs pasarán desapercibidas aunque sean críticas. El filtro es tan bueno como la lista que yo mantenga al día.
 
-Y por último **el matching por descripción puede dar algún falso positivo** ya que un término como "caddy" puede aparecer en una descripción por casualidad y no porque la CVE afecte de verdad al servidor. De momento no me ha pasado, pero es el precio de no depender solo del CPE para las CVEs que aún no lo tienen.
+Y por último como mencioné anteriormente **el matching por descripción puede dar algún falso positivo** ya que un término como "caddy" puede aparecer en una descripción por casualidad y no porque la CVE afecte de verdad al servidor. De momento no me ha pasado, pero es el precio de no depender solo del CPE para las CVEs que aún no lo tienen.
 
 
 ## Conclusión
