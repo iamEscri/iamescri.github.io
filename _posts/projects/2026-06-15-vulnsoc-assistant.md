@@ -131,9 +131,11 @@ Esto lo tenía claro desde el principio y es que **el LLM no es una fuente de da
 
 Para que no se descontrolara tomé unas cuantas decisiones concretas:
 
-- No quiero creatividad, **quiero que reescriba los datos inventándose lo menos posible.**
-- **Detección de alucinaciones**. El módulo compara lo que genera el modelo con los datos reales y avisa si se inventa algo que no estaba en la entrada.
-- **Proveedor de IA intercambiable**. Uso Groq con Llama 3.3 70b por la capa gratuita, pero todo pasa por una variable `IA_PROVIDER`, así que cambiar a Gemini o a OpenAI es cuestión de un momento. No quería atarme a un proveedor por algo que es solo operativo.
+-No quiero creatividad, **quiero que reescriba los datos inventándose lo menos posible.**
+
+-**Detección de alucinaciones**. El módulo compara lo que genera el modelo con los datos reales y avisa si se inventa algo que no estaba en la entrada.
+
+-**Proveedor de IA intercambiable**. Uso Groq con Llama 3.3 70b por la capa gratuita, pero todo pasa por una variable `IA_PROVIDER`, así que cambiar a Gemini o a OpenAI es cuestión de un momento. No quería atarme a un proveedor por algo que es solo operativo.
 
 El precio de esto es que dependo de los límites diarios de tokens de Groq, que llegué a tocar haciendo pruebas. Es un cambio que asumo: gratis a cambio de un techo de uso.
 
