@@ -1824,7 +1824,7 @@ body.is-subpage .content { padding: 48px 125px; }
   line-height: 1.2;
 }
 .estado-desc {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--text2);
   line-height: 1.7;
   flex: 1;
@@ -1836,7 +1836,7 @@ body.is-subpage .content { padding: 48px 125px; }
 }
 .estado-tag {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text3);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -1872,15 +1872,30 @@ body.is-subpage .content { padding: 48px 125px; }
 .estado-links { display: flex; gap: 8px; }
 .estado-link {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text2);
   border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 5px 11px;
+  padding: 3px 9px;
   text-decoration: none;
-  transition: color .15s, border-color .15s;
+  transition: color .18s, border-color .18s, background .18s, transform .18s;
 }
-.estado-link:hover { color: var(--accent2); border-color: rgba(0,229,160,.3); }
+.estado-link:hover {
+  color: var(--accent2);
+  border-color: rgba(0,229,160,.3);
+  background: rgba(0,229,160,.06);
+  transform: translateY(-1px);
+}
+/* hover toma el color del estado de la tarjeta */
+.estado-card.estado-active .estado-link:hover {
+  color: #00e5a0; border-color: rgba(0,229,160,.35); background: rgba(0,229,160,.06);
+}
+.estado-card.estado-in-progress .estado-link:hover {
+  color: #f59e0b; border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.07);
+}
+.estado-card.estado-in-course .estado-link:hover {
+  color: #818cf8; border-color: rgba(129,140,248,.35); background: rgba(129,140,248,.08);
+}
 .status-active { color: #4ade80; }
 .status-wip    { color: #fbbf24; }
 .status-course { color: var(--text3); }
