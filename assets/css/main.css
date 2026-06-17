@@ -1872,11 +1872,11 @@ body.is-subpage .content { padding: 48px 125px; }
 .estado-links { display: flex; gap: 8px; }
 .estado-link {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text3);
+  font-size: 11.5px;
+  color: var(--text2);
   border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 3px 9px;
+  padding: 5px 11px;
   text-decoration: none;
   transition: color .15s, border-color .15s;
 }
