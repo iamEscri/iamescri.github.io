@@ -68,7 +68,7 @@ en_desarrollo:
     stack: [Python, "Claude API", Wazuh, FastAPI]
     status: "in-progress"
     github: "https://github.com/iamEscri/vulnsoc-assistant"
-    post_url: ""
+    post_url: "https://vulnsoc-assistant.streamlit.app/"
   - name: "Pipeline Wazuh + n8n"
     icon: "⚙️"
     sub: "Triaje automático de alertas con Claude API"
