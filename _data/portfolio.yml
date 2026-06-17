@@ -99,6 +99,7 @@ en_desarrollo:
     stack: ["Blue Team", DFIR, OSINT]
     status: "in-course"
     github: ""
+    url: "https://www.campusciberseguridad.com/masters/master-en-ciberseguridad/" 
     post_url: ""
 
 
