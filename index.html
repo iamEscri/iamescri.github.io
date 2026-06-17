@@ -129,6 +129,9 @@ section: home
             {% if project.github and project.github != "" %}
             <a href="{{ project.github }}" target="_blank" rel="noopener" class="estado-link">GitHub ↗</a>
             {% endif %}
+            {% if project.url and project.url != "" %}
+            <a href="{{ project.url }}" target="_blank" rel="noopener" class="estado-link">URL ↗</a>
+            {% endif %}
             {% if project.post_url and project.post_url != "" %}
             <a href="{{ project.post_url | relative_url }}" class="estado-link">Post →</a>
             {% endif %}
