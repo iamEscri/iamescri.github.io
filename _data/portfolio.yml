@@ -66,7 +66,7 @@ en_desarrollo:
     year: "2026 — TFM"
     desc: "TFM en curso. Asistente para análisis y priorización de vulnerabilidades en SOC, con razonamiento por LLM sobre contexto de host, red y CVE."
     stack: [Python, "Claude API", Wazuh, FastAPI]
-    status: "in-progress"
+    status: "active"
     github: "https://github.com/iamEscri/vulnsoc-assistant"
     url: "https://vulnsoc-assistant.streamlit.app/" 
     post_url: "/projects/vulnsoc-assistant/"
