@@ -1739,7 +1739,7 @@ body.is-subpage .content { padding: 48px 125px; }
   flex-shrink: 0;
 }
 .home-section-title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: -.01em;
