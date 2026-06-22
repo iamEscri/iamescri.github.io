@@ -77,7 +77,7 @@ en_desarrollo:
     year: "2025"
     desc: "Triaje automático de alertas Wazuh con enriquecimiento contextual vía Claude y rutado a respuesta (notificación, bloqueo, ticket)."
     stack: [Wazuh, n8n, Docker, Traefik]
-    status: "active"
+    status: "in-progress"
     github: ""
     post_url: ""
   - name: "Homelab defensivo"
