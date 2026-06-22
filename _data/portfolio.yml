@@ -87,7 +87,7 @@ en_desarrollo:
     year: "2024"
     desc: "Laboratorio personal con Docker, Grafana, Loki y Wazuh. Hardening progresivo de hosts Linux y monitorización de telemetría real."
     stack: [Linux, Docker, Grafana, Loki]
-    status: "active"
+    status: "in-progress"
     github: ""
     post_url: ""
   - name: "Máster Ciberseguridad"
