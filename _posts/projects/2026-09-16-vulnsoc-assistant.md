@@ -555,5 +555,7 @@ La diferencia es que ahora el proyecto no solo intenta dar una respuesta, sino t
 
 ---
 
+
+
 **Proyecto:** [VulnSOC Assistant](https://vulnsoc.iamescri.es/)  
 **Código:** [GitHub](https://github.com/iamEscri/vulnsoc-assistant)
