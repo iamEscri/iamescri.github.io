@@ -40,7 +40,7 @@ en_desarrollo:
     stack: [Python, "Claude API", Wazuh, FastAPI]
     status: "active"
     github: "https://github.com/iamEscri/vulnsoc-assistant"
-    url: "https://vulnsoc-assistant.streamlit.app/" 
+    url: "https://vulnsoc.iamescri.es/" 
     post_url: "/projects/vulnsoc-assistant/"
   - name: "Automatización de Tickets IT"
     icon: "🎫"
