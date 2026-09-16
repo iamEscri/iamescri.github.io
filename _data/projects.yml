@@ -6,10 +6,10 @@
 
 - name: "VulnSOC Assistant"
   icon: "🛡️"
-  desc: "Herramienta web para SOC que analiza un CVE y devuelve prioridad real, análisis con IA y detección. Motor de scoring propio que extiende el CVSS con contexto de explotación."
-  stack: [Python, Streamlit, NVD, KEV, EPSS, Groq, Llama 3.3]
+  desc: "Herramienta web para SOC que analiza un CVE y devuelve prioridad real, análisis con IA y detección. Motor de scoring propio que extiende el CVSS con contexto de explotación. React + FastAPI desplegado en un VPS con Docker."
+  stack: [React, TypeScript, FastAPI, Docker, NVD, KEV, EPSS, Groq]
   github: "https://github.com/iamEscri/vulnsoc-assistant"
-  demo: "https://vulnsoc-assistant.streamlit.app"
+  demo: "https://vulnsoc.iamescri.es"
   post_url: "/projects/vulnsoc-assistant/"
   stars: 0
   forks: 0
