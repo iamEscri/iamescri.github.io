@@ -1378,7 +1378,24 @@ button:focus-visible,
 .writeup-body p  { margin-bottom: 16px; }
 .writeup-body a  { color: var(--accent2); }
 .writeup-body img { border-radius: var(--radius); border: 1px solid var(--border); margin: 24px 0; }
-.writeup-body ul, .writeup-body ol { margin: 0 0 16px 20px; }
+.writeup-body ul { list-style: none; margin: 0 0 16px 0; padding: 0; }
+.writeup-body ul > li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+}
+.writeup-body ul > li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.writeup-body ol { list-style: decimal; margin: 0 0 16px 20px; padding: 0; }
+.writeup-body ol > li::marker { color: var(--accent); font-weight: 600; }
 .writeup-body li { margin-bottom: 6px; }
 .writeup-body blockquote {
   border-left: 3px solid var(--accent);
