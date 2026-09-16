@@ -135,7 +135,7 @@ button:focus-visible,
 .topnav-link {
   padding: 8px 16px;
   border-radius: 7px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text3);
   cursor: pointer;
   transition: color .15s, background .15s;
@@ -1748,7 +1748,7 @@ body.is-subpage .content { padding: 48px 125px; }
 .hero-counter-item:hover .hero-counter-num { color: var(--accent2); }
 .hero-counter-num {
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
@@ -1756,7 +1756,7 @@ body.is-subpage .content { padding: 48px 125px; }
 }
 .hero-counter-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text3);
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -2275,7 +2275,7 @@ body.is-subpage .content { padding: 48px 125px; }
 .td-green { background: rgba(74,222,128,.55); }
 .term-title {
   margin-left: 8px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text3);
   letter-spacing: .04em;
 }
@@ -2285,14 +2285,14 @@ body.is-subpage .content { padding: 48px 125px; }
   flex-direction: column;
   gap: 12px;
 }
-.term-cmd { font-size: 12px; color: var(--text2); }
+.term-cmd { font-size: 13px; color: var(--text2); }
 .term-prompt { color: var(--accent2); margin-right: 7px; }
 .term-svc {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .term-svc-name {
   color: var(--text);
