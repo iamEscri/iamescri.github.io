@@ -553,9 +553,8 @@ El objetivo sigue siendo el mismo que tenía al principio: reunir distintas fuen
 
 La diferencia es que ahora el proyecto no solo intenta dar una respuesta, sino también dejar claro de dónde sale esa respuesta y qué cosas todavía no puede afirmar con seguridad.
 
----
-
-
-
 **Proyecto:** [VulnSOC Assistant](https://vulnsoc.iamescri.es/)  
 **Código:** [GitHub](https://github.com/iamEscri/vulnsoc-assistant)
+
+---
+
