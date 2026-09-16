@@ -1516,7 +1516,7 @@ button:focus-visible,
 .highlight .gu { color: #c084fc; font-weight: 500; }
 
 /* POST SIDEBAR */
-.post-sidebar { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 80px; overflow: hidden; }
+.post-sidebar { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 80px; max-height: calc(100vh - 100px); }
 .post-sidebar-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -1525,6 +1525,17 @@ button:focus-visible,
   overflow: hidden;
   word-break: break-word;
 }
+#toc-box { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+#toc-nav {
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 8px;
+  margin-right: -8px;
+}
+#toc-nav::-webkit-scrollbar { width: 6px; }
+#toc-nav::-webkit-scrollbar-track { background: transparent; }
+#toc-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+#toc-nav::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
 .post-sidebar-title {
   font-family: var(--font-mono);
   font-size: 11px;
