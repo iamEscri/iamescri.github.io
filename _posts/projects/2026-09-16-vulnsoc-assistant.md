@@ -12,7 +12,7 @@ category: projects
 tags: [cve, cvss, soc, scoring, nvd, kev, epss, ia, blue-team, fastapi, react, docker]
 ---
 
-# VulnSOC Assistant
+## VulnSOC Assistant
 
 VulnSOC Assistant nació como mi Trabajo Fin de Máster en Ciberseguridad con el objetivo de desarrollar una aplicación web capaz de automatizar gran parte del análisis de vulnerabilidades CVE y ayudar en su priorización. Para ello la herramienta recopila información de fuentes oficiales y utiliza el inventario de activos de la organización para aportar contexto sobre qué sistemas podrían verse afectados. Además integra inteligencia artificial como apoyo para interpretar los datos obtenidos y presentarlos de una forma más clara y útil para el analista.
 
