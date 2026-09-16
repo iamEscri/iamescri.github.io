@@ -77,7 +77,7 @@ El historial y el inventario se mantienen en el propio navegador mediante Indexe
 
 La arquitectura actual queda de esta forma:
 
-![Arquitectura completa de VulnSOC Assistant](/assets/img/projects/vulnsoc-assistant/00-arquitectura-general.png)
+![Arquitectura completa de VulnSOC Assistant](/assets/img/projects/vulnsoc-assistant/000-arquitectura-general.png)
 
 Este cambio me ha permitido trabajar con mucha más libertad. ya que la interfaz puede evolucionar de forma independiente mientras que el backend se centra en consultar las distintas fuentes, procesar la información y devolver los resultados que necesita VulnSOC.
 
