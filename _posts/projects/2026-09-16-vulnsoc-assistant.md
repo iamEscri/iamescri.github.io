@@ -14,11 +14,11 @@ tags: [cve, cvss, soc, scoring, nvd, kev, epss, ia, blue-team, fastapi, react, d
 
 # VulnSOC Assistant
 
-VulnSOC Assistant nació como mi Trabajo Fin de Máster en Ciberseguridad con el objetivo de desarrollar una aplicación web capaz de automatizar gran parte del análisis de vulnerabilidades CVE y ayudar en su priorización. Para ello la herramienta recopila información de fuentes oficiales y utiliza el inventario de activos de la organización para aportar contexto sobre qué sistemas podrían verse afectados. Además integra inteligencia artificial como apoyo para interpretar los datos obtenidos y presentarlos de una forma más clara y útil para el analista.
+VulnSOC Assistant nació como mi Trabajo Fin de Máster en Ciberseguridad con el objetivo de desarrollar una aplicación web capaz de **automatizar gran parte del análisis de vulnerabilidades CVE y ayudar en su priorización.** Para ello la herramienta recopila información de fuentes oficiales y utiliza el inventario de activos de la organización para aportar contexto sobre qué sistemas podrían verse afectados. Además integra **inteligencia artificial** como apoyo para interpretar los datos obtenidos y presentarlos de una forma más clara y útil para el analista.
 
 El proyecto también buscaba incorporar funcionalidades que agilizaran el trabajo diario como la exportación de los análisis en PDF, la búsqueda de vulnerabilidades por tecnología y versión, y el análisis múltiple de CVEs, permitiendo estudiar y priorizar varias vulnerabilidades de forma conjunta y reducir así el tiempo necesario para su revisión, todo ello centralizado en una única herramienta.
 
-La primera versión estaba hecha con Python y Streamlit y me sirvió para comprobar que la idea funcionaba. El objetivo era automatizar el análisis de CVEs: introducir una vulnerabilidad, reunir información de varias fuentes y usar ese contexto para asignarle una prioridad y decidir qué debía revisarse antes sin depender únicamente del CVSS. Poco a poco fui añadiendo más funciones y VulnSOC empezó a crecer bastante.
+La primera versión estaba hecha con `Python` y `Streamlit` y me sirvió para comprobar que la idea funcionaba. El objetivo era automatizar el análisis de CVEs: introducir una vulnerabilidad, reunir información de varias fuentes y usar ese contexto para asignarle una prioridad y decidir qué debía revisarse antes sin depender únicamente del `CVSS`. Poco a poco fui añadiendo más funciones y VulnSOC empezó a crecer bastante.
 
 Cuando terminé el TFM decidí seguir desarrollándolo, escalar el proyecto y mejorar todo lo que se me había quedado corto en la primera versión, tanto a nivel de funcionalidades como de diseño y arquitectura.
 
