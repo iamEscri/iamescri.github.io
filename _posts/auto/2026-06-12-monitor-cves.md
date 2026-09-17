@@ -54,27 +54,10 @@ Y hay un detalle de orden que me costó ver y es que el **EPSS y KEV se consulta
 
 Paso a paso el flujo es este:
 
-```
-Cron 08:00
-   ↓
-Watchlist (define cpeTerms / descTerms)
-   ↓
-NVD - Last 24h (GET a la API de NVD)
-   ↓
-Split Out CVEs
-   ↓
-Filter by Watchlist (CPE o descripción)
-   ↓
-¿Hay coincidencias?
-   ├─ No → Telegram: "Sin vulnerabilidades nuevas en el watchlist hoy"
-   └─ Sí → EPSS (cruce con first.org)
-            ↓
-         Aggregate + Priority (KEV + CVSS + EPSS → prioridad)
-            ↓
-         Build Messages (resumen + 1 mensaje por CVE)
-            ↓
-         Telegram
-```
+![Canvas del flujo en n8n con los nodos encadenados](/assets/img/auto/flujo.png)
+
+La automatización en `n8n` es la siguiente:
+
 ![Canvas del flujo en n8n con los nodos encadenados](/assets/img/auto/FlujoN8N.png)
 
 Cada caja del diagrama es un nodo de n8n. Un temporizador lo arranca a las 8:00, **pide a NVD las vulnerabilidades del último día**, las separa una a una y las pasa por el filtro de la watchlist. Si no queda ninguna que me afecte, me llega un aviso de que hoy no hay nada y ahí termina. Si queda alguna **consulta su probabilidad de explotación en EPSS**, la cruza con el catálogo de CISA, le pone una prioridad y construye el mensaje que acaba en `Telegram`.
