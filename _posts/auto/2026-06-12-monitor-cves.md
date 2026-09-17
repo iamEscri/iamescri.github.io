@@ -54,7 +54,7 @@ Y hay un detalle de orden que me costó ver y es que el **EPSS y KEV se consulta
 
 Paso a paso el flujo es este:
 
-![Canvas del flujo en n8n con los nodos encadenados](/assets/img/auto/flujo.png)
+![Canvas del flujo en n8n con los nodos encadenados](/assets/img/auto/flujo2.png)
 
 La automatización en `n8n` es la siguiente:
 
