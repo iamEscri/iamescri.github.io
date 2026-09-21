@@ -393,6 +393,8 @@ Además cambiar el proveedor de IA no modifica el scoring ni el resto de la lóg
 
 La configuración completa para utilizar modelos locales o servidores propios está disponible en el repositorio del proyecto.
 
+![archivo env de ejemplo](/assets/img/projects/vulnsoc-assistant/env-ejemplo.png)
+
 ---
 
 ## Mitigación
