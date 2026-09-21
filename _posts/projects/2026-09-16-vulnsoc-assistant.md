@@ -379,6 +379,22 @@ Esto me permite mantener la IA como una ayuda dentro del análisis sin convertir
 
 ---
 
+## IA local y servidores propios
+
+Otra mejora que quería añadir era la posibilidad de **utilizar VulnSOC sin depender obligatoriamente de una API de IA externa.**
+
+La aplicación puede conectarse a un modelo ejecutado en local o a un servidor privado compatible con la API de `OpenAI`. Esto permite utilizar herramientas como Ollama, LM Studio o vLLM, además de otros servidores que utilicen el mismo formato.
+
+Con esto VulnSOC sigue recopilando y procesando la información de la misma forma pero **el análisis generado por IA puede enviarse a un modelo alojado por el propio usuario en lugar de utilizar un proveedor externo.**
+
+Esto puede ser especialmente interesante en entornos donde se necesite tener más control sobre los datos enviados al modelo, utilizar infraestructura propia o simplemente evitar depender del consumo de una API externa.
+
+Además cambiar el proveedor de IA no modifica el scoring ni el resto de la lógica de VulnSOC. La IA sigue teniendo exactamente el mismo papel: interpretar el contexto que la aplicación ya ha recopilado.
+
+La configuración completa para utilizar modelos locales o servidores propios está disponible en el repositorio del proyecto.
+
+---
+
 ## Mitigación
 
 En esta parte he intentado separar claramente lo que viene de una fuente externa de lo que genera la IA.
