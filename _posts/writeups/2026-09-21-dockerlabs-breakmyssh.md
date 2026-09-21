@@ -47,7 +47,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://172.17.0.2
 
 Hydra encuentra la credencial en cuestión de segundos. Que un diccionario tan genérico como rockyou funcione contra root por SSH ya dice bastante. No hay bloqueo de intentos, no hay fail2ban delante, y la contraseña no cumple ningún criterio mínimo. Con acceso directo por SSH y sin nada que filtre los intentos es cuestión de tiempo que cualquier scanner automatizado dé con lo mismo.
 
-Con la credencial en mano, inicio sesión.
+Con la credencial en mano inicio sesión.
 
 ```bash
 ssh root@172.17.0.2
@@ -67,4 +67,4 @@ En un entorno real este problema se puede reducir bastante con medidas muy senci
 
 Además herramientas como **Fail2ban o algún sistema de rate limiting pueden bloquear intentos repetidos** y hacer que un ataque de fuerza bruta deje de ser práctico. Si SSH tiene que estar expuesto también se **puede limitar su acceso mediante una VPN, una allowlist de IPs o un bastion host.**
 
-En este caso,cualquiera de estas medidas habría dificultado o directamente impedido el ataque realizado durante la máquina.
+En este caso cualquiera de estas medidas habría dificultado o directamente impedido el ataque realizado durante la máquina.
