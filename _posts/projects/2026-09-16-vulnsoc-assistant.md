@@ -489,7 +489,7 @@ Por eso añadí una sección dentro de VulnSOC donde se explica cómo funciona l
 
 Aquí se pueden consultar los pesos, los umbrales y las principales limitaciones del sistema.
 
-Además de ayudar a entender mejor el resultado y entender mejor como funciona VulnSOC.
+Además de ayudar a entender mejor el resultado y como funciona VulnSOC.
 
 ---
 
