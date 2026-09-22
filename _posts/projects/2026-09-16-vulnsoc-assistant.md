@@ -22,7 +22,7 @@ La primera versión estaba hecha con `Python` y `Streamlit` y me sirvió para co
 
 Cuando terminé el TFM decidí seguir desarrollándolo, escalar el proyecto y mejorar todo lo que se me había quedado corto en la primera versión, tanto a nivel de funcionalidades como de diseño y arquitectura.
 
-La primera versión cumplía bien su objetivo pero estaba bastante condicionada por Streamlit. Para el TFM tenía sentido porque me permitía centrarme en la lógica del proyecto y tener una aplicación funcional sin dedicar demasiado tiempo al frontend. Cuando decidí seguir desarrollando VulnSOC esas limitaciones empezaron a notarse mucho más, sobre todo en el diseño, la organización de la interfaz y la separación entre frontend y backend. Por eso preferí no seguir trabajando sobre esa base y rehacer gran parte del proyecto con una arquitectura más flexible.
+La primera versión cumplía bien su objetivo pero estaba bastante condicionada por Streamlit. Para el TFM tenía sentido porque me permitía centrarme en la lógica del proyecto y tener una aplicación funcional sin dedicar demasiado tiempo al frontend. Cuando decidí seguir desarrollando VulnSOC esas limitaciones empezaron a notarse mucho más sobre todo en el diseño, la organización de la interfaz y la separación entre frontend y backend. Por eso preferí no seguir trabajando sobre esa base y **rehacer gran parte del proyecto con una arquitectura más flexible.**
 
 Así nació la versión actual de VulnSOC.
 
@@ -30,7 +30,7 @@ El cambio no se ha limitado a hacer una interfaz más moderna. Separé frontend 
 
 Para desarrollar esta segunda versión también me he apoyado en Codex, sobre todo para trabajar sobre el código, probar cambios y mejorar distintas partes de la aplicación. Aun así **las decisiones importantes sobre cómo funciona VulnSOC las he ido definiendo y revisando yo durante el desarrollo**, incluido el sistema de priorización el cual se basa en reglas concretas y permite ver qué factores influyen en la puntuación de cada vulnerabilidad.
 
-Aqui una imagen de como se vería la vista general de VulSOC.
+Aquí una imagen de como se vería la vista general de VulnSOC.
 
 ![Vista general de VulnSOC Assistant](/assets/img/projects/vulnsoc-assistant/01-vista-general.png)
 
@@ -48,7 +48,7 @@ Me interesa saber si existe explotación real conocida, qué probabilidad de exp
 
 La aplicación no intenta sustituir las fuentes originales, su función es recopilar distintas señales y presentarlas juntas para facilitar el análisis.
 
-Actualmente utilizo las siguentes fuentes:
+Actualmente utilizo las siguientes fuentes:
 
 - **NVD**, para obtener información técnica sobre el CVE y su CVSS.
 - **CISA KEV**, para comprobar si existe explotación conocida documentada.
@@ -71,7 +71,7 @@ La primera versión estaba construida alrededor de Streamlit. Para un TFM fue un
 
 Para la nueva versión decidí separar el **frontend** y el **backend** en lugar de mantener toda la aplicación dentro de una misma tecnología.
 
-**La parte visual está desarrollada con **React, TypeScript y Vite**, mientras que FastAPI y Python se encargan de la lógica del backend**. Entre ambos queda Caddy, que actúa como punto de entrada a la aplicación, gestiona HTTPS y dirige las peticiones de la API hacia FastAPI.
+**La parte visual está desarrollada con **React, TypeScript y Vite, mientras que FastAPI y Python se encargan de la lógica del backend**. Entre ambos queda Caddy, que actúa como punto de entrada a la aplicación, gestiona HTTPS y dirige las peticiones de la API hacia FastAPI.
 
 El historial y el inventario se mantienen en el propio navegador mediante IndexedDB, algo que explicaré con más detalle en la siguiente sección.
 
@@ -202,7 +202,7 @@ Más que fijarme únicamente en el número final lo que me interesa es poder abr
 
 Durante el desarrollo me encontré con un problema que al principio parece pequeño pero que puede cambiar bastante el resultado de un análisis, ese problema era qué hacer cuando falta información.
 
-**Si EPSS no devuelve un valor eso no significa que la probabilidad sea cero¨. Si NVD todavía no ha publicado un CVSS, tampoco significa que la vulnerabilidad tenga severidad cero.** Y si VulnSOC no consigue relacionar un CVE con ningún activo no puedo asumir automáticamente que no afecte al entorno.
+**Si EPSS no devuelve un valor eso no significa que la probabilidad sea cero. Si NVD todavía no ha publicado un CVSS, tampoco significa que la vulnerabilidad tenga severidad cero.** Y si VulnSOC no consigue relacionar un CVE con ningún activo no puedo asumir automáticamente que no afecte al entorno.
 
 Por eso **decidí tratar cero y desconocido como cosas distintas.**
 
@@ -293,7 +293,7 @@ Esta parte tiene todavía limitaciones.
 
 Las configuraciones CPE pueden representar situaciones bastante más complejas que una simple comparación de versiones.
 
-Cuando VulnSOC encuentra una situación que no puede interpretar con suficiente confianza prefiero mostrar el resultado a pendiente de comprobación antes que dar un resultado que pueda no ser correcto.
+Cuando VulnSOC encuentra una situación que no puede interpretar con suficiente confianza prefiero mostrar el resultado como **pendiente de comprobación** antes que dar un resultado que pueda no ser correcto.
 
 ---
 
@@ -349,7 +349,7 @@ En la parte superior se muestran juntas señales como:
 - EPSS
 - presencia en CISA KEV
 
-Así puedo tener una primera idea de la situación antes de entrar en los detalles.as.
+Así puedo tener una primera idea de la situación antes de entrar en los detalles.
 
 ![Detalle principal de una vulnerabilidad analizada](/assets/img/projects/vulnsoc-assistant/08-detalle-cve.png)
 
