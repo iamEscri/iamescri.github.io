@@ -71,7 +71,7 @@ La primera versión estaba construida alrededor de Streamlit. Para un TFM fue un
 
 Para la nueva versión decidí separar el **frontend** y el **backend** en lugar de mantener toda la aplicación dentro de una misma tecnología.
 
-**La parte visual está desarrollada con **React, TypeScript y Vite, mientras que FastAPI y Python se encargan de la lógica del backend**. Entre ambos queda Caddy, que actúa como punto de entrada a la aplicación, gestiona HTTPS y dirige las peticiones de la API hacia FastAPI.
+**La parte visual está desarrollada con React, TypeScript y Vite, mientras que FastAPI y Python se encargan de la lógica del backend**. Entre ambos queda Caddy, que actúa como punto de entrada a la aplicación, gestiona HTTPS y dirige las peticiones de la API hacia FastAPI.
 
 El historial y el inventario se mantienen en el propio navegador mediante IndexedDB, algo que explicaré con más detalle en la siguiente sección.
 
