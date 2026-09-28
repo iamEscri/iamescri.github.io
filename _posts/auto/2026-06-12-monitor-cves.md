@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Automatización en n8n para detectar qué CVEs afectan realmente a tu entorno"
+title: "Cómo monté un monitor de CVEs en n8n para filtrar y priorizar alertas de mi entorno"
 category: auto
 date: 2026-06-12
 read_time: 9
